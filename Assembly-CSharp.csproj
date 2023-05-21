@@ -44,12 +44,14 @@
      <Compile Include="Assets\Scripts\Core\CamFollowComponent.cs" />
      <Compile Include="Assets\Scripts\Combat\CombatAbleComponent.cs" />
      <Compile Include="Assets\Scripts\Core\ActionSchedulerComponent.cs" />
+     <Compile Include="Assets\Scripts\Controller\AIController.cs" />
      <Compile Include="Assets\Scripts\Core\IAction.cs" />
      <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Movement\NavMoveComponent.cs" />
+     <Compile Include="Assets\Scripts\Core\HealthComponent.cs" />
      <Compile Include="Assets\Scripts\UpdateManager.cs" />
      <Compile Include="Assets\Scripts\Combat\FighterActionComponent.cs" />
-     <Compile Include="Assets\Scripts\Combat\HealthComponent.cs" />
+     <Compile Include="Assets\Scripts\Movement\PathPatrolComponent.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Sword" />

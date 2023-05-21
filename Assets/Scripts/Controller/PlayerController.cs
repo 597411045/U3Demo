@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,6 +11,13 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
+        private HealthComponent hc;
+
+        private void Start()
+        {
+            hc = this.GetComponent<HealthComponent>();
+        }
+
         private void Awake()
         {
             UpdateManager.UpdateActions.Add(UpdateMethod);
@@ -17,9 +25,9 @@ namespace RPG.Control
 
         void UpdateMethod()
         {
+            if (hc.IsDead) return;
             if (CanDoCombat()) return;
-            if (CanSetNavDestinationToCursor())
-                return;
+            if (CanSetNavDestinationToCursor()) return;
         }
 
         private bool CanDoCombat()
@@ -31,16 +39,16 @@ namespace RPG.Control
                 {
                     CombatAbleComponent cac = hit.transform.GetComponent<CombatAbleComponent>();
                     if (cac == null) continue;
-
-                    this.GetComponent<FighterActionComponent>().MakeTargetBeAttackTarget(cac);
-                    return true;
+                    if (this.GetComponent<FighterActionComponent>().TryMakeTargetBeAttackTarget(cac))
+                    {
+                        return true;
+                    }
                 }
             }
 
             return false;
         }
 
-        
 
         private bool CanSetNavDestinationToCursor()
         {
@@ -54,6 +62,7 @@ namespace RPG.Control
                     return true;
                 }
             }
+
             return false;
         }
 

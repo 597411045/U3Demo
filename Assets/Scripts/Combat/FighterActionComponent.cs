@@ -14,7 +14,7 @@ namespace RPG.Combat
         [SerializeField] private float weaponDamage = 10f;
 
         private Transform target;
-        private float timeSinceLastAttackAction = 0f;
+        private float TimeLeftToAttackAction = 0f;
 
         private void Awake()
         {
@@ -23,10 +23,15 @@ namespace RPG.Combat
 
         private void UpdateMethod()
         {
-            timeSinceLastAttackAction += Time.deltaTime;
-
+            if (TimeLeftToAttackAction >= 0)
+            {
+                TimeLeftToAttackAction -= Time.deltaTime;
+            }
 
             if (target == null) return;
+
+            if (target.GetComponent<HealthComponent>().IsDead) return;
+
             if (!GetIfInRange())
             {
                 this.GetComponent<NavMoveComponent>().MoveToPosition(target.position);
@@ -38,12 +43,15 @@ namespace RPG.Combat
             }
         }
 
+
         private void AttackAction()
         {
-            if (timeSinceLastAttackAction > attackInterval)
+            this.transform.LookAt(target.transform);
+            if (TimeLeftToAttackAction <= 0)
             {
+                this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                timeSinceLastAttackAction = 0;
+                TimeLeftToAttackAction = attackInterval;
             }
         }
 
@@ -52,20 +60,37 @@ namespace RPG.Combat
             return Vector3.Distance(transform.position, target.position) < weaponRange;
         }
 
-        public void MakeTargetBeAttackTarget(CombatAbleComponent cac)
+        public bool TryMakeTargetBeAttackTarget(CombatAbleComponent cac)
         {
+            if (cac == null)
+            {
+                target = null;
+                return true;
+            }
+
+            if (cac.GetComponent<HealthComponent>().IsDead) return false;
+
             this.GetComponent<ActionSchedulerComponent>().StartAction(this);
             target = cac.transform;
+            return true;
         }
 
         public void Cancel()
         {
+            this.GetComponent<Animator>().SetTrigger("StopAttack");
             target = null;
         }
 
         private void Hit()
         {
+            if (target == null) return;
             target.GetComponent<HealthComponent>().TakeDamage(weaponDamage);
+        }
+        
+        private void OnDrawGizmos()
+        {
+            Gizmos.color=Color.yellow;
+            Gizmos.DrawWireSphere(this.transform.position,weaponRange);
         }
     }
 }

@@ -9,6 +9,10 @@ namespace RPG.Movement
 {
     public class NavMoveComponent : MonoBehaviour,IAction
     {
+
+
+
+
         private void Awake()
         {
             UpdateManager.UpdateActions.Add(UpdateMethod);
@@ -16,6 +20,7 @@ namespace RPG.Movement
 
         private void UpdateMethod()
         {
+
             UpdateAnimator();
         }
 
