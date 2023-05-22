@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using FSM;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -21,12 +22,30 @@ namespace RPG.Control
         private Vector3 guardPosition;
         private HealthComponent hc;
 
+        private CSMachine _SMachine;
+
         private void Start()
         {
             player = GameObject.FindWithTag("Player");
             guardPosition = this.transform.position;
             lastPlayerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
+
+            Trans_IdleToMove titm = new Trans_IdleToMove();
+
+            Trans_MoveToIdle tmti = new Trans_MoveToIdle();
+            
+            State_Idle si = new State_Idle();
+            si.AddTransition(titm);
+
+            State_Move sm = new State_Move();
+            sm.AddTransition(tmti);
+            
+            _SMachine = new CSMachine(si);
+            _SMachine.AddState(sm);
+
+           
+            
         }
 
         private void Awake()
@@ -37,41 +56,42 @@ namespace RPG.Control
         void UpdateMethod()
         {
             if (hc.IsDead) return;
-            if (TryDoCombat()) return;
-
-            if (TryChase())
-            {
-                ResetTimer(ref suspicionTimeAfterChase);
-
-                return;
-            }
-            else
-            {
-                if (TimerCheck(ref suspicionTimeAfterChase))
-                {
-                    return;
-                }
-                else
-                {
-                }
-            }
-
-            if (this.GetComponent<PathPatrolComponent>().TryFollowTheNextPath())
-            {
-                ResetTimer(ref suspicionTimeAfterPatrol);
-                return;
-            }
-            else
-            {
-                if (TimerCheck(ref suspicionTimeAfterPatrol))
-                {
-                    return;
-                }
-                else
-                {
-                    this.GetComponent<PathPatrolComponent>().PathPointNext();
-                }
-            }
+            _SMachine.OnUpdate(Time.deltaTime);
+            // if (TryDoCombat()) return;
+            //
+            // if (TryChase())
+            // {
+            //     ResetTimer(ref suspicionTimeAfterChase);
+            //
+            //     return;
+            // }
+            // else
+            // {
+            //     if (TimerCheck(ref suspicionTimeAfterChase))
+            //     {
+            //         return;
+            //     }
+            //     else
+            //     {
+            //     }
+            // }
+            //
+            // if (this.GetComponent<PathPatrolComponent>().TryFollowTheNextPath())
+            // {
+            //     ResetTimer(ref suspicionTimeAfterPatrol);
+            //     return;
+            // }
+            // else
+            // {
+            //     if (TimerCheck(ref suspicionTimeAfterPatrol))
+            //     {
+            //         return;
+            //     }
+            //     else
+            //     {
+            //         this.GetComponent<PathPatrolComponent>().PathPointNext();
+            //     }
+            // }
         }
 
         private void ResetTimer(ref float time)
