@@ -21,25 +21,43 @@ namespace RPG.Movement
             }
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
             if (pathPoints == null) return;
             for (int i = 0; i < pathPoints.Count; i++)
             {
-                Gizmos.DrawSphere(pathPoints[i], 0.25f);
                 Gizmos.DrawSphere(pathPoints[i], 0.25f);
                 Gizmos.DrawLine(pathPoints[i],
                     pathPoints[(i + 1) % pathPoints.Count]);
             }
         }
 
+        private void OnDrawGizmos()
+        {
+            if (pathGroup != null) return;
+            if (pathPoints != null) return;
+
+            for (int i = 0; i < this.transform.childCount; i++)
+            {
+                Gizmos.DrawSphere(this.transform.GetChild(i).position, 0.25f);
+                Gizmos.DrawLine(this.transform.GetChild(i).position,
+                    this.transform.GetChild((i + 1) % this.transform.childCount).position);
+            }
+        }
+
         public bool TryFollowTheNextPath()
         {
+            if (pathPoints.Count == 0)
+            {
+                pathPoints.Add(this.transform.position);
+            }
+
             if (Vector3.Distance(this.transform.position, pathPoints[currPoint]) > 1)
             {
-                this.GetComponent<NavMoveComponent>().StartMoveToPosition(pathPoints[currPoint]);
+                this.GetComponent<NavMoveComponent>().StartMoveToPosition(pathPoints[currPoint], 3);
                 return true;
             }
+
             return false;
         }
 

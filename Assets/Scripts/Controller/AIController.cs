@@ -12,6 +12,7 @@ namespace RPG.Control
     public class AIController : MonoBehaviour
     {
         [SerializeField] private float chaseDistance = 5f;
+        [SerializeField][Range(0, 6)] private float chaseSpeed = 5;
 
         private GameObject player;
         private Vector3 lastPlayerPosition;
@@ -69,7 +70,6 @@ namespace RPG.Control
                 else
                 {
                     this.GetComponent<PathPatrolComponent>().PathPointNext();
-
                 }
             }
         }
@@ -96,7 +96,7 @@ namespace RPG.Control
             {
                 lastPlayerPosition = player.transform.position;
                 CombatAbleComponent cac = player.GetComponent<CombatAbleComponent>();
-                if (this.GetComponent<FighterActionComponent>().TryMakeTargetBeAttackTarget(cac))
+                if (this.GetComponent<FighterActionComponent>().TryMakeTargetBeAttackTarget(cac,chaseSpeed))
                 {
                     return true;
                 }
@@ -110,9 +110,7 @@ namespace RPG.Control
             if (lastPlayerPosition != Vector3.zero &&
                 Vector3.Distance(this.transform.position, lastPlayerPosition) > 0.5f)
             {
-                this.GetComponent<NavMoveComponent>().StartMoveToPosition(lastPlayerPosition);
-                //suspicionTime = 0;
-
+                this.GetComponent<NavMoveComponent>().StartMoveToPosition(lastPlayerPosition, chaseSpeed);
                 return true;
             }
 

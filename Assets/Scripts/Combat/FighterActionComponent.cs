@@ -3,6 +3,7 @@ using System.Collections;
 using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Networking;
 
 namespace RPG.Combat
@@ -60,16 +61,19 @@ namespace RPG.Combat
             return Vector3.Distance(transform.position, target.position) < weaponRange;
         }
 
-        public bool TryMakeTargetBeAttackTarget(CombatAbleComponent cac)
+        public bool TryMakeTargetBeAttackTarget(CombatAbleComponent cac, float speed = 0)
         {
             if (cac == null)
             {
                 target = null;
                 return true;
             }
-
             if (cac.GetComponent<HealthComponent>().IsDead) return false;
 
+            if (speed != 0)
+            {
+                this.GetComponent<NavMeshAgent>().speed = speed;
+            }
             this.GetComponent<ActionSchedulerComponent>().StartAction(this);
             target = cac.transform;
             return true;

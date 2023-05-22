@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -6824281141041459065, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
+      propertyPath: hp
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: -6824281141041459065, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
       propertyPath: health
       value: 210
       objectReference: {fileID: 0}
@@ -88,6 +92,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chaseDistance: 5
+  chaseSpeed: 5
 --- !u!114 &8509959239411487573
 MonoBehaviour:
   m_ObjectHideFlags: 0

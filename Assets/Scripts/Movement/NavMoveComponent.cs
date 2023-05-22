@@ -7,12 +7,8 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class NavMoveComponent : MonoBehaviour,IAction
+    public class NavMoveComponent : MonoBehaviour, IAction
     {
-
-
-
-
         private void Awake()
         {
             UpdateManager.UpdateActions.Add(UpdateMethod);
@@ -20,28 +16,31 @@ namespace RPG.Movement
 
         private void UpdateMethod()
         {
-
             UpdateAnimator();
         }
 
-        public void StartMoveToPosition(Vector3 destination)
+        public void StartMoveToPosition(Vector3 destination, float speed = 0)
         {
+            if (speed != 0)
+            {
+                this.GetComponent<NavMeshAgent>().speed = speed;
+            }
+
             this.GetComponent<ActionSchedulerComponent>().StartAction(this);
             MoveToPosition(destination);
         }
-        
+
         public void MoveToPosition(Vector3 destination)
         {
             this.GetComponent<NavMeshAgent>().destination = destination;
             this.GetComponent<NavMeshAgent>().isStopped = false;
-
         }
 
         public void Cancel()
         {
             this.GetComponent<NavMeshAgent>().isStopped = true;
         }
-        
+
         private void UpdateAnimator()
         {
             Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
@@ -50,4 +49,3 @@ namespace RPG.Movement
         }
     }
 }
-

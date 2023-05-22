@@ -41,41 +41,49 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Core\CamFollowComponent.cs" />
      <Compile Include="Assets\Scripts\Combat\CombatAbleComponent.cs" />
-     <Compile Include="Assets\Scripts\Core\ActionSchedulerComponent.cs" />
-     <Compile Include="Assets\Scripts\Controller\AIController.cs" />
      <Compile Include="Assets\Scripts\Core\IAction.cs" />
      <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Movement\NavMoveComponent.cs" />
-     <Compile Include="Assets\Scripts\Core\HealthComponent.cs" />
      <Compile Include="Assets\Scripts\UpdateManager.cs" />
      <Compile Include="Assets\Scripts\Combat\FighterActionComponent.cs" />
      <Compile Include="Assets\Scripts\Movement\PathPatrolComponent.cs" />
+     <Compile Include="Assets\Scripts\Core\CamFollowComponent.cs" />
+     <Compile Include="Assets\Scripts\Core\ActionSchedulerComponent.cs" />
+     <Compile Include="Assets\Scripts\Controller\AIController.cs" />
+     <Compile Include="Assets\Scripts\Movement\NavMoveComponent.cs" />
+     <Compile Include="Assets\Scripts\Core\HealthComponent.cs" />
+     <Compile Include="Assets\Scripts\Cinematic\CMTriggerComponent.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Sword" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Spear" />
+     <Folder Include="Assets\Scripts\Cinematic" />
+     <Folder Include="Assets\Fantasy Skybox FREE\Panoramics" />
      <Folder Include="Assets\Scripts\Core" />
      <Folder Include="Assets\Game\Characters" />
      <Folder Include="Assets\Asset Packs\Animations\Unarmed" />
+     <Folder Include="Assets\Asset Packs\Terrain Textures\Simple Textures" />
      <Folder Include="Assets\Game\Core" />
      <None Include="Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Item" />
-     <Folder Include="Assets\Scenes\TestScene" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Materials" />
      <Folder Include="Assets\Asset Packs\Animations" />
      <Folder Include="Assets\Asset Packs\Terrain Textures" />
      <Folder Include="Assets\Game\Resources" />
      <Folder Include="Assets\Asset Packs" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Models" />
+     <Folder Include="Assets\Fantasy Skybox FREE\Panoramics\FS002" />
+     <Folder Include="Assets\Fantasy Skybox FREE" />
      <Folder Include="Assets\Scripts\Movement" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Textures" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Armed" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Bow" />
      <Folder Include="Assets\Scripts\Controller" />
+     <Folder Include="Assets\Scenes\Sandbox" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Sword" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Demo Scene" />
+     <Folder Include="Assets\Scenes\SampleScene\SampleScene" />
+     <Folder Include="Assets\Game\Cinematics" />
      <Folder Include="Assets\Scenes\SampleScene" />
      <Folder Include="Assets\Scenes\Trrian" />
      <Folder Include="Assets\Audio" />
@@ -86,6 +94,7 @@
      <Folder Include="Assets\Scripts\Combat" />
      <Folder Include="Assets\Game" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Prefabs" />
+     <Folder Include="Assets\Scenes\Sandbox\Shared" />
      <Folder Include="Assets\UI" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive" />
      <Reference Include="UnityEngine">
@@ -658,8 +667,14 @@
      <Reference Include="System.Xml.Serialization">
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
      </Reference>
+     <Reference Include="Cinemachine">
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+     </Reference>
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>C:\Users\AC\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="com.unity.cinemachine.editor">
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
      </Reference>
      <Reference Include="Unity.TextMeshPro.Editor">
      <HintPath>C:\Users\AC\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
