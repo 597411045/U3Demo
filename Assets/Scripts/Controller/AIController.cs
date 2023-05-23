@@ -31,20 +31,18 @@ namespace RPG.Control
             lastPlayerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
 
-            Trans_IdleToMove titm = new Trans_IdleToMove();
-
-            Trans_MoveToIdle tmti = new Trans_MoveToIdle();
-            
-            State_Idle si = new State_Idle();
-            si.AddTransition(titm);
-
-            State_Move sm = new State_Move();
-            sm.AddTransition(tmti);
-            
-            _SMachine = new CSMachine(si);
-            _SMachine.AddState(sm);
-
-           
+            // Trans_IdleToMove titm = new Trans_IdleToMove();
+            //
+            // Trans_MoveToIdle tmti = new Trans_MoveToIdle();
+            //
+            // State_Idle si = new State_Idle();
+            // si.AddTransition(titm);
+            //
+            // State_Move sm = new State_Move();
+            // sm.AddTransition(tmti);
+            //
+            // _SMachine = new CSMachine(si);
+            // _SMachine.AddState(sm);
             
         }
 
@@ -55,43 +53,45 @@ namespace RPG.Control
 
         void UpdateMethod()
         {
+            if (this.enabled == false) return;
+
             if (hc.IsDead) return;
-            _SMachine.OnUpdate(Time.deltaTime);
-            // if (TryDoCombat()) return;
-            //
-            // if (TryChase())
-            // {
-            //     ResetTimer(ref suspicionTimeAfterChase);
-            //
-            //     return;
-            // }
-            // else
-            // {
-            //     if (TimerCheck(ref suspicionTimeAfterChase))
-            //     {
-            //         return;
-            //     }
-            //     else
-            //     {
-            //     }
-            // }
-            //
-            // if (this.GetComponent<PathPatrolComponent>().TryFollowTheNextPath())
-            // {
-            //     ResetTimer(ref suspicionTimeAfterPatrol);
-            //     return;
-            // }
-            // else
-            // {
-            //     if (TimerCheck(ref suspicionTimeAfterPatrol))
-            //     {
-            //         return;
-            //     }
-            //     else
-            //     {
-            //         this.GetComponent<PathPatrolComponent>().PathPointNext();
-            //     }
-            // }
+            //_SMachine.OnUpdate(Time.deltaTime);
+            if (TryDoCombat()) return;
+            
+            if (TryChase())
+            {
+                ResetTimer(ref suspicionTimeAfterChase);
+            
+                return;
+            }
+            else
+            {
+                if (TimerCheck(ref suspicionTimeAfterChase))
+                {
+                    return;
+                }
+                else
+                {
+                }
+            }
+            
+            if (this.GetComponent<PathPatrolComponent>().TryFollowTheNextPath())
+            {
+                ResetTimer(ref suspicionTimeAfterPatrol);
+                return;
+            }
+            else
+            {
+                if (TimerCheck(ref suspicionTimeAfterPatrol))
+                {
+                    return;
+                }
+                else
+                {
+                    this.GetComponent<PathPatrolComponent>().PathPointNext();
+                }
+            }
         }
 
         private void ResetTimer(ref float time)

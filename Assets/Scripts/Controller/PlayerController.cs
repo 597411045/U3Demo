@@ -25,6 +25,7 @@ namespace RPG.Control
 
         void UpdateMethod()
         {
+            if (this.enabled == false) return;
             if (hc.IsDead) return;
             if (CanDoCombat()) return;
             if (CanSetNavDestinationToCursor()) return;
