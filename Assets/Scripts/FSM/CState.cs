@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +9,10 @@ namespace FSM
         protected string _name;
         protected string _tag;
         protected float _runningTime;
-        protected bool _ifWorking;
-        protected int _index;
+        protected bool _isActive;
         protected ISMachine _SMachine;
         protected Dictionary<string, ITransition> _transitions;
-        protected ITransition _workingTransition;
+        public Action _stateAction;
 
         public string Name
         {
@@ -22,7 +22,6 @@ namespace FSM
         public string Tag
         {
             get { return _tag; }
-            set { _tag = value; }
         }
 
         public float RunningTime
@@ -30,15 +29,22 @@ namespace FSM
             get { return _runningTime; }
         }
 
+        public bool IsActive
+        {
+            get { return _isActive; }
+        }
+
         public Dictionary<string, ITransition> Transitions
         {
-            get { return _transitions; }
+            get { return null; }
         }
 
         public ISMachine SMachine
         {
             get { return _SMachine; }
+            set { _SMachine = value; }
         }
+
 
         public CState(string name)
         {
@@ -50,50 +56,60 @@ namespace FSM
         public virtual void OnEnter()
         {
             _runningTime = 0;
-            _index = 0;
-            _ifWorking = true;
+            _isActive = true;
         }
 
         public virtual void OnExit()
         {
             _runningTime = 0;
-            _index = 0;
-            _ifWorking = false;
+            _isActive = false;
         }
 
-        public virtual void OnUpdate(float delta)
-        {
-            if (!_ifWorking) return;
-            _runningTime += delta;
-            if (_transitions.Count < 1) return;
+        private bool _willPass = false;
 
-            if (_workingTransition != null && _workingTransition.OnCheck())
+        public virtual void OnUpdate()
+        {
+            Debug.Log(Name + " OnUpdate");
+            _runningTime += Time.deltaTime;
+            Debug.Log(Name + " Doing Something");
+            _stateAction?.Invoke();
+            Debug.Log(Name + " Checking Transitions");
+
+            _willPass = false;
+            foreach (var child in _transitions)
             {
-                if (_workingTransition.OnCompleteCallBack())
+                if (child.Value.OnCheck(this))
                 {
-                    DoTransition(_workingTransition);
+                    Debug.Log(child.Key + "Pass Checked True, Changing To " + child.Value.ToStateName);
+                    _willPass = true;
+                    break;
                 }
             }
+
+            if (!_willPass) Debug.Log("Pass Checked Failed, Will Remain " + Name);
+
+            Debug.Log(Name + " OnUpdate Done");
         }
 
-        public void AddTransition(ITransition transition)
+        public ITransition AddTransition(ITransition transition)
         {
             if (!_transitions.ContainsKey(transition.Name))
             {
-                _transitions.Add(transition.Name,transition);
+                _transitions.Add(transition.Name, transition);
             }
+
+            Debug.Log(Name + " AddTransition: " + transition.Name);
+            return transition;
         }
 
-        public void SetStateMachine(ISMachine machine)
+        public void RemoveTransition(string name)
         {
-            _SMachine = machine;
-        }
+            if (_transitions.ContainsKey(name))
+            {
+                _transitions.Remove(name);
+            }
 
-        protected virtual void DoTransition(ITransition transition)
-        {
-           // _SMachine.CurState.OnExit(transition.ToState);
-            //_SMachine.SetState(transition.ToState);
-           // _SMachine.CurState.OnEnter(transition.FromState);
+            Debug.Log(Name + " RemoveTransition: " + name);
         }
     }
 }

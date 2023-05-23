@@ -2,45 +2,44 @@ namespace FSM
 {
     public abstract class CTransition : ITransition
     {
-        private string _name;
-        private IState _fromState;
-        private IState _toState;
+        protected string _name;
+        protected string _toStateName;
 
+        public bool ifReverse;
         public delegate bool DGT_RT_BOOL();
 
         public DGT_RT_BOOL Delegate_OnCheck;
-        public DGT_RT_BOOL Delegate_OnCompleteCallBack;
-            
-        public bool OnCheck()
+
+
+        public string ToStateName
         {
-            return Delegate_OnCheck.Invoke();
+            get { return _toStateName; }
         }
 
-        public bool OnCompleteCallBack()
+        private bool flag;
+        public bool OnCheck(IState fromState)
         {
-            return Delegate_OnCompleteCallBack.Invoke();
+            flag = Delegate_OnCheck.Invoke();
+            if (ifReverse) flag = !flag;
+            if (flag)
+            {
+                fromState.OnExit();
+                fromState.SMachine.GetState(_toStateName).OnEnter();
+                return true;
+            }
+
+            return false;
         }
-        
-        
+
         public string Name
         {
             get { return _name; }
         }
-        public IState FromState
-        {
-            get { return _fromState; }
-        }
-        public IState ToState
-        {
-            get { return _toState; }
-        }
 
-        public CTransition(string name)
+        public CTransition(string name, string toStateName)
         {
             _name = name;
+            _toStateName = toStateName;
         }
-        
-        
-
     }
 }
