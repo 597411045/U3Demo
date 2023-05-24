@@ -17,15 +17,15 @@ public class UpdateManager : MonoBehaviour
 
     private void Update()
     {
-        if (er.Current)
-        {
-            er.MoveNext();
-        }
+        // if (er.Current)
+        // {
+        //     er.MoveNext();
+        // }
         
         foreach (Action func in UpdateActions)
         {
             func();
-            //Debug.Log("Done " + i + " Method" + func.Method.DeclaringType+"."+func.Method.Name);
+            //Debug.Log("Done "  + " Method" + func.Method.DeclaringType+"."+func.Method.Name);
         }
     }
 

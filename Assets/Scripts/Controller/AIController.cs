@@ -43,9 +43,6 @@ namespace RPG.Control
             t2.Delegate_OnCheck += Trans_IfPlayerInRange;
             t2.ifReverse = true;
             
-            
-            
-            
         }
 
         bool Test()
@@ -60,12 +57,9 @@ namespace RPG.Control
 
         void UpdateMethod()
         {
-            if (this.enabled == false) return;
-            _SMachine.OnUpdate();
+            //_SMachine.OnUpdate();
 
             if (hc.IsDead) return;
-            return;
-
 
             if (TryDoCombat()) return;
 

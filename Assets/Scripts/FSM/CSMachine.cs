@@ -11,7 +11,6 @@ namespace FSM
 
         public CSMachine()
         {
-            Debug.Log("SM Construct");
             _states = new Dictionary<string, IState>();
         }
 
@@ -21,7 +20,6 @@ namespace FSM
             if (!_states.ContainsKey(state.Name))
             {
                 _states.Add(state.Name, state);
-                Debug.Log("SM AddState: " + state.Name);
             }
             else
             {

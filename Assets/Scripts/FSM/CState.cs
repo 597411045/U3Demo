@@ -69,11 +69,8 @@ namespace FSM
 
         public virtual void OnUpdate()
         {
-            Debug.Log(Name + " OnUpdate");
             _runningTime += Time.deltaTime;
-            Debug.Log(Name + " Doing Something");
             _stateAction?.Invoke();
-            Debug.Log(Name + " Checking Transitions");
 
             _willPass = false;
             foreach (var child in _transitions)
@@ -86,9 +83,7 @@ namespace FSM
                 }
             }
 
-            if (!_willPass) Debug.Log("Pass Checked Failed, Will Remain " + Name);
 
-            Debug.Log(Name + " OnUpdate Done");
         }
 
         public ITransition AddTransition(ITransition transition)

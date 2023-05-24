@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RPG.Control;
 using RPG.Core;
 using UnityEngine;
@@ -17,6 +18,8 @@ namespace Cinematic
             this.GetComponent<PlayableDirector>().played += DisablePlayerControl;
             this.GetComponent<PlayableDirector>().stopped += EnablePlayerControl;
         }
+
+        
 
         private void OnTriggerEnter(Collider other)
         {
