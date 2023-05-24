@@ -1,3 +1,5 @@
+using System;
+
 namespace FSM
 {
     public abstract class CTransition : ITransition
@@ -5,8 +7,8 @@ namespace FSM
         protected string _name;
         protected string _toStateName;
 
-        public bool ifReverse;
         public delegate bool DGT_RT_BOOL();
+
 
         public DGT_RT_BOOL Delegate_OnCheck;
 
@@ -19,16 +21,17 @@ namespace FSM
         private bool flag;
         public bool OnCheck(IState fromState)
         {
-            flag = Delegate_OnCheck.Invoke();
-            if (ifReverse) flag = !flag;
-            if (flag)
+          
+            if (Delegate_OnCheck.Invoke())
             {
                 fromState.OnExit();
                 fromState.SMachine.GetState(_toStateName).OnEnter();
                 return true;
             }
-
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         public string Name

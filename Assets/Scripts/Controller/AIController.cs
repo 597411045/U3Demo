@@ -16,39 +16,111 @@ namespace RPG.Control
         [SerializeField] [Range(0, 6)] private float chaseSpeed = 5;
 
         private GameObject player;
-        private Vector3 lastPlayerPosition;
-        private float suspicionTimeAfterChase = 2;
+        private Vector3 targerPosition;
+        private float suspicionTimeAfterChase = 5;
         private float suspicionTimeAfterPatrol = 2;
-        private Vector3 guardPosition;
         private HealthComponent hc;
 
-        private CSMachine _SMachine;
+        private SMEnemy SMachine;
 
         private void Start()
         {
             player = GameObject.FindWithTag("Player");
-            guardPosition = this.transform.position;
-            lastPlayerPosition = Vector3.zero;
+            targerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
 
-            _SMachine = new CSMachine();
-            _SMachine.AddState(new State_Idle()).OnEnter();
-            ((CTransition)_SMachine.GetState(State_Idle.CName).AddTransition(new Trans_ToMove())).
-            Delegate_OnCheck += Trans_IfPlayerInRange;
-
-
-            ((CState)_SMachine.AddState(new State_Move()))
-            ._stateAction += State_MoveTo;
-            CTransition t2 = (CTransition)_SMachine.GetState(State_Move.CName).AddTransition(new Trans_ToIdle());
-            t2.Delegate_OnCheck += Trans_IfPlayerInRange;
-            t2.ifReverse = true;
-            
+            SMachine = new SMEnemy();
+            BuildFSMFunction();
         }
 
-        bool Test()
+        #region FSM
+
+        private void BuildFSMFunction()
         {
-            return true;
+            SMachine.SMove._stateAction = State_Move;
+            
+            SMachine.IfInChaseRange.Delegate_OnCheck += IfInChaseRange;
+            SMachine.IfOutChaseRange.Delegate_OnCheck += IfOutChaseRange;
+            SMachine.IfNeedWait.Delegate_OnCheck += IfNeedWait;
+            SMachine.IfReachDestination.Delegate_OnCheck += IfReachDestination;
+            SMachine.IfNeedGoToSomewhere.Delegate_OnCheck += IfNeedGoToSomewhere;
         }
+
+        private void State_Move()
+        {
+            this.GetComponent<NavMoveComponent>().StartMoveToPosition(SMachine.moveDestination);
+        }
+        
+        private bool IfInChaseRange()
+        {
+            if (Vector3.Distance(player.transform.position, this.transform.position) < chaseDistance)
+            {
+                SMachine.moveDestination = player.transform.position;
+                this.GetComponent<NavMeshAgent>().speed = 5;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+        private bool IfOutChaseRange()
+        {
+            if (Vector3.Distance(player.transform.position, this.transform.position) > chaseDistance)
+            {
+                SMachine.waitTimer = 5;
+                return true;
+            }
+            else
+            {
+                SMachine.moveDestination = player.transform.position;
+                return false;
+            }
+        }
+
+        private bool IfNeedWait()
+        {
+            if (SMachine.waitTimer<=0)
+            {
+                return true;
+            }
+            else
+            {
+                SMachine.waitTimer -= Time.deltaTime;
+                return false;
+            }
+        }
+        private bool IfNeedGoToSomewhere()
+        {
+            if (Vector3.Distance(this.transform.position,SMachine.moveDestination)>1)
+            {
+                SMachine.moveDestination = this.GetComponent<PathPatrolComponent>().GetPoint();
+                this.GetComponent<NavMeshAgent>().speed = 2;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private bool IfReachDestination()
+        {
+            if (Vector3.Distance(this.transform.position,SMachine.moveDestination)<1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
+
+        #endregion
+
+
+        #region Old
 
         private void Awake()
         {
@@ -57,10 +129,9 @@ namespace RPG.Control
 
         void UpdateMethod()
         {
-            //_SMachine.OnUpdate();
-
             if (hc.IsDead) return;
-
+            SMachine.OnUpdate();
+            return;
             if (TryDoCombat()) return;
 
             if (TryChase())
@@ -118,7 +189,7 @@ namespace RPG.Control
         {
             if (Vector3.Distance(this.transform.position, player.transform.position) < chaseDistance)
             {
-                lastPlayerPosition = player.transform.position;
+                targerPosition = player.transform.position;
                 CombatAbleComponent cac = player.GetComponent<CombatAbleComponent>();
                 if (this.GetComponent<FighterActionComponent>().TryMakeTargetBeAttackTarget(cac, chaseSpeed))
                 {
@@ -131,44 +202,24 @@ namespace RPG.Control
 
         private bool TryChase()
         {
-            if (lastPlayerPosition != Vector3.zero &&
-                Vector3.Distance(this.transform.position, lastPlayerPosition) > 0.5f)
+            if (targerPosition != Vector3.zero &&
+                Vector3.Distance(this.transform.position, targerPosition) > 0.5f)
             {
-                this.GetComponent<NavMoveComponent>().StartMoveToPosition(lastPlayerPosition, chaseSpeed);
+                this.GetComponent<NavMoveComponent>().StartMoveToPosition(targerPosition, chaseSpeed);
                 return true;
             }
 
-            lastPlayerPosition = Vector3.zero;
+            targerPosition = Vector3.zero;
             return false;
-        }
-
-        private bool Trans_IfPlayerInRange()
-        {
-            if (Vector3.Distance(this.transform.position, player.transform.position) <chaseDistance)
-            {
-                lastPlayerPosition = player.transform.position;
-                return true;
-            }
-
-            return false;
-        }
-
-        private void State_MoveTo()
-        {
-            this.GetComponent<NavMoveComponent>().StartMoveToPosition(lastPlayerPosition, chaseSpeed);
-        }
-
-        private bool TryPatrol()
-        {
-            this.GetComponent<NavMoveComponent>().StartMoveToPosition(guardPosition);
-            return true;
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(this.transform.position, chaseDistance);
-            Gizmos.DrawSphere(lastPlayerPosition, 0.25f);
+            Gizmos.DrawSphere(targerPosition, 0.25f);
         }
+
+        #endregion
     }
 }

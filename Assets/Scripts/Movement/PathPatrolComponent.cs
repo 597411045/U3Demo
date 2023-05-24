@@ -47,12 +47,8 @@ namespace RPG.Movement
 
         public bool TryFollowTheNextPath()
         {
-            if (pathPoints.Count == 0)
-            {
-                pathPoints.Add(this.transform.position);
-            }
 
-            if (Vector3.Distance(this.transform.position, pathPoints[currPoint]) > 1)
+            if (Vector3.Distance(this.transform.position, GetPoint()) > 1)
             {
                 this.GetComponent<NavMoveComponent>().StartMoveToPosition(pathPoints[currPoint], 3);
                 return true;
@@ -69,6 +65,15 @@ namespace RPG.Movement
         public void AddPoint(Vector3 v)
         {
             pathPoints.Add(v);
+        }
+
+        public Vector3 GetPoint()
+        {
+            if (pathPoints.Count == 0)
+            {
+                pathPoints.Add(this.transform.position);
+            }
+            return pathPoints[currPoint];
         }
     }
 }
