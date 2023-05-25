@@ -19,7 +19,7 @@ namespace RPG.Saving
             int buildIndex = SceneManager.GetActiveScene().buildIndex;
             if (stateDict.ContainsKey("lastSceneBuildIndex"))
             {
-                buildIndex = (int)stateDict["lastSceneBuildIndex"];
+                buildIndex = stateDict["lastSceneBuildIndex"].ToObject<int>();
             }
 
             yield return SceneManager.LoadSceneAsync(buildIndex);
@@ -29,7 +29,7 @@ namespace RPG.Saving
         public void Save(string saveFile)
         {
             JObject state = LoadJsonFromFile(saveFile);
-            CaptureAsToken(state);
+            CaptureAsTokenInSystem(state);
             SaveFileAsJson(saveFile, state);
         }
 
@@ -73,12 +73,14 @@ namespace RPG.Saving
             }
         }
 
-        private void CaptureAsToken(JObject state)
+        private void CaptureAsTokenInSystem(JObject state)
         {
             IDictionary<string, JToken> stateDict = state;
-            foreach (var child in FindObjectsOfType<JsonSaveableEntity>())
+            JsonSaveableEntity[] tmp = FindObjectsOfType<JsonSaveableEntity>();
+
+            foreach (var child in tmp)
             {
-                stateDict[child.GetUniqueIdentifier()] = child.CaptureAsJToken();
+                stateDict[child.GetUniqueIdentifier()] = child.CaptureAsJTokenInEntity();
             }
 
             stateDict["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;

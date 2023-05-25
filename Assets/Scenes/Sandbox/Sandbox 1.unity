@@ -438,6 +438,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3882427192865623447, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
+      propertyPath: uniqueIdentifier
+      value: cc46f882-57ef-4c1a-b87b-56f8a37a104d
+      objectReference: {fileID: 0}
     - target: {fileID: 4466180402021482611, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: health
       value: 200
@@ -740,6 +744,10 @@ PrefabInstance:
     - target: {fileID: 1106883728987809035, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882427192865623447, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
+      propertyPath: uniqueIdentifier
+      value: f33c3af4-9b49-4d27-a3f7-daaea5de0f25
       objectReference: {fileID: 0}
     - target: {fileID: 4466180402021482611, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: health
@@ -1829,6 +1837,10 @@ PrefabInstance:
     - target: {fileID: 1106883728987809035, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882427192865623447, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 16891294-ab88-4200-b287-a7e51fedfbc3
       objectReference: {fileID: 0}
     - target: {fileID: 4466180402021482611, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: health
@@ -2922,7 +2934,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473970904}
-  m_LocalRotation: {x: 0.21589974, y: 0.7057957, z: -0.24193326, w: 0.6298477}
+  m_LocalRotation: {x: 0.2158997, y: 0.7057957, z: -0.24193327, w: 0.62984765}
   m_LocalPosition: {x: 2.25, y: 8.43, z: 10.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3133,6 +3145,10 @@ PrefabInstance:
     - target: {fileID: 1030175792992678265, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3882427192865623447, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
+      propertyPath: uniqueIdentifier
+      value: ed95e284-4d3e-48af-8a65-2e08d59b4a62
       objectReference: {fileID: 0}
     - target: {fileID: 4466180402021482611, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: health

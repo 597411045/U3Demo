@@ -4,7 +4,7 @@ namespace RPG.Saving
 {
     public interface IJsonSaveable
     {
-        JToken CaptureASJToken();
-        void RestoreFormJTkoen(JToken state);
+        JToken CaptureAsJTokenInInterface();
+        void RestoreFormJToken(JToken state);
     }
 }

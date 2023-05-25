@@ -19,13 +19,14 @@ namespace RPG.Saving
             return uniqueIdentifier;
         }
 
-        public JToken CaptureAsJToken()
+        public JToken CaptureAsJTokenInEntity()
         {
             JObject state = new JObject();
             IDictionary<string, JToken> stateDict = state;
-            foreach (var child in GetComponents<IJsonSaveable>())
+            IJsonSaveable[] tmp = GetComponents<IJsonSaveable>();
+            foreach (var child in tmp)
             {
-                JToken token = child.CaptureASJToken();
+                JToken token = child.CaptureAsJTokenInInterface();
                 string component = child.GetType().ToString();
                 Debug.Log($"{name} Capture {component} ={token.ToString()}");
                 stateDict[child.GetType().ToString()] = token;
@@ -44,7 +45,7 @@ namespace RPG.Saving
                 if (stateDict.ContainsKey(component))
                 {
                     Debug.Log($"{name} Restore {component} =>{stateDict[component].ToString()}");
-                    child.RestoreFormJTkoen(stateDict[component]);
+                    child.RestoreFormJToken(stateDict[component]);
                 }
             }
         }

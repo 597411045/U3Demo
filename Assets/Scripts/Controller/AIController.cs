@@ -130,8 +130,8 @@ namespace RPG.Control
         void UpdateMethod()
         {
             if (hc.IsDead) return;
-            SMachine.OnUpdate();
-            return;
+            //SMachine.OnUpdate();
+            //return;
             if (TryDoCombat()) return;
 
             if (TryChase())

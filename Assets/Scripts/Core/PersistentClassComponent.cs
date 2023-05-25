@@ -18,6 +18,7 @@ namespace RPG.Core
 
         private void SpawnObject()
         {
+            hasSpawn = true;
             DontDestroyOnLoad(Instantiate(go));
             DontDestroyOnLoad(Instantiate(go1));
         }

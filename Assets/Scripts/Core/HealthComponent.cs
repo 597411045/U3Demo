@@ -1,10 +1,12 @@
-﻿using UnityEngine;
+﻿using Newtonsoft.Json.Linq;
+using RPG.Saving;
+using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
 
 namespace RPG.Core
 {
-    public class HealthComponent : MonoBehaviour
+    public class HealthComponent : MonoBehaviour, IJsonSaveable
     {
         [SerializeField] private float hp = 100;
 
@@ -18,19 +20,32 @@ namespace RPG.Core
         public void TakeDamage(float damage)
         {
             hp = Mathf.Max(hp - damage, 0);
+
+            CheckIfDead();
+        }
+
+        void CheckIfDead()
+        {
             if (hp == 0)
             {
-                DeadAction();
+                if (isDead) return;
+                isDead = true;
+                this.GetComponent<Animator>().SetTrigger("IfDead");
+                this.GetComponent<ActionSchedulerComponent>().CancelCurrentAction();
+                this.GetComponent<NavMeshAgent>().enabled = false;
             }
         }
 
-        void DeadAction()
+
+        public JToken CaptureAsJTokenInInterface()
         {
-            if (isDead) return;
-            isDead = true;
-            this.GetComponent<Animator>().SetTrigger("IfDead");
-            this.GetComponent<ActionSchedulerComponent>().CancelCurrentAction();
-            this.GetComponent<NavMeshAgent>().enabled = false;
+            return JToken.FromObject(hp);
+        }
+
+        public void RestoreFormJToken(JToken state)
+        {
+            hp = state.ToObject<float>();
+            CheckIfDead();
         }
     }
 }

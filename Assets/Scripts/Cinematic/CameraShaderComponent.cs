@@ -31,13 +31,16 @@ namespace Cinematic
 
         public IEnumerator FadeOut(float time)
         {
+            contrast = 1;
             while (contrast >= 0)
             {
                 contrast -= Time.deltaTime / time;
                 yield return null;
             }
+            contrast = 0;
+
         }
-        
+
         public IEnumerator FadeIn(float time)
         {
             contrast = 0;
@@ -46,6 +49,7 @@ namespace Cinematic
                 contrast += Time.deltaTime / time;
                 yield return null;
             }
+            contrast = 1;
         }
     }
 }

@@ -1,13 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using RPG.Core;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class NavMoveComponent : MonoBehaviour, IAction
+    public class NavMoveComponent : MonoBehaviour, IAction, IJsonSaveable
     {
         private void Awake()
         {
@@ -46,6 +48,46 @@ namespace RPG.Movement
             Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
             Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
             this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+        }
+
+        struct MoveSaveData
+        {
+            public JToken position;
+            public JToken rotation;
+
+            public MoveSaveData(JToken a,JToken b)
+            {
+                position = a;
+                rotation = b;
+            }
+
+            public JToken ToToken()
+            {
+                JObject state = new JObject();
+                IDictionary<string, JToken> stateDict = state;
+                stateDict["position"] = position;
+                stateDict["rotation"] = rotation;
+                return state;
+            }
+        }
+
+        public JToken CaptureAsJTokenInInterface()
+        {
+            // JObject state = new JObject();
+            // IDictionary<string, JToken> stateDict = state;
+            // stateDict["position"] = transform.position.ToToken();
+            // stateDict["rotation"] = transform.eulerAngles.ToToken();
+            
+            return new MoveSaveData(transform.position.ToToken(),transform.eulerAngles.ToToken()).ToToken() ;
+        }
+
+        public void RestoreFormJToken(JToken state)
+        {
+            JObject s = state.ToObject<JObject>();
+            IDictionary<string, JToken> stateDict = s;
+            
+            this.GetComponent<NavMeshAgent>().Warp(stateDict["position"].ToVector3());
+            this.transform.eulerAngles = stateDict["rotation"].ToVector3();
         }
     }
 }
