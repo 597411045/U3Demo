@@ -1,11 +1,14 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace FSM
 {
     public abstract class CTransition : ITransition
     {
         protected string _name;
-        protected string _toStateName;
+        protected CState _toState;
+        protected int _priority;
 
         public delegate bool DGT_RT_BOOL();
 
@@ -13,25 +16,43 @@ namespace FSM
         public DGT_RT_BOOL Delegate_OnCheck;
 
 
-        public string ToStateName
+        public IState ToState
         {
-            get { return _toStateName; }
+            get { return _toState; }
         }
 
         private bool flag;
+
         public bool OnCheck(IState fromState)
         {
-          
+            //Debug.Log($"{Name} Update");
             if (Delegate_OnCheck.Invoke())
             {
-                fromState.OnExit();
-                fromState.SMachine.GetState(_toStateName).OnEnter();
+                //Debug.Log($"{Name} Checked true");
+                if (_toState != null)
+                {
+                    //Debug.Log($"{Name} has toState, state will to {_toState.Name}");
+
+                    fromState.OnExit();
+                    _toState.OnEnter();
+                }
+                else
+                {
+                    //Debug.Log($"{Name} has no toState, state will remain {fromState.Name}");
+                }
                 return true;
             }
             else
             {
+                //Debug.Log($"{Name} Checked false");
+
                 return false;
             }
+        }
+
+        public int Priority
+        {
+            get { return _priority; }
         }
 
         public string Name
@@ -39,10 +60,11 @@ namespace FSM
             get { return _name; }
         }
 
-        public CTransition(string name, string toStateName)
+        public CTransition(string name, CState toState, int priority)
         {
             _name = name;
-            _toStateName = toStateName;
+            _toState = toState;
+            _priority = priority;
         }
     }
 }

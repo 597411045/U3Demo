@@ -27,11 +27,11 @@ namespace FSM
             SAttack = new StateAttack();
             SDead = new StateDead();
 
-            IfInChaseRange = new TransToMove();
-            IfNeedWait= new TransToMove();
-            IfNeedGoToSomewhere= new TransToMove();
-            IfOutChaseRange = new TransToIdle();
-            IfReachDestination = new TransToIdle();
+            IfInChaseRange = new TransToMove("IfInChaseRange",SMove,0);
+            IfNeedWait= new TransToMove("IfNeedWait",null,1);
+            IfNeedGoToSomewhere= new TransToMove("IfNeedGoToSomewhere",SMove,2);
+            IfOutChaseRange = new TransToIdle("IfOutChaseRange",SIdle,0);
+            IfReachDestination = new TransToIdle("IfReachDestination",SIdle,1);
             
             BuildSM();
         }

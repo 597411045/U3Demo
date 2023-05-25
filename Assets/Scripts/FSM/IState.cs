@@ -9,13 +9,13 @@ namespace FSM
         string Tag { get; }
         float RunningTime { get; }
         bool IsActive { get; }
-        Dictionary<string, ITransition> Transitions { get; }
+        List<ITransition> Transitions { get; }
         ISMachine SMachine { get; }
 
         void OnEnter();
         void OnExit();
         void OnUpdate();
-        ITransition AddTransition(ITransition transition);
-        void RemoveTransition(string name);
+        void AddTransition(ITransition transition);
+        void RemoveTransition(ITransition transition);
     }
 }

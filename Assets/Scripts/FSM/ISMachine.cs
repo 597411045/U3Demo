@@ -4,10 +4,11 @@ namespace FSM
 {
     public interface ISMachine
     {
-        IState AddState(IState state);
+        bool IsActive { get; }
+        
+        void AddState(IState state);
         void RemoveState(IState state);
 
-        IState GetState(string name);
-        Dictionary<string, IState> States { get; }
+        List<IState> States { get; }
     }
 }

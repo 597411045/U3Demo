@@ -1,9 +1,13 @@
+using System;
+
 namespace FSM
 {
-    public interface ITransition
+    public interface ITransition 
     {
         string Name { get; }
-        string ToStateName { get; }
+        IState ToState { get; }
         bool OnCheck(IState fromState);
+        public int Priority { get; }
+
     }
 }

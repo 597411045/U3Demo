@@ -31,6 +31,7 @@ namespace RPG.Control
 
             SMachine = new SMEnemy();
             BuildFSMFunction();
+            SMachine.SIdle.OnEnter();
         }
 
         #region FSM
@@ -38,7 +39,7 @@ namespace RPG.Control
         private void BuildFSMFunction()
         {
             SMachine.SMove._stateAction = State_Move;
-            
+
             SMachine.IfInChaseRange.Delegate_OnCheck += IfInChaseRange;
             SMachine.IfOutChaseRange.Delegate_OnCheck += IfOutChaseRange;
             SMachine.IfNeedWait.Delegate_OnCheck += IfNeedWait;
@@ -50,13 +51,13 @@ namespace RPG.Control
         {
             this.GetComponent<NavMoveComponent>().StartMoveToPosition(SMachine.moveDestination);
         }
-        
+
         private bool IfInChaseRange()
         {
             if (Vector3.Distance(player.transform.position, this.transform.position) < chaseDistance)
             {
                 SMachine.moveDestination = player.transform.position;
-                this.GetComponent<NavMeshAgent>().speed = 5;
+                this.GetComponent<NavMeshAgent>().speed = 2;
                 return true;
             }
             else
@@ -64,7 +65,7 @@ namespace RPG.Control
                 return false;
             }
         }
-        
+
         private bool IfOutChaseRange()
         {
             if (Vector3.Distance(player.transform.position, this.transform.position) > chaseDistance)
@@ -81,33 +82,37 @@ namespace RPG.Control
 
         private bool IfNeedWait()
         {
-            if (SMachine.waitTimer<=0)
-            {
-                return true;
-            }
-            else
+            if (SMachine.waitTimer >= 0)
             {
                 SMachine.waitTimer -= Time.deltaTime;
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }
+
         private bool IfNeedGoToSomewhere()
         {
-            if (Vector3.Distance(this.transform.position,SMachine.moveDestination)>1)
+            SMachine.moveDestination = this.GetComponent<PathPatrolComponent>().GetPoint();
+            if (Vector3.Distance(this.transform.position, SMachine.moveDestination) > 1)
             {
-                SMachine.moveDestination = this.GetComponent<PathPatrolComponent>().GetPoint();
-                this.GetComponent<NavMeshAgent>().speed = 2;
+                this.GetComponent<NavMeshAgent>().speed = 5;
                 return true;
             }
             else
             {
+                this.GetComponent<PathPatrolComponent>().PathPointNext();
                 return false;
             }
         }
+
         private bool IfReachDestination()
         {
-            if (Vector3.Distance(this.transform.position,SMachine.moveDestination)<1)
+            if (Vector3.Distance(this.transform.position, SMachine.moveDestination) < 1)
             {
+                SMachine.waitTimer = 2;
                 return true;
             }
             else
@@ -115,7 +120,6 @@ namespace RPG.Control
                 return false;
             }
         }
-        
 
         #endregion
 
@@ -130,8 +134,9 @@ namespace RPG.Control
         void UpdateMethod()
         {
             if (hc.IsDead) return;
-            //SMachine.OnUpdate();
-            //return;
+            SMachine.OnUpdate();
+
+            return;
             if (TryDoCombat()) return;
 
             if (TryChase())
@@ -217,7 +222,10 @@ namespace RPG.Control
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(this.transform.position, chaseDistance);
-            Gizmos.DrawSphere(targerPosition, 0.25f);
+            if (SMachine?.moveDestination != null)
+            {
+                Gizmos.DrawSphere(SMachine.moveDestination, 0.25f);
+            }
         }
 
         #endregion

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace FSM
@@ -11,7 +12,7 @@ namespace FSM
         protected float _runningTime;
         protected bool _isActive;
         protected ISMachine _SMachine;
-        protected Dictionary<string, ITransition> _transitions;
+        protected List<ITransition> _transitions;
         public Action _stateAction;
 
         public string Name
@@ -34,7 +35,7 @@ namespace FSM
             get { return _isActive; }
         }
 
-        public Dictionary<string, ITransition> Transitions
+        public List<ITransition> Transitions
         {
             get { return null; }
         }
@@ -49,7 +50,7 @@ namespace FSM
         public CState(string name)
         {
             _name = name;
-            _transitions = new Dictionary<string, ITransition>();
+            _transitions = new List<ITransition>();
         }
 
 
@@ -65,46 +66,64 @@ namespace FSM
             _isActive = false;
         }
 
-        private bool _willPass = false;
-
         public virtual void OnUpdate()
         {
             _runningTime += Time.deltaTime;
+            //Debug.Log($"{Name} Update:");
             _stateAction?.Invoke();
 
-            _willPass = false;
+
             foreach (var child in _transitions)
             {
-                if (child.Value.OnCheck(this))
+                if (child.OnCheck(this))
                 {
-                    Debug.Log(child.Key + "Pass Checked True, Changing To " + child.Value.ToStateName);
-                    _willPass = true;
-                    break;
+                    if (child.ToState == null)
+                    {
+                        //Debug.Log($"Pass True But not ToState, stop check queue");
+                        break;
+                    }
                 }
             }
 
-
+            //Debug.Log($"{Name} Finish:");
         }
 
-        public ITransition AddTransition(ITransition transition)
+        private void SortPriority()
         {
-            if (!_transitions.ContainsKey(transition.Name))
-            {
-                _transitions.Add(transition.Name, transition);
-            }
-
-            Debug.Log(Name + " AddTransition: " + transition.Name);
-            return transition;
+            _transitions.Sort((x, y) => { return x.Priority > y.Priority ? 1 : -1; });
         }
 
-        public void RemoveTransition(string name)
+        public void AddTransition(ITransition transition)
         {
-            if (_transitions.ContainsKey(name))
+            if (_isActive)
             {
-                _transitions.Remove(name);
+                //Debug.Log("state is running, cannot modify now");
+                return;
             }
 
-            Debug.Log(Name + " RemoveTransition: " + name);
+            if (!_transitions.Exists((a) => { return a.Name == transition.Name; }))
+            {
+                _transitions.Add(transition);
+                SortPriority();
+                //Debug.Log(Name + " AddTransition: " + transition.Name);
+            }
+        }
+
+        public void RemoveTransition(ITransition transition)
+        {
+            if (_isActive)
+            {
+                //Debug.Log("state is running, cannot modify now");
+                return;
+            }
+
+            //Debug.Log(Name + " Removing Transition: " + transition.Name);
+
+            ITransition tmp = _transitions.FirstOrDefault((a) => { return a.Name == transition.Name; });
+            if (tmp != null)
+            {
+                _transitions.Remove(transition);
+            }
         }
     }
 }

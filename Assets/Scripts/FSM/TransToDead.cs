@@ -4,9 +4,9 @@ namespace FSM
 {
     public class TransToDead : CTransition
     {
-        public static string CName = "TransToDead";
+      
 
-        public TransToDead() : base(CName, StateDead.CName)
+        public TransToDead(string CName, CState toState,int priority) : base(CName, toState, priority)
         {
         }
     }

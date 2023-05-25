@@ -4,9 +4,7 @@ namespace FSM
 {
     public class TransToAttack : CTransition
     {
-        public static string CName = "TransToAttack";
-
-        public TransToAttack() : base(CName, StateAttack.CName)
+        public TransToAttack(string CName, CState toState, int priority) : base(CName, toState, priority)
         {
         }
     }

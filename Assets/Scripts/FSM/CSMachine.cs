@@ -7,63 +7,76 @@ namespace FSM
 {
     public class CSMachine : ISMachine
     {
-        private Dictionary<string, IState> _states;
+        private List<IState> _states;
+        private bool _isActive;
 
         public CSMachine()
         {
-            _states = new Dictionary<string, IState>();
+            _states = new List<IState>();
         }
 
-        public IState AddState(IState state)
+        public bool IsActive
         {
-            ((CState)state).SMachine = this;
-            if (!_states.ContainsKey(state.Name))
+            get { return _isActive; }
+        }
+
+        public void AddState(IState state)
+        {
+            if (_isActive)
             {
-                _states.Add(state.Name, state);
+                Debug.Log("state is running, cannot modify now");
+                return;
+            }
+            
+            if (_states == null) return;
+
+            ((CState)state).SMachine = this;
+            if (!_states.Exists((a) => { return a.Name == state.Name; }))
+            {
+                _states.Add(state);
             }
             else
             {
                 throw new Exception("SM AddState Failed, State Already Exist");
             }
-
-            return state;
         }
 
         public void RemoveState(IState state)
         {
+            if (_isActive)
+            {
+                Debug.Log("state is running, cannot modify now");
+                return;
+            }
+            
             if (_states == null) return;
-            if (_states.ContainsKey(state.Name)
-                && _states[state.Name].IsActive == false)
+            IState tmp = _states.FirstOrDefault((a) => { return a.Name == state.Name; });
+            if (tmp != null)
             {
-                _states.Remove(state.Name);
+                _states.Remove(state);
             }
+            
         }
 
-        public IState GetState(string name)
-        {
-            if (_states.ContainsKey(name))
-            {
-                return _states[name];
-            }
-
-            throw new Exception("No " + name + " in SM");
-            return null;
-        }
-
-        public Dictionary<string, IState> States
+        public List<IState> States
         {
             get { return null; }
         }
 
         public void OnUpdate()
         {
+            _isActive = true;
+            
+            //Debug.Log("SM Update:");
             foreach (var child in _states)
             {
-                if (child.Value.IsActive)
+                if (child.IsActive)
                 {
-                    child.Value.OnUpdate();
+                    child.OnUpdate();
                 }
             }
+            //Debug.Log("SM Finish:");
+            _isActive = false;
         }
     }
 }
