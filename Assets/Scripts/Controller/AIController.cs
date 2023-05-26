@@ -20,6 +20,7 @@ namespace RPG.Control
         private float suspicionTimeAfterChase = 5;
         private float suspicionTimeAfterPatrol = 2;
         private HealthComponent hc;
+        private FighterActionComponent fac;
 
         private SMEnemy SMachine;
 
@@ -28,6 +29,7 @@ namespace RPG.Control
             player = GameObject.FindWithTag("Player");
             targerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
+            fac = this.GetComponent<FighterActionComponent>();
 
             SMachine = new SMEnemy();
             BuildFSMFunction();
@@ -39,17 +41,68 @@ namespace RPG.Control
         private void BuildFSMFunction()
         {
             SMachine.SMove._stateAction = State_Move;
+            SMachine.SAttack._stateAction = State_Attack;
 
             SMachine.IfInChaseRange.Delegate_OnCheck += IfInChaseRange;
             SMachine.IfOutChaseRange.Delegate_OnCheck += IfOutChaseRange;
             SMachine.IfNeedWait.Delegate_OnCheck += IfNeedWait;
             SMachine.IfReachDestination.Delegate_OnCheck += IfReachDestination;
             SMachine.IfNeedGoToSomewhere.Delegate_OnCheck += IfNeedGoToSomewhere;
+
+            SMachine.IfInAttackRange.Delegate_OnCheck += IfInAttackRange;
+            SMachine.IfOutAttackRange.Delegate_OnCheck += IfOutAttackRange;
+        }
+
+        private bool IfOutAttackRange()
+        {
+            if (Vector3.Distance(this.transform.position, player.transform.position) > fac.weaponRange)
+            {
+                this.GetComponent<Animator>().SetTrigger("StopAttack");
+                this.GetComponent<NavMeshAgent>().enabled = true;
+                fac.target = null;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool IfInAttackRange()
+        {
+            if (Vector3.Distance(this.transform.position, player.transform.position) <= fac.weaponRange)
+            {
+                this.GetComponent<NavMeshAgent>().enabled = false;
+                SMachine.attackTarget = player.transform;
+                fac.target = player.transform;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void State_Move()
         {
             this.GetComponent<NavMoveComponent>().StartMoveToPosition(SMachine.moveDestination);
+        }
+
+        private void State_Attack()
+        {
+            if (fac.TimeLeftToAttackAction >= 0)
+            {
+                fac.TimeLeftToAttackAction -= Time.deltaTime;
+            }
+            
+            this.transform.LookAt(SMachine.attackTarget.transform);
+            
+            if (fac.TimeLeftToAttackAction <= 0)
+            {
+                this.GetComponent<Animator>().ResetTrigger("StopAttack");
+                this.GetComponent<Animator>().SetTrigger("IfAttack");
+                fac.TimeLeftToAttackAction = fac.attackInterval;
+            }
         }
 
         private bool IfInChaseRange()

@@ -40,7 +40,8 @@ namespace RPG.Movement
 
         public void Cancel()
         {
-            this.GetComponent<NavMeshAgent>().isStopped = true;
+            if (this.GetComponent<NavMeshAgent>().enabled == true)
+                this.GetComponent<NavMeshAgent>().isStopped = true;
         }
 
         private void UpdateAnimator()
@@ -55,7 +56,7 @@ namespace RPG.Movement
             public JToken position;
             public JToken rotation;
 
-            public MoveSaveData(JToken a,JToken b)
+            public MoveSaveData(JToken a, JToken b)
             {
                 position = a;
                 rotation = b;
@@ -77,15 +78,15 @@ namespace RPG.Movement
             // IDictionary<string, JToken> stateDict = state;
             // stateDict["position"] = transform.position.ToToken();
             // stateDict["rotation"] = transform.eulerAngles.ToToken();
-            
-            return new MoveSaveData(transform.position.ToToken(),transform.eulerAngles.ToToken()).ToToken() ;
+
+            return new MoveSaveData(transform.position.ToToken(), transform.eulerAngles.ToToken()).ToToken();
         }
 
         public void RestoreFormJToken(JToken state)
         {
             JObject s = state.ToObject<JObject>();
             IDictionary<string, JToken> stateDict = s;
-            
+
             this.GetComponent<NavMeshAgent>().Warp(stateDict["position"].ToVector3());
             this.transform.eulerAngles = stateDict["rotation"].ToVector3();
         }

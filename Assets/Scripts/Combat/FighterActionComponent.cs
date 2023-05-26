@@ -10,12 +10,12 @@ namespace RPG.Combat
 {
     public class FighterActionComponent : MonoBehaviour, IAction
     {
-        [SerializeField] private float weaponRange = 2f;
-        [SerializeField] private float attackInterval = 2f;
+        [SerializeField] public float weaponRange = 2f;
+        [SerializeField] public float attackInterval = 2f;
         [SerializeField] private float weaponDamage = 10f;
 
-        private Transform target;
-        private float TimeLeftToAttackAction = 0f;
+        public Transform target;
+        public float TimeLeftToAttackAction = 0f;
 
         private void Awake()
         {
