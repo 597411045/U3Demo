@@ -42,6 +42,7 @@ namespace RPG.Control
         {
             SMachine.SMove._stateAction = State_Move;
             SMachine.SAttack._stateAction = State_Attack;
+            SMachine.SIdle._stateAction = State_Idle;
 
             SMachine.IfInChaseRange.Delegate_OnCheck += IfInChaseRange;
             SMachine.IfOutChaseRange.Delegate_OnCheck += IfOutChaseRange;
@@ -55,11 +56,17 @@ namespace RPG.Control
 
         private bool IfOutAttackRange()
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) > fac.weaponRange)
+            if (Vector3.Distance(this.transform.position, player.transform.position) > fac._weapon.weaponRange ||
+                player.GetComponent<HealthComponent>().IsDead)
             {
                 this.GetComponent<Animator>().SetTrigger("StopAttack");
                 this.GetComponent<NavMeshAgent>().enabled = true;
                 fac.target = null;
+
+                if (player.GetComponent<HealthComponent>().IsDead)
+                {
+                    SMachine.waitTimer = 5;
+                }
                 return true;
             }
             else
@@ -70,7 +77,8 @@ namespace RPG.Control
 
         private bool IfInAttackRange()
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= fac.weaponRange)
+            if (Vector3.Distance(this.transform.position, player.transform.position) <= fac._weapon.weaponRange &&
+                player.GetComponent<HealthComponent>().IsDead == false)
             {
                 this.GetComponent<NavMeshAgent>().enabled = false;
                 SMachine.attackTarget = player.transform;
@@ -83,9 +91,22 @@ namespace RPG.Control
             }
         }
 
+        private void State_Idle()
+        {
+            if (fac.TimeLeftToAttackAction >= 0)
+            {
+                fac.TimeLeftToAttackAction -= Time.deltaTime;
+            }
+        }
+
         private void State_Move()
         {
             this.GetComponent<NavMoveComponent>().StartMoveToPosition(SMachine.moveDestination);
+
+            if (fac.TimeLeftToAttackAction >= 0)
+            {
+                fac.TimeLeftToAttackAction -= Time.deltaTime;
+            }
         }
 
         private void State_Attack()
@@ -94,20 +115,21 @@ namespace RPG.Control
             {
                 fac.TimeLeftToAttackAction -= Time.deltaTime;
             }
-            
+
             this.transform.LookAt(SMachine.attackTarget.transform);
-            
+
             if (fac.TimeLeftToAttackAction <= 0)
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                fac.TimeLeftToAttackAction = fac.attackInterval;
+                fac.TimeLeftToAttackAction = fac._weapon.attackInterval;
             }
         }
 
         private bool IfInChaseRange()
         {
-            if (Vector3.Distance(player.transform.position, this.transform.position) < chaseDistance)
+            if (Vector3.Distance(player.transform.position, this.transform.position) < chaseDistance &&
+                player.GetComponent<HealthComponent>().IsDead == false)
             {
                 SMachine.moveDestination = player.transform.position;
                 this.GetComponent<NavMeshAgent>().speed = 2;
@@ -121,7 +143,8 @@ namespace RPG.Control
 
         private bool IfOutChaseRange()
         {
-            if (Vector3.Distance(player.transform.position, this.transform.position) > chaseDistance)
+            if (Vector3.Distance(player.transform.position, this.transform.position) > chaseDistance ||
+                player.GetComponent<HealthComponent>().IsDead)
             {
                 SMachine.waitTimer = 5;
                 return true;
@@ -181,12 +204,11 @@ namespace RPG.Control
 
         private void Awake()
         {
-            UpdateManager.UpdateActions.Add(UpdateMethod);
+            UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
         }
 
         void UpdateMethod()
         {
-            if (hc.IsDead) return;
             SMachine.OnUpdate();
 
             return;

@@ -20,13 +20,12 @@ namespace RPG.Control
 
         private void Awake()
         {
-            UpdateManager.UpdateActions.Add(UpdateMethod);
+            UpdateManager.RegisterAction(UpdateMethod,this.gameObject.GetHashCode());
         }
 
         void UpdateMethod()
         {
             if (this.enabled == false) return;
-            if (hc.IsDead) return;
             if (CanDoCombat()) return;
             if (CanSetNavDestinationToCursor()) return;
         }

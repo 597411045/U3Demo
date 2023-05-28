@@ -23,6 +23,14 @@ PrefabInstance:
       propertyPath: m_Speed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1828159161105581296, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 461e24b4d0664844da499083b1d3bc21, type: 2}
+    - target: {fileID: 1828159161105581296, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
+      propertyPath: isFsmControlled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6690393764511993227, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
       propertyPath: m_RootOrder
       value: 0

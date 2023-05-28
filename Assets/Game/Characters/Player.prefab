@@ -15,6 +15,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 1828159161105581296, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
+      propertyPath: aoc
+      value: 
+      objectReference: {fileID: 22100000, guid: 2ec9c82286833fc419c8cb166f0d7dae, type: 2}
+    - target: {fileID: 1828159161105581296, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
+      propertyPath: _weapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 427a1764fd596b5499425ac49173e9c4, type: 2}
     - target: {fileID: 2977268488878185827, guid: a1c56b069c5c3a14699e19193246cc2c, type: 3}
       propertyPath: uniqueIdentifier
       value: Player

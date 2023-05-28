@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
@@ -22,6 +23,7 @@ namespace RPG.Saving
                 buildIndex = stateDict["lastSceneBuildIndex"].ToObject<int>();
             }
 
+            if (buildIndex == 2) buildIndex = 0;
             yield return SceneManager.LoadSceneAsync(buildIndex);
             RestoreFromToken(state);
         }
@@ -69,6 +71,14 @@ namespace RPG.Saving
                 {
                     writer.Formatting = Formatting.Indented;
                     state.WriteTo(writer);
+
+                    // string a = state.ToString();
+                    // byte[] buffer = Encoding.ASCII.GetBytes(a);
+                    //
+                    // JObject b = JObject.Parse(a);
+                    // IDictionary<string, JToken> stateDict = b;
+                    //
+                    // int c = 0;
                 }
             }
         }

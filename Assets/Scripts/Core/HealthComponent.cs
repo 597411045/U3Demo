@@ -26,13 +26,16 @@ namespace RPG.Core
 
         void CheckIfDead()
         {
-            if (hp == 0)
+            if (hp <= 0)
             {
                 if (isDead) return;
                 isDead = true;
+
+                UpdateManager.RemoveActionsById(this.gameObject.GetHashCode());
+
                 this.GetComponent<Animator>().SetTrigger("IfDead");
-                this.GetComponent<ActionSchedulerComponent>().CancelCurrentAction();
                 this.GetComponent<NavMeshAgent>().enabled = false;
+
             }
         }
 

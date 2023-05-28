@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
@@ -13,7 +14,7 @@ namespace RPG.Movement
     {
         private void Awake()
         {
-            UpdateManager.UpdateActions.Add(UpdateMethod);
+            UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
         }
 
         private void UpdateMethod()
@@ -34,14 +35,14 @@ namespace RPG.Movement
 
         public void MoveToPosition(Vector3 destination)
         {
+            if (!this.GetComponent<NavMeshAgent>().enabled) return;
             this.GetComponent<NavMeshAgent>().destination = destination;
             this.GetComponent<NavMeshAgent>().isStopped = false;
         }
 
         public void Cancel()
         {
-            if (this.GetComponent<NavMeshAgent>().enabled == true)
-                this.GetComponent<NavMeshAgent>().isStopped = true;
+            this.GetComponent<NavMeshAgent>().isStopped = true;
         }
 
         private void UpdateAnimator()

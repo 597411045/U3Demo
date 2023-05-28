@@ -10,20 +10,15 @@ namespace RPG.Saving
         private const string saveFile = "save";
 
 
-        // IEnumerator Start()
-        // {
-        //     
-        //     Debug.Log("IE Start");
-        //     
-        //     CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
-        //     csc.contrast = 0;
-        //     
-        //     UpdateManager.UpdateActions.Clear();
-        //     yield return this.GetComponent<JsonSavingSystem>().LoadLastScene(saveFile);
-        //     
-        //     CameraShaderComponent csc2 = Camera.main.GetComponent<CameraShaderComponent>();
-        //     yield return csc2.FadeIn(1);
-        // }
+       IEnumerator Start()
+       {
+           Debug.Log("IE Start");
+           
+           yield return this.GetComponent<JsonSavingSystem>().LoadLastScene(saveFile);
+           
+           CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
+           yield return csc.FadeIn(1);
+       }
 
         private void Update()
         {
