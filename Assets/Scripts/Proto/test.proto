@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message TestData{
+  string a = 1;
+  int32 b = 2;
+}
+
+//--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto
+//    /Users/ac/Desktop/U3Demo/Packages/Google.Protobuf.Tools.3.23.2/tools/macosx_x64/protoc 
