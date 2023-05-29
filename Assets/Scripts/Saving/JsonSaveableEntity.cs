@@ -27,6 +27,7 @@ namespace RPG.Saving
             foreach (var child in tmp)
             {
                 JToken token = child.CaptureAsJTokenInInterface();
+                if(token==null) continue;
                 string component = child.GetType().ToString();
                 Debug.Log($"{name} Capture {component} ={token.ToString()}");
                 stateDict[child.GetType().ToString()] = token;

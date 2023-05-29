@@ -35,7 +35,9 @@ namespace RPG.Core
 
                 this.GetComponent<Animator>().SetTrigger("IfDead");
                 this.GetComponent<NavMeshAgent>().enabled = false;
-
+                this.GetComponent<CapsuleCollider>().height = 0;
+                this.GetComponent<CapsuleCollider>().radius = 0.3f;
+                this.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.3f, 0);
             }
         }
 

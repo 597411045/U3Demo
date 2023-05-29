@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aoc: {fileID: 22100000, guid: 2ec9c82286833fc419c8cb166f0d7dae, type: 2}
   weaponPrefab: {fileID: 6321403166119639267, guid: 35341ace5c3a95a40a134d59462b04cc, type: 3}
-  weaponRange: 5
-  attackInterval: 3
-  weaponDamage: 100
+  dropPrefab: {fileID: 888441843114917845, guid: 35fb1a6f0f249a44ba27934717022b3a, type: 3}
+  projectilePrefab: {fileID: 0}
+  weaponRange: 3
+  attackInterval: 2
+  weaponDamage: 10
+  transformName: Hand_R
+  prefabName: SwordWeapon

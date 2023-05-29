@@ -7,7 +7,7 @@ public static class Util
         for (int i = 0; i < tf.childCount; i++)
         {
             string a = tf.GetChild(i).name;
-            if (tf.GetChild(i).name.Equals(name))
+            if (tf.GetChild(i).name.Contains(name))
             {
                 result = tf.GetChild(i);
                 return true;

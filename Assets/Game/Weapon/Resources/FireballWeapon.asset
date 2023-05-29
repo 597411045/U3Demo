@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf841a92a3e5442ea23b03840218f75c, type: 3}
+  m_Name: FireballWeapon
+  m_EditorClassIdentifier: 
+  aoc: {fileID: 22100000, guid: f98406a02a1d54c4fad33f7202fc9dce, type: 2}
+  weaponPrefab: {fileID: 0}
+  dropPrefab: {fileID: 8670498440673526498, guid: 3080944bdf2b7ed43b0d02efd40fd5b5, type: 3}
+  projectilePrefab: {fileID: 7391127619364308812, guid: c3649cc525bf71d4ea7101772905ae2d, type: 3}
+  weaponRange: 20
+  attackInterval: 5
+  weaponDamage: 20
+  transformName: Hand_L
+  prefabName: FireballWeapon

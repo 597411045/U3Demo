@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Saving;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
 
 namespace RPG.Combat
 {
-    public class FighterActionComponent : MonoBehaviour, IAction
+    public class FighterActionComponent : MonoBehaviour, IAction, IJsonSaveable
     {
-        
         [SerializeField] private bool isFsmControlled;
 
         [SerializeField] private Transform handTransform;
@@ -27,8 +29,7 @@ namespace RPG.Combat
 
         private void Start()
         {
-            if (_weapon == null) return;
-            _weapon.Spawn(this.transform, this.GetComponent<Animator>());
+            _weapon.Spawn(this.transform, this.GetComponent<Animator>(), out shotPoint);
         }
 
         private void UpdateMethod()
@@ -102,10 +103,57 @@ namespace RPG.Combat
             target.GetComponent<HealthComponent>().TakeDamage(_weapon.weaponDamage);
         }
 
+        private void Shoot()
+        {
+            if (target == null) return;
+            GameObject go = Instantiate(_weapon.projectilePrefab);
+            go.GetComponent<Projectile>().atk = _weapon.weaponDamage;
+            //go.GetComponent<Projectile>().isAutoNav = true;
+            go.GetComponent<Projectile>().Target = target.gameObject;
+
+            go.transform.position = shotPoint.position;
+            go.transform.position += (target.transform.position - this.transform.position).normalized * 0.5f;
+
+            go.GetComponent<Projectile>().direction =
+                (target.transform.position + new Vector3(0, 1, 0) - go.transform.position).normalized;
+        }
+
+        private Transform shotPoint;
+
+        public void EquipItem(Weapon weapon)
+        {
+            this._weapon.Drop(shotPoint);
+            this._weapon = weapon;
+            _weapon.Spawn(this.transform, this.GetComponent<Animator>(), out shotPoint);
+        }
+
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(this.transform.position, _weapon.weaponRange);
+        }
+
+        public JToken CaptureAsJTokenInInterface()
+        {
+            if (gameObject.tag != "Player") return null;
+
+            JObject state = new JObject();
+            IDictionary<string, JToken> stateDict = state;
+            stateDict["weaponPrefabName"] = _weapon.prefabName;
+            return state;
+        }
+
+        public void RestoreFormJToken(JToken state)
+        {
+            if (gameObject.tag != "Player") return;
+
+            JObject s = state.ToObject<JObject>();
+            IDictionary<string, JToken> stateDict = s;
+            string str = stateDict["weaponPrefabName"].ToObject<string>();
+            if (!this._weapon.prefabName.Equals(str))
+            {
+                this._weapon = Resources.Load<Weapon>(str);
+            }
         }
     }
 }
