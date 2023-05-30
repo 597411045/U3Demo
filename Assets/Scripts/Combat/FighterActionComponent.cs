@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
+using UI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
@@ -100,7 +101,7 @@ namespace RPG.Combat
         private void Hit()
         {
             if (target == null) return;
-            target.GetComponent<HealthComponent>().TakeDamage(_weapon.weaponDamage);
+            target.GetComponent<HealthComponent>().TakeDamage(_weapon.weaponDamage, this.gameObject);
         }
 
         private void Shoot()
@@ -110,6 +111,7 @@ namespace RPG.Combat
             go.GetComponent<Projectile>().atk = _weapon.weaponDamage;
             //go.GetComponent<Projectile>().isAutoNav = true;
             go.GetComponent<Projectile>().Target = target.gameObject;
+            go.GetComponent<Projectile>().launcher = this.gameObject;
 
             go.transform.position = shotPoint.position;
             go.transform.position += (target.transform.position - this.transform.position).normalized * 0.5f;
@@ -154,6 +156,12 @@ namespace RPG.Combat
             {
                 this._weapon = Resources.Load<Weapon>(str);
             }
+        }
+
+        public float GetTargetHealthPercentage()
+        {
+            if (target == null) return 0;
+            return target.GetComponent<HealthComponent>().GetHealthPercentage();
         }
     }
 }

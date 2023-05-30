@@ -1,5 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Google.Protobuf.WellKnownTypes;
+using Newtonsoft.Json.Linq;
 using RPG.Saving;
+using RPG.Stats;
+using UI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -8,27 +12,49 @@ namespace RPG.Core
 {
     public class HealthComponent : MonoBehaviour, IJsonSaveable
     {
-        [SerializeField] private float hp = 100;
+        [SerializeField] private float hp = 0;
+        private float maxHp;
 
         private bool isDead = false;
+
+
+        public float HP
+        {
+            set
+            {
+                hp = value;
+                this.GetComponent<UIControl>().UpdateUI();
+            }
+        }
 
         public bool IsDead
         {
             get { return isDead; }
         }
 
-        public void TakeDamage(float damage)
+        private void Start()
         {
-            hp = Mathf.Max(hp - damage, 0);
-
-            CheckIfDead();
+            maxHp = this.GetComponent<BaseStats>().GetHealth();
+            HP = maxHp;
         }
 
-        void CheckIfDead()
+        public void TakeDamage(float damage, GameObject attacker)
+        {
+            HP = Mathf.Max(hp - damage, 0);
+
+            if (CheckIfDead())
+            {
+                attacker.GetComponent<BaseStats>().GainExp(
+                    this.GetComponent<BaseStats>().GetExpValue()
+                    );
+            }
+        }
+
+        bool CheckIfDead()
         {
             if (hp <= 0)
             {
-                if (isDead) return;
+                if (isDead) return true;
                 isDead = true;
 
                 UpdateManager.RemoveActionsById(this.gameObject.GetHashCode());
@@ -38,7 +64,11 @@ namespace RPG.Core
                 this.GetComponent<CapsuleCollider>().height = 0;
                 this.GetComponent<CapsuleCollider>().radius = 0.3f;
                 this.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.3f, 0);
+
+                return true;
             }
+
+            return false;
         }
 
 
@@ -51,6 +81,11 @@ namespace RPG.Core
         {
             hp = state.ToObject<float>();
             CheckIfDead();
+        }
+
+        public float GetHealthPercentage()
+        {
+            return hp / maxHp * 100;
         }
     }
 }

@@ -15,6 +15,7 @@ namespace RPG.Combat
         [SerializeField] public GameObject colliderEffect = null;
         [SerializeField] public GameObject[] clearImmediate = null;
 
+        public GameObject launcher;
 
         private void Update()
         {
@@ -71,7 +72,7 @@ namespace RPG.Combat
 
             if (other.gameObject.GetComponent<HealthComponent>() != null)
             {
-                other.gameObject.GetComponent<HealthComponent>().TakeDamage(atk);
+                other.gameObject.GetComponent<HealthComponent>().TakeDamage(atk,launcher);
 
                 // other.gameObject.GetComponent<Rigidbody>().AddForce(
                 //     (this.transform.position -

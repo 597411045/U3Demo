@@ -17,7 +17,7 @@ MonoBehaviour:
   dropPrefab: {fileID: 888441843114917845, guid: 35fb1a6f0f249a44ba27934717022b3a, type: 3}
   projectilePrefab: {fileID: 0}
   weaponRange: 3
-  attackInterval: 2
+  attackInterval: 1
   weaponDamage: 10
   transformName: Hand_R
   prefabName: SwordWeapon
