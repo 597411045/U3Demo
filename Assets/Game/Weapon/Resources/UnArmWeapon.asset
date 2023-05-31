@@ -17,7 +17,7 @@ MonoBehaviour:
   dropPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
   weaponRange: 2
-  attackInterval: 2
-  weaponDamage: 5
+  attackInterval: 1
+  weaponDamage: 50
   transformName: 
   prefabName: UnArmWeapon

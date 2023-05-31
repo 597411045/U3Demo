@@ -17,7 +17,7 @@ MonoBehaviour:
   dropPrefab: {fileID: 8670498440673526498, guid: 3080944bdf2b7ed43b0d02efd40fd5b5, type: 3}
   projectilePrefab: {fileID: 7391127619364308812, guid: c3649cc525bf71d4ea7101772905ae2d, type: 3}
   weaponRange: 20
-  attackInterval: 5
+  attackInterval: 3
   weaponDamage: 20
   transformName: Hand_L
   prefabName: FireballWeapon

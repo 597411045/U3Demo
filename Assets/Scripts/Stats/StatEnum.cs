@@ -11,6 +11,8 @@
     {
         Health,
         Exp,
-        Level
+        Level,
+        TotalExpToLevel,
+        Damage
     }
 }

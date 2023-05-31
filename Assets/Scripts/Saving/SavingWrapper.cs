@@ -9,8 +9,12 @@ namespace RPG.Saving
     {
         private const string saveFile = "save";
 
+        private void Start()
+        {
+            StartCoroutine(IEStart());
+        }
 
-        IEnumerator Start()
+        IEnumerator IEStart()
         {
             Debug.Log("IE Start");
 

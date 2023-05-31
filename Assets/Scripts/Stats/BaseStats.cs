@@ -1,12 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json.Linq;
+using RPG.Core;
 using RPG.Saving;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace RPG.Stats
 {
-    public class BaseStats : MonoBehaviour,IJsonSaveable
+    public class BaseStats : MonoBehaviour, IJsonSaveable, IModifierProvider
     {
         [Range(1, 99)] [SerializeField] private int startingLevel = 1;
 
@@ -14,38 +17,161 @@ namespace RPG.Stats
         private CharacterEnum characterEnum;
 
         [SerializeField] private Progression progression;
+        [SerializeField] public GameObject levelUpEffect = null;
 
-        [SerializeField] private float _exp;
 
-        public float GetHealth()
+        private float _exp;
+        private float _hp;
+        private float _maxHp;
+        private float[] _explevels;
+
+        private void Awake()
         {
-            return progression.GetData(characterEnum, ProgressionEnum.Health, startingLevel);
+            _maxHp = progression.GetData(characterEnum, ProgressionEnum.Health, startingLevel);
+            _hp = _maxHp;
+
+            _explevels = progression.GetRawData(characterEnum, ProgressionEnum.TotalExpToLevel);
+            OnSetEXP += CalcuLevel;
+
+            OnLevelUp += GenLevelUpEffect;
+            OnLevelUp += RestoreHP;
         }
 
+        public float HP
+        {
+            set
+            {
+                _hp = value;
+                this.GetComponent<HealthComponent>().CheckIfDead();
+            }
+            get { return _hp; }
+        }
+
+        public float MAXHP
+        {
+            get { return _maxHp; }
+        }
+
+        public float GetHealthPercentage()
+        {
+            return HP / _maxHp * 100;
+        }
 
         public void GainExp(float maxHp)
         {
-            _exp += maxHp;
+            EXP += maxHp;
         }
 
-        public float GetExpValue()
+        public delegate void OnSetEXPDelegate();
+
+        public event OnSetEXPDelegate OnSetEXP;
+
+        public float EXP
         {
-            return progression.GetData(characterEnum, ProgressionEnum.Exp, startingLevel);
+            set
+            {
+                _exp = value;
+
+                OnSetEXP.Invoke();
+            }
+            get { return _exp; }
+        }
+
+        public float GetExpReward()
+        {
+            return progression.GetData(characterEnum, ProgressionEnum.Exp, Level);
         }
 
         public JToken CaptureAsJTokenInInterface()
         {
             JObject state = new JObject();
-            IDictionary<string,JToken> stateDict= state;
+            IDictionary<string, JToken> stateDict = state;
             stateDict["Exp"] = _exp;
+            stateDict["HP"] = _hp;
             return state;
         }
 
         public void RestoreFormJToken(JToken s)
         {
             JObject state = s.ToObject<JObject>();
-            IDictionary<string,JToken> stateDict= state;
-            _exp = stateDict["Exp"].ToObject<float>();
+            IDictionary<string, JToken> stateDict = state;
+            EXP = stateDict["Exp"].ToObject<float>();
+            HP = stateDict["HP"].ToObject<float>();
+        }
+
+
+        public event Action OnLevelUp;
+
+        public int Level
+        {
+            set { startingLevel = value; }
+            get { return startingLevel; }
+        }
+
+        private void CalcuLevel()
+        {
+            bool flag = false;
+            for (int i = Level; i < _explevels.Length; i++)
+            {
+                if (_exp >= _explevels[i])
+                {
+                    Level = i + 1;
+                    flag = true;
+                }
+            }
+
+            if (flag)
+            {
+                OnLevelUp.Invoke();
+            }
+        }
+
+        private void GenLevelUpEffect()
+        {
+            Instantiate(levelUpEffect, this.transform);
+        }
+
+        private void RestoreHP()
+        {
+            HP = _maxHp;
+        }
+
+        public float GetAllAdditiveModifier(ProgressionEnum b)
+        {
+            float sum = 0;
+
+            foreach (var c in GetComponents<IModifierProvider>())
+            {
+                float percent = 0;
+                float unit = 0;
+                foreach (var d in c.GetAdditiveModifier(b))
+                {
+                    unit += d;
+                }
+
+                foreach (var d in c.GetPercentageModifier(b))
+                {
+                    percent += d;
+                }
+
+                sum += unit * percent;
+            }
+
+            return sum;
+        }
+
+        public IEnumerable<float> GetAdditiveModifier(ProgressionEnum b)
+        {
+            if (b == ProgressionEnum.Damage)
+            {
+                yield return 1;
+                yield return 2;
+            }
+        }
+
+        public IEnumerable<float> GetPercentageModifier(ProgressionEnum b)
+        {
+            yield return 0.5f;
         }
     }
 }

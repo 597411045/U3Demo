@@ -25,6 +25,13 @@ MonoBehaviour:
       - 10
       - 20
       - 30
+    - _progressionEnum: 3
+      _levels:
+      - 0
+      - 10
+      - 30
+      - 60
+      - 100
   - _characterEnum: 1
     _progressionStats:
     - _progressionEnum: 0
@@ -37,3 +44,6 @@ MonoBehaviour:
       - 5
       - 10
       - 15
+    - _progressionEnum: 3
+      _levels:
+      - 999

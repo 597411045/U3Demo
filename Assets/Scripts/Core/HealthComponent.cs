@@ -10,49 +10,30 @@ using UnityEngine.Serialization;
 
 namespace RPG.Core
 {
-    public class HealthComponent : MonoBehaviour, IJsonSaveable
+    public class HealthComponent : MonoBehaviour
     {
-        [SerializeField] private float hp = 0;
-        private float maxHp;
-
         private bool isDead = false;
-
-
-        public float HP
-        {
-            set
-            {
-                hp = value;
-                this.GetComponent<UIControl>().UpdateUI();
-            }
-        }
 
         public bool IsDead
         {
             get { return isDead; }
         }
 
-        private void Start()
-        {
-            maxHp = this.GetComponent<BaseStats>().GetHealth();
-            HP = maxHp;
-        }
-
         public void TakeDamage(float damage, GameObject attacker)
         {
-            HP = Mathf.Max(hp - damage, 0);
+            this.GetComponent<BaseStats>().HP = Mathf.Max(0, this.GetComponent<BaseStats>().HP - damage);
 
             if (CheckIfDead())
             {
                 attacker.GetComponent<BaseStats>().GainExp(
-                    this.GetComponent<BaseStats>().GetExpValue()
-                    );
+                    this.GetComponent<BaseStats>().GetExpReward()
+                );
             }
         }
 
-        bool CheckIfDead()
+        public bool CheckIfDead()
         {
-            if (hp <= 0)
+            if (this.GetComponent<BaseStats>().HP <= 0)
             {
                 if (isDead) return true;
                 isDead = true;
@@ -69,23 +50,6 @@ namespace RPG.Core
             }
 
             return false;
-        }
-
-
-        public JToken CaptureAsJTokenInInterface()
-        {
-            return JToken.FromObject(hp);
-        }
-
-        public void RestoreFormJToken(JToken state)
-        {
-            hp = state.ToObject<float>();
-            CheckIfDead();
-        }
-
-        public float GetHealthPercentage()
-        {
-            return hp / maxHp * 100;
         }
     }
 }

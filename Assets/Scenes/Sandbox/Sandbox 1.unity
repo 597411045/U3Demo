@@ -1970,6 +1970,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5644322673556897299, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
+      propertyPath: startingLevel
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8509959239411487573, guid: 8ea871bcaa9ce294f820ac4770c9ffa3, type: 3}
       propertyPath: pathGroup
       value: 
@@ -2077,13 +2081,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 1762891301}
     m_Modifications:
     - target: {fileID: 1389234060814686978, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
+      propertyPath: user
+      value: 
+      objectReference: {fileID: 921061553}
+    - target: {fileID: 1389234060814686978, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
       propertyPath: textHP
       value: 
       objectReference: {fileID: 830472880}
     - target: {fileID: 1389234060814686978, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
+      propertyPath: expText
+      value: 
+      objectReference: {fileID: 6725360613802425255}
+    - target: {fileID: 1389234060814686978, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
       propertyPath: targetHP
       value: 
       objectReference: {fileID: 6725360613802425254}
+    - target: {fileID: 1389234060814686978, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
+      propertyPath: levelText
+      value: 
+      objectReference: {fileID: 6725360613802425256}
     - target: {fileID: 1652303307584237739, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
       propertyPath: _weapon
       value: 
@@ -2154,6 +2170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
+--- !u!1 &921061553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2110895717630858710, guid: 67647917a3a1c514fb21e7b0e22642ea, type: 3}
+  m_PrefabInstance: {fileID: 921061552}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &923840533
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3095,7 +3116,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1473970904}
-  m_LocalRotation: {x: 0.21589974, y: 0.7057957, z: -0.24193326, w: 0.6298477}
+  m_LocalRotation: {x: 0.2158997, y: 0.7057957, z: -0.24193327, w: 0.62984765}
   m_LocalPosition: {x: 2.25, y: 8.43, z: 10.59}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3232,7 +3253,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546734266}
-  m_LocalRotation: {x: 0.056779124, y: -0.46728355, z: 0.030089458, w: 0.8817692}
+  m_LocalRotation: {x: 0.056779146, y: -0.46728358, z: 0.030089466, w: 0.8817692}
   m_LocalPosition: {x: 12.41, y: 7.68, z: -15.23}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4363,6 +4384,28 @@ PrefabInstance:
 --- !u!114 &6725360613802425254 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2782203635595396872, guid: 40bf2c1d1d1c9e84fa557503d1c1ef44, type: 3}
+  m_PrefabInstance: {fileID: 6725360613802425253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6725360613802425255 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3356764822355134957, guid: 40bf2c1d1d1c9e84fa557503d1c1ef44, type: 3}
+  m_PrefabInstance: {fileID: 6725360613802425253}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6725360613802425256 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 363644583781748931, guid: 40bf2c1d1d1c9e84fa557503d1c1ef44, type: 3}
   m_PrefabInstance: {fileID: 6725360613802425253}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

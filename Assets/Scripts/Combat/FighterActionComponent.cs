@@ -5,6 +5,7 @@ using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
+using RPG.Stats;
 using UI;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,7 +13,7 @@ using UnityEngine.Networking;
 
 namespace RPG.Combat
 {
-    public class FighterActionComponent : MonoBehaviour, IAction, IJsonSaveable
+    public class FighterActionComponent : MonoBehaviour, IAction, IJsonSaveable, IModifierProvider
     {
         [SerializeField] private bool isFsmControlled;
 
@@ -24,13 +25,9 @@ namespace RPG.Combat
 
         private void Awake()
         {
+            _weapon.Spawn(this.transform, this.GetComponent<Animator>(), out shotPoint);
             if (isFsmControlled) return;
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
-        }
-
-        private void Start()
-        {
-            _weapon.Spawn(this.transform, this.GetComponent<Animator>(), out shotPoint);
         }
 
         private void UpdateMethod()
@@ -101,14 +98,17 @@ namespace RPG.Combat
         private void Hit()
         {
             if (target == null) return;
-            target.GetComponent<HealthComponent>().TakeDamage(_weapon.weaponDamage, this.gameObject);
+            target.GetComponent<HealthComponent>()
+                .TakeDamage(this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage),
+                    this.gameObject);
         }
 
         private void Shoot()
         {
             if (target == null) return;
             GameObject go = Instantiate(_weapon.projectilePrefab);
-            go.GetComponent<Projectile>().atk = _weapon.weaponDamage;
+            go.GetComponent<Projectile>().atk =
+                this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage);
             //go.GetComponent<Projectile>().isAutoNav = true;
             go.GetComponent<Projectile>().Target = target.gameObject;
             go.GetComponent<Projectile>().launcher = this.gameObject;
@@ -152,16 +152,26 @@ namespace RPG.Combat
             JObject s = state.ToObject<JObject>();
             IDictionary<string, JToken> stateDict = s;
             string str = stateDict["weaponPrefabName"].ToObject<string>();
-            if (!this._weapon.prefabName.Equals(str))
+            EquipItem(Resources.Load<Weapon>(str));
+        }
+
+        public float GetTargetHP()
+        {
+            if (target == null) return 0;
+            return target.GetComponent<BaseStats>().HP;
+        }
+
+        public IEnumerable<float> GetAdditiveModifier(ProgressionEnum e)
+        {
+            if (e == ProgressionEnum.Damage)
             {
-                this._weapon = Resources.Load<Weapon>(str);
+                yield return _weapon.weaponDamage;
             }
         }
 
-        public float GetTargetHealthPercentage()
+        public IEnumerable<float> GetPercentageModifier(ProgressionEnum b)
         {
-            if (target == null) return 0;
-            return target.GetComponent<HealthComponent>().GetHealthPercentage();
+            yield return 1f;
         }
     }
 }
