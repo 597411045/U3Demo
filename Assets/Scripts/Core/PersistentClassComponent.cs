@@ -1,4 +1,5 @@
 ﻿using System;
+using RPG.Saving;
 using UnityEngine;
 
 namespace RPG.Core
@@ -7,6 +8,7 @@ namespace RPG.Core
     {
         [SerializeField] private GameObject go;
         [SerializeField] private GameObject go1;
+        [SerializeField] private GameObject go2;
 
         private static bool hasSpawn;
 
@@ -16,11 +18,14 @@ namespace RPG.Core
             SpawnObject();
         }
 
+        
+
         private void SpawnObject()
         {
             hasSpawn = true;
             DontDestroyOnLoad(Instantiate(go));
             DontDestroyOnLoad(Instantiate(go1));
+            DontDestroyOnLoad(Instantiate(go2));
         }
     }
 }

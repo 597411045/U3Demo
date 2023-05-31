@@ -9,7 +9,7 @@ namespace RPG.Saving
     {
         private const string saveFile = "save";
 
-        private void Start()
+        public void StartGame()
         {
             StartCoroutine(IEStart());
         }
@@ -34,6 +34,11 @@ namespace RPG.Saving
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 Save();
+            }
+
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                StartGame();
             }
         }
 
