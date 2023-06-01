@@ -6,20 +6,23 @@ using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 namespace RPG.Control
 {
+    public enum CursorType
+    {
+        None,
+        Movement,
+        Combat,
+        UI,
+        PickUp,
+        Deny,
+    }
+
+
     public class PlayerController : MonoBehaviour
     {
-        private HealthComponent hc;
-
-
-        enum CursorType
-        {
-            None,
-            Movement,
-            Combat
-        }
 
         [Serializable]
         struct CursorMapping
@@ -31,11 +34,6 @@ namespace RPG.Control
 
         [SerializeField] private CursorMapping[] _cursorMappings;
 
-        private void Start()
-        {
-            hc = this.GetComponent<HealthComponent>();
-        }
-
         private void Awake()
         {
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
@@ -45,32 +43,59 @@ namespace RPG.Control
         {
             if (this.enabled == false) return;
 
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                SetCursor(CursorType.UI);
+                return;
+            }
+
+            RaycastHit[] hit = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
+            for (int i = 0; i < hit.Length; i++)
+            {
+                for (int j = i + 1; j < hit.Length; j++)
+                {
+                    if (hit[i].distance > hit[j].distance)
+                    {
+                        (hit[j], hit[i]) = (hit[i], hit[j]);
+                    }
+                }
+
+                if (hit[i].transform.GetComponent<IRayCastAble>() != null)
+                {
+                    if (hit[i].transform.GetComponent<IRayCastAble>().HandleRaycaset(this, hit[i]))
+                    {
+                        return;
+                    }
+                }
+            }
+
             if (CanDoCombat()) return;
             if (CanSetNavDestinationToCursor()) return;
             //SetCursor(CursorType.None);
         }
 
+
         private bool CanDoCombat()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SetCursor(CursorType.Combat);
-                RaycastHit[] raycastHits = Physics.RaycastAll(GerRayFromCursor());
-                foreach (RaycastHit hit in raycastHits)
-                {
-                    CombatAbleComponent cac = hit.transform.GetComponent<CombatAbleComponent>();
-                    if (cac == null) continue;
-                    if (this.GetComponent<FighterActionComponent>().TryMakeTargetBeAttackTarget(cac))
-                    {
-                        return true;
-                    }
-                }
-            }
+            // if (Input.GetMouseButtonDown(0))
+            // {
+            //     SetCursor(CursorType.Combat);
+            //     RaycastHit[] raycastHits = Physics.RaycastAll(GerRayFromCursor());
+            //     foreach (RaycastHit hit in raycastHits)
+            //     {
+            //         CombatAbleComponent cac = hit.transform.GetComponent<CombatAbleComponent>();
+            //         if (cac == null) continue;
+            //         if (this.GetComponent<FighterActionComponent>().TryMakeTargetBeAttackTarget(cac))
+            //         {
+            //             return true;
+            //         }
+            //     }
+            // }
 
             return false;
         }
 
-        private void SetCursor(CursorType e)
+        public void SetCursor(CursorType e)
         {
             CursorMapping m = GetCursorMapping(e);
             Cursor.SetCursor(m.texture, m.hotspot, CursorMode.Auto);
@@ -92,18 +117,18 @@ namespace RPG.Control
 
         private bool CanSetNavDestinationToCursor()
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                SetCursor(CursorType.Movement);
-
-                RaycastHit raycastHit;
-                bool ifHit = Physics.Raycast(GerRayFromCursor(), out raycastHit);
-                if (ifHit)
-                {
-                    this.GetComponent<NavMoveComponent>().StartMoveToPosition(raycastHit.point);
-                    return true;
-                }
-            }
+// s            if (Input.GetMouseButtonDown(0))
+//             {
+//                 SetCursor(CursorType.Movement);
+//
+//                 RaycastHit raycastHit;
+//                 bool ifHit = Physics.Raycast(GerRayFromCursor(), out raycastHit);
+//                 if (ifHit)
+//                 {
+//                     this.GetComponent<NavMoveComponent>().StartMoveToPosition(raycastHit.point);
+//                     return true;
+//                 }
+//             }
 
             return false;
         }

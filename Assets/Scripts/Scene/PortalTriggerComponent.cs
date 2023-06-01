@@ -28,12 +28,15 @@ namespace RPG.Scene
             UpdateManager.ClearAllActions();
             DontDestroyOnLoad(gameObject);
 
-            
+
             FindObjectOfType<SavingWrapper>().Save();
-            
+
             StopCoroutine("FadeIn");
+
             CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
-            yield return csc.FadeOut(1);
+            csc.StopImme = true;
+            yield return new WaitForSeconds(0.02f);
+            yield return csc.Fade(0, 2);
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
 
@@ -41,10 +44,12 @@ namespace RPG.Scene
 
             SetPlayerPosition();
 
-            CameraShaderComponent csc2 = Camera.main.GetComponent<CameraShaderComponent>();
-            yield return csc2.FadeIn(0.5f);
-
             FindObjectOfType<SavingWrapper>().Save();
+
+            CameraShaderComponent csc2 = Camera.main.GetComponent<CameraShaderComponent>();
+            csc2.contrast = 0;
+            yield return csc2.Fade(1, 2);
+
             Destroy(gameObject);
         }
 

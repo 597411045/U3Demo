@@ -3,15 +3,19 @@ using Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json.Linq;
 using RPG.Saving;
 using RPG.Stats;
-using UI;
+using RPG.UI;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 namespace RPG.Core
 {
     public class HealthComponent : MonoBehaviour
     {
+        [SerializeField] private UnityEvent<float> uevent;
+
+
         private bool isDead = false;
 
         public bool IsDead
@@ -23,6 +27,7 @@ namespace RPG.Core
         {
             this.GetComponent<BaseStats>().HP = Mathf.Max(0, this.GetComponent<BaseStats>().HP - damage);
 
+            uevent.Invoke(damage);
             if (CheckIfDead())
             {
                 attacker.GetComponent<BaseStats>().GainExp(

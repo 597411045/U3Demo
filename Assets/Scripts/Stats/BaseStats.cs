@@ -4,6 +4,7 @@ using Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
+using RPG.UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -43,6 +44,7 @@ namespace RPG.Stats
             {
                 _hp = value;
                 this.GetComponent<HealthComponent>().CheckIfDead();
+                this.GetComponent<UIControl>().UpdateHpBar(HP / _maxHp);
             }
             get { return _hp; }
         }
@@ -50,11 +52,6 @@ namespace RPG.Stats
         public float MAXHP
         {
             get { return _maxHp; }
-        }
-
-        public float GetHealthPercentage()
-        {
-            return HP / _maxHp * 100;
         }
 
         public void GainExp(float maxHp)

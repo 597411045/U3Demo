@@ -13,6 +13,8 @@ namespace Cinematic
         public Shader shader;
         private Material mat;
 
+        public bool StopImme;
+
         private void Awake()
         {
             mat = new Material(shader);
@@ -29,26 +31,39 @@ namespace Cinematic
             }
         }
 
+        public IEnumerator Fade(float value, float time)
+        {
+            StopImme = false;
+            while (!Mathf.Approximately(contrast, value) && StopImme == false)
+            {
+                contrast = Mathf.MoveTowards(contrast, value, Time.deltaTime / time);
+                yield return null;
+            }
+        }
+
         public IEnumerator FadeOut(float time)
         {
             contrast = 1;
-            while (contrast >= 0)
+            StopImme = false;
+            while (contrast >= 0 && StopImme == false)
             {
                 contrast -= Time.deltaTime / time;
                 yield return null;
             }
-            contrast = 0;
 
+            contrast = 0;
         }
 
         public IEnumerator FadeIn(float time)
         {
             contrast = 0;
-            while (contrast <= 1)
+            StopImme = false;
+            while (contrast <= 1 && StopImme == false)
             {
                 contrast += Time.deltaTime / time;
                 yield return null;
             }
+
             contrast = 1;
         }
     }

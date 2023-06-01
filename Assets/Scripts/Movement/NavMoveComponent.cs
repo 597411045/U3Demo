@@ -42,7 +42,8 @@ namespace RPG.Movement
 
         public void Cancel()
         {
-            this.GetComponent<NavMeshAgent>().isStopped = true;
+            if (this.GetComponent<NavMeshAgent>().enabled)
+                this.GetComponent<NavMeshAgent>().isStopped = true;
         }
 
         private void UpdateAnimator()

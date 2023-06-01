@@ -6,7 +6,6 @@ using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
 using RPG.Stats;
-using UI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;

@@ -2,9 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using RPG.Combat;
+using RPG.Control;
+using RPG.Core;
 using UnityEngine;
 
-public class PickUpAble : MonoBehaviour
+public class PickUpAble : MonoBehaviour, IRayCastAble
 {
     [SerializeField] private Weapon _weapon = null;
 
@@ -26,5 +28,18 @@ public class PickUpAble : MonoBehaviour
             collision.GetComponent<FighterActionComponent>().EquipItem(_weapon);
             Destroy(this.gameObject);
         }
+    }
+
+
+    public bool HandleRaycaset(PlayerController p, RaycastHit h)
+    {
+        p.SetCursor(CursorType.PickUp);
+        if (Input.GetMouseButtonDown(0))
+        {
+            p.GetComponent<FighterActionComponent>().EquipItem(_weapon);
+            Destroy(this.gameObject);
+        }
+
+        return true;
     }
 }
