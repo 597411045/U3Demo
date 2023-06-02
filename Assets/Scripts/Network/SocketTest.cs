@@ -25,10 +25,6 @@ namespace Network
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                ServerBuild();
-            }
         }
 
         public void ServerBuild()
@@ -40,11 +36,11 @@ namespace Network
             _socket.Listen(2);
             Debug.Log("Server Listening");
 
-            AcceptStart();
+            //AcceptStart();
 
-            ValidStart();
+            //ValidStart();
 
-            
+
             // _socket.BeginAccept((asyncResult) =>
             // {
             //     Socket handler = _socket.EndAccept(asyncResult);
@@ -62,14 +58,15 @@ namespace Network
             // Debug.Log(Encoding.UTF8.GetString(bt));
         }
 
-        private void ValidStart()
+        public void ValidStart()
         {
             ClientValidThead = new Thread(ClientValid);
             ClientValidThead.Name = "ClientValidThead";
+            ClientValidThead.IsBackground = true;
             ClientValidThead.Start();
         }
 
-        private void AcceptStart()
+        public void AcceptStart()
         {
             KeepAccept = true;
             ServerAcceptThead = new Thread(() =>
@@ -90,13 +87,14 @@ namespace Network
                 }
             });
             ServerAcceptThead.Name = "ServerAcceptThead";
+            ServerAcceptThead.IsBackground = true;
             ServerAcceptThead.Start();
         }
 
-        public void ClientValid()
+        private void ClientValid()
         {
             Socket tmpClient;
-            byte[] bt = new byte[27];
+            byte[] bt = new byte[4];
             while (true)
             {
                 while (tmpClients.Count > 0)
@@ -108,11 +106,12 @@ namespace Network
                         tmpClient = tmpClients.Dequeue();
                     }
 
+                    Debug.Log(Thread.CurrentThread.Name + " Receiving");
                     tmpClient.BeginReceive(bt, 0, bt.Length, SocketFlags.None, ar =>
                     {
-                        Debug.Log(Thread.CurrentThread.Name + " Receiving");
                         int length = tmpClient.EndReceive(ar);
-                        if (length != 27)
+                        Debug.Log($"Reveived {length} bytes");
+                        if (length != 4)
                         {
                             tmpClient.Disconnect(false);
                             Debug.Log($"InValid Client {clientCount}");
@@ -135,24 +134,6 @@ namespace Network
             }
         }
 
-        void client()
-        {
-            _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            _socket.Connect(ip, 6000);
-
-            Debug.Log("server connect");
-
-            _socket.Listen(2);
-            Socket handler = _socket.Accept();
-            Debug.Log("client join");
-
-            handler.Send(Encoding.UTF8.GetBytes("Test"));
-
-            byte[] bt = new byte[1024];
-            int length = handler.Receive(bt);
-            Debug.Log(Encoding.UTF8.GetString(bt));
-        }
 
         public void StopAll()
         {
@@ -164,6 +145,24 @@ namespace Network
         private void OnDestroy()
         {
             StopAll();
+        }
+
+        public void ClientConnect()
+        {
+            Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
+            Thread clientThread = new Thread(() =>
+            {
+                client.Connect(IPAddress.Parse("127.0.0.1"), 7000);
+                Debug.Log("connect success");
+                client.Send(Encoding.UTF8.GetBytes("Test"));
+                byte[] bt = new byte[27];
+                client.Receive(bt, 0, bt.Length,SocketFlags.None);
+
+
+            });
+            clientThread.IsBackground = true;
+            clientThread.Start();
         }
     }
 }
