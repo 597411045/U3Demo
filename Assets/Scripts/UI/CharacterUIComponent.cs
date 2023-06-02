@@ -8,7 +8,7 @@ namespace RPG.UI
         public float timer = 0f;
         public bool persist;
 
-        private void Update()
+        private void LateUpdate()
         {
             this.transform.forward = Camera.main.transform.forward;
 

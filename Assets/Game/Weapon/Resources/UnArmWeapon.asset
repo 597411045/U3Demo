@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: UnArmWeapon
   m_EditorClassIdentifier: 
   aoc: {fileID: 0}
-  weaponPrefab: {fileID: 0}
+  weaponPrefab: {fileID: 4385473539729566026, guid: a55a568f70b40c64f8e17fc6fd3a8b80, type: 3}
   dropPrefab: {fileID: 0}
   projectilePrefab: {fileID: 0}
   weaponRange: 2
@@ -21,3 +21,4 @@ MonoBehaviour:
   weaponDamage: 50
   transformName: 
   prefabName: UnArmWeapon
+  hitAudio: {fileID: 8300000, guid: 151fa7778dc9cf14ba998127d188283b, type: 3}

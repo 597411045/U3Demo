@@ -5,10 +5,21 @@ using RPG.Combat;
 using RPG.Control;
 using RPG.Core;
 using UnityEngine;
+using UnityEngine.Serialization;
+
+public enum ItemType
+{
+    Weapon,
+    Consume
+}
+
 
 public class PickUpAble : MonoBehaviour, IRayCastAble
 {
-    [SerializeField] private Weapon _weapon = null;
+    [FormerlySerializedAs("_weapon")] [SerializeField]
+    private WeaponConfig weaponConfig = null;
+
+    [SerializeField] private ConsumeConfig consumeConfig;
 
     public float timer = 0;
 
@@ -25,7 +36,8 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
         if (timer >= 0) return;
         if (collision.gameObject.tag.Equals("Player") || collision.gameObject.name.Contains("Enemy"))
         {
-            collision.GetComponent<FighterActionComponent>().EquipItem(_weapon);
+            weaponConfig?.DoAction(collision.gameObject);
+            consumeConfig?.DoAction(collision.gameObject);
             Destroy(this.gameObject);
         }
     }
@@ -36,7 +48,9 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
         p.SetCursor(CursorType.PickUp);
         if (Input.GetMouseButtonDown(0))
         {
-            p.GetComponent<FighterActionComponent>().EquipItem(_weapon);
+            weaponConfig?.DoAction(p.gameObject);
+            consumeConfig?.DoAction(p.gameObject);
+
             Destroy(this.gameObject);
         }
 

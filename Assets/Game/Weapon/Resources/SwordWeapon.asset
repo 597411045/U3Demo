@@ -21,3 +21,4 @@ MonoBehaviour:
   weaponDamage: 10
   transformName: Hand_R
   prefabName: SwordWeapon
+  hitAudio: {fileID: 8300000, guid: dc5c98755448cdd48a680d017cb8ceb5, type: 3}

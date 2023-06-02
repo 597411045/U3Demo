@@ -3,7 +3,7 @@
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
-    public class Weapon : ScriptableObject
+    public class WeaponConfig : ScriptableObject,IItemAction
     {
         [SerializeField] private AnimatorOverrideController aoc = null;
         [SerializeField] private GameObject weaponPrefab = null;
@@ -14,6 +14,7 @@ namespace RPG.Combat
         [SerializeField] public float weaponDamage = 10f;
         [SerializeField] private string transformName;
         [SerializeField] public string prefabName;
+        [SerializeField] public AudioClip hitAudio;
 
 
         public void Spawn(Transform tf, Animator anim, out Transform slot)
@@ -59,6 +60,11 @@ namespace RPG.Combat
                     Destroy(tf.gameObject);
                 }
             }
+        }
+
+        public void DoAction(GameObject go)
+        {
+            go.GetComponent<FighterActionComponent>().EquipItem(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using RPG.Core;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {
@@ -15,6 +16,8 @@ namespace RPG.Combat
         [SerializeField] public GameObject colliderEffect = null;
         [SerializeField] public GameObject[] clearImmediate = null;
 
+
+        [SerializeField] private UnityEvent HitEvent;
         public GameObject launcher;
 
         private void Update()
@@ -54,6 +57,7 @@ namespace RPG.Combat
 
         private void OnTriggerEnter(Collider other)
         {
+            
             if (other.gameObject.name.Contains("Flower"))
             {
                 if (colliderEffect != null)
@@ -73,7 +77,7 @@ namespace RPG.Combat
             if (other.gameObject.GetComponent<HealthComponent>() != null)
             {
                 other.gameObject.GetComponent<HealthComponent>().TakeDamage(atk,launcher);
-
+                HitEvent.Invoke();
                 // other.gameObject.GetComponent<Rigidbody>().AddForce(
                 //     (this.transform.position -
                 //      (this.transform.position + this.transform.rotation * new Vector3(0, 0, -1))).normalized
@@ -88,7 +92,7 @@ namespace RPG.Combat
                     Destroy(c);
                 }
 
-                Destroy(this.gameObject, 0.2f);
+                Destroy(this.gameObject, 0.3f);
             }
         }
 

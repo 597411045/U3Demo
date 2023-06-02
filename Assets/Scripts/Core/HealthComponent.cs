@@ -14,6 +14,7 @@ namespace RPG.Core
     public class HealthComponent : MonoBehaviour
     {
         [SerializeField] private UnityEvent<float> uevent;
+        [SerializeField] private UnityEvent DeadEvent;
 
 
         private bool isDead = false;
@@ -50,6 +51,7 @@ namespace RPG.Core
                 this.GetComponent<CapsuleCollider>().height = 0;
                 this.GetComponent<CapsuleCollider>().radius = 0.3f;
                 this.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.3f, 0);
+                DeadEvent.Invoke();
 
                 return true;
             }

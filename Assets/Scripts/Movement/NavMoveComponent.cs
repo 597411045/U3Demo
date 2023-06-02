@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RPG.Control;
 using RPG.Core;
 using RPG.Saving;
 using UnityEngine;
@@ -15,6 +16,7 @@ namespace RPG.Movement
         private void Awake()
         {
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
+            nmp = new NavMeshPath();
         }
 
         private void UpdateMethod()
@@ -91,6 +93,44 @@ namespace RPG.Movement
 
             this.GetComponent<NavMeshAgent>().Warp(stateDict["position"].ToVector3());
             this.transform.eulerAngles = stateDict["rotation"].ToVector3();
+        }
+
+
+        NavMeshHit nmh;
+        NavMeshPath nmp;
+        private float SumPathLength;
+
+        public bool IfMoveable(PlayerController p, RaycastHit h, out Vector3 des)
+        {
+            des = Vector3.zero;
+            if (!NavMesh.SamplePosition(h.point, out nmh, 1, NavMesh.AllAreas))
+            {
+                p.SetCursor(CursorType.Deny);
+                return false;
+            }
+
+            if (NavMesh.CalculatePath(p.transform.position, h.point, NavMesh.AllAreas, nmp) == false
+                || nmp.status != NavMeshPathStatus.PathComplete)
+            {
+                p.SetCursor(CursorType.Deny);
+                return false;
+            }
+
+            SumPathLength = 0;
+
+            for (int i = 0; i < nmp.corners.Length - 1; i++)
+            {
+                SumPathLength += (nmp.corners[i] - nmp.corners[i + 1]).sqrMagnitude;
+            }
+
+            if (SumPathLength > 50)
+            {
+                p.SetCursor(CursorType.Deny);
+                return false;
+            }
+
+            des = nmh.position;
+            return true;
         }
     }
 }

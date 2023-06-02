@@ -56,7 +56,7 @@ namespace RPG.Control
 
         private bool IfOutAttackRange()
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) > fac._weapon.weaponRange ||
+            if (Vector3.Distance(this.transform.position, player.transform.position) > fac.weaponConfig.weaponRange ||
                 player.GetComponent<HealthComponent>().IsDead)
             {
                 this.GetComponent<Animator>().SetTrigger("StopAttack");
@@ -77,7 +77,7 @@ namespace RPG.Control
 
         private bool IfInAttackRange()
         {
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= fac._weapon.weaponRange &&
+            if (Vector3.Distance(this.transform.position, player.transform.position) <= fac.weaponConfig.weaponRange &&
                 player.GetComponent<HealthComponent>().IsDead == false)
             {
                 this.GetComponent<NavMeshAgent>().enabled = false;
@@ -122,7 +122,7 @@ namespace RPG.Control
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                fac.TimeLeftToAttackAction = fac._weapon.attackInterval;
+                fac.TimeLeftToAttackAction = fac.weaponConfig.attackInterval;
             }
         }
 

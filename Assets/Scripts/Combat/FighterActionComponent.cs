@@ -9,6 +9,7 @@ using RPG.Stats;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Networking;
+using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
@@ -17,14 +18,18 @@ namespace RPG.Combat
         [SerializeField] private bool isFsmControlled;
 
         [SerializeField] private Transform handTransform;
-        [SerializeField] public Weapon _weapon;
+
+        [FormerlySerializedAs("_weapon")] [SerializeField]
+        public WeaponConfig weaponConfig;
+
+        [SerializeField] public Transform weaponTR;
 
         public Transform target;
         public float TimeLeftToAttackAction = 0f;
 
         private void Awake()
         {
-            _weapon.Spawn(this.transform, this.GetComponent<Animator>(), out shotPoint);
+            weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
             if (isFsmControlled) return;
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
         }
@@ -59,13 +64,13 @@ namespace RPG.Combat
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                TimeLeftToAttackAction = _weapon.attackInterval;
+                TimeLeftToAttackAction = weaponConfig.attackInterval;
             }
         }
 
         private bool GetIfInRange()
         {
-            return Vector3.Distance(transform.position, target.position) < _weapon.weaponRange;
+            return Vector3.Distance(transform.position, target.position) < weaponConfig.weaponRange;
         }
 
         public bool TryMakeTargetBeAttackTarget(CombatAbleComponent cac, float speed = 0)
@@ -100,38 +105,42 @@ namespace RPG.Combat
             target.GetComponent<HealthComponent>()
                 .TakeDamage(this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage),
                     this.gameObject);
+            if (weaponConfig.hitAudio != null)
+            {
+                weaponTR.GetComponent<AudioSource>().clip = weaponConfig.hitAudio;
+                weaponTR.GetComponent<AudioSource>().Play();
+            }
         }
 
         private void Shoot()
         {
             if (target == null) return;
-            GameObject go = Instantiate(_weapon.projectilePrefab);
+            GameObject go = Instantiate(weaponConfig.projectilePrefab);
             go.GetComponent<Projectile>().atk =
                 this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage);
             //go.GetComponent<Projectile>().isAutoNav = true;
             go.GetComponent<Projectile>().Target = target.gameObject;
             go.GetComponent<Projectile>().launcher = this.gameObject;
 
-            go.transform.position = shotPoint.position;
+            go.transform.position = weaponTR.position;
             go.transform.position += (target.transform.position - this.transform.position).normalized * 0.5f;
 
             go.GetComponent<Projectile>().direction =
                 (target.transform.position + new Vector3(0, 1, 0) - go.transform.position).normalized;
         }
 
-        private Transform shotPoint;
 
-        public void EquipItem(Weapon weapon)
+        public void EquipItem(WeaponConfig weaponConfig)
         {
-            this._weapon.Drop(shotPoint);
-            this._weapon = weapon;
-            _weapon.Spawn(this.transform, this.GetComponent<Animator>(), out shotPoint);
+            this.weaponConfig.Drop(weaponTR);
+            this.weaponConfig = weaponConfig;
+            this.weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
         }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(this.transform.position, _weapon.weaponRange);
+            Gizmos.DrawWireSphere(this.transform.position, weaponConfig.weaponRange);
         }
 
         public JToken CaptureAsJTokenInInterface()
@@ -140,7 +149,7 @@ namespace RPG.Combat
 
             JObject state = new JObject();
             IDictionary<string, JToken> stateDict = state;
-            stateDict["weaponPrefabName"] = _weapon.prefabName;
+            stateDict["weaponPrefabName"] = weaponConfig.prefabName;
             return state;
         }
 
@@ -151,7 +160,7 @@ namespace RPG.Combat
             JObject s = state.ToObject<JObject>();
             IDictionary<string, JToken> stateDict = s;
             string str = stateDict["weaponPrefabName"].ToObject<string>();
-            EquipItem(Resources.Load<Weapon>(str));
+            EquipItem(Resources.Load<WeaponConfig>(str));
         }
 
         public float GetTargetHP()
@@ -164,7 +173,7 @@ namespace RPG.Combat
         {
             if (e == ProgressionEnum.Damage)
             {
-                yield return _weapon.weaponDamage;
+                yield return weaponConfig.weaponDamage;
             }
         }
 
