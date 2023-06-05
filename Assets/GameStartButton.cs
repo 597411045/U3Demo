@@ -15,15 +15,11 @@ public class GameStartButton : MonoBehaviour
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SavingWrapper>().StartGame);
         }
-        if (this.gameObject.name == "ServerBuild")
-        {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SocketTest>().ServerBuild);
-        }
-        if (this.gameObject.name == "ServerListen")
+        if (this.gameObject.name == "ServerAccept")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SocketTest>().AcceptStart);
         }
-        if (this.gameObject.name == "ClientValid")
+        if (this.gameObject.name == "ServerValid")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SocketTest>().ValidStart);
         }
