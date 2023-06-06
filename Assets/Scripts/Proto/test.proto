@@ -1,8 +1,12 @@
 syntax = "proto3";
 
-message TestData{
-  string a = 1;
-  int32 b = 2;
+message PTTransform{
+  float positionX = 1;
+  float positionY = 2;
+  float positionZ = 3;
+  float angleX = 4;
+  float angleY = 5;
+  float angleZ = 6;
 }
 
 //--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto

@@ -22,28 +22,30 @@ public static partial class TestReflection {
   static TestReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "Cgp0ZXN0LnByb3RvIiAKCFRlc3REYXRhEgkKAWEYASABKAkSCQoBYhgCIAEo",
-          "BWIGcHJvdG8z"));
+          "Cgp0ZXN0LnByb3RvInYKC1BUVHJhbnNmb3JtEhEKCXBvc2l0aW9uWBgBIAEo",
+          "AhIRCglwb3NpdGlvblkYAiABKAISEQoJcG9zaXRpb25aGAMgASgCEg4KBmFu",
+          "Z2xlWBgEIAEoAhIOCgZhbmdsZVkYBSABKAISDgoGYW5nbGVaGAYgASgCYgZw",
+          "cm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::TestData), global::TestData.Parser, new[]{ "A", "B" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::PTTransform), global::PTTransform.Parser, new[]{ "PositionX", "PositionY", "PositionZ", "AngleX", "AngleY", "AngleZ" }, null, null, null, null)
         }));
   }
   #endregion
 
 }
 #region Messages
-public sealed partial class TestData : pb::IMessage<TestData>
+public sealed partial class PTTransform : pb::IMessage<PTTransform>
 #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     , pb::IBufferMessage
 #endif
 {
-  private static readonly pb::MessageParser<TestData> _parser = new pb::MessageParser<TestData>(() => new TestData());
+  private static readonly pb::MessageParser<PTTransform> _parser = new pb::MessageParser<PTTransform>(() => new PTTransform());
   private pb::UnknownFieldSet _unknownFields;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public static pb::MessageParser<TestData> Parser { get { return _parser; } }
+  public static pb::MessageParser<PTTransform> Parser { get { return _parser; } }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -59,7 +61,7 @@ public sealed partial class TestData : pb::IMessage<TestData>
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public TestData() {
+  public PTTransform() {
     OnConstruction();
   }
 
@@ -67,59 +69,115 @@ public sealed partial class TestData : pb::IMessage<TestData>
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public TestData(TestData other) : this() {
-    a_ = other.a_;
-    b_ = other.b_;
+  public PTTransform(PTTransform other) : this() {
+    positionX_ = other.positionX_;
+    positionY_ = other.positionY_;
+    positionZ_ = other.positionZ_;
+    angleX_ = other.angleX_;
+    angleY_ = other.angleY_;
+    angleZ_ = other.angleZ_;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public TestData Clone() {
-    return new TestData(this);
+  public PTTransform Clone() {
+    return new PTTransform(this);
   }
 
-  /// <summary>Field number for the "a" field.</summary>
-  public const int AFieldNumber = 1;
-  private string a_ = "";
+  /// <summary>Field number for the "positionX" field.</summary>
+  public const int PositionXFieldNumber = 1;
+  private float positionX_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public string A {
-    get { return a_; }
+  public float PositionX {
+    get { return positionX_; }
     set {
-      a_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      positionX_ = value;
     }
   }
 
-  /// <summary>Field number for the "b" field.</summary>
-  public const int BFieldNumber = 2;
-  private int b_;
+  /// <summary>Field number for the "positionY" field.</summary>
+  public const int PositionYFieldNumber = 2;
+  private float positionY_;
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public int B {
-    get { return b_; }
+  public float PositionY {
+    get { return positionY_; }
     set {
-      b_ = value;
+      positionY_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "positionZ" field.</summary>
+  public const int PositionZFieldNumber = 3;
+  private float positionZ_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public float PositionZ {
+    get { return positionZ_; }
+    set {
+      positionZ_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "angleX" field.</summary>
+  public const int AngleXFieldNumber = 4;
+  private float angleX_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public float AngleX {
+    get { return angleX_; }
+    set {
+      angleX_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "angleY" field.</summary>
+  public const int AngleYFieldNumber = 5;
+  private float angleY_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public float AngleY {
+    get { return angleY_; }
+    set {
+      angleY_ = value;
+    }
+  }
+
+  /// <summary>Field number for the "angleZ" field.</summary>
+  public const int AngleZFieldNumber = 6;
+  private float angleZ_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public float AngleZ {
+    get { return angleZ_; }
+    set {
+      angleZ_ = value;
     }
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override bool Equals(object other) {
-    return Equals(other as TestData);
+    return Equals(other as PTTransform);
   }
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public bool Equals(TestData other) {
+  public bool Equals(PTTransform other) {
     if (ReferenceEquals(other, null)) {
       return false;
     }
     if (ReferenceEquals(other, this)) {
       return true;
     }
-    if (A != other.A) return false;
-    if (B != other.B) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionX, other.PositionX)) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionY, other.PositionY)) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(PositionZ, other.PositionZ)) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleX, other.AngleX)) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleY, other.AngleY)) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleZ, other.AngleZ)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -127,8 +185,12 @@ public sealed partial class TestData : pb::IMessage<TestData>
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override int GetHashCode() {
     int hash = 1;
-    if (A.Length != 0) hash ^= A.GetHashCode();
-    if (B != 0) hash ^= B.GetHashCode();
+    if (PositionX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionX);
+    if (PositionY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionY);
+    if (PositionZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(PositionZ);
+    if (AngleX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleX);
+    if (AngleY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleY);
+    if (AngleZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleZ);
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -147,13 +209,29 @@ public sealed partial class TestData : pb::IMessage<TestData>
   #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     output.WriteRawMessage(this);
   #else
-    if (A.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(A);
+    if (PositionX != 0F) {
+      output.WriteRawTag(13);
+      output.WriteFloat(PositionX);
     }
-    if (B != 0) {
-      output.WriteRawTag(16);
-      output.WriteInt32(B);
+    if (PositionY != 0F) {
+      output.WriteRawTag(21);
+      output.WriteFloat(PositionY);
+    }
+    if (PositionZ != 0F) {
+      output.WriteRawTag(29);
+      output.WriteFloat(PositionZ);
+    }
+    if (AngleX != 0F) {
+      output.WriteRawTag(37);
+      output.WriteFloat(AngleX);
+    }
+    if (AngleY != 0F) {
+      output.WriteRawTag(45);
+      output.WriteFloat(AngleY);
+    }
+    if (AngleZ != 0F) {
+      output.WriteRawTag(53);
+      output.WriteFloat(AngleZ);
     }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
@@ -165,13 +243,29 @@ public sealed partial class TestData : pb::IMessage<TestData>
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-    if (A.Length != 0) {
-      output.WriteRawTag(10);
-      output.WriteString(A);
+    if (PositionX != 0F) {
+      output.WriteRawTag(13);
+      output.WriteFloat(PositionX);
     }
-    if (B != 0) {
-      output.WriteRawTag(16);
-      output.WriteInt32(B);
+    if (PositionY != 0F) {
+      output.WriteRawTag(21);
+      output.WriteFloat(PositionY);
+    }
+    if (PositionZ != 0F) {
+      output.WriteRawTag(29);
+      output.WriteFloat(PositionZ);
+    }
+    if (AngleX != 0F) {
+      output.WriteRawTag(37);
+      output.WriteFloat(AngleX);
+    }
+    if (AngleY != 0F) {
+      output.WriteRawTag(45);
+      output.WriteFloat(AngleY);
+    }
+    if (AngleZ != 0F) {
+      output.WriteRawTag(53);
+      output.WriteFloat(AngleZ);
     }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(ref output);
@@ -183,11 +277,23 @@ public sealed partial class TestData : pb::IMessage<TestData>
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public int CalculateSize() {
     int size = 0;
-    if (A.Length != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeStringSize(A);
+    if (PositionX != 0F) {
+      size += 1 + 4;
     }
-    if (B != 0) {
-      size += 1 + pb::CodedOutputStream.ComputeInt32Size(B);
+    if (PositionY != 0F) {
+      size += 1 + 4;
+    }
+    if (PositionZ != 0F) {
+      size += 1 + 4;
+    }
+    if (AngleX != 0F) {
+      size += 1 + 4;
+    }
+    if (AngleY != 0F) {
+      size += 1 + 4;
+    }
+    if (AngleZ != 0F) {
+      size += 1 + 4;
     }
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
@@ -197,15 +303,27 @@ public sealed partial class TestData : pb::IMessage<TestData>
 
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-  public void MergeFrom(TestData other) {
+  public void MergeFrom(PTTransform other) {
     if (other == null) {
       return;
     }
-    if (other.A.Length != 0) {
-      A = other.A;
+    if (other.PositionX != 0F) {
+      PositionX = other.PositionX;
     }
-    if (other.B != 0) {
-      B = other.B;
+    if (other.PositionY != 0F) {
+      PositionY = other.PositionY;
+    }
+    if (other.PositionZ != 0F) {
+      PositionZ = other.PositionZ;
+    }
+    if (other.AngleX != 0F) {
+      AngleX = other.AngleX;
+    }
+    if (other.AngleY != 0F) {
+      AngleY = other.AngleY;
+    }
+    if (other.AngleZ != 0F) {
+      AngleZ = other.AngleZ;
     }
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
@@ -222,12 +340,28 @@ public sealed partial class TestData : pb::IMessage<TestData>
         default:
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
           break;
-        case 10: {
-          A = input.ReadString();
+        case 13: {
+          PositionX = input.ReadFloat();
           break;
         }
-        case 16: {
-          B = input.ReadInt32();
+        case 21: {
+          PositionY = input.ReadFloat();
+          break;
+        }
+        case 29: {
+          PositionZ = input.ReadFloat();
+          break;
+        }
+        case 37: {
+          AngleX = input.ReadFloat();
+          break;
+        }
+        case 45: {
+          AngleY = input.ReadFloat();
+          break;
+        }
+        case 53: {
+          AngleZ = input.ReadFloat();
           break;
         }
       }
@@ -245,12 +379,28 @@ public sealed partial class TestData : pb::IMessage<TestData>
         default:
           _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
           break;
-        case 10: {
-          A = input.ReadString();
+        case 13: {
+          PositionX = input.ReadFloat();
           break;
         }
-        case 16: {
-          B = input.ReadInt32();
+        case 21: {
+          PositionY = input.ReadFloat();
+          break;
+        }
+        case 29: {
+          PositionZ = input.ReadFloat();
+          break;
+        }
+        case 37: {
+          AngleX = input.ReadFloat();
+          break;
+        }
+        case 45: {
+          AngleY = input.ReadFloat();
+          break;
+        }
+        case 53: {
+          AngleZ = input.ReadFloat();
           break;
         }
       }

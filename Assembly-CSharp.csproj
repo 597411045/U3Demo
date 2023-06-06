@@ -55,6 +55,7 @@
      <Compile Include="Assets/Scripts/Stats/BaseStats.cs" />
      <Compile Include="Assets/Scripts/FSM/CState.cs" />
      <Compile Include="Assets/Scripts/Combat/WeaponConfig.cs" />
+     <Compile Include="Assets/Scripts/Network/AcceptCenter.cs" />
      <Compile Include="Assets/Scripts/Stats/IModifierProvider.cs" />
      <Compile Include="Assets/Scripts/Controller/PlayerController.cs" />
      <Compile Include="Assets/Scripts/UI/UIControl.cs" />
@@ -93,11 +94,17 @@
      <Compile Include="Assets/Scripts/FSM/StateDead.cs" />
      <Compile Include="Assets/Scripts/FSM/CSMachine.cs" />
      <Compile Include="Assets/Scripts/Movement/NavMoveComponent.cs" />
-     <Compile Include="Assets/Scripts/Network/SocketTest.cs" />
+     <Compile Include="Assets/Scripts/Network/NetworkCenter.cs" />
      <Compile Include="Assets/Scripts/Core/HealthComponent.cs" />
      <Compile Include="Assets/Scripts/Core/IRayCastAble.cs" />
      <Compile Include="Assets/Scripts/UI/CharacterUIComponent.cs" />
      <Compile Include="Assets/Scripts/Saving/JsonSavingSystem.cs" />
+     <Compile Include="Assets/Scripts/Network/ValidChildCenter.cs" />
+     <Compile Include="Assets/Scripts/Network/ValidCenter.cs" />
+     <Compile Include="Assets/Scripts/Network/ManagerCenter.cs" />
+     <Compile Include="Assets/Scripts/Network/CommunicationChildCenter.cs" />
+     <Compile Include="Assets/Scripts/Network/CommunicationCenter.cs" />
+     <Compile Include="Assets\Scripts\Network\ConnectCenter.cs" />
      <Folder Include="Assets" />
      <None Include="Assets/Asset Packs/Synty - Polygon Student Sample/README - Usage Rights for these assets.txt" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/Hoe" />
@@ -176,7 +183,6 @@
      <Folder Include="Assets/Game/Item" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/SFX/Death" />
      <Folder Include="Assets/Asset Packs/Pixel Cursors/Cursors" />
-     <Folder Include="Assets/Scripts/Network" />
      <Folder Include="Assets/Asset Packs/Animations by Explosive/2Hand-Club" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/Club/Materials and Model" />
      <Folder Include="Assets/Asset Packs/Synty - Polygon Student Sample" />

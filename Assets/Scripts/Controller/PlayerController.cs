@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Google.Protobuf;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -23,6 +24,8 @@ namespace RPG.Control
 
     public class PlayerController : MonoBehaviour
     {
+        private PTTransform ptt;
+
 
         [Serializable]
         struct CursorMapping
@@ -37,6 +40,27 @@ namespace RPG.Control
         private void Awake()
         {
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
+            ptt = new PTTransform();
+        }
+
+        public void Update()
+        {
+            SendProtobuf();
+            ptt.PositionX = this.transform.position.x;
+            ptt.PositionY = this.transform.position.y;
+            ptt.PositionZ = this.transform.position.z;
+            ptt.AngleX = this.transform.eulerAngles.x;
+            ptt.AngleY = this.transform.eulerAngles.y;
+            ptt.AngleZ = this.transform.eulerAngles.z;
+
+            Debug.Log(ptt.ToByteArray());
+            Debug.Log(ptt.ToByteString());
+            Debug.Log(ptt.ToString());
+            Debug.Log(PTTransform.Parser.ParseJson(ptt.ToString()));
+        }
+
+        private void SendProtobuf()
+        {
         }
 
         void UpdateMethod()

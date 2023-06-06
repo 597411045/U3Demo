@@ -35,17 +35,19 @@ public class UpdateManager : MonoBehaviour
     {
         er = GetEnumYieldTimer();
         er.MoveNext();
-
-        TestData a= new TestData();
-        a.A = "Test";
-        a.B = 10;
-        var b=a.ToByteArray();
-        var c = a.ToByteString();
-        var d = a.ToString();
-
-
-        TestData a2;
-        a2 = TestData.Parser.ParseJson(d);
+        //
+        // TestData a= new TestData();
+        // a.A = "Test";
+        // a.B = 10;
+        // var b=a.ToByteArray();
+        // var c = a.ToByteString();
+        // var d = a.ToString();
+        //
+        //
+        // TestData a2;
+        // a2 = TestData.Parser.ParseJson(d);
+        
+        
         
         int z = 0;
     }
