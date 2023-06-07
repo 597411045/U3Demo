@@ -81,13 +81,13 @@ namespace Network
 
         ~NetTaskInstance()
         {
-            Debug.Log($"{name} destroy by desstration");
+            Debug.LogError($"{name} destroy by desstration");
             this.DestroyTask();
         }
 
         public void DestroyTask()
         {
-            Debug.Log($"{name} destroy by manual");
+            Debug.LogError($"{name} destroy by manual");
             manualResetEvent.Reset();
             if (socketInstance != null && socketInstance.socket != null)
             {
@@ -109,6 +109,7 @@ namespace Network
         public static Dictionary<NTI_type, List<NetTaskInstance>>
             allNTI = new Dictionary<NTI_type, List<NetTaskInstance>>();
 
+        public static bool isServer = true;
 
         private void Start()
         {
@@ -120,6 +121,25 @@ namespace Network
             allNTI.Add(NTI_type.Manager, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.Communication, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
+            allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
+        }
+
+        private string a;
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Debug.LogError(
+                    $"tmp:{tmpSocketInstance.Count},val:{valSocketInstance.Count},comm:{CommunicationCenter.clientCommunications.Count}");
+                foreach (var c in allNTI)
+                {
+                    a += c.Key.ToString() + ":" + c.Value.Count + "|";
+                }
+
+                Debug.LogError(a);
+                a = "";
+            }
         }
 
         public void AcceptStart()
@@ -148,6 +168,19 @@ namespace Network
             allNTI[NTI_type.Valid][0].DestroyTask();
         }
 
+        public void CommStart()
+        {
+            if (CommunicationCenter.InstanceCount > 0) return;
+            CommunicationCenter cc = new CommunicationCenter();
+            cc.StartTask();
+        }
+
+        public void CommStop()
+        {
+            if (CommunicationCenter.InstanceCount <= 0) return;
+            allNTI[NTI_type.Communication][0].DestroyTask();
+        }
+
 
         public void ManagerStart()
         {
@@ -165,6 +198,7 @@ namespace Network
 
         private void OnDestroy()
         {
+            Debug.LogError("OnDestroy");
             foreach (var c in allNTI)
             {
                 foreach (var d in c.Value)
@@ -176,9 +210,40 @@ namespace Network
 
         public void ConnectStart()
         {
+            isServer = false;
             if (ConnectCenter.InstanceCount > 0) return;
             ConnectCenter cc = new ConnectCenter();
             cc.StartTask();
+        }
+
+        public void ClientSendValid()
+        {
+            if (CommunicationCenter.clientCommunications.ContainsKey(-1))
+            {
+                CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
+                    .Enqueue(
+                        new byte[123]);
+            }
+        }
+
+        public void ClientSendSome()
+        {
+            if (CommunicationCenter.clientCommunications.ContainsKey(-1))
+            {
+                CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
+                    .Enqueue(
+                        new byte[] { 89, 90, 91 });
+            }
+        }
+
+        public void ClientSendText(string toString)
+        {
+            if (CommunicationCenter.clientCommunications.ContainsKey(-1))
+            {
+                CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
+                    .Enqueue(
+                        Encoding.UTF8.GetBytes(toString));
+            }
         }
     }
 }

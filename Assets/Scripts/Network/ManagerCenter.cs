@@ -20,7 +20,7 @@ namespace Network
         {
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.Log("ManagerNTI Start");
+                Debug.LogError("ManagerNTI Start");
                 while (true)
                 {
                     if (NetworkCenter.allNTI[NTI_type.ValidChild].Count > 0)
@@ -28,19 +28,29 @@ namespace Network
                         for (int i = NetworkCenter.allNTI[NTI_type.ValidChild].Count - 1; i >= 0; i--)
                         {
                             if (NetworkCenter.allNTI[NTI_type.ValidChild][i].threadInstance.GetRunningTime()
-                                    .TotalSeconds > 5 ||
+                                    .TotalSeconds > 10 ||
                                 NetworkCenter.allNTI[NTI_type.ValidChild][i].markForDone)
                             {
                                 NetworkCenter.allNTI[NTI_type.ValidChild][i].DestroyTask();
                                 NetworkCenter.allNTI[NTI_type.ValidChild].RemoveAt(i);
-                                Debug.Log("Remove A Timeout ValidChildNTI");
+                                Debug.LogError("Remove A Timeout ValidChildNTI");
+                            }
+                        }
+                    }else if (NetworkCenter.allNTI[NTI_type.Connect].Count > 0)
+                    {
+                        for (int i = NetworkCenter.allNTI[NTI_type.Connect].Count - 1; i >= 0; i--)
+                        {
+                            if (NetworkCenter.allNTI[NTI_type.Connect][i].markForDone)
+                            {
+                                NetworkCenter.allNTI[NTI_type.Connect][i].DestroyTask();
+                                NetworkCenter.allNTI[NTI_type.Connect].RemoveAt(i);
+                                Debug.LogError("Remove A MarkForDone ConnectNTI");
                             }
                         }
                     }
                     else
                     {
-                        Debug.Log("ManagerNTI Wait 5 Second");
-                        Debug.Log(NetworkCenter.valSocketInstance.Count);
+                        Debug.LogError("ManagerNTI Wait 5 Second");
                         Thread.Sleep(5000);
                     }
                 }

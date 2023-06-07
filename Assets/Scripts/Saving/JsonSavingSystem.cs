@@ -23,7 +23,7 @@ namespace RPG.Saving
                 buildIndex = stateDict["lastSceneBuildIndex"].ToObject<int>();
             }
 
-            if (buildIndex == 2) buildIndex = 0;
+            if (buildIndex == 0) buildIndex = 1;
             yield return SceneManager.LoadSceneAsync(buildIndex);
             RestoreFromToken(state);
         }

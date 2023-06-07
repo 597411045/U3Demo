@@ -46,7 +46,7 @@ namespace Network
         {
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.Log("CommunicationChildNTI Start");
+                Debug.LogError("CommunicationChildNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -56,6 +56,7 @@ namespace Network
                     if (length != 0)
                     {
                         socketInstance.recvList.Enqueue(this.socketInstance.recvBuf);
+                        Debug.LogError($"Received:{Encoding.UTF8.GetString(this.socketInstance.recvBuf)}");
                         this.socketInstance.recvBuf = new byte[SocketInstance.length];
                     }
                 }
@@ -69,7 +70,7 @@ namespace Network
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
                 byte[] tmp;
-                Debug.Log("CommunicationChildNTI Start");
+                Debug.LogError("CommunicationChildNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -80,8 +81,8 @@ namespace Network
                     }
                     else
                     {
-                        Debug.Log("socketInstance.sendList.Count < 0, Wait 5 seconds");
-                        Thread.Sleep(5000);
+                        //Debug.LogError("socketInstance.sendList.Count < 0, Wait 5 seconds");
+                        //Thread.Sleep(5000);
                     }
                 }
             }));

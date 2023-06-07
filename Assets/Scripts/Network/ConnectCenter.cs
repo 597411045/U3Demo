@@ -28,8 +28,9 @@ namespace Network
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
                 this.socketInstance.socket.Connect(ep);
-                Debug.Log("Connected");
+                Debug.LogError("Connected");
                 NetworkCenter.valSocketInstance.Enqueue(socketInstance);
+                this.socketInstance = null;
                 markForDone = true;
             }));
             NetworkCenter.allNTI[NTI_type.Connect].Add(this);

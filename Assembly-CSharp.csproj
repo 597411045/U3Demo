@@ -49,6 +49,7 @@
      <Compile Include="Assets/Scripts/Combat/CombatAbleComponent.cs" />
      <Compile Include="Assets/Scripts/Core/IAction.cs" />
      <Compile Include="Assets/Scripts/Combat/ConsumeConfig.cs" />
+     <Compile Include="Assets/Scripts/Network/ManagerCenter.cs" />
      <Compile Include="Assets/Scripts/FSM/StateIdle.cs" />
      <Compile Include="Assets/Scripts/FSM/TransToAttack.cs" />
      <Compile Include="Assets/Scripts/Stats/StatEnum.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets/GameStartButton.cs" />
      <Compile Include="Assets/Scripts/Core/PersistentClassComponent.cs" />
      <Compile Include="Assets/Scripts/FSM/TransToDead.cs" />
+     <Compile Include="Assets/Scripts/Network/ConnectCenter.cs" />
      <Compile Include="Assets/Scripts/UpdateManager.cs" />
      <Compile Include="Assets/Scripts/Combat/FighterActionComponent.cs" />
      <Compile Include="Assets/Scripts/FSM/StateMove.cs" />
@@ -76,11 +78,13 @@
      <Compile Include="Assets/Scripts/Cinematic/CameraShaderComponent.cs" />
      <Compile Include="Assets/Scripts/FSM/SMEnemy.cs" />
      <Compile Include="Assets/Scripts/Combat/Projectile.cs" />
+     <Compile Include="Assets/Scripts/Network/ValidCenter.cs" />
      <Compile Include="Assets/Scripts/Util.cs" />
      <Compile Include="Assets/Scripts/Saving/JsonStatics.cs" />
      <Compile Include="Assets/Asset Packs/GameDev.tv Assets/Scripts/Utils/LazyValue.cs" />
      <Compile Include="Assets/Scripts/Saving/JsonSaveableEntity.cs" />
      <Compile Include="Assets/Scripts/Core/ActionSchedulerComponent.cs" />
+     <Compile Include="Assets/Scripts/Network/CommunicationCenter.cs" />
      <Compile Include="Assets/Scripts/Controller/AIController.cs" />
      <Compile Include="Assets/Scripts/FSM/CTransition.cs" />
      <Compile Include="Assets/Scripts/FSM/StateAttack.cs" />
@@ -91,6 +95,8 @@
      <Compile Include="Assets/Scripts/FSM/TransToMove.cs" />
      <Compile Include="Assets/Scripts/FSM/TransToIdle.cs" />
      <Compile Include="Assets/Scripts/Saving/SavingWrapper.cs" />
+     <Compile Include="Assets/Scripts/Network/ValidChildCenter.cs" />
+     <Compile Include="Assets/Scripts/Network/CommunicationChildCenter.cs" />
      <Compile Include="Assets/Scripts/FSM/StateDead.cs" />
      <Compile Include="Assets/Scripts/FSM/CSMachine.cs" />
      <Compile Include="Assets/Scripts/Movement/NavMoveComponent.cs" />
@@ -99,12 +105,6 @@
      <Compile Include="Assets/Scripts/Core/IRayCastAble.cs" />
      <Compile Include="Assets/Scripts/UI/CharacterUIComponent.cs" />
      <Compile Include="Assets/Scripts/Saving/JsonSavingSystem.cs" />
-     <Compile Include="Assets/Scripts/Network/ValidChildCenter.cs" />
-     <Compile Include="Assets/Scripts/Network/ValidCenter.cs" />
-     <Compile Include="Assets/Scripts/Network/ManagerCenter.cs" />
-     <Compile Include="Assets/Scripts/Network/CommunicationChildCenter.cs" />
-     <Compile Include="Assets/Scripts/Network/CommunicationCenter.cs" />
-     <Compile Include="Assets\Scripts\Network\ConnectCenter.cs" />
      <Folder Include="Assets" />
      <None Include="Assets/Asset Packs/Synty - Polygon Student Sample/README - Usage Rights for these assets.txt" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/Hoe" />
@@ -183,6 +183,7 @@
      <Folder Include="Assets/Game/Item" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/SFX/Death" />
      <Folder Include="Assets/Asset Packs/Pixel Cursors/Cursors" />
+     <Folder Include="Assets/Scripts/Network" />
      <Folder Include="Assets/Asset Packs/Animations by Explosive/2Hand-Club" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/Club/Materials and Model" />
      <Folder Include="Assets/Asset Packs/Synty - Polygon Student Sample" />

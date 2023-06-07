@@ -1,13 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using Google.Protobuf;
+using Network;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace RPG.Control
 {
@@ -37,26 +42,54 @@ namespace RPG.Control
 
         [SerializeField] private CursorMapping[] _cursorMappings;
 
+        private NetworkCenter nc;
+        StringBuilder sb;
+
         private void Awake()
         {
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
             ptt = new PTTransform();
+
+            nc = GameObject.FindObjectOfType<NetworkCenter>();
+            sb = new StringBuilder();
         }
 
         public void Update()
         {
-            SendProtobuf();
-            ptt.PositionX = this.transform.position.x;
-            ptt.PositionY = this.transform.position.y;
-            ptt.PositionZ = this.transform.position.z;
-            ptt.AngleX = this.transform.eulerAngles.x;
-            ptt.AngleY = this.transform.eulerAngles.y;
-            ptt.AngleZ = this.transform.eulerAngles.z;
+            if (nc == null) return;
+            if (NetworkCenter.isServer)
+            {
+                if (CommunicationCenter.clientCommunications[1][CommunicationChildType.Recv].socketInstance
+                        .recvList.Count <= 0) return;
+                byte[] b = CommunicationCenter.clientCommunications[1][CommunicationChildType.Recv].socketInstance
+                    .recvList
+                    .Dequeue();
+                sb.Clear();
+                for (int i = 0; i < b.Length; i++)
+                {
+                    if (b[i] == 0) break;
+                    sb.Append((char)b[i]);
+                }
 
-            Debug.Log(ptt.ToByteArray());
-            Debug.Log(ptt.ToByteString());
-            Debug.Log(ptt.ToString());
-            Debug.Log(PTTransform.Parser.ParseJson(ptt.ToString()));
+                int a = 0;
+                ptt = PTTransform.Parser.ParseJson(sb.ToString());
+                this.transform.position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+            }
+            else
+            {
+                ptt.PositionX = this.transform.position.x;
+                ptt.PositionY = this.transform.position.y;
+                ptt.PositionZ = this.transform.position.z;
+                ptt.AngleX = this.transform.eulerAngles.x;
+                ptt.AngleY = this.transform.eulerAngles.y;
+                ptt.AngleZ = this.transform.eulerAngles.z;
+                nc.ClientSendText(ptt.ToString());
+            }
+
+            //Debug.Log(ptt.ToByteArray());
+            //Debug.Log(ptt.ToByteString());
+            //Debug.Log(ptt.ToString());
+            //Debug.Log(PTTransform.Parser.ParseJson(ptt.ToString()));
         }
 
         private void SendProtobuf()

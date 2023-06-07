@@ -45,6 +45,26 @@ public class GameStartButton : MonoBehaviour
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ManagerStop);
         }
+        if (this.gameObject.name == "StartClient")
+        {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ConnectStart);
+        }
+        if (this.gameObject.name == "StartCommCenter")
+        {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().CommStart);
+        }
+        if (this.gameObject.name == "StopCommCenter")
+        {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().CommStop);
+        }
+        if (this.gameObject.name == "ClientSendValid")
+        {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ClientSendValid);
+        }
+        if (this.gameObject.name == "ClientSendSome")
+        {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ClientSendSome);
+        }
     }
 
     // Update is called once per frame

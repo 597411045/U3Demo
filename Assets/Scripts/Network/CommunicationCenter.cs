@@ -22,6 +22,7 @@ namespace Network
 
         public void BuildCommunicationNTI()
         {
+            Debug.LogError("Build Comm");
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
                 SocketInstance tmp;
@@ -46,12 +47,11 @@ namespace Network
                     }
                     else
                     {
-                        Debug.Log("etworkCenter.valSocketInstance.Count < 0, Wait 5 Seconds");
+                        //Debug.LogError("NetworkCenter.valSocketInstance.Count < 0, Wait 5 Seconds");
                         Thread.Sleep(5000);
                     }
                 }
             }));
-            this.StartTask();
             NetworkCenter.allNTI[NTI_type.Communication].Add(this);
         }
     }

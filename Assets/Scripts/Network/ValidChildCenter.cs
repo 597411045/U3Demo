@@ -21,13 +21,13 @@ namespace Network
         {
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.Log("ValidChildNTI Start");
+                Debug.LogError("ValidChildNTI Start");
                 int length = this.socketInstance.socket.Receive(this.socketInstance.recvBuf, 0,
                     this.socketInstance.recvBuf.Length, SocketFlags.None);
-                Debug.Log($"Reveived {length} bytes");
+                Debug.LogError($"Reveived {length} bytes");
                 if (length != 123)
                 {
-                    Debug.Log($"InValid Client");
+                    Debug.LogError($"InValid Client");
                 }
                 else
                 {
@@ -35,10 +35,9 @@ namespace Network
                     this.socketInstance.UID = EasyID++;
                     NetworkCenter.valSocketInstance.Enqueue(this.socketInstance);
                     this.socketInstance = null;
-                    Debug.Log($"Valid Client");
+                    Debug.LogError($"Valid Client");
                 }
 
-                this.socketInstance.recvBuf = new byte[SocketInstance.length];
 
                 this.markForDone = true;
             }));

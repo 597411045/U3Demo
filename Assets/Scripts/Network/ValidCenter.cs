@@ -19,7 +19,7 @@ namespace Network
         {
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.Log("ValidNTI Start");
+                Debug.LogError("ValidNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -27,11 +27,11 @@ namespace Network
                     {
                         SocketInstance tmp = NetworkCenter.tmpSocketInstance.Dequeue();
                         ValidChildCenter vcc = new ValidChildCenter(tmp);
-                        Debug.Log("Build A ValidChildNTI");
+                        Debug.LogError("Build A ValidChildNTI");
                     }
                     else
                     {
-                        Debug.Log("ValidNTI Wait 5 Second");
+                        //Debug.LogError("ValidNTI Wait 5 Second");
                         Thread.Sleep(5000);
                     }
                 }

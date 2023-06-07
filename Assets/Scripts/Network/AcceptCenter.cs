@@ -26,17 +26,17 @@ namespace Network
             EndPoint ep = new IPEndPoint(ip, port);
             this.socketInstance.socket.Bind(ep);
             this.socketInstance.socket.Listen(5);
-            Debug.Log("Listen Ready");
+            Debug.LogError("Listen Ready");
             this.name = "AcceptNTI";
 
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.Log("AcceptNTI Start");
+                Debug.LogError("AcceptNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
                     Socket tmp = this.socketInstance.socket.Accept();
-                    Debug.Log("A New Client In");
+                    Debug.LogError("A New Client In");
                     NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
                 }
             }));
