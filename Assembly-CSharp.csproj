@@ -105,6 +105,7 @@
      <Compile Include="Assets/Scripts/Core/IRayCastAble.cs" />
      <Compile Include="Assets/Scripts/UI/CharacterUIComponent.cs" />
      <Compile Include="Assets/Scripts/Saving/JsonSavingSystem.cs" />
+     <Compile Include="Assets/Scripts/Network/S1Server.cs" />
      <Folder Include="Assets" />
      <None Include="Assets/Asset Packs/Synty - Polygon Student Sample/README - Usage Rights for these assets.txt" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/Hoe" />
@@ -135,6 +136,7 @@
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets" />
      <Folder Include="Assets/Game/Core" />
      <None Include="Assets/Asset Packs/Animations by Explosive/README - Usage Rights for these assets 1.txt" />
+     <Folder Include="Assets/Scenes/Sandbox/Sanebox 1 Server" />
      <Folder Include="Assets/Asset Packs/Animations by Explosive/Item" />
      <Folder Include="Assets/Asset Packs/GameDev.tv Assets/Rod of Death/Materials and Model" />
      <Folder Include="Assets/Asset Packs/Synty - Polygon Student Sample/Materials" />
@@ -173,6 +175,7 @@
      <Folder Include="Assets/Asset Packs/Animations by Explosive/Sword" />
      <Folder Include="Assets/Asset Packs/Synty - Polygon Student Sample/Demo Scene" />
      <Folder Include="Assets/Scripts/Item" />
+     <Folder Include="Assets/Game/Characters/Resources" />
      <Folder Include="Assets/Game/Cinematics" />
      <Folder Include="Assets/Scripts/Scene" />
      <Folder Include="Assets/Scenes/Old_Trrian" />

@@ -12,7 +12,7 @@ namespace RPG.Stats
 {
     public class BaseStats : MonoBehaviour, IJsonSaveable, IModifierProvider
     {
-        [Range(1, 99)] [SerializeField] private int startingLevel = 1;
+        [Range(1, 99)] [SerializeField] public int startingLevel = 1;
 
         [FormerlySerializedAs("characterClass")] [SerializeField]
         private CharacterEnum characterEnum;
@@ -22,11 +22,11 @@ namespace RPG.Stats
 
 
         private float _exp;
-        private float _hp;
-        private float _maxHp;
+        public float _hp;
+        public float _maxHp;
         private float[] _explevels;
 
-        private void Awake()
+        public void AwakeGen()
         {
             _maxHp = progression.GetData(characterEnum, ProgressionEnum.Health, startingLevel);
             _hp = _maxHp;
@@ -37,6 +37,7 @@ namespace RPG.Stats
             OnLevelUp += GenLevelUpEffect;
             OnLevelUp += RestoreHP;
         }
+        
 
         public float HP
         {

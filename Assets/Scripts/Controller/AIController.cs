@@ -56,6 +56,7 @@ namespace RPG.Control
 
         private bool IfOutAttackRange()
         {
+            if (player == null) return false;
             if (Vector3.Distance(this.transform.position, player.transform.position) > fac.weaponConfig.weaponRange ||
                 player.GetComponent<HealthComponent>().IsDead)
             {
@@ -77,6 +78,7 @@ namespace RPG.Control
 
         private bool IfInAttackRange()
         {
+            if (player == null) return false;
             if (Vector3.Distance(this.transform.position, player.transform.position) <= fac.weaponConfig.weaponRange &&
                 player.GetComponent<HealthComponent>().IsDead == false)
             {
@@ -128,6 +130,7 @@ namespace RPG.Control
 
         private bool IfInChaseRange()
         {
+            if (player == null) return false;
             if (Vector3.Distance(player.transform.position, this.transform.position) < chaseDistance &&
                 player.GetComponent<HealthComponent>().IsDead == false)
             {
@@ -143,6 +146,8 @@ namespace RPG.Control
 
         private bool IfOutChaseRange()
         {
+            if (player == null) return false;
+
             if (Vector3.Distance(player.transform.position, this.transform.position) > chaseDistance ||
                 player.GetComponent<HealthComponent>().IsDead)
             {

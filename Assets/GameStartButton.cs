@@ -13,6 +13,7 @@ public class GameStartButton : MonoBehaviour
     {
         if (this.gameObject.name == "StartGame")
         {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().StartAsClient);
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SavingWrapper>().StartGame);
         }
 
@@ -64,6 +65,12 @@ public class GameStartButton : MonoBehaviour
         if (this.gameObject.name == "ClientSendSome")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ClientSendSome);
+        }
+        if (this.gameObject.name == "StartAsServer")
+        {
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().StartAsServer);
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SavingWrapper>().StartGame);
+
         }
     }
 

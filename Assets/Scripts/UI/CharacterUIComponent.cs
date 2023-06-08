@@ -10,6 +10,7 @@ namespace RPG.UI
 
         private void LateUpdate()
         {
+            if (Camera.main == null) return;
             this.transform.forward = Camera.main.transform.forward;
 
             if (persist) return;

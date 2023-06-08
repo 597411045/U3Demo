@@ -6,7 +6,7 @@ namespace RPG.Movement
 {
     public class PathPatrolComponent : MonoBehaviour
     {
-        [SerializeField] private GameObject pathGroup;
+        [SerializeField] public GameObject pathGroup;
         private List<Vector3> pathPoints;
         private int currPoint;
 

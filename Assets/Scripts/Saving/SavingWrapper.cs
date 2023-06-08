@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Cinematic;
+using Network;
 using UnityEngine;
 
 namespace RPG.Saving
@@ -20,26 +21,26 @@ namespace RPG.Saving
 
             yield return this.GetComponent<JsonSavingSystem>().LoadLastScene(saveFile);
 
-            CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
-            yield return csc.FadeIn(1);
+            if (!NetworkCenter.isServerForS1)
+            {
+                CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
+                yield return csc.FadeIn(1);
+            }
+          
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.F2))
             {
-                Load();
+                LoadManual();
             }
 
             if (Input.GetKeyDown(KeyCode.F1))
             {
                 Save();
             }
-
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                StartGame();
-            }
+            
         }
 
         public void Save()
@@ -50,6 +51,13 @@ namespace RPG.Saving
         public void Load()
         {
             GetComponent<JsonSavingSystem>().Load(saveFile);
+        }
+        
+        public void LoadManual()
+        {
+            UpdateManager.ClearAllActions();
+
+            StartCoroutine(IEStart());
         }
     }
 }

@@ -103,13 +103,14 @@ namespace Network
 
     public class NetworkCenter : MonoBehaviour
     {
+        public static bool isServerForS1 = true;
+
         public static Queue<SocketInstance> tmpSocketInstance = new Queue<SocketInstance>();
         public static Queue<SocketInstance> valSocketInstance = new Queue<SocketInstance>();
 
         public static Dictionary<NTI_type, List<NetTaskInstance>>
             allNTI = new Dictionary<NTI_type, List<NetTaskInstance>>();
 
-        public static bool isServer = true;
 
         private void Start()
         {
@@ -122,6 +123,7 @@ namespace Network
             allNTI.Add(NTI_type.Communication, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
+
         }
 
         private string a;
@@ -210,7 +212,6 @@ namespace Network
 
         public void ConnectStart()
         {
-            isServer = false;
             if (ConnectCenter.InstanceCount > 0) return;
             ConnectCenter cc = new ConnectCenter();
             cc.StartTask();
@@ -218,32 +219,48 @@ namespace Network
 
         public void ClientSendValid()
         {
-            if (CommunicationCenter.clientCommunications.ContainsKey(-1))
-            {
-                CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
-                    .Enqueue(
-                        new byte[123]);
-            }
+            // if (CommunicationCenter.clientCommunications.ContainsKey(-1))
+            // {
+            //     CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
+            //         .Enqueue(
+            //             new byte[123]);
+            // }
         }
 
         public void ClientSendSome()
         {
-            if (CommunicationCenter.clientCommunications.ContainsKey(-1))
-            {
-                CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
-                    .Enqueue(
-                        new byte[] { 89, 90, 91 });
-            }
+            // if (CommunicationCenter.clientCommunications.ContainsKey(-1))
+            // {
+            //     CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
+            //         .Enqueue(
+            //             new byte[] { 89, 90, 91 });
+            // }
         }
 
-        public void ClientSendText(string toString)
+        public static void ClientSendText(string toString)
         {
-            if (CommunicationCenter.clientCommunications.ContainsKey(-1))
+            if (CommunicationCenter.clientCommunications.ContainsKey("Server"))
             {
-                CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
+                CommunicationCenter.clientCommunications["Server"][CommunicationChildType.Send].socketInstance.sendList
                     .Enqueue(
                         Encoding.UTF8.GetBytes(toString));
             }
+        }
+
+        public void StartAsServer()
+        {
+            isServerForS1 = true;
+            AcceptStart();
+            ValidStart();
+            CommStart();
+            ManagerStart();
+        }
+        
+        public void StartAsClient()
+        {
+            isServerForS1 = false;
+            CommStart();
+            ConnectStart();
         }
     }
 }

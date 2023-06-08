@@ -1,5 +1,6 @@
 ﻿using System;
 using Google.Protobuf.WellKnownTypes;
+using Network;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Stats;
@@ -23,13 +24,15 @@ namespace RPG.UI
 
         private void Awake()
         {
+
+            if (NetworkCenter.isServerForS1) return;
             //_canvas = this.gameObject.GetComponentInChildren<Canvas>();
 
             //Transform tmp;
             //this.transform.FindAlongChild("HP", out tmp, true);
             //_hpBarRT = tmp.GetComponent<RectTransform>();
             oldSizeDelta = _hpBarRT.sizeDelta;
-
+            
             if (user == null) return;
 
             this.GetComponent<BaseStats>().OnSetEXP += () =>
@@ -39,7 +42,8 @@ namespace RPG.UI
         }
 
         private void Update()
-        {
+        {            if (NetworkCenter.isServerForS1) return;
+
             if (user == null) return;
             targetHP.text =
                 $"Target HP:{user.GetComponent<FighterActionComponent>().GetTargetHP()}";

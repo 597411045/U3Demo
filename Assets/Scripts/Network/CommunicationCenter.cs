@@ -10,8 +10,8 @@ namespace Network
     {
         public static int InstanceCount = 0;
 
-        public static Dictionary<int, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications =
-            new Dictionary<int, Dictionary<CommunicationChildType, NetTaskInstance>>();
+        public static Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications =
+            new Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>>();
 
         public CommunicationCenter() : base()
         {
@@ -43,7 +43,15 @@ namespace Network
                         {
                             throw new Exception("Maybe UID not assigned");
                         }
-                        clientCommunications.Add(tmp.UID, tmpDic);
+
+                        if (NetworkCenter.isServerForS1)
+                        {
+                            clientCommunications.Add("Client" + tmp.UID.ToString(), tmpDic);
+                        }
+                        else
+                        {
+                            clientCommunications.Add("Server", tmpDic);
+                        }
                     }
                     else
                     {

@@ -47,6 +47,7 @@ namespace RPG.Control
 
         private void Awake()
         {
+            if (NetworkCenter.isServerForS1) return;
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
             ptt = new PTTransform();
 
@@ -56,40 +57,7 @@ namespace RPG.Control
 
         public void Update()
         {
-            if (nc == null) return;
-            if (NetworkCenter.isServer)
-            {
-                if (CommunicationCenter.clientCommunications[1][CommunicationChildType.Recv].socketInstance
-                        .recvList.Count <= 0) return;
-                byte[] b = CommunicationCenter.clientCommunications[1][CommunicationChildType.Recv].socketInstance
-                    .recvList
-                    .Dequeue();
-                sb.Clear();
-                for (int i = 0; i < b.Length; i++)
-                {
-                    if (b[i] == 0) break;
-                    sb.Append((char)b[i]);
-                }
-
-                int a = 0;
-                ptt = PTTransform.Parser.ParseJson(sb.ToString());
-                this.transform.position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
-            }
-            else
-            {
-                ptt.PositionX = this.transform.position.x;
-                ptt.PositionY = this.transform.position.y;
-                ptt.PositionZ = this.transform.position.z;
-                ptt.AngleX = this.transform.eulerAngles.x;
-                ptt.AngleY = this.transform.eulerAngles.y;
-                ptt.AngleZ = this.transform.eulerAngles.z;
-                nc.ClientSendText(ptt.ToString());
-            }
-
-            //Debug.Log(ptt.ToByteArray());
-            //Debug.Log(ptt.ToByteString());
-            //Debug.Log(ptt.ToString());
-            //Debug.Log(PTTransform.Parser.ParseJson(ptt.ToString()));
+            
         }
 
         private void SendProtobuf()

@@ -30,6 +30,7 @@ namespace Network
                 this.socketInstance.socket.Connect(ep);
                 Debug.LogError("Connected");
                 NetworkCenter.valSocketInstance.Enqueue(socketInstance);
+                this.socketInstance.socket.Send(new byte[123], 0, 123, SocketFlags.None);
                 this.socketInstance = null;
                 markForDone = true;
             }));
