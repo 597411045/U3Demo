@@ -47,7 +47,7 @@ namespace RPG.Control
 
         private void Awake()
         {
-            if (NetworkCenter.isServerForS1) return;
+            if (NetworkCenter.isServer) return;
             UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
             ptt = new PTTransform();
 

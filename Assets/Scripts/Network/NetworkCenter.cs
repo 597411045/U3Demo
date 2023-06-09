@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Network
 {
@@ -42,19 +43,26 @@ namespace Network
     {
         public static int length = 256;
 
-        public int UID;
+        //改用string作为UID，可直接用于Dic
+        //public int UID;
+        public string UID;
         public string name;
         public Socket socket;
         public byte[] sendBuf;
         public byte[] recvBuf;
+
+        //可能会直接传Protobuf btye流，因此在SI中保留原始byte字节，但可以去0
         public Queue<byte[]> sendList;
         public Queue<byte[]> recvList;
 
-        public SocketInstance(Socket s)
+        //new时必须提供socket和uid
+        public SocketInstance(Socket s, string uid)
         {
             socket = s;
-            sendBuf = new byte[length];
-            recvBuf = new byte[length];
+            //一并在new Comm时初始化buffer
+            //sendBuf = new byte[length];
+            //recvBuf = new byte[length];
+            UID = uid;
         }
     }
 
@@ -101,16 +109,20 @@ namespace Network
         }
     }
 
+    //网络方案总入口
     public class NetworkCenter : MonoBehaviour
     {
-        public static bool isServerForS1 = true;
+        public static bool isServer;
 
-        public static Queue<SocketInstance> tmpSocketInstance = new Queue<SocketInstance>();
+        //取消Valid
+        //public static Queue<SocketInstance> tmpSocketInstance = new Queue<SocketInstance>();
         public static Queue<SocketInstance> valSocketInstance = new Queue<SocketInstance>();
 
         public static Dictionary<NTI_type, List<NetTaskInstance>>
             allNTI = new Dictionary<NTI_type, List<NetTaskInstance>>();
 
+
+        private CommunicationCenter cc;
 
         private void Start()
         {
@@ -124,6 +136,7 @@ namespace Network
             allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
 
+            CommStart();
         }
 
         private string a;
@@ -133,7 +146,8 @@ namespace Network
             if (Input.GetKeyDown(KeyCode.D))
             {
                 Debug.LogError(
-                    $"tmp:{tmpSocketInstance.Count},val:{valSocketInstance.Count},comm:{CommunicationCenter.clientCommunications.Count}");
+                    // $"tmp:{tmpSocketInstance.Count},val:{valSocketInstance.Count},comm:{CommunicationCenter.clientCommunications.Count}");
+                    $"val:{valSocketInstance.Count},comm:{cc.clientCommunications.Count}");
                 foreach (var c in allNTI)
                 {
                     a += c.Key.ToString() + ":" + c.Value.Count + "|";
@@ -173,7 +187,7 @@ namespace Network
         public void CommStart()
         {
             if (CommunicationCenter.InstanceCount > 0) return;
-            CommunicationCenter cc = new CommunicationCenter();
+            cc = new CommunicationCenter();
             cc.StartTask();
         }
 
@@ -227,40 +241,59 @@ namespace Network
             // }
         }
 
-        public void ClientSendSome()
+        //统一接收入口
+        public byte[] GetMessageBySocketUID(string uid)
         {
-            // if (CommunicationCenter.clientCommunications.ContainsKey(-1))
-            // {
-            //     CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
-            //         .Enqueue(
-            //             new byte[] { 89, 90, 91 });
-            // }
+            if (!cc.clientCommunications.ContainsKey(uid))
+            {
+                //Debug.LogError("No This Key");
+                return null;
+            }
+
+            if (cc.clientCommunications[uid][CommunicationChildType.Recv]
+                    .socketInstance
+                    .recvList.Count <= 0)
+            {
+                //Debug.LogError("Dic Count <= 0");
+
+                return null;
+            }
+
+            return cc.clientCommunications[uid][CommunicationChildType.Recv].socketInstance
+                .recvList
+                .Dequeue();
         }
 
-        public static void ClientSendText(string toString)
+        //统一发送出口
+        public void SendMessageBySocketUID(string uid, byte[] bs)
         {
-            if (CommunicationCenter.clientCommunications.ContainsKey("Server"))
+            if (cc.clientCommunications.ContainsKey(uid))
             {
-                CommunicationCenter.clientCommunications["Server"][CommunicationChildType.Send].socketInstance.sendList
-                    .Enqueue(
-                        Encoding.UTF8.GetBytes(toString));
+                cc.clientCommunications[uid][CommunicationChildType.Send].socketInstance.sendList
+                    .Enqueue(bs);
             }
         }
 
         public void StartAsServer()
         {
-            isServerForS1 = true;
+            isServer = true;
             AcceptStart();
-            ValidStart();
-            CommStart();
+            //取消Valid，合并至Cmd和Comm
+            //ValidStart();
+
+            //启动NC时，自动启用
+            //CommStart();
             ManagerStart();
+            SceneManager.LoadScene(1);
         }
-        
+
         public void StartAsClient()
         {
-            isServerForS1 = false;
-            CommStart();
+            isServer = false;
+            //启动NC时，自动启用
+            //CommStart();
             ConnectStart();
+            SceneManager.LoadScene(2);
         }
     }
 }

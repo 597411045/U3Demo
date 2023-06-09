@@ -9,19 +9,22 @@ namespace Network
     {
         public static int InstanceCount = 0;
 
+        //临时记录tmpSocketUid
+        public static int tmpId = 1;
+
         public AcceptCenter() : base()
         {
             BuildAcceptNTI(7000);
             this.name = "AcceptCenter";
             InstanceCount++;
-
         }
 
         public void BuildAcceptNTI(int port)
         {
             //NetTaskInstance AcceptNTI = new NetTaskInstance();
             this.socketInstance =
-                new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp));
+                new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
+                    "ServerMainSocket");
             IPAddress ip = IPAddress.Parse("127.0.0.1");
             EndPoint ep = new IPEndPoint(ip, port);
             this.socketInstance.socket.Bind(ep);
@@ -35,9 +38,12 @@ namespace Network
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
-                    Socket tmp = this.socketInstance.socket.Accept();
+                    Socket tmpS = this.socketInstance.socket.Accept();
                     Debug.LogError("A New Client In");
-                    NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
+                    //取消Valid，无需传输到临时Socket列表，直接转入Val列表
+                    //NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
+                    SocketInstance tmpSI = new SocketInstance(tmpS, "tmpSocket" + tmpId++.ToString());
+                    NetworkCenter.valSocketInstance.Enqueue(tmpSI);
                 }
             }));
             NetworkCenter.allNTI[NTI_type.Accept].Add(this);

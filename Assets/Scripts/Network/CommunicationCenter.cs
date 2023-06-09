@@ -10,14 +10,19 @@ namespace Network
     {
         public static int InstanceCount = 0;
 
-        public static Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications =
-            new Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>>();
+        //改为实例，由Network调用
+        //public static Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications =
+        //    new Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>>();
+        public Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications;
 
         public CommunicationCenter() : base()
         {
             BuildCommunicationNTI();
             this.name = "CommunicationCenter";
             InstanceCount++;
+
+            clientCommunications =
+                new Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>>();
         }
 
         public void BuildCommunicationNTI()
@@ -32,6 +37,11 @@ namespace Network
                     if (NetworkCenter.valSocketInstance.Count > 0)
                     {
                         tmp = NetworkCenter.valSocketInstance.Dequeue();
+                        tmp.recvList = new Queue<byte[]>();
+                        tmp.sendList = new Queue<byte[]>();
+                        tmp.recvBuf = new byte[SocketInstance.length];
+                        tmp.sendBuf = new byte[SocketInstance.length];
+
                         Dictionary<CommunicationChildType, NetTaskInstance> tmpDic =
                             new Dictionary<CommunicationChildType, NetTaskInstance>();
                         tmpDic.Add(CommunicationChildType.Recv,
@@ -39,19 +49,7 @@ namespace Network
                         tmpDic.Add(CommunicationChildType.Send,
                             new CommunicationChildCenter(tmp, CommunicationChildType.Send));
 
-                        if (tmp.UID == 0)
-                        {
-                            throw new Exception("Maybe UID not assigned");
-                        }
-
-                        if (NetworkCenter.isServerForS1)
-                        {
-                            clientCommunications.Add("Client" + tmp.UID.ToString(), tmpDic);
-                        }
-                        else
-                        {
-                            clientCommunications.Add("Server", tmpDic);
-                        }
+                        clientCommunications.Add(tmp.UID, tmpDic);
                     }
                     else
                     {

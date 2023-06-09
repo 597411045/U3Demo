@@ -7,6 +7,7 @@ message PTTransform{
   float angleX = 4;
   float angleY = 5;
   float angleZ = 6;
+  float Speed = 7;
 }
 
 //--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto

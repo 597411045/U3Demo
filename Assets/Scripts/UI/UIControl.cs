@@ -24,15 +24,14 @@ namespace RPG.UI
 
         private void Awake()
         {
-
-            if (NetworkCenter.isServerForS1) return;
+            if (NetworkCenter.isServer) return;
             //_canvas = this.gameObject.GetComponentInChildren<Canvas>();
 
             //Transform tmp;
             //this.transform.FindAlongChild("HP", out tmp, true);
             //_hpBarRT = tmp.GetComponent<RectTransform>();
             oldSizeDelta = _hpBarRT.sizeDelta;
-            
+
             if (user == null) return;
 
             this.GetComponent<BaseStats>().OnSetEXP += () =>
@@ -42,7 +41,8 @@ namespace RPG.UI
         }
 
         private void Update()
-        {            if (NetworkCenter.isServerForS1) return;
+        {
+            if (NetworkCenter.isServer) return;
 
             if (user == null) return;
             targetHP.text =

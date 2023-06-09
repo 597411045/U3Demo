@@ -22,14 +22,14 @@ public static partial class TestReflection {
   static TestReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "Cgp0ZXN0LnByb3RvInYKC1BUVHJhbnNmb3JtEhEKCXBvc2l0aW9uWBgBIAEo",
-          "AhIRCglwb3NpdGlvblkYAiABKAISEQoJcG9zaXRpb25aGAMgASgCEg4KBmFu",
-          "Z2xlWBgEIAEoAhIOCgZhbmdsZVkYBSABKAISDgoGYW5nbGVaGAYgASgCYgZw",
-          "cm90bzM="));
+          "Cgp0ZXN0LnByb3RvIoUBCgtQVFRyYW5zZm9ybRIRCglwb3NpdGlvblgYASAB",
+          "KAISEQoJcG9zaXRpb25ZGAIgASgCEhEKCXBvc2l0aW9uWhgDIAEoAhIOCgZh",
+          "bmdsZVgYBCABKAISDgoGYW5nbGVZGAUgASgCEg4KBmFuZ2xlWhgGIAEoAhIN",
+          "CgVTcGVlZBgHIAEoAmIGcHJvdG8z"));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::PTTransform), global::PTTransform.Parser, new[]{ "PositionX", "PositionY", "PositionZ", "AngleX", "AngleY", "AngleZ" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::PTTransform), global::PTTransform.Parser, new[]{ "PositionX", "PositionY", "PositionZ", "AngleX", "AngleY", "AngleZ", "Speed" }, null, null, null, null)
         }));
   }
   #endregion
@@ -76,6 +76,7 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     angleX_ = other.angleX_;
     angleY_ = other.angleY_;
     angleZ_ = other.angleZ_;
+    speed_ = other.speed_;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -157,6 +158,18 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     }
   }
 
+  /// <summary>Field number for the "Speed" field.</summary>
+  public const int SpeedFieldNumber = 7;
+  private float speed_;
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public float Speed {
+    get { return speed_; }
+    set {
+      speed_ = value;
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override bool Equals(object other) {
@@ -178,6 +191,7 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleX, other.AngleX)) return false;
     if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleY, other.AngleY)) return false;
     if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleZ, other.AngleZ)) return false;
+    if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -191,6 +205,7 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     if (AngleX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleX);
     if (AngleY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleY);
     if (AngleZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleZ);
+    if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -233,6 +248,10 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
       output.WriteRawTag(53);
       output.WriteFloat(AngleZ);
     }
+    if (Speed != 0F) {
+      output.WriteRawTag(61);
+      output.WriteFloat(Speed);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -267,6 +286,10 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
       output.WriteRawTag(53);
       output.WriteFloat(AngleZ);
     }
+    if (Speed != 0F) {
+      output.WriteRawTag(61);
+      output.WriteFloat(Speed);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(ref output);
     }
@@ -293,6 +316,9 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
       size += 1 + 4;
     }
     if (AngleZ != 0F) {
+      size += 1 + 4;
+    }
+    if (Speed != 0F) {
       size += 1 + 4;
     }
     if (_unknownFields != null) {
@@ -324,6 +350,9 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     }
     if (other.AngleZ != 0F) {
       AngleZ = other.AngleZ;
+    }
+    if (other.Speed != 0F) {
+      Speed = other.Speed;
     }
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
@@ -364,6 +393,10 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
           AngleZ = input.ReadFloat();
           break;
         }
+        case 61: {
+          Speed = input.ReadFloat();
+          break;
+        }
       }
     }
   #endif
@@ -401,6 +434,10 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
         }
         case 53: {
           AngleZ = input.ReadFloat();
+          break;
+        }
+        case 61: {
+          Speed = input.ReadFloat();
           break;
         }
       }

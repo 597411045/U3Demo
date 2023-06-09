@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Network;
 using RPG.Saving;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameStartButton : MonoBehaviour
@@ -14,7 +15,6 @@ public class GameStartButton : MonoBehaviour
         if (this.gameObject.name == "StartGame")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().StartAsClient);
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SavingWrapper>().StartGame);
         }
 
         if (this.gameObject.name == "StartAcceptCenter")
@@ -46,31 +46,35 @@ public class GameStartButton : MonoBehaviour
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ManagerStop);
         }
+
         if (this.gameObject.name == "StartClient")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ConnectStart);
         }
+
         if (this.gameObject.name == "StartCommCenter")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().CommStart);
         }
+
         if (this.gameObject.name == "StopCommCenter")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().CommStop);
         }
+
         if (this.gameObject.name == "ClientSendValid")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ClientSendValid);
+            this.GetComponent<Button>().onClick
+                .AddListener(GameObject.FindObjectOfType<NetworkCenter>().ClientSendValid);
         }
+
         if (this.gameObject.name == "ClientSendSome")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ClientSendSome);
         }
+
         if (this.gameObject.name == "StartAsServer")
         {
             this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().StartAsServer);
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<SavingWrapper>().StartGame);
-
         }
     }
 

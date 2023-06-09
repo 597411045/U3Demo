@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
@@ -37,9 +38,6 @@ namespace Network
 
             this.name = "CommunicationChildCenter";
             InstanceCount++;
-
-            s.recvList = new Queue<byte[]>();
-            s.sendList = new Queue<byte[]>();
         }
 
         public void BuildRecvCommunicationChildNTI()
@@ -55,8 +53,23 @@ namespace Network
                         this.socketInstance.recvBuf.Length, SocketFlags.None);
                     if (length != 0)
                     {
-                        socketInstance.recvList.Enqueue(this.socketInstance.recvBuf);
-                        Debug.LogError($"Received:{Encoding.UTF8.GetString(this.socketInstance.recvBuf)}");
+                        //去0
+                        //测试长度
+                        int i = 0;
+                        for (; i < this.socketInstance.recvBuf.Length;)
+                        {
+                            if (this.socketInstance.recvBuf[i] == 0) break;
+                            i++;
+                        }
+
+                        //new btye[]
+                        byte[] b = new byte[i];
+                        for (int j = 0; j < i; j++)
+                        {
+                            b[j] = this.socketInstance.recvBuf[j];
+                        }
+
+                        socketInstance.recvList.Enqueue(b);
                         this.socketInstance.recvBuf = new byte[SocketInstance.length];
                     }
                 }

@@ -21,7 +21,7 @@ namespace RPG.Saving
 
             yield return this.GetComponent<JsonSavingSystem>().LoadLastScene(saveFile);
 
-            if (!NetworkCenter.isServerForS1)
+            if (!NetworkCenter.isServer)
             {
                 CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
                 yield return csc.FadeIn(1);

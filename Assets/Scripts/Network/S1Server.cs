@@ -14,22 +14,21 @@ namespace Network
 
         private StringBuilder sb;
         private PTTransform ptt;
+        private NetworkCenter nc;
 
         private void Awake()
         {
             Entities = new Dictionary<string, GameObject>();
             sb = new StringBuilder();
+            nc = FindObjectOfType<NetworkCenter>();
         }
 
         private void Start()
         {
-            GeneratePlayer();
-
-            if (NetworkCenter.isServerForS1) return;
-            //GenerateEnemy1();
+            //GeneratePlayer();
         }
 
-        void GenerateEnemy1()
+        public void GenerateEnemy1()
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("Enemy"));
             go.transform.position = new Vector3(23.88f, 6.1f, 14.13f);
@@ -41,7 +40,7 @@ namespace Network
             Entities.Add("Enemy1", go);
         }
 
-        void GeneratePlayer()
+        public void GeneratePlayer()
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("Player"));
             go.transform.position = new Vector3(34f, 6.57f, 35.46f);
@@ -49,45 +48,20 @@ namespace Network
             Entities.Add("Player", go);
         }
 
+        private byte[] b;
+
         private void Update()
         {
-            if (NetworkCenter.isServerForS1)
+            b = nc.GetMessageBySocketUID("tmpSocket1");
+            if (b != null)
             {
-                if (CommunicationCenter.clientCommunications.ContainsKey("Client1") == false) return;
-                while (CommunicationCenter.clientCommunications["Client1"][CommunicationChildType.Recv].socketInstance
-                           .recvList.Count > 0)
-                {
-                    byte[] b = CommunicationCenter.clientCommunications["Client1"][CommunicationChildType.Recv].socketInstance
-                        .recvList
-                        .Dequeue();
-                    sb.Clear();
-                    for (int i = 0; i < b.Length; i++)
-                    {
-                        if (b[i] == 0) break;
-                        sb.Append((char)b[i]);
-                    }
-
-                    int a = 0;
-                    ptt = PTTransform.Parser.ParseJson(sb.ToString());
-                    Entities["Player"].transform.position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
-                    Entities["Player"].transform.eulerAngles = new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
-                }
+                sb.Clear();
+                sb.Append(Encoding.UTF8.GetString(b));
+                ptt = PTTransform.Parser.ParseJson(sb.ToString());
+                Entities["Player"].transform.position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+                Entities["Player"].transform.eulerAngles = new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
+                Entities["Player"].GetComponent<Animator>().SetFloat("ForwardSpeed", ptt.Speed);
             }
-            else
-            {
-                ptt.PositionX = Entities["Player"].transform.position.x;
-                ptt.PositionY = Entities["Player"].transform.position.y;
-                ptt.PositionZ = Entities["Player"].transform.position.z;
-                ptt.AngleX = Entities["Player"].transform.eulerAngles.x;
-                ptt.AngleY = Entities["Player"].transform.eulerAngles.y;
-                ptt.AngleZ = Entities["Player"].transform.eulerAngles.z;
-                NetworkCenter.ClientSendText(ptt.ToString());
-            }
-
-            //Debug.Log(ptt.ToByteArray());
-            //Debug.Log(ptt.ToByteString());
-            //Debug.Log(ptt.ToString());
-            //Debug.Log(PTTransform.Parser.ParseJson(ptt.ToString()));
         }
     }
 }
