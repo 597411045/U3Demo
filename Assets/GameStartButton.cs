@@ -29,12 +29,10 @@ public class GameStartButton : MonoBehaviour
 
         if (this.gameObject.name == "StartValidCenter")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ValidStart);
         }
 
         if (this.gameObject.name == "StopValidCenter")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().ValidStop);
         }
 
         if (this.gameObject.name == "StartManagerCenter")

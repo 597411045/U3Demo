@@ -18,7 +18,7 @@ namespace Network
     {
         public static int InstanceCount = 0;
 
-        public CommunicationChildCenter(SocketInstance s, CommunicationChildType c) : base()
+        public CommunicationChildCenter(SocketInstance s, CommunicationChildType c,string name) : base(name)
         {
             this.socketInstance = s;
 
@@ -36,7 +36,6 @@ namespace Network
                 }
             }
 
-            this.name = "CommunicationChildCenter";
             InstanceCount++;
         }
 
@@ -44,7 +43,7 @@ namespace Network
         {
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.LogError("CommunicationChildNTI Start");
+                Debug.LogError("Recv Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -73,7 +72,7 @@ namespace Network
                         this.socketInstance.recvBuf = new byte[SocketInstance.length];
                     }
                 }
-            }));
+            }),"BuildRecvCommunicationChildNTI");
             this.StartTask();
             NetworkCenter.allNTI[NTI_type.CommunicationChild].Add(this);
         }
@@ -83,7 +82,7 @@ namespace Network
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
                 byte[] tmp;
-                Debug.LogError("CommunicationChildNTI Start");
+                Debug.LogError("Send Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -98,7 +97,7 @@ namespace Network
                         //Thread.Sleep(5000);
                     }
                 }
-            }));
+            }),"BuildSendCommunicationChildNTI");
             this.StartTask();
             NetworkCenter.allNTI[NTI_type.CommunicationChild].Add(this);
         }

@@ -12,10 +12,9 @@ namespace Network
         //临时记录tmpSocketUid
         public static int tmpId = 1;
 
-        public AcceptCenter() : base()
+        public AcceptCenter(string name) : base(name)
         {
             BuildAcceptNTI(7000);
-            this.name = "AcceptCenter";
             InstanceCount++;
         }
 
@@ -46,6 +45,7 @@ namespace Network
                     NetworkCenter.valSocketInstance.Enqueue(tmpSI);
                 }
             }));
+            StartTask();
             NetworkCenter.allNTI[NTI_type.Accept].Add(this);
         }
     }

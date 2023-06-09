@@ -26,11 +26,12 @@ namespace Network
         public Thread thread;
         public DateTime startTime;
 
-        public ThreadInstance(Thread t)
+        public ThreadInstance(Thread t, string _name)
         {
             startTime = DateTime.Now;
             thread = t;
             thread.IsBackground = true;
+            name = _name;
         }
 
         public TimeSpan GetRunningTime()
@@ -46,9 +47,7 @@ namespace Network
         //改用string作为UID，可直接用于Dic
         //public int UID;
         public string UID;
-        public string name;
         public Socket socket;
-        public byte[] sendBuf;
         public byte[] recvBuf;
 
         //可能会直接传Protobuf btye流，因此在SI中保留原始byte字节，但可以去0
@@ -59,10 +58,10 @@ namespace Network
         public SocketInstance(Socket s, string uid)
         {
             socket = s;
-            //一并在new Comm时初始化buffer
-            //sendBuf = new byte[length];
-            //recvBuf = new byte[length];
             UID = uid;
+            recvList = new Queue<byte[]>();
+            sendList = new Queue<byte[]>();
+            recvBuf = new byte[SocketInstance.length];
         }
     }
 
@@ -73,13 +72,14 @@ namespace Network
         public ThreadInstance threadInstance;
         public SocketInstance socketInstance;
 
-        public NetTaskInstance()
+        public NetTaskInstance(string _name)
         {
             manualResetEvent = new ManualResetEvent(false);
             manualResetEvent.Reset();
+            name = _name;
         }
 
-        public bool markForDone;
+        //public bool markForDone;
 
         public void StartTask()
         {
@@ -87,25 +87,18 @@ namespace Network
             threadInstance.thread.Start();
         }
 
-        ~NetTaskInstance()
+        public void StopTask()
         {
-            Debug.LogError($"{name} destroy by desstration");
-            this.DestroyTask();
-        }
-
-        public void DestroyTask()
-        {
-            Debug.LogError($"{name} destroy by manual");
+            Debug.LogError(name + " Before Stop");
+            Debug.LogError(threadInstance.thread.ThreadState);
+            Debug.LogError(socketInstance.UID + ":" + socketInstance.socket.Connected);
+            Debug.LogError(name + " Begin Stop");
             manualResetEvent.Reset();
-            if (socketInstance != null && socketInstance.socket != null)
-            {
-                socketInstance.socket.Disconnect(false);
-            }
-
-            if (threadInstance != null && threadInstance.thread != null)
-            {
-                threadInstance.thread.Abort();
-            }
+            threadInstance.thread.Abort();
+            socketInstance.socket.Disconnect(false);
+            Debug.LogError(name + " After Stop");
+            Debug.LogError(threadInstance.thread.ThreadState);
+            Debug.LogError(socketInstance.UID + ":" + socketInstance.socket.Connected);
         }
     }
 
@@ -113,6 +106,8 @@ namespace Network
     public class NetworkCenter : MonoBehaviour
     {
         public static bool isServer;
+        public static NetworkCenter ins;
+
 
         //取消Valid
         //public static Queue<SocketInstance> tmpSocketInstance = new Queue<SocketInstance>();
@@ -126,12 +121,9 @@ namespace Network
 
         private void Start()
         {
+            ins = this;
             allNTI.Add(NTI_type.Accept, new List<NetTaskInstance>());
 
-            allNTI.Add(NTI_type.Valid, new List<NetTaskInstance>());
-            allNTI.Add(NTI_type.ValidChild, new List<NetTaskInstance>());
-
-            allNTI.Add(NTI_type.Manager, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.Communication, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
@@ -141,94 +133,75 @@ namespace Network
 
         private string a;
 
+        private byte[] b;
+
         public void Update()
         {
-            if (Input.GetKeyDown(KeyCode.D))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
-                Debug.LogError(
-                    // $"tmp:{tmpSocketInstance.Count},val:{valSocketInstance.Count},comm:{CommunicationCenter.clientCommunications.Count}");
-                    $"val:{valSocketInstance.Count},comm:{cc.clientCommunications.Count}");
-                foreach (var c in allNTI)
-                {
-                    a += c.Key.ToString() + ":" + c.Value.Count + "|";
-                }
+                DestroyAll();
+            }
 
-                Debug.LogError(a);
-                a = "";
+            if (isServer)
+            {
+                foreach (var c in cc.clientCommunications)
+                {
+                    b = GetMessageBySocketUID(c.Key);
+                    if (b != null)
+                    {
+                        CommandExecuter.CommandExec(c.Key, Encoding.UTF8.GetString(b));
+                    }
+                }
+            }
+            else
+            {
+                b = GetMessageBySocketUID("ClientMainSocket");
+                if (b != null)
+                {
+                    CommandExecuter.CommandExec("ClientMainSocket", Encoding.UTF8.GetString(b));
+                }
+            }
+        }
+
+        private void DestroyAll()
+        {
+            foreach (var c in allNTI)
+            {
+                foreach (var d in c.Value)
+                {
+                    d.StopTask();
+                }
             }
         }
 
         public void AcceptStart()
         {
             if (AcceptCenter.InstanceCount > 0) return;
-            AcceptCenter ac = new AcceptCenter();
-            ac.StartTask();
+            AcceptCenter ac = new AcceptCenter("AcceptCenter");
         }
 
         public void AcceptStop()
         {
             if (AcceptCenter.InstanceCount <= 0) return;
-            allNTI[NTI_type.Accept][0].DestroyTask();
         }
 
-        public void ValidStart()
-        {
-            if (ValidCenter.InstanceCount > 0) return;
-            ValidCenter vc = new ValidCenter();
-            vc.StartTask();
-        }
-
-        public void ValidStop()
-        {
-            if (ValidCenter.InstanceCount <= 0) return;
-            allNTI[NTI_type.Valid][0].DestroyTask();
-        }
 
         public void CommStart()
         {
             if (CommunicationCenter.InstanceCount > 0) return;
-            cc = new CommunicationCenter();
-            cc.StartTask();
+            cc = new CommunicationCenter("CommunicationCenter");
         }
 
         public void CommStop()
         {
             if (CommunicationCenter.InstanceCount <= 0) return;
-            allNTI[NTI_type.Communication][0].DestroyTask();
         }
 
-
-        public void ManagerStart()
-        {
-            if (ManagerCenter.InstanceCount > 0) return;
-            ManagerCenter mc = new ManagerCenter();
-            mc.StartTask();
-        }
-
-        public void ManagerStop()
-        {
-            if (ManagerCenter.InstanceCount <= 0) return;
-            allNTI[NTI_type.Manager][0].DestroyTask();
-        }
-
-
-        private void OnDestroy()
-        {
-            Debug.LogError("OnDestroy");
-            foreach (var c in allNTI)
-            {
-                foreach (var d in c.Value)
-                {
-                    d.DestroyTask();
-                }
-            }
-        }
 
         public void ConnectStart()
         {
             if (ConnectCenter.InstanceCount > 0) return;
-            ConnectCenter cc = new ConnectCenter();
-            cc.StartTask();
+            ConnectCenter cc = new ConnectCenter("ConnectCenter");
         }
 
         public void ClientSendValid()
@@ -272,6 +245,10 @@ namespace Network
                 cc.clientCommunications[uid][CommunicationChildType.Send].socketInstance.sendList
                     .Enqueue(bs);
             }
+            else
+            {
+                Debug.LogError("SendMessageBySocketUID Has No Key: " + uid);
+            }
         }
 
         public void StartAsServer()
@@ -283,7 +260,6 @@ namespace Network
 
             //启动NC时，自动启用
             //CommStart();
-            ManagerStart();
             SceneManager.LoadScene(1);
         }
 
@@ -293,7 +269,6 @@ namespace Network
             //启动NC时，自动启用
             //CommStart();
             ConnectStart();
-            SceneManager.LoadScene(2);
         }
     }
 }

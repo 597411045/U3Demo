@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using UnityEngine;
 
@@ -9,10 +10,9 @@ namespace Network
     {
         public static int InstanceCount = 0;
 
-        public ConnectCenter() : base()
+        public ConnectCenter(string name) : base(name)
         {
             BuildConnectNTI(7000);
-            this.name = "ConnectCenter";
             InstanceCount++;
         }
 
@@ -30,11 +30,9 @@ namespace Network
                 Debug.LogError("Connected");
                 NetworkCenter.valSocketInstance.Enqueue(socketInstance);
                 
-                //不在连接时验证，后在Comm中验证
-                //this.socketInstance.socket.Send(new byte[123], 0, 123, SocketFlags.None);
-                //this.socketInstance = null;
-                markForDone = true;
-            }));
+                this.socketInstance.sendList.Enqueue(Encoding.UTF8.GetBytes("ID:123"));
+            }),"BuildConnectNTI");
+            StartTask();
             NetworkCenter.allNTI[NTI_type.Connect].Add(this);
         }
     }

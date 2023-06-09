@@ -8,6 +8,7 @@ using Network;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
+using RPG.Scene;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
@@ -31,6 +32,8 @@ namespace RPG.Control
     {
         private PTTransform ptt;
 
+        public bool readySync = false;
+
 
         [Serializable]
         struct CursorMapping
@@ -53,15 +56,16 @@ namespace RPG.Control
 
             nc = GameObject.FindObjectOfType<NetworkCenter>();
             sb = new StringBuilder();
+            SceneEntityManager.Entities.Add("123", this.gameObject);
         }
 
-        public void Update()
+        private void Start()
         {
-            
-        }
-
-        private void SendProtobuf()
-        {
+            if (!NetworkCenter.isServer)
+            {
+                this.gameObject.SetActive(false);
+                CommandExecuter.SendLogin();
+            }
         }
 
         void UpdateMethod()
@@ -97,6 +101,27 @@ namespace RPG.Control
             if (CanDoCombat()) return;
             if (CanSetNavDestinationToCursor()) return;
             //SetCursor(CursorType.None);
+        }
+
+        private void Update()
+        {
+            if (readySync)
+            {
+                ptt.PositionX = this.transform.position.x;
+                ptt.PositionY = this.transform.position.y;
+                ptt.PositionZ = this.transform.position.z;
+                ptt.AngleX = this.transform.eulerAngles.x;
+                ptt.AngleY = this.transform.eulerAngles.y;
+                ptt.AngleZ = this.transform.eulerAngles.z;
+
+                Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
+                Vector3 localVelocity =
+                    this.transform.InverseTransformDirection(velocity);
+
+                ptt.Speed = localVelocity.z;
+                NetworkCenter.ins.SendMessageBySocketUID("ClientMainSocket",
+                    Encoding.UTF8.GetBytes("123|position|" + ptt.ToString()));
+            }
         }
 
 

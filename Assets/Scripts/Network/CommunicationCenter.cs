@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using UnityEngine;
 
@@ -15,10 +16,9 @@ namespace Network
         //    new Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>>();
         public Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications;
 
-        public CommunicationCenter() : base()
+        public CommunicationCenter(string name) : base(name)
         {
             BuildCommunicationNTI();
-            this.name = "CommunicationCenter";
             InstanceCount++;
 
             clientCommunications =
@@ -27,7 +27,7 @@ namespace Network
 
         public void BuildCommunicationNTI()
         {
-            Debug.LogError("Build Comm");
+            Debug.LogError("Comm Start");
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
                 SocketInstance tmp;
@@ -37,10 +37,7 @@ namespace Network
                     if (NetworkCenter.valSocketInstance.Count > 0)
                     {
                         tmp = NetworkCenter.valSocketInstance.Dequeue();
-                        tmp.recvList = new Queue<byte[]>();
-                        tmp.sendList = new Queue<byte[]>();
-                        tmp.recvBuf = new byte[SocketInstance.length];
-                        tmp.sendBuf = new byte[SocketInstance.length];
+                        
 
                         Dictionary<CommunicationChildType, NetTaskInstance> tmpDic =
                             new Dictionary<CommunicationChildType, NetTaskInstance>();
@@ -54,10 +51,11 @@ namespace Network
                     else
                     {
                         //Debug.LogError("NetworkCenter.valSocketInstance.Count < 0, Wait 5 Seconds");
-                        Thread.Sleep(5000);
+                        Thread.Sleep(1000);
                     }
                 }
             }));
+            StartTask();
             NetworkCenter.allNTI[NTI_type.Communication].Add(this);
         }
     }

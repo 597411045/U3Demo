@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RPG.Control;
@@ -50,9 +51,12 @@ namespace RPG.Movement
 
         private void UpdateAnimator()
         {
-            Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
-            Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
-            this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+            if (!NetworkCenter.isServer)
+            {
+                Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
+                Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
+                this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+            }
         }
 
         struct MoveSaveData
