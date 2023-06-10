@@ -44,7 +44,7 @@ namespace RPG.Core
                 if (isDead) return true;
                 isDead = true;
 
-                UpdateManager.RemoveActionsById(this.gameObject.GetHashCode());
+                UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
 
                 this.GetComponent<Animator>().SetTrigger("IfDead");
                 this.GetComponent<NavMeshAgent>().enabled = false;

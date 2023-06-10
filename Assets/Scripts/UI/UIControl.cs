@@ -25,11 +25,13 @@ namespace RPG.UI
         private void Awake()
         {
             if (NetworkCenter.isServer) return;
-            //_canvas = this.gameObject.GetComponentInChildren<Canvas>();
 
-            //Transform tmp;
-            //this.transform.FindAlongChild("HP", out tmp, true);
-            //_hpBarRT = tmp.GetComponent<RectTransform>();
+
+            textHP = GameObject.Find("HP_Text").GetComponent<Text>();
+            targetHP = GameObject.Find("TargetHP_Text").GetComponent<Text>();
+            levelText = GameObject.Find("Level_Text").GetComponent<Text>();
+            expText = GameObject.Find("Exp_Text").GetComponent<Text>();
+
             oldSizeDelta = _hpBarRT.sizeDelta;
 
             if (user == null) return;
@@ -38,9 +40,16 @@ namespace RPG.UI
             {
                 expText.text = $"Exp:{user.GetComponent<BaseStats>().EXP}";
             };
+
+            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
         }
 
-        private void Update()
+        private void OnDestroy()
+        {
+            UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
+        }
+
+        private void UpdateMethod()
         {
             if (NetworkCenter.isServer) return;
 

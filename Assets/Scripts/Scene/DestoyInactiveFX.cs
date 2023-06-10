@@ -5,7 +5,7 @@ namespace RPG.Scene
 {
     public class DestoyInactiveFX : MonoBehaviour
     {
-        private void Update()
+        private void LateUpdate()
         {
             if (this.GetComponent<ParticleSystem>().IsAlive() == false)
             {

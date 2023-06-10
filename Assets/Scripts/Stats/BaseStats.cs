@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
+using Network;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
@@ -26,7 +27,16 @@ namespace RPG.Stats
         public float _maxHp;
         private float[] _explevels;
 
-        public void AwakeGen()
+
+        private void Awake()
+        {
+            if (NetworkCenter.ins == null)
+            {
+                InitBaseStat();
+            }
+        }
+
+        public void InitBaseStat()
         {
             _maxHp = progression.GetData(characterEnum, ProgressionEnum.Health, startingLevel);
             _hp = _maxHp;
@@ -37,7 +47,7 @@ namespace RPG.Stats
             OnLevelUp += GenLevelUpEffect;
             OnLevelUp += RestoreHP;
         }
-        
+
 
         public float HP
         {

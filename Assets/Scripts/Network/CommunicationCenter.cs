@@ -37,14 +37,14 @@ namespace Network
                     if (NetworkCenter.valSocketInstance.Count > 0)
                     {
                         tmp = NetworkCenter.valSocketInstance.Dequeue();
-                        
+
 
                         Dictionary<CommunicationChildType, NetTaskInstance> tmpDic =
                             new Dictionary<CommunicationChildType, NetTaskInstance>();
                         tmpDic.Add(CommunicationChildType.Recv,
-                            new CommunicationChildCenter(tmp, CommunicationChildType.Recv));
+                            new CommunicationChildCenter(tmp, CommunicationChildType.Recv, tmp.UID + " Recv"));
                         tmpDic.Add(CommunicationChildType.Send,
-                            new CommunicationChildCenter(tmp, CommunicationChildType.Send));
+                            new CommunicationChildCenter(tmp, CommunicationChildType.Send, tmp.UID + " Send"));
 
                         clientCommunications.Add(tmp.UID, tmpDic);
                     }
@@ -54,7 +54,7 @@ namespace Network
                         Thread.Sleep(1000);
                     }
                 }
-            }));
+            }), "BuildCommunicationNTI");
             StartTask();
             NetworkCenter.allNTI[NTI_type.Communication].Add(this);
         }

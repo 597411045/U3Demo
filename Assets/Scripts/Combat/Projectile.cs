@@ -20,7 +20,12 @@ namespace RPG.Combat
         [SerializeField] private UnityEvent HitEvent;
         public GameObject launcher;
 
-        private void Update()
+        private void Awake()
+        {
+            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+        }
+
+        private void UpdateMethod()
         {
             if (isAutoNav == false)
             {
@@ -49,34 +54,19 @@ namespace RPG.Combat
 
             if (aliveTime <= 0)
             {
+                UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
                 Destroy(this.gameObject);
             }
 
             aliveTime -= Time.deltaTime;
         }
 
+
         private void OnTriggerEnter(Collider other)
         {
-            
-            if (other.gameObject.name.Contains("Flower"))
-            {
-                if (colliderEffect != null)
-                {
-                    Instantiate(colliderEffect, this.gameObject.transform.position, this.transform.rotation);
-                }
-
-                foreach (var c in clearImmediate)
-                {
-                    Destroy(c);
-                }
-
-                Destroy(this.gameObject, 0.2f);
-                return;
-            }
-
             if (other.gameObject.GetComponent<HealthComponent>() != null)
             {
-                other.gameObject.GetComponent<HealthComponent>().TakeDamage(atk,launcher);
+                other.gameObject.GetComponent<HealthComponent>().TakeDamage(atk, launcher);
                 HitEvent.Invoke();
                 // other.gameObject.GetComponent<Rigidbody>().AddForce(
                 //     (this.transform.position -
@@ -92,6 +82,7 @@ namespace RPG.Combat
                     Destroy(c);
                 }
 
+                UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
                 Destroy(this.gameObject, 0.3f);
             }
         }

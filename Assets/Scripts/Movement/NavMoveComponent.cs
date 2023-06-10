@@ -16,7 +16,7 @@ namespace RPG.Movement
     {
         private void Awake()
         {
-            UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
+            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
             nmp = new NavMeshPath();
         }
 

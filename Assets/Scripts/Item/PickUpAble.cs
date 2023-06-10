@@ -23,13 +23,25 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
 
     public float timer = 0;
 
-    private void Update()
+    private void Awake()
+    {
+        UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+    }
+
+    private void OnDestroy()
+    {
+        UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
+    }
+    
+    private void UpdateMethod()
     {
         if (timer >= 0)
         {
             timer -= Time.deltaTime;
         }
     }
+
+    
 
     private void OnTriggerEnter(Collider collision)
     {

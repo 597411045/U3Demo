@@ -50,27 +50,26 @@ namespace RPG.Control
 
         private void Awake()
         {
-            if (NetworkCenter.isServer) return;
-            UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
-            ptt = new PTTransform();
-
-            nc = GameObject.FindObjectOfType<NetworkCenter>();
-            sb = new StringBuilder();
-            SceneEntityManager.Entities.Add("123", this.gameObject);
-        }
-
-        private void Start()
-        {
             if (!NetworkCenter.isServer)
             {
-                this.gameObject.SetActive(false);
-                CommandExecuter.SendLogin();
+                UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+                UpdateManager.ServerAsyn.Add(new CAction(SyncMethod, this.GetInstanceID(), this.gameObject));
+                ptt = new PTTransform();
+                sb = new StringBuilder();
+                if (NetworkCenter.ins != null)
+                {
+                    SceneEntityManager.Entities.Add("123", this.gameObject);
+                    this.gameObject.SetActive(false);
+                    CommandExecuter.SendLogin();
+                }
             }
         }
+
 
         void UpdateMethod()
         {
             if (this.enabled == false) return;
+            if (!this.gameObject.activeInHierarchy) return;
 
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -103,7 +102,7 @@ namespace RPG.Control
             //SetCursor(CursorType.None);
         }
 
-        private void Update()
+        private void SyncMethod()
         {
             if (readySync)
             {

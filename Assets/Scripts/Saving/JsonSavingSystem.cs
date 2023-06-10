@@ -15,17 +15,13 @@ namespace RPG.Saving
 
         public IEnumerator LoadLastScene(string saveFile)
         {
-            // JObject state = LoadJsonFromFile(saveFile);
-            // IDictionary<string, JToken> stateDict = state;
-             int buildIndex = SceneManager.GetActiveScene().buildIndex;
-            // if (stateDict.ContainsKey("lastSceneBuildIndex"))
-            // {
-            //     buildIndex = stateDict["lastSceneBuildIndex"].ToObject<int>();
-            // }
-
-            if (buildIndex == 0) buildIndex = 1;
-            yield return SceneManager.LoadSceneAsync(buildIndex);
-            //RestoreFromToken(state);
+            JObject state = LoadJsonFromFile(saveFile);
+            IDictionary<string, JToken> stateDict = state;
+            if (stateDict.ContainsKey("lastSceneBuildIndex"))
+            {
+                yield return SceneManager.LoadSceneAsync(stateDict["lastSceneBuildIndex"].ToObject<string>());
+                RestoreFromToken(state);
+            }
         }
 
         public void Save(string saveFile)
@@ -93,7 +89,7 @@ namespace RPG.Saving
                 stateDict[child.GetUniqueIdentifier()] = child.CaptureAsJTokenInEntity();
             }
 
-            stateDict["lastSceneBuildIndex"] = SceneManager.GetActiveScene().buildIndex;
+            stateDict["lastSceneBuildIndex"] = SceneManager.GetActiveScene().name;
         }
 
         private void RestoreFromToken(JObject state)

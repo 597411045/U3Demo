@@ -19,7 +19,7 @@ namespace RPG.Scene
             go.transform.eulerAngles = new Vector3(0, -257.29f, 0);
             go.GetComponent<FighterActionComponent>().EquipItem(Resources.Load<WeaponConfig>("SwordWeapon"));
             go.GetComponent<BaseStats>().startingLevel = 2;
-            go.GetComponent<BaseStats>().AwakeGen();
+            go.GetComponent<BaseStats>().InitBaseStat();
             go.GetComponent<PathPatrolComponent>().pathGroup = GameObject.Find("PatrolPoint");
             Entities.Add("Enemy1", go);
         }

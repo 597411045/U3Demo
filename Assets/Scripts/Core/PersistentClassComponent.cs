@@ -23,9 +23,20 @@ namespace RPG.Core
         private void SpawnObject()
         {
             hasSpawn = true;
-            DontDestroyOnLoad(Instantiate(go));
-            DontDestroyOnLoad(Instantiate(go1));
-            DontDestroyOnLoad(Instantiate(go2));
+            if (go != null)
+            {
+                DontDestroyOnLoad(Instantiate(go));
+            }
+
+            if (go1 != null)
+            {
+                DontDestroyOnLoad(Instantiate(go1));
+            }
+
+            if (go2 != null)
+            {
+                DontDestroyOnLoad(Instantiate(go2));
+            }
         }
     }
 }

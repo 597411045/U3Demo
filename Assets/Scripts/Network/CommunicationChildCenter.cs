@@ -18,7 +18,7 @@ namespace Network
     {
         public static int InstanceCount = 0;
 
-        public CommunicationChildCenter(SocketInstance s, CommunicationChildType c,string name) : base(name)
+        public CommunicationChildCenter(SocketInstance s, CommunicationChildType c, string name) : base(name)
         {
             this.socketInstance = s;
 
@@ -72,7 +72,7 @@ namespace Network
                         this.socketInstance.recvBuf = new byte[SocketInstance.length];
                     }
                 }
-            }),"BuildRecvCommunicationChildNTI");
+            }), "BuildRecvCommunicationChildNTI");
             this.StartTask();
             NetworkCenter.allNTI[NTI_type.CommunicationChild].Add(this);
         }
@@ -97,7 +97,7 @@ namespace Network
                         //Thread.Sleep(5000);
                     }
                 }
-            }),"BuildSendCommunicationChildNTI");
+            }), "BuildSendCommunicationChildNTI");
             this.StartTask();
             NetworkCenter.allNTI[NTI_type.CommunicationChild].Add(this);
         }

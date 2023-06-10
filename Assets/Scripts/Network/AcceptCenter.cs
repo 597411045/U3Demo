@@ -44,7 +44,7 @@ namespace Network
                     SocketInstance tmpSI = new SocketInstance(tmpS, "tmpSocket" + tmpId++.ToString());
                     NetworkCenter.valSocketInstance.Enqueue(tmpSI);
                 }
-            }));
+            }),"BuildAcceptNTI");
             StartTask();
             NetworkCenter.allNTI[NTI_type.Accept].Add(this);
         }

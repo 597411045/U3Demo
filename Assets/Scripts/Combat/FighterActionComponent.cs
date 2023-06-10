@@ -31,7 +31,7 @@ namespace RPG.Combat
         {
             weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
             if (isFsmControlled) return;
-            UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
+            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod,this.GetInstanceID(),this.gameObject));
         }
 
         private void UpdateMethod()

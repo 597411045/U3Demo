@@ -68,6 +68,7 @@ namespace RPG.Control
                 {
                     SMachine.waitTimer = 5;
                 }
+
                 return true;
             }
             else
@@ -209,7 +210,7 @@ namespace RPG.Control
 
         private void Awake()
         {
-            UpdateManager.RegisterAction(UpdateMethod, this.gameObject.GetHashCode());
+            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
         }
 
         void UpdateMethod()

@@ -603,12 +603,24 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
+      propertyPath: PortalName
+      value: S2P2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
       propertyPath: toPortalId
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
       propertyPath: sceneToLoad
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
+      propertyPath: toSceneName
+      value: Scenes/Sandbox 1/Sandbox 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
+      propertyPath: toPortalName
+      value: S1P2
       objectReference: {fileID: 0}
     - target: {fileID: 2254463852048026238, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
       propertyPath: m_Name
@@ -1457,6 +1469,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6725360614632896778, guid: 40bf2c1d1d1c9e84fa557503d1c1ef44, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -51.289978
+      objectReference: {fileID: 0}
     - target: {fileID: 7142653616414076623, guid: 40bf2c1d1d1c9e84fa557503d1c1ef44, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -1583,12 +1599,24 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
+      propertyPath: PortalName
+      value: S2P1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
       propertyPath: toPortalId
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
       propertyPath: sceneToLoad
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
+      propertyPath: toSceneName
+      value: Scenes/Sandbox 1/Sandbox 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2254463852048026234, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
+      propertyPath: toPortalName
+      value: S1P1
       objectReference: {fileID: 0}
     - target: {fileID: 2254463852048026238, guid: f50018e395b96f14fbc9c75261ad36a9, type: 3}
       propertyPath: m_Name

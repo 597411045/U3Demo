@@ -40,7 +40,6 @@ namespace RPG.Saving
             {
                 Save();
             }
-            
         }
 
         public void Save()

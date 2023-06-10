@@ -10,10 +10,10 @@ namespace RPG.Scene
 {
     public class PortalTriggerComponent : MonoBehaviour
     {
-        [SerializeField] private int sceneToLoad = -1;
+        [SerializeField] private string toSceneName;
         [SerializeField] private GameObject spawnPoint;
-        [SerializeField] private int toPortalId = 0;
-        [SerializeField] private int portalId = 0;
+        [SerializeField] private string toPortalName;
+        [SerializeField] private string PortalName;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -38,7 +38,7 @@ namespace RPG.Scene
             yield return new WaitForSeconds(0.02f);
             yield return csc.Fade(0, 2);
 
-            yield return SceneManager.LoadSceneAsync(sceneToLoad);
+            yield return SceneManager.LoadSceneAsync(toSceneName);
 
             FindObjectOfType<SavingWrapper>().Load();
 
@@ -58,7 +58,7 @@ namespace RPG.Scene
             GameObject player = GameObject.FindWithTag("Player");
             foreach (var child in FindObjectsOfType<PortalTriggerComponent>())
             {
-                if (child.portalId == toPortalId)
+                if (child.PortalName == toPortalName)
                 {
                     player.GetComponent<NavMeshAgent>().Warp(child.spawnPoint.transform.position);
                     player.transform.rotation = child.spawnPoint.transform.rotation;

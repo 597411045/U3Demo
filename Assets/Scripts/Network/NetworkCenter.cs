@@ -67,6 +67,7 @@ namespace Network
 
     public class NetTaskInstance
     {
+        public bool isFinished;
         public string name;
         public ManualResetEvent manualResetEvent;
         public ThreadInstance threadInstance;
@@ -89,16 +90,34 @@ namespace Network
 
         public void StopTask()
         {
-            Debug.LogError(name + " Before Stop");
-            Debug.LogError(threadInstance.thread.ThreadState);
-            Debug.LogError(socketInstance.UID + ":" + socketInstance.socket.Connected);
-            Debug.LogError(name + " Begin Stop");
             manualResetEvent.Reset();
-            threadInstance.thread.Abort();
-            socketInstance.socket.Disconnect(false);
-            Debug.LogError(name + " After Stop");
-            Debug.LogError(threadInstance.thread.ThreadState);
-            Debug.LogError(socketInstance.UID + ":" + socketInstance.socket.Connected);
+            if (threadInstance != null)
+            {
+                Debug.LogError(threadInstance.name + ":" + threadInstance.thread.ThreadState);
+                threadInstance.thread.Abort();
+                Debug.LogError(threadInstance.name + ":" + threadInstance.thread.ThreadState);
+            }
+            else
+            {
+                Debug.LogError("threadInstance null, no need des");
+            }
+
+            if (socketInstance != null)
+            {
+                if (socketInstance.socket != null)
+                {
+                    Debug.LogError(socketInstance.UID + ":" + socketInstance.socket.Connected);
+                    if (socketInstance.socket.Connected)
+                    {
+                        socketInstance.socket.Disconnect(false);
+                        Debug.LogError(socketInstance.UID + ":" + socketInstance.socket.Connected);
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError("socketInstance or socket null, no need des");
+            }
         }
     }
 
@@ -135,7 +154,13 @@ namespace Network
 
         private byte[] b;
 
-        public void Update()
+
+        private void Awake()
+        {
+            UpdateManager.ServerAsyn.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+        }
+        
+        public void UpdateMethod()
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
@@ -163,13 +188,40 @@ namespace Network
             }
         }
 
+        public void LateUpdate()
+        {
+            DestroyFinished();
+        }
+
         private void DestroyAll()
+        {
+            Debug.LogError("DestroyAll");
+            foreach (var c in allNTI)
+            {
+                for (int i = c.Value.Count - 1; i >= 0; i--)
+                {
+                    c.Value[i].StopTask();
+                    c.Value.RemoveAt(i);
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            DestroyAll();
+        }
+
+        private void DestroyFinished()
         {
             foreach (var c in allNTI)
             {
-                foreach (var d in c.Value)
+                for (int i = c.Value.Count - 1; i >= 0; i--)
                 {
-                    d.StopTask();
+                    if (c.Value[i].isFinished)
+                    {
+                        c.Value[i].StopTask();
+                        c.Value.RemoveAt(i);
+                    }
                 }
             }
         }
@@ -202,16 +254,6 @@ namespace Network
         {
             if (ConnectCenter.InstanceCount > 0) return;
             ConnectCenter cc = new ConnectCenter("ConnectCenter");
-        }
-
-        public void ClientSendValid()
-        {
-            // if (CommunicationCenter.clientCommunications.ContainsKey(-1))
-            // {
-            //     CommunicationCenter.clientCommunications[-1][CommunicationChildType.Send].socketInstance.sendList
-            //         .Enqueue(
-            //             new byte[123]);
-            // }
         }
 
         //统一接收入口
