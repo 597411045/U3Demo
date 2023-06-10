@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Google.Protobuf;
-using Network;
+using PRG.Network;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -33,7 +33,7 @@ namespace RPG.Control
         private PTTransform ptt;
 
         public bool readySync = false;
-
+        private GameObject cineMachine;
 
         [Serializable]
         struct CursorMapping
@@ -45,31 +45,59 @@ namespace RPG.Control
 
         [SerializeField] private CursorMapping[] _cursorMappings;
 
-        private NetworkCenter nc;
         StringBuilder sb;
 
         private void Awake()
         {
             if (!NetworkCenter.isServer)
             {
-                UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
-                UpdateManager.ServerAsyn.Add(new CAction(SyncMethod, this.GetInstanceID(), this.gameObject));
+               
                 ptt = new PTTransform();
                 sb = new StringBuilder();
-                if (NetworkCenter.ins != null)
-                {
-                    SceneEntityManager.Entities.Add("123", this.gameObject);
-                    this.gameObject.SetActive(false);
-                    CommandExecuter.SendLogin();
-                }
+
+                cineMachine = GameObject.Find("CM vcam1");
+
+                //CommandExecuter.SendSyncRequest("ClientMainSocket", "TestCilent");
             }
         }
 
+        private void Start()
+        {
+            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
+            UpdateManager.Ins.RegisterAction(CActionType.SendMessage,
+                new CAction(SendMessage, this.GetInstanceID(), this.gameObject));
+        }
 
-        void UpdateMethod()
+
+        private Vector3 oldMousePosition;
+        private Vector2 mouseMoveDelta;
+
+        void LocalCompute()
         {
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
+
+            if (cineMachine != null)
+            {
+                if (Input.GetMouseButtonDown(1))
+                {
+                    oldMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                }
+
+                if (Input.GetMouseButton(1))
+                {
+                    mouseMoveDelta = (Camera.main.ScreenToViewportPoint(Input.mousePosition) - oldMousePosition);
+                    cineMachine.transform.Rotate(Vector3.up, mouseMoveDelta.x * 50, Space.World);
+                    cineMachine.transform.Rotate(Vector3.right, -mouseMoveDelta.y * 50);
+                    cineMachine.transform.eulerAngles = new Vector3(
+                        Mathf.Clamp(cineMachine.transform.eulerAngles.x, 10, 60), cineMachine.transform.eulerAngles.y,
+                        cineMachine.transform.eulerAngles.z);
+
+                    oldMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+                }
+            }
+
 
             if (EventSystem.current.IsPointerOverGameObject())
             {
@@ -102,7 +130,7 @@ namespace RPG.Control
             //SetCursor(CursorType.None);
         }
 
-        private void SyncMethod()
+        private void SendMessage()
         {
             if (readySync)
             {
@@ -118,7 +146,7 @@ namespace RPG.Control
                     this.transform.InverseTransformDirection(velocity);
 
                 ptt.Speed = localVelocity.z;
-                NetworkCenter.ins.SendMessageBySocketUID("ClientMainSocket",
+                NetworkCenter.Ins.SendMessageBySocketUID("ClientMainSocket",
                     Encoding.UTF8.GetBytes("123|position|" + ptt.ToString()));
             }
         }

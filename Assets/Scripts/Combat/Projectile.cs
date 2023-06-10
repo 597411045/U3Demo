@@ -22,10 +22,11 @@ namespace RPG.Combat
 
         private void Awake()
         {
-            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
         }
 
-        private void UpdateMethod()
+        private void LocalCompute()
         {
             if (isAutoNav == false)
             {
@@ -54,7 +55,7 @@ namespace RPG.Combat
 
             if (aliveTime <= 0)
             {
-                UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
+                UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
                 Destroy(this.gameObject);
             }
 
@@ -82,7 +83,7 @@ namespace RPG.Combat
                     Destroy(c);
                 }
 
-                UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
+                UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
                 Destroy(this.gameObject, 0.3f);
             }
         }

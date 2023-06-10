@@ -17,7 +17,8 @@ MonoBehaviour:
   dropPrefab: {fileID: 4455695230265305195, guid: 795e3271175ba5348b690e69078492f4, type: 3}
   projectilePrefab: {fileID: 6969103569893680567, guid: b53f32bd0272128429da6b4f5527b047, type: 3}
   weaponRange: 10
-  attackInterval: 2
+  attackInterval: 10
   weaponDamage: 10
   transformName: Hand_L
   prefabName: BowWeapon
+  hitAudio: {fileID: 0}

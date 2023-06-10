@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using Cinematic;
-using Network;
+using PRG.Network;
 using UnityEngine;
 
 namespace RPG.Saving
@@ -26,7 +26,6 @@ namespace RPG.Saving
                 CameraShaderComponent csc = Camera.main.GetComponent<CameraShaderComponent>();
                 yield return csc.FadeIn(1);
             }
-          
         }
 
         private void Update()
@@ -51,10 +50,10 @@ namespace RPG.Saving
         {
             GetComponent<JsonSavingSystem>().Load(saveFile);
         }
-        
+
         public void LoadManual()
         {
-            UpdateManager.ClearAllActions();
+            UpdateManager.Ins.ClearAllLocalCompute();
 
             StartCoroutine(IEStart());
         }

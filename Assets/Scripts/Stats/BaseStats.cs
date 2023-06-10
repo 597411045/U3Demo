@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
-using Network;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
 using RPG.Saving;
@@ -30,10 +29,7 @@ namespace RPG.Stats
 
         private void Awake()
         {
-            if (NetworkCenter.ins == null)
-            {
-                InitBaseStat();
-            }
+            InitBaseStat();
         }
 
         public void InitBaseStat()

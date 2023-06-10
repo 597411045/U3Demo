@@ -1,9 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Network;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using PRG.Network;
 using RPG.Control;
 using RPG.Core;
 using RPG.Saving;
@@ -14,13 +14,14 @@ namespace RPG.Movement
 {
     public class NavMoveComponent : MonoBehaviour, IAction, IJsonSaveable
     {
-        private void Awake()
+        private void Start()
         {
-            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
             nmp = new NavMeshPath();
         }
 
-        private void UpdateMethod()
+        private void LocalCompute()
         {
             UpdateAnimator();
         }

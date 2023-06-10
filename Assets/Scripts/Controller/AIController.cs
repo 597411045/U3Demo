@@ -34,6 +34,9 @@ namespace RPG.Control
             SMachine = new SMEnemy();
             BuildFSMFunction();
             SMachine.SIdle.OnEnter();
+
+            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
         }
 
         #region FSM
@@ -208,12 +211,7 @@ namespace RPG.Control
 
         #region Old
 
-        private void Awake()
-        {
-            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
-        }
-
-        void UpdateMethod()
+        void LocalCompute()
         {
             SMachine.OnUpdate();
 

@@ -9,10 +9,10 @@ namespace RPG.Core
         [SerializeField] Transform target;
 
         // Update is called once per frame
-        void  LateUpdate()
-        {
-            this.transform.position = target.position;
-        }
+        // void  LateUpdate()
+        // {
+        //     this.transform.position = target.position;
+        // }
     }
 
 }

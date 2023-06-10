@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace Network
+namespace PRG.Network
 {
     public enum CommunicationChildType
     {
@@ -43,7 +43,7 @@ namespace Network
         {
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.LogError("Recv Start");
+                Debug.LogError("BuildRecvCommunicationChildNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -74,7 +74,7 @@ namespace Network
                 }
             }), "BuildRecvCommunicationChildNTI");
             this.StartTask();
-            NetworkCenter.allNTI[NTI_type.CommunicationChild].Add(this);
+            NetworkCenter.Ins.AddNTI(NTI_type.CommunicationChild, this);
         }
 
         public void BuildSendCommunicationChildNTI()
@@ -82,7 +82,7 @@ namespace Network
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
                 byte[] tmp;
-                Debug.LogError("Send Start");
+                Debug.LogError("BuildSendCommunicationChildNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -99,7 +99,7 @@ namespace Network
                 }
             }), "BuildSendCommunicationChildNTI");
             this.StartTask();
-            NetworkCenter.allNTI[NTI_type.CommunicationChild].Add(this);
+            NetworkCenter.Ins.AddNTI(NTI_type.CommunicationChild, this);
         }
     }
 }

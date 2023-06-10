@@ -1,4 +1,4 @@
-namespace Network
+namespace PRG.Network
 {
     public class ISyncObject
     {

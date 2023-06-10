@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace Network
+namespace PRG.Network
 {
     public class ConnectCenter : NetTaskInstance
     {
@@ -19,7 +19,6 @@ namespace Network
 
         public void BuildConnectNTI(int port)
         {
-            //NetTaskInstance AcceptNTI = new NetTaskInstance();
             this.socketInstance =
                 new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
                     "ClientMainSocket");
@@ -28,12 +27,13 @@ namespace Network
 
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
+                Debug.LogError("BuildConnectNTI Start");
                 try
                 {
                     this.socketInstance.socket.Connect(ep);
                     Debug.LogError("Connected");
-                    NetworkCenter.valSocketInstance.Enqueue(socketInstance);
-                    this.socketInstance.sendList.Enqueue(Encoding.UTF8.GetBytes("ID:123"));
+                    NetworkCenter.Ins.EnqueueSI(socketInstance);
+                    this.socketInstance.sendList.Enqueue(Encoding.UTF8.GetBytes("Hello Server"));
                     this.socketInstance = null;
                 }
                 catch (Exception e)
@@ -46,7 +46,7 @@ namespace Network
                 }
             }), "BuildConnectNTI");
             StartTask();
-            NetworkCenter.allNTI[NTI_type.Connect].Add(this);
+            NetworkCenter.Ins.AddNTI(NTI_type.Connect, this);
         }
     }
 }

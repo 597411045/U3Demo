@@ -41,18 +41,11 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Buffers.dll" />
-    <Analyzer Include="C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Google.Protobuf.dll" />
-    <Analyzer Include="C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll" />
-    <Analyzer Include="C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Memory.dll" />
-    <Analyzer Include="C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Numerics.Vectors.dll" />
-  </ItemGroup>
-  <ItemGroup>
      <Compile Include="Assets\Scripts\FSM\ITransition.cs" />
      <Compile Include="Assets\Scripts\Stats\Progression.cs" />
-     <Compile Include="Assets\Scripts\Scene\DestoyInactiveFX.cs" />
      <Compile Include="Assets\Scripts\IEnumratorExample.cs" />
-     <Compile Include="Assets\Scripts\Network\ThreadTest.cs" />
+     <Compile Include="Assets\Scripts\UI\CmdUI.cs" />
+     <Compile Include="Assets\Scripts\ThreadTest.cs" />
      <Compile Include="Assets\Scripts\Combat\CombatAbleComponent.cs" />
      <Compile Include="Assets\Scripts\Core\IAction.cs" />
      <Compile Include="Assets\Scripts\Combat\ConsumeConfig.cs" />
@@ -68,7 +61,7 @@
      <Compile Include="Assets\Scripts\UI\UIControl.cs" />
      <Compile Include="Assets\Scripts\Network\CommandExecuter.cs" />
      <Compile Include="Assets\Scripts\FSM\ISMachine.cs" />
-     <Compile Include="Assets\GameStartButton.cs" />
+     <Compile Include="Assets\Scripts\GameStartButton.cs" />
      <Compile Include="Assets\Scripts\Core\PersistentClassComponent.cs" />
      <Compile Include="Assets\Scripts\FSM\TransToDead.cs" />
      <Compile Include="Assets\Scripts\Network\ConnectCenter.cs" />
@@ -85,7 +78,7 @@
      <Compile Include="Assets\Scripts\Cinematic\CameraShaderComponent.cs" />
      <Compile Include="Assets\Scripts\FSM\SMEnemy.cs" />
      <Compile Include="Assets\Scripts\Combat\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Util.cs" />
+     <Compile Include="Assets\Scripts\Core\Util.cs" />
      <Compile Include="Assets\Scripts\Saving\JsonStatics.cs" />
      <Compile Include="Assets\Asset Packs\GameDev.tv Assets\Scripts\Utils\LazyValue.cs" />
      <Compile Include="Assets\Scripts\Saving\JsonSaveableEntity.cs" />
@@ -109,59 +102,100 @@
      <Compile Include="Assets\Scripts\Core\HealthComponent.cs" />
      <Compile Include="Assets\Scripts\Network\ISyncObject.cs" />
      <Compile Include="Assets\Scripts\Core\IRayCastAble.cs" />
+     <Compile Include="Assets\Scripts\Network\SyncComponent.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterUIComponent.cs" />
      <Compile Include="Assets\Scripts\Saving\JsonSavingSystem.cs" />
+     <Compile Include="Assets\Scripts\Scene\AutoDestroy.cs" />
      <Compile Include="Assets\Scripts\Scene\SceneEntityManager.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Scenes\Sandbox 1 Client" />
      <None Include="Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Hoe" />
      <Folder Include="Assets\Asset Packs\SimpleFX\_Demo" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Shaders" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Rod of Death\Prefab" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Sword" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Spear" />
-     <Folder Include="Assets\Dev" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs\Vehicles" />
+     <Folder Include="Assets\Asset Packs\SimpleSky\_Models" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs\Environments" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Models" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club\Prefab" />
      <Folder Include="Assets\Scripts\Cinematic" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE\Panoramics" />
      <Folder Include="Assets\Scripts\Core" />
+     <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample\UI\Update 1.1" />
      <Folder Include="Assets\Game\Characters" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Bow\Prefab" />
      <Folder Include="Assets\Asset Packs\Animations\Unarmed" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Models" />
+     <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample\UI" />
      <Folder Include="Assets\Asset Packs\Pixel Cursors\Demo" />
+     <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample\Coins Pack\Money_Perspective" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow\Materials &amp; Meshes" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs\Buildings" />
      <Folder Include="Assets\Scripts\Saving" />
      <Folder Include="Assets\Asset Packs\Terrain Textures\Simple Textures" />
      <None Include="Assets\Asset Packs\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\TerrainAssets" />
      <Folder Include="Assets\Asset Packs\SimpleFX\Materials" />
      <Folder Include="Assets\Asset Packs\SimpleFX" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Rod of Death" />
      <Folder Include="Assets\Game\Effects" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water" />
+     <Folder Include="Assets\Game\UI\Resources" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs\Buildings" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Bow" />
      <Folder Include="Assets\Game\UI" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village\Components\Materials" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Models\ImportedModels" />
      <Folder Include="Assets\Game\Weapon" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs\Props" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Textures" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Textures" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets" />
      <Folder Include="Assets\Game\Core" />
      <None Include="Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
      <Folder Include="Assets\Scenes\Sanebox 1 Server" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Item" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Rod of Death\Materials and Model" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Models" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Prefabs" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Farm\Components\Materials" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Materials" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment" />
+     <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample\Coins Pack" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Self Heal" />
      <Folder Include="Assets\Asset Packs\Animations" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Pitchfork" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures\Old Floor Boards" />
      <Folder Include="Assets\Asset Packs\SimpleFX\Prefabs" />
      <Folder Include="Assets\Scripts\FSM" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required" />
+     <Folder Include="Assets\Asset Packs\SimpleSky\_Textures\Materials" />
      <Folder Include="Assets\Asset Packs\SimpleFX\Models" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets" />
      <Folder Include="Assets\Game\Item\Resources" />
      <None Include="Assets\Shader\NewUnlitShader.shader" />
      <Folder Include="Assets\Asset Packs\Terrain Textures" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\TerrainAssets\BillboardTextures" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs\Props" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Materials" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Bow\Materials and Model" />
      <Folder Include="Assets\Game\Weapon\Resources" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures" />
+     <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample" />
      <Folder Include="Assets\Scenes\Sandbox 1\Sandbox 1_Profiles" />
      <Folder Include="Assets\Scripts\Proto" />
      <Folder Include="Assets\Scenes\Sandbox 2" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Props" />
      <Folder Include="Assets\Asset Packs" />
+     <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Sprites\Placeholders" />
+     <Folder Include="Assets\Asset Packs\SimpleSky\_Materials" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Farm" />
+     <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Models" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE\Panoramics\FS002" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Scripts" />
@@ -169,45 +203,85 @@
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE" />
      <Folder Include="Assets\Game\SceneMetric" />
      <Folder Include="Assets\Scripts\Movement" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Buildings" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Materials" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\SFX" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Textures" />
      <Folder Include="Assets\Scripts\UI" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Armed" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Models" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Bow" />
      <Folder Include="Assets\Scripts\Controller" />
+     <Folder Include="Assets\Scenes\Sandbox" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Environments" />
      <Folder Include="Assets\Scenes\Sandbox 1" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow" />
+     <Folder Include="Assets\Asset Packs\SimpleSky" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures\Tiling Textures" />
      <Folder Include="Assets\Scenes\Sandbox 2\Sandbox 2" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights" />
      <Folder Include="Assets\Asset Packs\Pixel Cursors" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Sword" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures\StoneWork" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Demo Scene" />
      <Folder Include="Assets\Scripts\Item" />
      <Folder Include="Assets\Game\Characters\Resources" />
      <Folder Include="Assets\Game\Cinematics" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Farm\Components" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs\Buildings" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village\Components" />
+     <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample\UI\Parts" />
      <Folder Include="Assets\Scripts\Scene" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs" />
      <Folder Include="Assets\Scenes\Old_Trrian" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Pitchfork\Materials and Model" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Scripts\Utils" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Hoe\Materials and Model" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Models" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs\Props" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Hoe\Prefab" />
      <Folder Include="Assets\Game\Item" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Textures" />
+     <Folder Include="Assets\Scenes\S1" />
+     <None Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\SFX\Death" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Materials" />
+     <Folder Include="Assets\Asset Packs\Standard Assets" />
      <Folder Include="Assets\Asset Packs\Pixel Cursors\Cursors" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Materials" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle\Components" />
      <Folder Include="Assets\Scripts\Network" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Club" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club\Materials and Model" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample" />
      <Folder Include="Assets\Scripts" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs" />
+     <Folder Include="Assets\Asset Packs\SimpleSky\_Textures" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs\Environments" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club" />
+     <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Sprites" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Textures" />
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Scripts\Combat" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle\Components\Materials" />
      <Folder Include="Assets\Game" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Prefabs" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Pitchfork\Prefab" />
      <Folder Include="Assets\Scenes\Sandbox 1\Shared" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village\Materials" />
      <Folder Include="Assets\Shader" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow\Prefab" />
+     <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Materials" />
+     <Folder Include="Assets\Scenes\Particle Materials" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive" />
+     <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Nature" />
      <Folder Include="Assets\Scenes\Sandbox 1\Sandbox 1" />
      <Reference Include="UnityEngine">
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
@@ -435,22 +509,22 @@
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
      </Reference>
      <Reference Include="System.Buffers">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Dev\Plugins\System.Buffers.dll</HintPath>
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Buffers.dll</HintPath>
      </Reference>
      <Reference Include="System.Numerics.Vectors">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Dev\Plugins\System.Numerics.Vectors.dll</HintPath>
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Numerics.Vectors.dll</HintPath>
      </Reference>
      <Reference Include="System.Runtime.CompilerServices.Unsafe">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Dev\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
      </Reference>
      <Reference Include="Newtonsoft.Json">
      <HintPath>C:\Users\AC\Desktop\U3Demo\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
      </Reference>
      <Reference Include="System.Memory">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Dev\Plugins\System.Memory.dll</HintPath>
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Memory.dll</HintPath>
      </Reference>
      <Reference Include="Google.Protobuf">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Dev\Plugins\Google.Protobuf.dll</HintPath>
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Google.Protobuf.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>

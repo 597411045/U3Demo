@@ -1,6 +1,6 @@
 ﻿using System;
 using Google.Protobuf.WellKnownTypes;
-using Network;
+using PRG.Network;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Stats;
@@ -26,7 +26,6 @@ namespace RPG.UI
         {
             if (NetworkCenter.isServer) return;
 
-
             textHP = GameObject.Find("HP_Text").GetComponent<Text>();
             targetHP = GameObject.Find("TargetHP_Text").GetComponent<Text>();
             levelText = GameObject.Find("Level_Text").GetComponent<Text>();
@@ -40,16 +39,20 @@ namespace RPG.UI
             {
                 expText.text = $"Exp:{user.GetComponent<BaseStats>().EXP}";
             };
+        }
 
-            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+        private void Start()
+        {
+            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
         }
 
         private void OnDestroy()
         {
-            UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
+            UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
         }
 
-        private void UpdateMethod()
+        private void LocalCompute()
         {
             if (NetworkCenter.isServer) return;
 

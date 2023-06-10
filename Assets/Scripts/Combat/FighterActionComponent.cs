@@ -30,11 +30,18 @@ namespace RPG.Combat
         private void Awake()
         {
             weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
-            if (isFsmControlled) return;
-            UpdateManager.LocalCompute.Add(new CAction(UpdateMethod,this.GetInstanceID(),this.gameObject));
         }
 
-        private void UpdateMethod()
+        private void Start()
+        {
+            if (!isFsmControlled)
+            {
+                UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+                    new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
+            }
+        }
+
+        private void LocalCompute()
         {
             if (TimeLeftToAttackAction >= 0)
             {

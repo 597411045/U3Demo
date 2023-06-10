@@ -5,6 +5,7 @@ using RPG.Combat;
 using RPG.Movement;
 using RPG.Stats;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace RPG.Scene
 {
@@ -15,7 +16,7 @@ namespace RPG.Scene
         public static void GenerateEnemy1()
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("Enemy"));
-            go.transform.position = new Vector3(23.88f, 6.1f, 14.13f);
+            go.transform.position = new Vector3(27.79f, 1.6f, 6.26f);
             go.transform.eulerAngles = new Vector3(0, -257.29f, 0);
             go.GetComponent<FighterActionComponent>().EquipItem(Resources.Load<WeaponConfig>("SwordWeapon"));
             go.GetComponent<BaseStats>().startingLevel = 2;
@@ -27,9 +28,10 @@ namespace RPG.Scene
         public static void GeneratePlayer(string id)
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("Player"));
-            go.transform.position = new Vector3(34f, 6.57f, 35.46f);
+            go.GetComponent<NavMeshAgent>().Warp(new Vector3(31.22f, 3.88f, 35.46f));
             go.transform.eulerAngles = new Vector3(0, 126.579f, 0);
             Entities.Add(id, go);
+            Debug.LogError(go.transform.position);
         }
 
         public static void DestroyPlayer()

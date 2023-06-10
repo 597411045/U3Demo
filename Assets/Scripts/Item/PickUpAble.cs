@@ -23,17 +23,18 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
 
     public float timer = 0;
 
-    private void Awake()
+    private void Start()
     {
-        UpdateManager.LocalCompute.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
+        UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
+            new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
     }
 
     private void OnDestroy()
     {
-        UpdateManager.ClearAllByGameobjectId(this.gameObject.GetInstanceID());
+        UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
     }
-    
-    private void UpdateMethod()
+
+    private void LocalCompute()
     {
         if (timer >= 0)
         {
@@ -41,7 +42,6 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
         }
     }
 
-    
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -50,6 +50,7 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
         {
             weaponConfig?.DoAction(collision.gameObject);
             consumeConfig?.DoAction(collision.gameObject);
+            UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
             Destroy(this.gameObject);
         }
     }

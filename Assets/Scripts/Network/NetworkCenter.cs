@@ -4,17 +4,15 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using RPG.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Network
+namespace PRG.Network
 {
     public enum NTI_type
     {
         Accept,
-        Valid,
-        ValidChild,
-        Manager,
         Communication,
         CommunicationChild,
         Connect
@@ -124,75 +122,118 @@ namespace Network
     //网络方案总入口
     public class NetworkCenter : MonoBehaviour
     {
+        public static NetworkCenter Ins;
         public static bool isServer;
-        public static NetworkCenter ins;
 
-
-        //取消Valid
-        //public static Queue<SocketInstance> tmpSocketInstance = new Queue<SocketInstance>();
-        public static Queue<SocketInstance> valSocketInstance = new Queue<SocketInstance>();
-
-        public static Dictionary<NTI_type, List<NetTaskInstance>>
-            allNTI = new Dictionary<NTI_type, List<NetTaskInstance>>();
-
-
+        private Queue<SocketInstance> valSocketInstance;
+        private Dictionary<NTI_type, List<NetTaskInstance>> allNTI;
         private CommunicationCenter cc;
+        private CommandExecuter ec;
 
-        private void Start()
-        {
-            ins = this;
-            allNTI.Add(NTI_type.Accept, new List<NetTaskInstance>());
+        public Queue<byte[]> cmdTunnel;
 
-            allNTI.Add(NTI_type.Communication, new List<NetTaskInstance>());
-            allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
-            allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
-
-            CommStart();
-        }
-
-        private string a;
-
-        private byte[] b;
-
+        // public NetworkCenter()
+        // {
+        //     Debug.LogError("NetworkCenter Construction");
+        //     if (ins != null)
+        //     {
+        //         Debug.LogError("For Now, Only One NetworkCenter Allowed");
+        //         return;
+        //     }
+        //
+        //     ins = this;
+        // }
 
         private void Awake()
         {
-            UpdateManager.ServerAsyn.Add(new CAction(UpdateMethod, this.GetInstanceID(), this.gameObject));
-        }
-        
-        public void UpdateMethod()
-        {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (Ins == null)
             {
-                DestroyAll();
+                Debug.LogError(this.ToString() + " Awake");
+                Ins = this;
+            }
+            else
+            {
+                Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
+                Destroy(this);
             }
 
+            valSocketInstance = new Queue<SocketInstance>();
+            allNTI = new Dictionary<NTI_type, List<NetTaskInstance>>();
+
+            //初始化线程任务集合
+            allNTI.Add(NTI_type.Accept, new List<NetTaskInstance>());
+            allNTI.Add(NTI_type.Communication, new List<NetTaskInstance>());
+            allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
+            allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
+            //初始化通讯中心
+            cc = new CommunicationCenter("CommunicationCenter");
+
+            //初始化控制台
+            ec = new CommandExecuter();
+            cc.clientCommunications.Add("cmd", new Dictionary<CommunicationChildType, NetTaskInstance>());
+            NetTaskInstance cmdNTI = new NetTaskInstance("cmd");
+            cc.clientCommunications["cmd"].Add(CommunicationChildType.Recv, cmdNTI);
+            cc.clientCommunications["cmd"].Add(CommunicationChildType.Send, cmdNTI);
+            cc.clientCommunications["cmd"][CommunicationChildType.Recv].socketInstance =
+                new SocketInstance(null, "cmd");
+            cmdTunnel = cc.clientCommunications["cmd"][CommunicationChildType.Recv].socketInstance.recvList;
+
+            //通过地图名，决定功能，直接进入地图时适用
+            if (SceneManager.GetActiveScene().name.Contains("Server"))
+            {
+                isServer = true;
+                AcceptCenter ac = new AcceptCenter("AcceptCenter");
+            }
+            else
+            {
+                isServer = false;
+                ConnectCenter cc = new ConnectCenter("ConnectCenter");
+            }
+        }
+
+        private void Start()
+        {
+            //将接受指令的处理注册到ServerAsyn阶段
+            //计划阶段：接受指令-执行状态指令-本地模拟-执行同步指令-发送指令
+            UpdateManager.Ins.RegisterAction(CActionType.RecvMessage,
+                new CAction(RecvMessage, this.GetInstanceID(), this.gameObject));
+        }
+
+        public void RecvMessage()
+        {
             if (isServer)
             {
                 foreach (var c in cc.clientCommunications)
                 {
-                    b = GetMessageBySocketUID(c.Key);
+                    byte[] b = GetMessageBySocketUID(c.Key);
                     if (b != null)
                     {
-                        CommandExecuter.CommandExec(c.Key, Encoding.UTF8.GetString(b));
+                        ec.CommandExec(c.Key, Encoding.UTF8.GetString(b));
                     }
                 }
             }
             else
             {
-                b = GetMessageBySocketUID("ClientMainSocket");
+                byte[] b = GetMessageBySocketUID("ClientMainSocket");
                 if (b != null)
                 {
-                    CommandExecuter.CommandExec("ClientMainSocket", Encoding.UTF8.GetString(b));
+                    ec.CommandExec("ClientMainSocket", Encoding.UTF8.GetString(b));
                 }
             }
         }
 
+        //每帧后检查已完成的线程任务
         public void LateUpdate()
         {
             DestroyFinished();
         }
 
+        private void OnDestroy()
+        {
+            DestroyAll();
+        }
+
+        //退出时停止所有线程任务
         private void DestroyAll()
         {
             Debug.LogError("DestroyAll");
@@ -204,11 +245,6 @@ namespace Network
                     c.Value.RemoveAt(i);
                 }
             }
-        }
-
-        private void OnDestroy()
-        {
-            DestroyAll();
         }
 
         private void DestroyFinished()
@@ -226,34 +262,26 @@ namespace Network
             }
         }
 
-        public void AcceptStart()
+        //统一套接字实例入口
+        public void EnqueueSI(SocketInstance si)
         {
-            if (AcceptCenter.InstanceCount > 0) return;
-            AcceptCenter ac = new AcceptCenter("AcceptCenter");
+            valSocketInstance.Enqueue(si);
         }
 
-        public void AcceptStop()
+        public SocketInstance DequeueSI()
         {
-            if (AcceptCenter.InstanceCount <= 0) return;
+            if (valSocketInstance.Count > 0)
+            {
+                return valSocketInstance.Dequeue();
+            }
+
+            return null;
         }
 
-
-        public void CommStart()
+        //统一线程任务入口
+        public void AddNTI(NTI_type nt, NetTaskInstance nti)
         {
-            if (CommunicationCenter.InstanceCount > 0) return;
-            cc = new CommunicationCenter("CommunicationCenter");
-        }
-
-        public void CommStop()
-        {
-            if (CommunicationCenter.InstanceCount <= 0) return;
-        }
-
-
-        public void ConnectStart()
-        {
-            if (ConnectCenter.InstanceCount > 0) return;
-            ConnectCenter cc = new ConnectCenter("ConnectCenter");
+            allNTI[nt].Add(nti);
         }
 
         //统一接收入口
@@ -261,7 +289,7 @@ namespace Network
         {
             if (!cc.clientCommunications.ContainsKey(uid))
             {
-                //Debug.LogError("No This Key");
+                //Debug.LogError("GetMessageBySocketUID No Such Key");
                 return null;
             }
 
@@ -269,8 +297,6 @@ namespace Network
                     .socketInstance
                     .recvList.Count <= 0)
             {
-                //Debug.LogError("Dic Count <= 0");
-
                 return null;
             }
 
@@ -289,28 +315,24 @@ namespace Network
             }
             else
             {
-                Debug.LogError("SendMessageBySocketUID Has No Key: " + uid);
+                Debug.LogError("SendMessageBySocketUID No Such Key");
             }
         }
 
+
+        //通过入口界面选择功能
         public void StartAsServer()
         {
             isServer = true;
-            AcceptStart();
-            //取消Valid，合并至Cmd和Comm
-            //ValidStart();
-
-            //启动NC时，自动启用
-            //CommStart();
-            SceneManager.LoadScene(1);
+            AcceptCenter ac = new AcceptCenter("AcceptCenter");
+            SceneManager.LoadScene("Scenes/Sanebox 1 Server/Sanebox 1 Server");
         }
 
         public void StartAsClient()
         {
             isServer = false;
-            //启动NC时，自动启用
-            //CommStart();
-            ConnectStart();
+            ConnectCenter cc = new ConnectCenter("ConnectCenter");
+            //客户端通过网络消息进行场景切换
         }
     }
 }

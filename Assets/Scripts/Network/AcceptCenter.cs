@@ -1,16 +1,15 @@
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using UnityEngine;
 
-namespace Network
+namespace PRG.Network
 {
     public class AcceptCenter : NetTaskInstance
     {
         public static int InstanceCount = 0;
 
-        //临时记录tmpSocketUid
-        public static int tmpId = 1;
 
         public AcceptCenter(string name) : base(name)
         {
@@ -20,7 +19,6 @@ namespace Network
 
         public void BuildAcceptNTI(int port)
         {
-            //NetTaskInstance AcceptNTI = new NetTaskInstance();
             this.socketInstance =
                 new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
                     "ServerMainSocket");
@@ -33,7 +31,7 @@ namespace Network
 
             this.threadInstance = new ThreadInstance(new Thread(() =>
             {
-                Debug.LogError("AcceptNTI Start");
+                Debug.LogError("BuildAcceptNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
@@ -41,12 +39,13 @@ namespace Network
                     Debug.LogError("A New Client In");
                     //取消Valid，无需传输到临时Socket列表，直接转入Val列表
                     //NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
-                    SocketInstance tmpSI = new SocketInstance(tmpS, "tmpSocket" + tmpId++.ToString());
-                    NetworkCenter.valSocketInstance.Enqueue(tmpSI);
+                    SocketInstance tmpSI = new SocketInstance(tmpS, System.Guid.NewGuid().ToString());
+                    tmpSI.sendList.Enqueue(Encoding.UTF8.GetBytes("Hello Client"));
+                    NetworkCenter.Ins.EnqueueSI(tmpSI);
                 }
-            }),"BuildAcceptNTI");
+            }), "BuildAcceptNTI");
             StartTask();
-            NetworkCenter.allNTI[NTI_type.Accept].Add(this);
+            NetworkCenter.Ins.AddNTI(NTI_type.Accept, this);
         }
     }
 }
