@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using PRG.Cmd;
 using PRG.Network;
 using RPG.Core;
 using UnityEngine;
@@ -9,9 +10,11 @@ using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class CmdUI : MonoBehaviour
+    public class CmdManagement : TaskPipelineBase, ILocalCompute
     {
-        public static CmdUI Ins;
+        public static CmdManagement Ins;
+        private CommandExecuter ce;
+
 
         [SerializeField] public GameObject _canvas;
         [SerializeField] public InputField _inputField;
@@ -30,20 +33,19 @@ namespace RPG.UI
                 Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
                 Destroy(this);
             }
+
+            ce = new CommandExecuter();
         }
 
-        void Start()
+        protected override void Start()
         {
+            base.Start();
             _canvas.SetActive(false);
-
-            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
         }
 
         private bool lastIsFocused;
 
-
-        void LocalCompute()
+        public void LocalCompute()
         {
             if (Input.GetKeyDown(KeyCode.F3))
             {
@@ -53,7 +55,7 @@ namespace RPG.UI
 
             if (lastIsFocused && Input.GetKeyDown(KeyCode.Return))
             {
-                NetworkCenter.Ins.cmdTunnel.Enqueue(Encoding.UTF8.GetBytes(_inputField.text));
+                NetworkManagement.Ins.cmdTunnel.Enqueue(Encoding.UTF8.GetBytes(_inputField.text));
                 lastCmd = _inputField.text;
                 _inputField.text = "";
                 _inputField.ActivateInputField();
@@ -72,6 +74,16 @@ namespace RPG.UI
                 if (_inputField.text.Contains("SL"))
                 {
                     _inputField.text = @"SendLogin|ID:{username}|PWD:{password}";
+                }
+
+                _inputField.ActivateInputField();
+            }
+
+            if (lastIsFocused && Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                if (_inputField.text.Contains("SGP"))
+                {
+                    _inputField.text = @"SendGeneratePrefab|Prefab:{prefabName}|GameObjectName:{GameObjectName}";
                 }
 
                 _inputField.ActivateInputField();

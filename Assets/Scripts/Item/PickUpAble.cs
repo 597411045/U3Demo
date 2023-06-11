@@ -14,7 +14,7 @@ public enum ItemType
 }
 
 
-public class PickUpAble : MonoBehaviour, IRayCastAble
+public class PickUpAble : TaskPipelineBase, IRayCastAble, ILocalCompute
 {
     [FormerlySerializedAs("_weapon")] [SerializeField]
     private WeaponConfig weaponConfig = null;
@@ -22,25 +22,6 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
     [SerializeField] private ConsumeConfig consumeConfig;
 
     public float timer = 0;
-
-    private void Start()
-    {
-        UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-            new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
-    }
-
-    private void OnDestroy()
-    {
-        UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
-    }
-
-    private void LocalCompute()
-    {
-        if (timer >= 0)
-        {
-            timer -= Time.deltaTime;
-        }
-    }
 
 
     private void OnTriggerEnter(Collider collision)
@@ -50,11 +31,9 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
         {
             weaponConfig?.DoAction(collision.gameObject);
             consumeConfig?.DoAction(collision.gameObject);
-            UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
             Destroy(this.gameObject);
         }
     }
-
 
     public bool HandleRaycaset(PlayerController p, RaycastHit h)
     {
@@ -69,4 +48,13 @@ public class PickUpAble : MonoBehaviour, IRayCastAble
 
         return true;
     }
+
+    public void LocalCompute()
+    {
+        if (timer >= 0)
+        {
+            timer -= Time.deltaTime;
+        }
+    }
+
 }

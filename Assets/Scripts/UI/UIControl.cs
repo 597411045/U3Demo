@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class UIControl : MonoBehaviour
+    public class UIControl : TaskPipelineBase
     {
         [SerializeField] Text textHP;
         [SerializeField] GameObject user;
@@ -24,7 +24,7 @@ namespace RPG.UI
 
         private void Awake()
         {
-            if (NetworkCenter.isServer) return;
+            if (NetworkManagement.isServer) return;
 
             textHP = GameObject.Find("HP_Text").GetComponent<Text>();
             targetHP = GameObject.Find("TargetHP_Text").GetComponent<Text>();
@@ -41,20 +41,9 @@ namespace RPG.UI
             };
         }
 
-        private void Start()
+        public void LocalCompute()
         {
-            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
-        }
-
-        private void OnDestroy()
-        {
-            UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
-        }
-
-        private void LocalCompute()
-        {
-            if (NetworkCenter.isServer) return;
+            if (NetworkManagement.isServer) return;
 
             if (user == null) return;
             targetHP.text =

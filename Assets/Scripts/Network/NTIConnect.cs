@@ -7,11 +7,11 @@ using UnityEngine;
 
 namespace PRG.Network
 {
-    public class ConnectCenter : NetTaskInstance
+    public class NTIConnect : NetTaskInstance
     {
         public static int InstanceCount = 0;
 
-        public ConnectCenter(string name) : base(name)
+        public NTIConnect(string name) : base(name)
         {
             BuildConnectNTI(7000);
             InstanceCount++;
@@ -32,7 +32,7 @@ namespace PRG.Network
                 {
                     this.socketInstance.socket.Connect(ep);
                     Debug.LogError("Connected");
-                    NetworkCenter.Ins.EnqueueSI(socketInstance);
+                    NetworkManagement.Ins.EnqueueSI(socketInstance);
                     this.socketInstance.sendList.Enqueue(Encoding.UTF8.GetBytes("Hello Server"));
                     this.socketInstance = null;
                 }
@@ -46,7 +46,7 @@ namespace PRG.Network
                 }
             }), "BuildConnectNTI");
             StartTask();
-            NetworkCenter.Ins.AddNTI(NTI_type.Connect, this);
+            NetworkManagement.Ins.AddNTI(NTI_type.Connect, this);
         }
     }
 }

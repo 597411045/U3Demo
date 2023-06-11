@@ -14,7 +14,7 @@ public class GameStartButton : MonoBehaviour
     {
         if (this.gameObject.name == "StartGame")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().StartAsClient);
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkManagement>().StartAsClient);
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
                 this.GetComponent<Button>().interactable = false;
@@ -51,7 +51,7 @@ public class GameStartButton : MonoBehaviour
 
         if (this.gameObject.name == "StartAsServer")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkCenter>().StartAsServer);
+            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkManagement>().StartAsServer);
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
                 this.GetComponent<Button>().interactable = false;

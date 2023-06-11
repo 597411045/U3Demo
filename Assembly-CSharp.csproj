@@ -41,10 +41,18 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Cmd\CMDBase.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CMDChangeScene.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CMDGeneratePrefab.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CMDLogin.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CMDSyncObject.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CMDSyncRequest.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CMDSyncRequestAllow.cs" />
      <Compile Include="Assets\Scripts\FSM\ITransition.cs" />
      <Compile Include="Assets\Scripts\Stats\Progression.cs" />
      <Compile Include="Assets\Scripts\IEnumratorExample.cs" />
-     <Compile Include="Assets\Scripts\UI\CmdUI.cs" />
+     <Compile Include="Assets\Scripts\Network\SyncObjectComponent.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CmdManagement.cs" />
      <Compile Include="Assets\Scripts\ThreadTest.cs" />
      <Compile Include="Assets\Scripts\Combat\CombatAbleComponent.cs" />
      <Compile Include="Assets\Scripts\Core\IAction.cs" />
@@ -55,17 +63,17 @@
      <Compile Include="Assets\Scripts\Stats\BaseStats.cs" />
      <Compile Include="Assets\Scripts\FSM\CState.cs" />
      <Compile Include="Assets\Scripts\Combat\WeaponConfig.cs" />
-     <Compile Include="Assets\Scripts\Network\AcceptCenter.cs" />
+     <Compile Include="Assets\Scripts\Network\NTIAccept.cs" />
      <Compile Include="Assets\Scripts\Stats\IModifierProvider.cs" />
      <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
      <Compile Include="Assets\Scripts\UI\UIControl.cs" />
-     <Compile Include="Assets\Scripts\Network\CommandExecuter.cs" />
+     <Compile Include="Assets\Scripts\Cmd\CommandExecuter.cs" />
      <Compile Include="Assets\Scripts\FSM\ISMachine.cs" />
      <Compile Include="Assets\Scripts\GameStartButton.cs" />
      <Compile Include="Assets\Scripts\Core\PersistentClassComponent.cs" />
      <Compile Include="Assets\Scripts\FSM\TransToDead.cs" />
-     <Compile Include="Assets\Scripts\Network\ConnectCenter.cs" />
-     <Compile Include="Assets\Scripts\Core\UpdateManager.cs" />
+     <Compile Include="Assets\Scripts\Network\NTIConnect.cs" />
+     <Compile Include="Assets\Scripts\Core\TaskPipelineManager.cs" />
      <Compile Include="Assets\Scripts\Combat\FighterActionComponent.cs" />
      <Compile Include="Assets\Scripts\FSM\StateMove.cs" />
      <Compile Include="Assets\Scripts\Proto\Test.cs" />
@@ -79,11 +87,12 @@
      <Compile Include="Assets\Scripts\FSM\SMEnemy.cs" />
      <Compile Include="Assets\Scripts\Combat\Projectile.cs" />
      <Compile Include="Assets\Scripts\Core\Util.cs" />
+     <Compile Include="Assets\Scripts\Core\TaskPipelineBase.cs" />
      <Compile Include="Assets\Scripts\Saving\JsonStatics.cs" />
      <Compile Include="Assets\Asset Packs\GameDev.tv Assets\Scripts\Utils\LazyValue.cs" />
      <Compile Include="Assets\Scripts\Saving\JsonSaveableEntity.cs" />
      <Compile Include="Assets\Scripts\Core\ActionSchedulerComponent.cs" />
-     <Compile Include="Assets\Scripts\Network\CommunicationCenter.cs" />
+     <Compile Include="Assets\Scripts\Network\NTICommCenter.cs" />
      <Compile Include="Assets\Scripts\Controller\AIController.cs" />
      <Compile Include="Assets\Scripts\FSM\CTransition.cs" />
      <Compile Include="Assets\Scripts\FSM\StateAttack.cs" />
@@ -94,15 +103,14 @@
      <Compile Include="Assets\Scripts\FSM\TransToMove.cs" />
      <Compile Include="Assets\Scripts\FSM\TransToIdle.cs" />
      <Compile Include="Assets\Scripts\Saving\SavingWrapper.cs" />
-     <Compile Include="Assets\Scripts\Network\CommunicationChildCenter.cs" />
+     <Compile Include="Assets\Scripts\Network\NTICommChild.cs" />
      <Compile Include="Assets\Scripts\FSM\StateDead.cs" />
      <Compile Include="Assets\Scripts\FSM\CSMachine.cs" />
      <Compile Include="Assets\Scripts\Movement\NavMoveComponent.cs" />
-     <Compile Include="Assets\Scripts\Network\NetworkCenter.cs" />
+     <Compile Include="Assets\Scripts\Network\NetworkManagement.cs" />
      <Compile Include="Assets\Scripts\Core\HealthComponent.cs" />
      <Compile Include="Assets\Scripts\Network\ISyncObject.cs" />
      <Compile Include="Assets\Scripts\Core\IRayCastAble.cs" />
-     <Compile Include="Assets\Scripts\Network\SyncComponent.cs" />
      <Compile Include="Assets\Scripts\UI\CharacterUIComponent.cs" />
      <Compile Include="Assets\Scripts\Saving\JsonSavingSystem.cs" />
      <Compile Include="Assets\Scripts\Scene\AutoDestroy.cs" />

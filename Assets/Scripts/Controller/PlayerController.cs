@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cinemachine;
 using Google.Protobuf;
 using PRG.Network;
 using RPG.Combat;
@@ -28,11 +29,8 @@ namespace RPG.Control
     }
 
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerController : TaskPipelineBase, ILocalCompute
     {
-        private PTTransform ptt;
-
-        public bool readySync = false;
         private GameObject cineMachine;
 
         [Serializable]
@@ -45,35 +43,20 @@ namespace RPG.Control
 
         [SerializeField] private CursorMapping[] _cursorMappings;
 
-        StringBuilder sb;
-
         private void Awake()
         {
-            if (!NetworkCenter.isServer)
+            if (!NetworkManagement.isServer)
             {
-               
-                ptt = new PTTransform();
-                sb = new StringBuilder();
-
                 cineMachine = GameObject.Find("CM vcam1");
-
-                //CommandExecuter.SendSyncRequest("ClientMainSocket", "TestCilent");
+                cineMachine.GetComponent<CinemachineVirtualCamera>().Follow = this.gameObject.transform;
             }
-        }
-
-        private void Start()
-        {
-            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
-            UpdateManager.Ins.RegisterAction(CActionType.SendMessage,
-                new CAction(SendMessage, this.GetInstanceID(), this.gameObject));
         }
 
 
         private Vector3 oldMousePosition;
         private Vector2 mouseMoveDelta;
 
-        void LocalCompute()
+        public void OnLocalCompute()
         {
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
@@ -129,28 +112,6 @@ namespace RPG.Control
             if (CanSetNavDestinationToCursor()) return;
             //SetCursor(CursorType.None);
         }
-
-        private void SendMessage()
-        {
-            if (readySync)
-            {
-                ptt.PositionX = this.transform.position.x;
-                ptt.PositionY = this.transform.position.y;
-                ptt.PositionZ = this.transform.position.z;
-                ptt.AngleX = this.transform.eulerAngles.x;
-                ptt.AngleY = this.transform.eulerAngles.y;
-                ptt.AngleZ = this.transform.eulerAngles.z;
-
-                Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
-                Vector3 localVelocity =
-                    this.transform.InverseTransformDirection(velocity);
-
-                ptt.Speed = localVelocity.z;
-                NetworkCenter.Ins.SendMessageBySocketUID("ClientMainSocket",
-                    Encoding.UTF8.GetBytes("123|position|" + ptt.ToString()));
-            }
-        }
-
 
         private bool CanDoCombat()
         {
@@ -213,6 +174,11 @@ namespace RPG.Control
         private Ray GerRayFromCursor()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        public void LocalCompute()
+        {
+            OnLocalCompute();
         }
     }
 }

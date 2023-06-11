@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace RPG.Combat
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : TaskPipelineBase, ILocalCompute
     {
         [SerializeField] private float speed = 1;
         [SerializeField] public bool isAutoNav;
@@ -20,13 +20,8 @@ namespace RPG.Combat
         [SerializeField] private UnityEvent HitEvent;
         public GameObject launcher;
 
-        private void Awake()
-        {
-            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
-        }
 
-        private void LocalCompute()
+        private void OnLocalCompute()
         {
             if (isAutoNav == false)
             {
@@ -55,7 +50,6 @@ namespace RPG.Combat
 
             if (aliveTime <= 0)
             {
-                UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
                 Destroy(this.gameObject);
             }
 
@@ -83,7 +77,6 @@ namespace RPG.Combat
                     Destroy(c);
                 }
 
-                UpdateManager.Ins.ClearLocalComputelByGameobjectId(this.gameObject.GetInstanceID());
                 Destroy(this.gameObject, 0.3f);
             }
         }
@@ -91,6 +84,11 @@ namespace RPG.Combat
         private void OnCollisionEnter(Collision collision)
         {
             speed = 0;
+        }
+
+        void ILocalCompute.LocalCompute()
+        {
+            OnLocalCompute();
         }
     }
 }

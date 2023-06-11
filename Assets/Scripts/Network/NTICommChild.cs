@@ -14,11 +14,11 @@ namespace PRG.Network
     }
 
 
-    public class CommunicationChildCenter : NetTaskInstance
+    public class NTICommChild : NetTaskInstance
     {
         public static int InstanceCount = 0;
 
-        public CommunicationChildCenter(SocketInstance s, CommunicationChildType c, string name) : base(name)
+        public NTICommChild(SocketInstance s, CommunicationChildType c, string name) : base(name)
         {
             this.socketInstance = s;
 
@@ -74,7 +74,7 @@ namespace PRG.Network
                 }
             }), "BuildRecvCommunicationChildNTI");
             this.StartTask();
-            NetworkCenter.Ins.AddNTI(NTI_type.CommunicationChild, this);
+            NetworkManagement.Ins.AddNTI(NTI_type.CommunicationChild, this);
         }
 
         public void BuildSendCommunicationChildNTI()
@@ -99,7 +99,7 @@ namespace PRG.Network
                 }
             }), "BuildSendCommunicationChildNTI");
             this.StartTask();
-            NetworkCenter.Ins.AddNTI(NTI_type.CommunicationChild, this);
+            NetworkManagement.Ins.AddNTI(NTI_type.CommunicationChild, this);
         }
     }
 }

@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89d2ae9aefa1452ca9f6d4f79b923a38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 6448616281697339265, guid: f1cbd8ed73e72c1479fe56fde57c5e80, type: 3}
-  go1: {fileID: 1786501292999587572, guid: 503bb0fcc95307b4bb6ae16e971e2604, type: 3}
-  go2: {fileID: 6651175282184127127, guid: 96860a82a759645bba80595a02fef565, type: 3}
+  gos:
+  - {fileID: 6448616281697339265, guid: f1cbd8ed73e72c1479fe56fde57c5e80, type: 3}
+  - {fileID: 6651175282184127127, guid: 96860a82a759645bba80595a02fef565, type: 3}
+  - {fileID: 3725185063380853562, guid: 347b54f92e9c608419eacd3985f803a7, type: 3}

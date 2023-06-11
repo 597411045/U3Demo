@@ -4,6 +4,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using PRG.Cmd;
+using RGP.Cmd;
 using RPG.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -120,15 +122,14 @@ namespace PRG.Network
     }
 
     //网络方案总入口
-    public class NetworkCenter : MonoBehaviour
+    public class NetworkManagement : TaskPipelineBase, IRecvCmd, ISendSyncObject, ISyncData, ISyncStats
     {
-        public static NetworkCenter Ins;
+        public static NetworkManagement Ins;
         public static bool isServer;
 
         private Queue<SocketInstance> valSocketInstance;
         private Dictionary<NTI_type, List<NetTaskInstance>> allNTI;
-        private CommunicationCenter cc;
-        private CommandExecuter ec;
+        private NTICommCenter cc;
 
         public Queue<byte[]> cmdTunnel;
 
@@ -146,6 +147,8 @@ namespace PRG.Network
 
         private void Awake()
         {
+            #region 单例
+
             if (Ins == null)
             {
                 Debug.LogError(this.ToString() + " Awake");
@@ -157,6 +160,8 @@ namespace PRG.Network
                 Destroy(this);
             }
 
+            #endregion
+
             valSocketInstance = new Queue<SocketInstance>();
             allNTI = new Dictionary<NTI_type, List<NetTaskInstance>>();
 
@@ -166,10 +171,10 @@ namespace PRG.Network
             allNTI.Add(NTI_type.CommunicationChild, new List<NetTaskInstance>());
             allNTI.Add(NTI_type.Connect, new List<NetTaskInstance>());
             //初始化通讯中心
-            cc = new CommunicationCenter("CommunicationCenter");
+            cc = new NTICommCenter("CommunicationCenter");
 
-            //初始化控制台
-            ec = new CommandExecuter();
+            #region 初始化控制台
+
             cc.clientCommunications.Add("cmd", new Dictionary<CommunicationChildType, NetTaskInstance>());
             NetTaskInstance cmdNTI = new NetTaskInstance("cmd");
             cc.clientCommunications["cmd"].Add(CommunicationChildType.Recv, cmdNTI);
@@ -178,49 +183,65 @@ namespace PRG.Network
                 new SocketInstance(null, "cmd");
             cmdTunnel = cc.clientCommunications["cmd"][CommunicationChildType.Recv].socketInstance.recvList;
 
+            #endregion
+
             //通过地图名，决定功能，直接进入地图时适用
             if (SceneManager.GetActiveScene().name.Contains("Server"))
             {
                 isServer = true;
-                AcceptCenter ac = new AcceptCenter("AcceptCenter");
+                NTIAccept ac = new NTIAccept("AcceptCenter");
             }
-            else
+
+            if (SceneManager.GetActiveScene().name.Contains("Client"))
             {
                 isServer = false;
-                ConnectCenter cc = new ConnectCenter("ConnectCenter");
+                NTIConnect cc = new NTIConnect("ConnectCenter");
             }
         }
 
-        private void Start()
+
+        protected override void OnDestroy()
         {
-            //将接受指令的处理注册到ServerAsyn阶段
-            //计划阶段：接受指令-执行状态指令-本地模拟-执行同步指令-发送指令
-            UpdateManager.Ins.RegisterAction(CActionType.RecvMessage,
-                new CAction(RecvMessage, this.GetInstanceID(), this.gameObject));
+            DestroyAll();
+            base.OnDestroy();
         }
 
-        public void RecvMessage()
+        public void RecvCmd()
         {
-            if (isServer)
+            foreach (var c in cc.clientCommunications)
             {
-                foreach (var c in cc.clientCommunications)
+                byte[] b = GetMessageBySocketUID(c.Key);
+                if (b != null)
                 {
-                    byte[] b = GetMessageBySocketUID(c.Key);
-                    if (b != null)
+                    CommandExecuter.Ins.CommandExec(c.Key, Encoding.UTF8.GetString(b));
+                }
+            }
+        }
+
+        public void SendSyncObject()
+        {
+            foreach (var c in FindObjectsOfType<SyncObjectComponent>())
+            {
+                if (c.enabled)
+                {
+                    foreach (var d in GetComponents<ISyncObject>())
                     {
-                        ec.CommandExec(c.Key, Encoding.UTF8.GetString(b));
+                        CMDSyncObject.Send("ClientMainSocket", d.BuildSyncObject());
                     }
                 }
             }
-            else
-            {
-                byte[] b = GetMessageBySocketUID("ClientMainSocket");
-                if (b != null)
-                {
-                    ec.CommandExec("ClientMainSocket", Encoding.UTF8.GetString(b));
-                }
-            }
         }
+
+        public void SyncStats()
+        {
+        }
+
+        public void SyncData()
+        {
+        }
+
+
+        #region LateUpdate 线程任务清理
 
         //每帧后检查已完成的线程任务
         public void LateUpdate()
@@ -228,10 +249,6 @@ namespace PRG.Network
             DestroyFinished();
         }
 
-        private void OnDestroy()
-        {
-            DestroyAll();
-        }
 
         //退出时停止所有线程任务
         private void DestroyAll()
@@ -261,6 +278,10 @@ namespace PRG.Network
                 }
             }
         }
+
+        #endregion
+
+        #region 普通函数
 
         //统一套接字实例入口
         public void EnqueueSI(SocketInstance si)
@@ -324,15 +345,17 @@ namespace PRG.Network
         public void StartAsServer()
         {
             isServer = true;
-            AcceptCenter ac = new AcceptCenter("AcceptCenter");
+            NTIAccept ac = new NTIAccept("AcceptCenter");
             SceneManager.LoadScene("Scenes/Sanebox 1 Server/Sanebox 1 Server");
         }
 
         public void StartAsClient()
         {
             isServer = false;
-            ConnectCenter cc = new ConnectCenter("ConnectCenter");
+            NTIConnect cc = new NTIConnect("ConnectCenter");
             //客户端通过网络消息进行场景切换
         }
+
+        #endregion
     }
 }

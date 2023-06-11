@@ -25,7 +25,6 @@ namespace RPG.Scene
 
         IEnumerator ChangeSceneAsync()
         {
-            UpdateManager.Ins.ClearAllLocalCompute();
             DontDestroyOnLoad(gameObject);
 
 

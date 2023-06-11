@@ -22,14 +22,15 @@ public static partial class TestReflection {
   static TestReflection() {
     byte[] descriptorData = global::System.Convert.FromBase64String(
         string.Concat(
-          "Cgp0ZXN0LnByb3RvIoUBCgtQVFRyYW5zZm9ybRIRCglwb3NpdGlvblgYASAB",
+          "Cgp0ZXN0LnByb3RvIrQBCgtQVFRyYW5zZm9ybRIRCglwb3NpdGlvblgYASAB",
           "KAISEQoJcG9zaXRpb25ZGAIgASgCEhEKCXBvc2l0aW9uWhgDIAEoAhIOCgZh",
           "bmdsZVgYBCABKAISDgoGYW5nbGVZGAUgASgCEg4KBmFuZ2xlWhgGIAEoAhIN",
-          "CgVTcGVlZBgHIAEoAmIGcHJvdG8z"));
+          "CgVTcGVlZBgHIAEoAhIWCg5nYW1lT2JqZWN0TmFtZRgIIAEoCRIVCg1jb21w",
+          "b25lbnROYW1lGAkgASgJYgZwcm90bzM="));
     descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
         new pbr::FileDescriptor[] { },
         new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-          new pbr::GeneratedClrTypeInfo(typeof(global::PTTransform), global::PTTransform.Parser, new[]{ "PositionX", "PositionY", "PositionZ", "AngleX", "AngleY", "AngleZ", "Speed" }, null, null, null, null)
+          new pbr::GeneratedClrTypeInfo(typeof(global::PTTransform), global::PTTransform.Parser, new[]{ "PositionX", "PositionY", "PositionZ", "AngleX", "AngleY", "AngleZ", "Speed", "GameObjectName", "ComponentName" }, null, null, null, null)
         }));
   }
   #endregion
@@ -77,6 +78,8 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     angleY_ = other.angleY_;
     angleZ_ = other.angleZ_;
     speed_ = other.speed_;
+    gameObjectName_ = other.gameObjectName_;
+    componentName_ = other.componentName_;
     _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
   }
 
@@ -170,6 +173,30 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     }
   }
 
+  /// <summary>Field number for the "gameObjectName" field.</summary>
+  public const int GameObjectNameFieldNumber = 8;
+  private string gameObjectName_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string GameObjectName {
+    get { return gameObjectName_; }
+    set {
+      gameObjectName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
+  /// <summary>Field number for the "componentName" field.</summary>
+  public const int ComponentNameFieldNumber = 9;
+  private string componentName_ = "";
+  [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+  [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+  public string ComponentName {
+    get { return componentName_; }
+    set {
+      componentName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+    }
+  }
+
   [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
   [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
   public override bool Equals(object other) {
@@ -192,6 +219,8 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleY, other.AngleY)) return false;
     if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(AngleZ, other.AngleZ)) return false;
     if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(Speed, other.Speed)) return false;
+    if (GameObjectName != other.GameObjectName) return false;
+    if (ComponentName != other.ComponentName) return false;
     return Equals(_unknownFields, other._unknownFields);
   }
 
@@ -206,6 +235,8 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     if (AngleY != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleY);
     if (AngleZ != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(AngleZ);
     if (Speed != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(Speed);
+    if (GameObjectName.Length != 0) hash ^= GameObjectName.GetHashCode();
+    if (ComponentName.Length != 0) hash ^= ComponentName.GetHashCode();
     if (_unknownFields != null) {
       hash ^= _unknownFields.GetHashCode();
     }
@@ -252,6 +283,14 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
       output.WriteRawTag(61);
       output.WriteFloat(Speed);
     }
+    if (GameObjectName.Length != 0) {
+      output.WriteRawTag(66);
+      output.WriteString(GameObjectName);
+    }
+    if (ComponentName.Length != 0) {
+      output.WriteRawTag(74);
+      output.WriteString(ComponentName);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(output);
     }
@@ -290,6 +329,14 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
       output.WriteRawTag(61);
       output.WriteFloat(Speed);
     }
+    if (GameObjectName.Length != 0) {
+      output.WriteRawTag(66);
+      output.WriteString(GameObjectName);
+    }
+    if (ComponentName.Length != 0) {
+      output.WriteRawTag(74);
+      output.WriteString(ComponentName);
+    }
     if (_unknownFields != null) {
       _unknownFields.WriteTo(ref output);
     }
@@ -320,6 +367,12 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     }
     if (Speed != 0F) {
       size += 1 + 4;
+    }
+    if (GameObjectName.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(GameObjectName);
+    }
+    if (ComponentName.Length != 0) {
+      size += 1 + pb::CodedOutputStream.ComputeStringSize(ComponentName);
     }
     if (_unknownFields != null) {
       size += _unknownFields.CalculateSize();
@@ -353,6 +406,12 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
     }
     if (other.Speed != 0F) {
       Speed = other.Speed;
+    }
+    if (other.GameObjectName.Length != 0) {
+      GameObjectName = other.GameObjectName;
+    }
+    if (other.ComponentName.Length != 0) {
+      ComponentName = other.ComponentName;
     }
     _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
   }
@@ -397,6 +456,14 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
           Speed = input.ReadFloat();
           break;
         }
+        case 66: {
+          GameObjectName = input.ReadString();
+          break;
+        }
+        case 74: {
+          ComponentName = input.ReadString();
+          break;
+        }
       }
     }
   #endif
@@ -438,6 +505,14 @@ public sealed partial class PTTransform : pb::IMessage<PTTransform>
         }
         case 61: {
           Speed = input.ReadFloat();
+          break;
+        }
+        case 66: {
+          GameObjectName = input.ReadString();
+          break;
+        }
+        case 74: {
+          ComponentName = input.ReadString();
           break;
         }
       }

@@ -12,19 +12,24 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class NavMoveComponent : MonoBehaviour, IAction, IJsonSaveable
+    public class NavMoveComponent : TaskPipelineBase, IAction, IJsonSaveable, ILocalCompute, ISyncObject
     {
-        private void Start()
+        //SyncObject
+        public PTTransform ptt;
+
+        private void Awake()
         {
-            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
+            ptt = new PTTransform();
             nmp = new NavMeshPath();
         }
 
-        private void LocalCompute()
+        public void LocalCompute()
         {
             UpdateAnimator();
         }
+
+
+        #region 普通函数
 
         public void StartMoveToPosition(Vector3 destination, float speed = 0)
         {
@@ -52,13 +57,18 @@ namespace RPG.Movement
 
         private void UpdateAnimator()
         {
-            if (!NetworkCenter.isServer)
+            if (!NetworkManagement.isServer)
             {
                 Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
                 Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
                 this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+                ptt.Speed = localVelocity.z;
             }
         }
+
+        #endregion
+
+        #region 存档系统
 
         struct MoveSaveData
         {
@@ -95,11 +105,13 @@ namespace RPG.Movement
         {
             JObject s = state.ToObject<JObject>();
             IDictionary<string, JToken> stateDict = s;
-
             this.GetComponent<NavMeshAgent>().Warp(stateDict["position"].ToVector3());
             this.transform.eulerAngles = stateDict["rotation"].ToVector3();
         }
 
+        #endregion
+
+        #region 射线系统
 
         NavMeshHit nmh;
         NavMeshPath nmp;
@@ -136,6 +148,36 @@ namespace RPG.Movement
 
             des = nmh.position;
             return true;
+        }
+
+        #endregion
+
+        public string BuildSyncObject()
+        {
+            ptt.GameObjectName = this.gameObject.name;
+            ptt.ComponentName = "NavMoveComponent";
+
+            ptt.PositionX = this.transform.position.x;
+            ptt.PositionY = this.transform.position.y;
+            ptt.PositionZ = this.transform.position.z;
+            ptt.AngleX = this.transform.eulerAngles.x;
+            ptt.AngleY = this.transform.eulerAngles.y;
+            ptt.AngleZ = this.transform.eulerAngles.z;
+
+            return ptt.ToString();
+        }
+
+        public void ApplySyncData()
+        {
+            this.transform.position =
+                new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+            this.transform.eulerAngles =
+                new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
+        }
+
+        public void ApplySyncStata()
+        {
+            this.GetComponent<Animator>().SetFloat("ForwardSpeed", ptt.Speed);
         }
     }
 }

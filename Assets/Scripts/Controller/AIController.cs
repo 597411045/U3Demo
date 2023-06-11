@@ -10,7 +10,7 @@ using UnityEngine.AI;
 
 namespace RPG.Control
 {
-    public class AIController : MonoBehaviour
+    public class AIController : TaskPipelineBase, ILocalCompute
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] [Range(0, 6)] private float chaseSpeed = 5;
@@ -24,8 +24,9 @@ namespace RPG.Control
 
         private SMEnemy SMachine;
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             player = GameObject.FindWithTag("Player");
             targerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
@@ -34,10 +35,16 @@ namespace RPG.Control
             SMachine = new SMEnemy();
             BuildFSMFunction();
             SMachine.SIdle.OnEnter();
-
-            UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
         }
+
+        public void LocalCompute()
+        {
+            if (!hc.IsDead)
+            {
+                SMachine.OnUpdate();
+            }
+        }
+
 
         #region FSM
 
@@ -211,10 +218,8 @@ namespace RPG.Control
 
         #region Old
 
-        void LocalCompute()
+        void OldLocalCompute()
         {
-            SMachine.OnUpdate();
-
             return;
             if (TryDoCombat()) return;
 

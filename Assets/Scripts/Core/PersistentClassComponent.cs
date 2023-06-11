@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RPG.Saving;
 using UnityEngine;
 
@@ -6,9 +7,7 @@ namespace RPG.Core
 {
     public class PersistentClassComponent : MonoBehaviour
     {
-        [SerializeField] private GameObject go;
-        [SerializeField] private GameObject go1;
-        [SerializeField] private GameObject go2;
+        [SerializeField] List<GameObject> gos;
 
         private static bool hasSpawn;
 
@@ -18,24 +17,14 @@ namespace RPG.Core
             SpawnObject();
         }
 
-        
 
         private void SpawnObject()
         {
             hasSpawn = true;
-            if (go != null)
+            foreach (var c in gos)
             {
-                DontDestroyOnLoad(Instantiate(go));
-            }
-
-            if (go1 != null)
-            {
-                DontDestroyOnLoad(Instantiate(go1));
-            }
-
-            if (go2 != null)
-            {
-                DontDestroyOnLoad(Instantiate(go2));
+                if (c != null)
+                    DontDestroyOnLoad(Instantiate(c));
             }
         }
     }

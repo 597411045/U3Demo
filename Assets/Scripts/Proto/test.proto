@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 message PTTransform{
+
   float positionX = 1;
   float positionY = 2;
   float positionZ = 3;
@@ -8,6 +9,10 @@ message PTTransform{
   float angleY = 5;
   float angleZ = 6;
   float Speed = 7;
+
+  string gameObjectName = 8;
+  string componentName = 9;
+
 }
 
 //--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto

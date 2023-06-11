@@ -13,7 +13,7 @@ using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
-    public class FighterActionComponent : MonoBehaviour, IAction, IJsonSaveable, IModifierProvider
+    public class FighterActionComponent : TaskPipelineBase, IAction, IJsonSaveable, IModifierProvider,ILocalCompute
     {
         [SerializeField] private bool isFsmControlled;
 
@@ -32,16 +32,7 @@ namespace RPG.Combat
             weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
         }
 
-        private void Start()
-        {
-            if (!isFsmControlled)
-            {
-                UpdateManager.Ins.RegisterAction(CActionType.LocalCompute,
-                    new CAction(LocalCompute, this.GetInstanceID(), this.gameObject));
-            }
-        }
-
-        private void LocalCompute()
+        private void OnLocalCompute()
         {
             if (TimeLeftToAttackAction >= 0)
             {
@@ -187,6 +178,21 @@ namespace RPG.Combat
         public IEnumerable<float> GetPercentageModifier(ProgressionEnum b)
         {
             yield return 1f;
+        }
+
+      
+        
+        protected override void Start()
+        {
+            if (!isFsmControlled)
+            {
+                base.Start();
+            }
+        }
+      
+        void ILocalCompute.LocalCompute()
+        {
+            OnLocalCompute();
         }
     }
 }

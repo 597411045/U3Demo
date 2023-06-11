@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace PRG.Network
 {
-    public class AcceptCenter : NetTaskInstance
+    public class NTIAccept : NetTaskInstance
     {
         public static int InstanceCount = 0;
 
 
-        public AcceptCenter(string name) : base(name)
+        public NTIAccept(string name) : base(name)
         {
             BuildAcceptNTI(7000);
             InstanceCount++;
@@ -41,11 +41,11 @@ namespace PRG.Network
                     //NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
                     SocketInstance tmpSI = new SocketInstance(tmpS, System.Guid.NewGuid().ToString());
                     tmpSI.sendList.Enqueue(Encoding.UTF8.GetBytes("Hello Client"));
-                    NetworkCenter.Ins.EnqueueSI(tmpSI);
+                    NetworkManagement.Ins.EnqueueSI(tmpSI);
                 }
             }), "BuildAcceptNTI");
             StartTask();
-            NetworkCenter.Ins.AddNTI(NTI_type.Accept, this);
+            NetworkManagement.Ins.AddNTI(NTI_type.Accept, this);
         }
     }
 }
