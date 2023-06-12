@@ -1,4 +1,5 @@
 ﻿using System.Text.RegularExpressions;
+using RPG.UI;
 using UnityEngine;
 
 namespace RPG.Cmd
@@ -11,21 +12,34 @@ namespace RPG.Cmd
 
         public CMDBase()
         {
-            _regex = new Regex(@"<\w*>");
-            _regex2 = new Regex(@"\w*");
+            _regex = new Regex(@"<.*?>");
         }
 
-        public virtual void Send(string siid, params string[] para)
+        public virtual void Send(string siid, params string[] paras)
         {
         }
 
-        public virtual void Recv(string cmd)
+        public virtual void Recv(string siid, string cmd)
         {
         }
 
-        protected string GetParam(string cmd,int index)
+        protected string GetParam(string cmd, int index)
         {
-            return _regex2.Match(_regex.Matches(cmd)[index].ToString()).ToString();
+            string str = _regex.Matches(cmd)[index].ToString();
+            str = str.Substring(1, str.Length - 2);
+
+            return str;
+        }
+
+        protected string ReplaceParam(string[] paras)
+        {
+            string cmd = CmdFormat;
+            for (int i = 0; i < paras.Length; i++)
+            {
+                cmd = cmd.Replace($"<{GetParam(CmdFormat, i)}>", $"<{paras[i]}>");
+            }
+
+            return cmd;
         }
     }
 }

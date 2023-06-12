@@ -13,7 +13,7 @@ namespace RPG.Movement
     public class NavMoveComponent : TaskPipelineBase, IAction, IJsonSaveable, ILocalCompute, ISyncObject
     {
         //SyncObject
-        public PTTransform ptt;
+        private PTTransform ptt;
 
         private void Awake()
         {
@@ -150,6 +150,14 @@ namespace RPG.Movement
 
         #endregion
 
+        #region 同步系统
+
+        public PTTransform SyncObject
+        {
+            get { return ptt; }
+            set { ptt = value; }
+        }
+
         public string BuildSyncObject()
         {
             ptt.GameObjectName = this.gameObject.name;
@@ -173,9 +181,12 @@ namespace RPG.Movement
                 new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
         }
 
+
         public void ApplySyncStata()
         {
             this.GetComponent<Animator>().SetFloat("ForwardSpeed", ptt.Speed);
         }
+
+        #endregion
     }
 }

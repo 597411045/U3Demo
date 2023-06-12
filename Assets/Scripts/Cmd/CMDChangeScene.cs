@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using System.Text.RegularExpressions;
+using PRG.Cmd;
 using PRG.Network;
 using RPG.UI;
 using UnityEngine;
@@ -13,6 +14,7 @@ namespace RPG.Cmd
 
         public CMDChangeScene() : base()
         {
+            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
             CmdFormat = $"{this.GetType().Name}|<SceneName>";
             Ins = this;
         }
@@ -25,22 +27,23 @@ namespace RPG.Cmd
         /// </summary>
         /// <param name="siUid"></param>
         /// <param name="para">1个参数：场景名</param>
-        public override void Send(string siUid, params string[] para)
+        public override void Send(string siUid, params string[] paras)
         {
             //构建协议字符
-            string cmd = CmdFormat.Replace(GetParam(CmdFormat, 0), para[0]);
+            string cmd = ReplaceParam(paras);
             NetworkManagement.Ins.SendMessageBySocketUID(siUid,
                 Encoding.UTF8.GetBytes(cmd));
             CmdManagement.Ins.LogOnScreen("Send:" + cmd);
         }
 
         //[2.1]客户端收到切换场景消息，进行场景切换
-        public override void Recv(string cmd)
+        public override void Recv(string siid, string cmd)
         {
+            CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
+
             //TODO:需要携程进行后续操作,携程内容：切换场景-屏幕渐变+生成角色-发送同步请求
             string SceneName = GetParam(cmd, 0);
             SceneManager.LoadScene(SceneName);
-            CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
         }
     }
 }

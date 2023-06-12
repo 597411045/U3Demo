@@ -90,6 +90,9 @@ public class TaskPipelineManager : MonoBehaviour
     //发送指令
     private List<ISendSyncObject> SendSyncObject;
 
+    private List<Action> DoOnce;
+
+
     //清除任务
     //private List<CAction> CleanAction;
 
@@ -129,10 +132,11 @@ public class TaskPipelineManager : MonoBehaviour
         }
 
         RecvCmd = new List<IRecvCmd>();
+        SyncStats = new List<ISyncStats>();
         LocalCompute = new List<ILocalCompute>();
         SyncData = new List<ISyncData>();
-        SyncStats = new List<ISyncStats>();
         SendSyncObject = new List<ISendSyncObject>();
+        DoOnce = new List<Action>();
         //CleanAction = new List<CAction>();
     }
 
@@ -178,7 +182,13 @@ public class TaskPipelineManager : MonoBehaviour
             if (!SendSyncObject[i].GetIfDestroyed())
                 SendSyncObject[i].SendSyncObject();
         }
-       
+
+
+        for (int i = DoOnce.Count - 1; i >= 0; i--)
+        {
+            DoOnce[i].Invoke();
+            DoOnce.RemoveAt(i);
+        }
     }
 
     //Test
@@ -273,44 +283,8 @@ public class TaskPipelineManager : MonoBehaviour
         }
     }
 
-    // public void ClearAllLocalCompute()
-    // {
-    //     Debug.LogError("ClearAllLocalCompute");
-    //
-    //     CleanAction.Add(new CAction(() => { LocalCompute.Clear(); }, 0, null));
-    // }
-    //
-    // public void ClearLocalComputelByGameobjectId(int goid)
-    // {
-    //     CleanAction.Add(new CAction(() =>
-    //     {
-    //         for (int i = LocalCompute.Count - 1; i >= 0; i--)
-    //         {
-    //             if (LocalCompute[i].go.GetInstanceID() == goid)
-    //             {
-    //                 //Debug.LogError(LocalCompute[i].action.Method.DeclaringType + "|" +LocalCompute[i].action.Method.Name + " Clear");
-    //                 LocalCompute.RemoveAt(i);
-    //             }
-    //         }
-    //     }, 0, null));
-    // }
-    //
-    // public void ClearLocalComputeByActionId(int acid)
-    // {
-    //     CleanAction.Add(new CAction(() =>
-    //     {
-    //         for (int i = LocalCompute.Count - 1; i >= 0; i--)
-    //         {
-    //             if (LocalCompute[i].guid == acid)
-    //             {
-    //                 LocalCompute.RemoveAt(i);
-    //             }
-    //         }
-    //     }, 0, null));
-    // }
-    //
-    // private void OnDestroy()
-    // {
-    //     ClearAllLocalCompute();
-    // }
+    public void Register(Action a)
+    {
+        DoOnce.Add(a);
+    }
 }

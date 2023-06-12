@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using RPG.Cmd;
 using UnityEngine;
 
 namespace PRG.Network
@@ -33,7 +34,9 @@ namespace PRG.Network
                     this.socketInstance.socket.Connect(ep);
                     Debug.LogError("Connected");
                     NetworkManagement.Ins.EnqueueSI(socketInstance);
-                    this.socketInstance.sendList.Enqueue(Encoding.UTF8.GetBytes("Hello Server"));
+
+                    CMDHello.Ins.Send(this.socketInstance, "Hello Server");
+
                     this.socketInstance = null;
                 }
                 catch (Exception e)

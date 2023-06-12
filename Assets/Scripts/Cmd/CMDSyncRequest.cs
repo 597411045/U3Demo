@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using PRG.Cmd;
 using PRG.Network;
 using RPG.Scene;
 using RPG.UI;
@@ -6,17 +7,28 @@ using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDSyncRequest
+    public class CMDSyncRequest : CMDBase
     {
-        public CMDSyncRequest Ins;
-        
+        public static CMDSyncRequest Ins;
+
+        public CMDSyncRequest() : base()
+        {
+            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
+            CmdFormat = $"{this.GetType().Name}|<GameObjectName>";
+            Ins = this;
+        }
+
+
         //同步阶段
         //3接着创建完成后，controller会发出同步请求协议
-        public void Send(string siUid, string GameObjectName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="siUid"></param>
+        /// <param name="paras">1:GameObjectName</param>
+        public override void Send(string siUid, params string[] paras)
         {
-            Debug.LogError("SendSyncRequest");
-            //构建协议字符
-            string cmd = $"SendSyncRequest|GameObjectName:{GameObjectName}";
+            string cmd = ReplaceParam(paras);
             NetworkManagement.Ins.SendMessageBySocketUID(siUid,
                 Encoding.UTF8.GetBytes(cmd));
             CmdManagement.Ins.LogOnScreen("Send:" + cmd);
@@ -24,21 +36,16 @@ namespace RPG.Cmd
 
         //[3]服务器收到同步协议，根据同步列表是否有此物体，进行回复
         //若是，则开启该物体的被同步功能
-        public bool Recv(string cmd, out string param)
+        public override void Recv(string siid, string cmd)
         {
-            Debug.LogError("RecvSyncRequest");
             CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
 
-            string key = cmd.Split(':')[1];
-            if (SceneEntityManager.SyncEntities.ContainsKey(key))
+            string GameObjectName = GetParam(cmd, 0);
+
+            GameObject go = GameObject.Find(GameObjectName);
+            if (go != null)
             {
-                param = key;
-                return true;
-            }
-            else
-            {
-                param = "";
-                return false;
+                CMDSyncRequestAllow.Ins.Send(siid, GameObjectName);
             }
         }
     }

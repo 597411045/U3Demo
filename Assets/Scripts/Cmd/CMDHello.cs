@@ -1,21 +1,18 @@
 ﻿using System.Text;
 using PRG.Cmd;
 using PRG.Network;
-using PRG.Sync;
-using RPG.Scene;
 using RPG.UI;
-using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDSyncRequestAllow : CMDBase
+    public class CMDHello : CMDBase
     {
-        public static CMDSyncRequestAllow Ins;
+        public static CMDHello Ins;
 
-        public CMDSyncRequestAllow() : base()
+        public CMDHello() : base()
         {
             CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
-            CmdFormat = $"{this.GetType().Name}|<GameObjectName>";
+            CmdFormat = $"{this.GetType().Name}|<Hello>";
             Ins = this;
         }
 
@@ -26,12 +23,21 @@ namespace RPG.Cmd
         /// </summary>
         /// <param name="siUid"></param>
         /// <param name="para">1:GameObjectName</param>
-        public override void Send(string siUid, params string[] paras)
+        public override void Send(string siUid, params string[] para)
         {
-            string cmd = ReplaceParam(paras);
+            //构建协议字符
+            string cmd = CmdFormat.Replace(GetParam(CmdFormat, 0), para[0]);
             NetworkManagement.Ins.SendMessageBySocketUID(siUid,
                 Encoding.UTF8.GetBytes(cmd));
             CmdManagement.Ins.LogOnScreen("Send:" + cmd);
+        }
+
+        public void Send(SocketInstance si, params string[] paras)
+        {
+            //构建协议字符
+            string cmd = ReplaceParam(paras);
+            si.sendList.Enqueue(Encoding.UTF8.GetBytes(cmd));
+            TaskPipelineManager.Ins.Register(() => { CmdManagement.Ins.LogOnScreen("SendInBuffer:" + cmd); });
         }
 
         // //[3.1]客户端接收到允许同步，开启此物体的同步功能
@@ -39,12 +45,10 @@ namespace RPG.Cmd
         {
             CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
 
-            string GameObjectName = GetParam(cmd, 0);
-            GameObject go = GameObject.Find(GameObjectName);
-            if (go != null)
+            string hello = GetParam(cmd, 0);
+            if (!NetworkManagement.isServer)
             {
-                go.GetComponent<SyncObjectComponent>().enabled = true;
-                Debug.LogError(" go.GetComponent<SyncObjectComponent>().enabled = true;");
+                CMDLogin.Ins.Send(siid, "Username", "Password");
             }
         }
     }

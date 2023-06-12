@@ -28,7 +28,6 @@ namespace RPG.Scene
             go.GetComponent<NavMeshAgent>().Warp(new Vector3(31.22f, 3.88f, 35.46f));
             go.transform.eulerAngles = new Vector3(0, 126.579f, 0);
             go.name = gobjectName;
-            Debug.LogError(go.transform.position);
         }
     }
 }

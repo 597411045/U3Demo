@@ -69,23 +69,15 @@ namespace RPG.UI
 
             lastIsFocused = _inputField.isFocused;
 
-            if (lastIsFocused && Input.GetKeyDown(KeyCode.DownArrow))
+            if (lastIsFocused && Input.GetKeyDown(KeyCode.Tab))
             {
-                if (_inputField.text.Contains("SL"))
-                {
-                    _inputField.text = @"SendLogin|ID:{username}|PWD:{password}";
-                }
-
+                _inputField.text = CommandExecuter.Ins.GetHint(_inputField.text);
                 _inputField.ActivateInputField();
             }
-
+            
             if (lastIsFocused && Input.GetKeyDown(KeyCode.DownArrow))
             {
-                if (_inputField.text.Contains("SGP"))
-                {
-                    _inputField.text = @"SendGeneratePrefab|Prefab:{prefabName}|GameObjectName:{GameObjectName}";
-                }
-
+                _inputField.text = CommandExecuter.Ins.GetNextHint();
                 _inputField.ActivateInputField();
             }
         }

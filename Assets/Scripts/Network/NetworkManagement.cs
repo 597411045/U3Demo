@@ -7,6 +7,7 @@ using System.Threading;
 using PRG.Cmd;
 using PRG.Sync;
 using RGP.Cmd;
+using RPG.Cmd;
 using RPG.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -132,17 +133,6 @@ namespace PRG.Network
 
         public Queue<byte[]> cmdTunnel;
 
-        public NetworkManagement()
-        {
-            Debug.LogError("NetworkCenter Construction");
-            if (Ins != null)
-            {
-                Debug.LogError("For Now, Only One NetworkCenter Allowed");
-                return;
-            }
-            Ins = this;
-        }
-
         private void Awake()
         {
             #region 单例
@@ -193,7 +183,10 @@ namespace PRG.Network
             if (SceneManager.GetActiveScene().name.Contains("Client"))
             {
                 isServer = false;
-                NTIConnect cc = new NTIConnect("ConnectCenter");
+                if (!SceneManager.GetActiveScene().name.Contains("Solo"))
+                {
+                    NTIConnect cc = new NTIConnect("ConnectCenter");
+                }
             }
         }
 
@@ -214,7 +207,6 @@ namespace PRG.Network
                     CommandExecuter.Ins.CommandExec(c.Key, Encoding.UTF8.GetString(b));
                 }
             }
-            
         }
 
 

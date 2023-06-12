@@ -1,30 +1,51 @@
+using System.Threading;
 using RGP.Cmd;
 using RPG.Core;
+using UnityEngine;
 
 namespace PRG.Sync
 {
     public class SyncManagement : TaskPipelineBase, ISendSyncObject, ISyncData, ISyncStats
     {
+        private float timer = 0;
+
         public void SendSyncObject()
         {
-            foreach (var c in FindObjectsOfType<SyncObjectComponent>())
+            if (timer <= 0)
             {
-                if (c.enabled)
+                foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
-                    foreach (var d in GetComponents<ISyncObject>())
+                    Debug.LogError(c.enabled);
+                    if (c.enabled)
                     {
-                        CMDSyncObject.Ins.Send("ClientMainSocket", d.BuildSyncObject());
+                        foreach (var d in GetComponents<ISyncObject>())
+                        {
+                            //CMDSyncObject.Ins.Send("ClientMainSocket", d.BuildSyncObject());
+                            Debug.LogError("SendSyncObject");
+                        }
                     }
                 }
+
+                timer = 5;
             }
+
+            timer -= Time.deltaTime;
         }
 
         public void SyncStats()
         {
+            if (timer <= 0)
+            {
+                Debug.LogError("SyncStats");
+            }
         }
 
         public void SyncData()
         {
+            if (timer <= 0)
+            {
+                Debug.LogError("SyncData");
+            }
         }
     }
 }

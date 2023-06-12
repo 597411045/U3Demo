@@ -7,5 +7,7 @@ namespace PRG.Sync
         public void ApplySyncStata();
 
         public void ApplySyncData();
+
+        public PTTransform SyncObject { get; set; }
     }
 }

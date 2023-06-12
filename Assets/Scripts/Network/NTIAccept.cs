@@ -2,6 +2,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using RPG.Cmd;
 using UnityEngine;
 
 namespace PRG.Network
@@ -40,7 +41,7 @@ namespace PRG.Network
                     //取消Valid，无需传输到临时Socket列表，直接转入Val列表
                     //NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
                     SocketInstance tmpSI = new SocketInstance(tmpS, System.Guid.NewGuid().ToString());
-                    tmpSI.sendList.Enqueue(Encoding.UTF8.GetBytes("Hello Client"));
+                    CMDHello.Ins.Send(tmpSI, "Hello Client");
                     NetworkManagement.Ins.EnqueueSI(tmpSI);
                 }
             }), "BuildAcceptNTI");

@@ -1,20 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Cinemachine;
-using Google.Protobuf;
 using PRG.Network;
-using RPG.Combat;
+using RPG.Cmd;
 using RPG.Core;
-using RPG.Movement;
-using RPG.Scene;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.SceneManagement;
 
 namespace RPG.Control
 {
@@ -49,9 +40,15 @@ namespace RPG.Control
             {
                 cineMachine = GameObject.Find("CM vcam1");
                 cineMachine.GetComponent<CinemachineVirtualCamera>().Follow = this.gameObject.transform;
+                if (!SceneManager.GetActiveScene().name.Contains("Solo"))
+                {
+                    TaskPipelineManager.Ins.Register(() =>
+                    {
+                        CMDSyncRequest.Ins.Send("ClientMainSocket", this.gameObject.name);
+                    });
+                }
             }
         }
-
 
         private Vector3 oldMousePosition;
         private Vector2 mouseMoveDelta;
@@ -60,6 +57,7 @@ namespace RPG.Control
         {
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
+            if (NetworkManagement.isServer) return;
 
             if (cineMachine != null)
             {
@@ -108,8 +106,8 @@ namespace RPG.Control
                 }
             }
 
-            if (CanDoCombat()) return;
-            if (CanSetNavDestinationToCursor()) return;
+            //if (CanDoCombat()) return;
+            //if (CanSetNavDestinationToCursor()) return;
             //SetCursor(CursorType.None);
         }
 
