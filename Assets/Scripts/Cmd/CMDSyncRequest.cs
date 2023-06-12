@@ -8,6 +8,8 @@ namespace RPG.Cmd
 {
     public class CMDSyncRequest
     {
+        public CMDSyncRequest Ins;
+        
         //同步阶段
         //3接着创建完成后，controller会发出同步请求协议
         public void Send(string siUid, string GameObjectName)

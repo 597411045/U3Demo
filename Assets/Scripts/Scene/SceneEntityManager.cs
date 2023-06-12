@@ -11,8 +11,6 @@ namespace RPG.Scene
 {
     public class SceneEntityManager : MonoBehaviour
     {
-        public static Dictionary<string, GameObject> SyncEntities = new Dictionary<string, GameObject>();
-
         public static void GenerateEnemyPrefab()
         {
             GameObject go = Instantiate(Resources.Load<GameObject>("Enemy"));
@@ -22,23 +20,15 @@ namespace RPG.Scene
             go.GetComponent<BaseStats>().startingLevel = 2;
             go.GetComponent<BaseStats>().InitBaseStat();
             go.GetComponent<PathPatrolComponent>().pathGroup = GameObject.Find("PatrolPoint");
-            SyncEntities.Add("Enemy1", go);
         }
 
-        public static void GeneratePlayerPrefab(string gameObjectName)
+        public static void GeneratePurePrefab(string prefabName, string gobjectName, Vector3 position)
         {
-            GameObject go = Instantiate(Resources.Load<GameObject>("Player"));
+            GameObject go = Instantiate(Resources.Load<GameObject>(prefabName));
             go.GetComponent<NavMeshAgent>().Warp(new Vector3(31.22f, 3.88f, 35.46f));
             go.transform.eulerAngles = new Vector3(0, 126.579f, 0);
-            go.name = gameObjectName;
-            SyncEntities.Add(gameObjectName, go);
+            go.name = gobjectName;
             Debug.LogError(go.transform.position);
-        }
-
-        public static void DestroyPlayer()
-        {
-            Destroy(SyncEntities["Player"]);
-            SyncEntities.Remove("Player");
         }
     }
 }

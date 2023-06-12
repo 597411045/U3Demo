@@ -11,7 +11,6 @@ namespace RPG.Cmd
 
         public CMDBase()
         {
-            Debug.Log(this.GetType().Name);
             _regex = new Regex(@"<\w*>");
             _regex2 = new Regex(@"\w*");
         }

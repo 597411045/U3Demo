@@ -1,4 +1,4 @@
-namespace PRG.Network
+namespace PRG.Sync
 {
     public interface ISyncObject
     {

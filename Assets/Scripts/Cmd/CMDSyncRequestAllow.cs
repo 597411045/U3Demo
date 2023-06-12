@@ -8,6 +8,8 @@ namespace RPG.Cmd
 {
     public class CMDSyncRequestAllow
     {
+        public static CMDSyncRequest Ins;
+        
         //3.1服务器回复允许同步
         public void Send(string siUid, string GameObjectName)
         {

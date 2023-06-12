@@ -11,7 +11,7 @@ namespace RPG.Core
             Register();
         }
 
-        protected virtual void Register()
+        protected void Register()
         {
             TaskPipelineManager.Ins.Register(this);
         }

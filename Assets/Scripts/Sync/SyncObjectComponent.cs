@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PRG.Network
+namespace PRG.Sync
 {
     public class SyncObjectComponent : MonoBehaviour
     {

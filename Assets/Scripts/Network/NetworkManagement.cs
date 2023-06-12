@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using PRG.Cmd;
+using PRG.Sync;
 using RGP.Cmd;
 using RPG.Core;
 using UnityEngine;
@@ -80,8 +81,6 @@ namespace PRG.Network
             name = _name;
         }
 
-        //public bool markForDone;
-
         public void StartTask()
         {
             manualResetEvent.Set();
@@ -122,7 +121,7 @@ namespace PRG.Network
     }
 
     //网络方案总入口
-    public class NetworkManagement : TaskPipelineBase, IRecvCmd, ISendSyncObject, ISyncData, ISyncStats
+    public class NetworkManagement : TaskPipelineBase, IRecvCmd
     {
         public static NetworkManagement Ins;
         public static bool isServer;
@@ -133,17 +132,16 @@ namespace PRG.Network
 
         public Queue<byte[]> cmdTunnel;
 
-        // public NetworkCenter()
-        // {
-        //     Debug.LogError("NetworkCenter Construction");
-        //     if (ins != null)
-        //     {
-        //         Debug.LogError("For Now, Only One NetworkCenter Allowed");
-        //         return;
-        //     }
-        //
-        //     ins = this;
-        // }
+        public NetworkManagement()
+        {
+            Debug.LogError("NetworkCenter Construction");
+            if (Ins != null)
+            {
+                Debug.LogError("For Now, Only One NetworkCenter Allowed");
+                return;
+            }
+            Ins = this;
+        }
 
         private void Awake()
         {
@@ -216,28 +214,7 @@ namespace PRG.Network
                     CommandExecuter.Ins.CommandExec(c.Key, Encoding.UTF8.GetString(b));
                 }
             }
-        }
-
-        public void SendSyncObject()
-        {
-            foreach (var c in FindObjectsOfType<SyncObjectComponent>())
-            {
-                if (c.enabled)
-                {
-                    foreach (var d in GetComponents<ISyncObject>())
-                    {
-                        CMDSyncObject.Send("ClientMainSocket", d.BuildSyncObject());
-                    }
-                }
-            }
-        }
-
-        public void SyncStats()
-        {
-        }
-
-        public void SyncData()
-        {
+            
         }
 
 

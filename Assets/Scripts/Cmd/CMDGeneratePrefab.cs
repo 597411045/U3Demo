@@ -6,24 +6,34 @@ using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDGeneratePrefab
+    public class CMDGeneratePrefab : CMDBase
     {
-        //2.2服务器回复创建玩家
-        public void Send(string fromUid, string prefabName, string GameObjectName)
+        public static CMDGeneratePrefab Ins;
+
+        public CMDGeneratePrefab() : base()
         {
-            Debug.LogError("SendGeneratePrefab");
-            //构建协议字符
-            string cmd = $"SendGeneratePrefab|Prefab:{prefabName}|GameObjectName:{GameObjectName}";
+            CmdFormat = $"{this.GetType().Name}|<PrefabName><PTT>";
+            Ins = this;
+        }
+
+        //2.2服务器回复创建玩家
+        public override void Send(string fromUid, params string[] para)
+        {
+            string cmd = CmdFormat.Replace(GetParam(CmdFormat, 0), para[0])
+                .Replace(GetParam(CmdFormat, 1), para[1]);
             NetworkManagement.Ins.SendMessageBySocketUID(fromUid,
                 Encoding.UTF8.GetBytes(cmd));
             CmdManagement.Ins.LogOnScreen("Send:" + cmd);
         }
 
         //[2.2].客户端收到创建玩家消息，进行玩家创建
-        public void Recv(string cmd)
+        public override void Recv(string cmd)
         {
-            Debug.LogError("RecvGeneratePrefab");
-            SceneEntityManager.GeneratePlayerPrefab(cmd.Split('|')[2].Split(':')[1]);
+            string PrefabName = GetParam(cmd, 0);
+            string PTT = GetParam(cmd, 1);
+            PTTransform ptt = PTTransform.Parser.ParseJson(PTT);
+            Vector3 position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+            SceneEntityManager.GeneratePurePrefab(PrefabName, ptt.GameObjectName, position);
             CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
         }
     }

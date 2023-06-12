@@ -15,8 +15,7 @@ namespace PRG.Cmd
     public class CommandExecuter
     {
         public static CommandExecuter Ins;
-        private List<CMDBase> avaliableCmd;
-
+        private Dictionary<string, CMDBase> avaliableCmd;
 
         public CommandExecuter()
         {
@@ -30,24 +29,24 @@ namespace PRG.Cmd
                 Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
             }
 
-            avaliableCmd = new List<CMDBase>();
+            avaliableCmd = new Dictionary<string, CMDBase>();
+
+            CMDChangeScene cmdChangeScene = new CMDChangeScene();
+            avaliableCmd.Add(cmdChangeScene.GetType().Name,cmdChangeScene);
+            CMDGeneratePrefab cmdGeneratePrefab = new CMDGeneratePrefab();
+            avaliableCmd.Add(cmdGeneratePrefab.GetType().Name,cmdGeneratePrefab);
         }
 
+        
 
         public void CommandExec(string fromUid, string cmd)
         {
-            if (avaliableCmd.Contains(cmd.Split('|')[0]))
-            {
-                
-            }
-            
-            
             //初始化阶段
             //0.客户端收到服务器链接成功的消息
             //1，客户端率先发起登录信息
             if (cmd.Equals("Hello Client"))
             {
-                CMDLogin.Send(fromUid, "TestClient", "TestClient");
+                CMDLogin.Ins.Send(fromUid, "TestClient", "TestClient");
                 return;
             }
 
@@ -56,25 +55,25 @@ namespace PRG.Cmd
             {
                 CMDLogin.Recv(cmd);
                 //2.1 发送切换场景
-                CMDChangeScene.Send(fromUid, "Scenes/Sandbox 1 Client/Sandbox 1 Client");
+                CMDChangeScene.Ins.Send(fromUid, "Scenes/Sandbox 1 Client/Sandbox 1 Client");
 
                 //2.2服务器回复创建玩家
                 //TODO:广播
-                CMDGeneratePrefab.Send(fromUid, "Player", "TestTransform");
+                CMDGeneratePrefab.Ins.Send(fromUid, "Player", "TestTransform");
                 return;
             }
 
             //[2.1]客户端收到切换场景消息，进行场景切换
             if (cmd.Contains("SendChangeScene|"))
             {
-                CMDChangeScene.Recv(cmd);
+                CMDChangeScene.Ins.Recv(cmd);
                 return;
             }
 
             //[2.2].客户端收到创建玩家消息，进行玩家创建
             if (cmd.Contains("SendGeneratePrefab|"))
             {
-                CMDGeneratePrefab.Recv(cmd);
+                CMDGeneratePrefab.Ins.Recv(cmd);
                 return;
             }
 
@@ -86,10 +85,10 @@ namespace PRG.Cmd
             if (cmd.Contains("SendSyncRequest|"))
             {
                 string param;
-                if (CMDSyncRequest.Recv(cmd, out param))
+                if (CMDSyncRequest.Ins.Recv(cmd, out param))
                 {
                     //3.1服务器回复允许同步
-                    CMDSyncRequestAllow.Send(fromUid, param);
+                    CMDSyncRequestAllow.Ins.Send(fromUid, param);
                 }
 
                 return;
@@ -98,7 +97,7 @@ namespace PRG.Cmd
             //[3.1]客户端接收到允许同步，开启此物体的同步功能
             if (cmd.Contains("SendSyncRequestAllow|"))
             {
-                CMDSyncRequestAllow.Recv(cmd);
+                CMDSyncRequestAllow.Ins.Recv(cmd);
                 return;
             }
 
@@ -106,7 +105,7 @@ namespace PRG.Cmd
             //[3.2]服务端接收到同步信息
             if (cmd.Contains("SendSyncObject|"))
             {
-                CMDSyncObject.Recv(cmd);
+                CMDSyncObject.Ins.Recv(cmd);
                 return;
             }
 

@@ -9,9 +9,12 @@ namespace RPG.Cmd
 {
     public class CMDChangeScene : CMDBase
     {
+        public static CMDChangeScene Ins;
+
         public CMDChangeScene() : base()
         {
-            CmdFormat = $"{this.GetType().Name}|SceneName:<param1>";
+            CmdFormat = $"{this.GetType().Name}|<SceneName>";
+            Ins = this;
         }
 
         //2.1 发送切换场景
@@ -25,7 +28,7 @@ namespace RPG.Cmd
         public override void Send(string siUid, params string[] para)
         {
             //构建协议字符
-            string cmd = CmdFormat.Replace(GetParam(CmdFormat, 1), para[0]);
+            string cmd = CmdFormat.Replace(GetParam(CmdFormat, 0), para[0]);
             NetworkManagement.Ins.SendMessageBySocketUID(siUid,
                 Encoding.UTF8.GetBytes(cmd));
             CmdManagement.Ins.LogOnScreen("Send:" + cmd);
@@ -35,8 +38,8 @@ namespace RPG.Cmd
         public override void Recv(string cmd)
         {
             //TODO:需要携程进行后续操作,携程内容：切换场景-屏幕渐变+生成角色-发送同步请求
-            string param = GetParam(cmd, 1);
-            SceneManager.LoadScene(param);
+            string SceneName = GetParam(cmd, 0);
+            SceneManager.LoadScene(SceneName);
             CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
         }
     }
