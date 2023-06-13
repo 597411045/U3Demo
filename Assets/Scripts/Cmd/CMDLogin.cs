@@ -9,7 +9,6 @@ namespace RPG.Cmd
 {
     public class CMDLogin : CMDBase<CMDLogin>
     {
-
         public CMDLogin() : base()
         {
             CmdFormat = $"{this.GetType().Name}|<Username><Password>";
@@ -36,7 +35,7 @@ namespace RPG.Cmd
             string PrefabName = "Player";
             string GObjectName = GetParam(cmd, 0);
             Vector3 position = Vector3.zero;
-            SceneEntityManager.GeneratePurePrefab("Player", GObjectName, position);
+            SceneEntityManager.GeneratePurePrefab("Player", GObjectName, position, siid);
 
             CMDChangeScene.Ins.Send(siid, "Assets/Scenes/Sandbox 1 Client/Sandbox 1 Client.unity");
             CMDGeneratePrefab.Ins.Send(siid, PrefabName, GObjectName);

@@ -1,6 +1,7 @@
 using System;
 using Cinemachine;
 using PRG.Network;
+using PRG.Sync;
 using RPG.Cmd;
 using RPG.Core;
 using UnityEngine;
@@ -57,7 +58,7 @@ namespace RPG.Control
         {
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
-            if (NetworkManagement.isServer) return;
+            if (this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
 
             if (cineMachine != null)
             {

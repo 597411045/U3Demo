@@ -11,10 +11,15 @@ namespace RGP.Cmd
     {
         public CMDSyncObject() : base()
         {
-            CmdFormat = $"{this.GetType().Name}|<PTT>";
+            CmdFormat = $"{this.GetType().Name}|<GameObjectName><PTT>";
         }
 
         //3.2客户端发送出同步信息
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="siUid"></param>
+        /// <param name="paras">1:GameObjectName,2:PTT</param>
         public override void Send(string siUid, params string[] paras)
         {
             string cmd = ReplaceParam(paras);
@@ -29,16 +34,15 @@ namespace RGP.Cmd
             CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
 
 
-            string PTT = GetParam(cmd, 0);
-            PTTransform ptt = PTTransform.Parser.ParseJson(PTT);
-            Vector3 position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+            string GameObjectName = GetParam(cmd, 0);
+            string json = GetParam(cmd, 1);
 
-            foreach (var c in GameObject.Find(ptt.GameObjectName).GetComponents<ISyncObject>())
+            PTTransform tmp = PTTransform.Parser.ParseJson(json);
+
+            GameObject go = GameObject.Find(GameObjectName);
+            if (go != null)
             {
-                if (((Component)c).name.Equals(ptt.ComponentName))
-                {
-                    c.SyncObject = ptt;
-                }
+                go.GetComponent<SyncObjectComponent>().syncObjects[tmp.ComponentName].GetSyncBuffer().Enqueue(json);
             }
         }
     }

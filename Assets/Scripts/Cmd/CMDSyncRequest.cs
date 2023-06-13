@@ -2,6 +2,7 @@
 using Cmd;
 using PRG.Cmd;
 using PRG.Network;
+using PRG.Sync;
 using RPG.Scene;
 using RPG.UI;
 using UnityEngine;

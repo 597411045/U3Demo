@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using FSM;
+using PRG.Sync;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -26,9 +27,8 @@ namespace RPG.Control
 
         void Awake()
         {
-            
         }
-        
+
         private void Start()
         {
             base.Start();
@@ -44,10 +44,9 @@ namespace RPG.Control
 
         public void LocalCompute()
         {
-            if (!hc.IsDead)
-            {
-                SMachine.OnUpdate();
-            }
+            if (hc.IsDead) return;
+            if (this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
+            SMachine.OnUpdate();
         }
 
 

@@ -1,6 +1,7 @@
 using System.Threading;
 using RGP.Cmd;
 using RPG.Core;
+using RPG.Scene;
 using UnityEngine;
 
 namespace PRG.Sync
@@ -12,6 +13,8 @@ namespace PRG.Sync
         private void Awake()
         {
             base.Awake();
+            GameObject go = SceneEntityManager.GenerateEnemyPrefab();
+            go.GetComponent<SyncObjectComponent>().isSyncControlled = false;
         }
 
         public void SendSyncObject()
@@ -20,17 +23,20 @@ namespace PRG.Sync
             {
                 foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
-                    Debug.LogError(c.enabled);
-                    if (c.enabled && c.SIID != "")
+                    if (!c.isSyncControlled && c.SIID != "")
                     {
                         foreach (var d in c.syncObjects)
                         {
-                            CMDSyncObject.Ins.Send("ClientMainSocket", d.Value.BuildSyncObject());
+                            string json = d.Value.BuildSyncObject();
+                            if (json != "")
+                            {
+                                CMDSyncObject.Ins.Send(c.SIID, c.gameObject.name, json);
+                            }
                         }
                     }
                 }
 
-                timer = 5;
+                timer = 0.3f;
             }
 
             timer -= Time.deltaTime;
@@ -40,7 +46,16 @@ namespace PRG.Sync
         {
             if (timer <= 0)
             {
-                Debug.LogError("SyncStats");
+                foreach (var c in FindObjectsOfType<SyncObjectComponent>())
+                {
+                    if (c.enabled && c.SIID != "")
+                    {
+                        foreach (var d in c.syncObjects)
+                        {
+                            d.Value.ApplySyncData();
+                        }
+                    }
+                }
             }
         }
 
@@ -48,7 +63,16 @@ namespace PRG.Sync
         {
             if (timer <= 0)
             {
-                Debug.LogError("SyncData");
+                foreach (var c in FindObjectsOfType<SyncObjectComponent>())
+                {
+                    if (c.enabled && c.SIID != "")
+                    {
+                        foreach (var d in c.syncObjects)
+                        {
+                            d.Value.ApplySyncData();
+                        }
+                    }
+                }
             }
         }
     }

@@ -15,11 +15,19 @@ namespace RPG.Movement
     {
         //SyncObject
         private PTTransform ptt;
+        public Queue<string> syncBuffer;
 
         private void Awake()
         {
             ptt = new PTTransform();
             nmp = new NavMeshPath();
+            syncBuffer = new Queue<string>();
+        }
+
+        private void Start()
+        {
+            base.Start();
+            RegisterToSyncComponent();
         }
 
         public void LocalCompute()
@@ -56,7 +64,7 @@ namespace RPG.Movement
 
         private void UpdateAnimator()
         {
-            if (!NetworkManagement.isServer)
+            if (!this.GetComponent<SyncObjectComponent>().isSyncControlled)
             {
                 Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
                 Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
@@ -164,8 +172,14 @@ namespace RPG.Movement
             this.GetComponent<SyncObjectComponent>().syncObjects.Add(this.GetType().Name, this);
         }
 
+        public Queue<string> GetSyncBuffer()
+        {
+            return syncBuffer;
+        }
+
         public string BuildSyncObject()
         {
+            if (this.GetComponent<SyncObjectComponent>().isSyncControlled) return "";
             ptt.GameObjectName = this.gameObject.name;
             ptt.ComponentName = "NavMoveComponent";
 
@@ -181,16 +195,23 @@ namespace RPG.Movement
 
         public void ApplySyncData()
         {
-            this.transform.position =
-                new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
-            this.transform.eulerAngles =
-                new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
+            if (!this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
+
+            if (syncBuffer.Count > 0)
+            {
+                ptt = PTTransform.Parser.ParseJson(syncBuffer.Dequeue());
+                this.transform.position =
+                    new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+                this.transform.eulerAngles =
+                    new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
+                this.GetComponent<Animator>().SetFloat("ForwardSpeed", ptt.Speed);
+            }
         }
 
 
-        public void ApplySyncStata()
+        public void ApplySyncState()
         {
-            this.GetComponent<Animator>().SetFloat("ForwardSpeed", ptt.Speed);
+            if (!this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
         }
 
         #endregion

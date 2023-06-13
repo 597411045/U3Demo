@@ -9,7 +9,6 @@ namespace RPG.Cmd
 {
     public class CMDGeneratePrefab : CMDBase<CMDGeneratePrefab>
     {
-
         public CMDGeneratePrefab() : base()
         {
             CmdFormat = $"{this.GetType().Name}|<PrefabName><GameObjectName>";
@@ -38,7 +37,7 @@ namespace RPG.Cmd
             string GameObjectName = GetParam(cmd, 1);
             //PTTransform ptt = PTTransform.Parser.ParseJson(PTT);
             //Vector3 position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
-            SceneEntityManager.GeneratePurePrefab(PrefabName, GameObjectName, Vector3.zero);
+            SceneEntityManager.GeneratePurePrefab(PrefabName, GameObjectName, Vector3.zero, siid);
         }
     }
 }

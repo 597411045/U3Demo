@@ -40,6 +40,7 @@ namespace RPG.Cmd
             //TODO:需要携程进行后续操作,携程内容：切换场景-屏幕渐变+生成角色-发送同步请求
             string SceneName = GetParam(cmd, 0);
             SceneManager.LoadScene(SceneName);
+            
         }
     }
 }

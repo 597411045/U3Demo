@@ -10,7 +10,6 @@ namespace RPG.Cmd
 {
     public class CMDSyncRequestAllow : CMDBase<CMDSyncRequestAllow>
     {
-
         public CMDSyncRequestAllow() : base()
         {
             CmdFormat = $"{this.GetType().Name}|<GameObjectName>";
@@ -40,7 +39,7 @@ namespace RPG.Cmd
             GameObject go = GameObject.Find(GameObjectName);
             if (go != null)
             {
-                go.GetComponent<SyncObjectComponent>().enabled = true;
+                go.GetComponent<SyncObjectComponent>().isSyncControlled = false;
                 Debug.LogError(" go.GetComponent<SyncObjectComponent>().enabled = true;");
             }
         }
