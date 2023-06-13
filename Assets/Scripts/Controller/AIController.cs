@@ -10,7 +10,7 @@ using UnityEngine.AI;
 
 namespace RPG.Control
 {
-    public class AIController : TaskPipelineBase, ILocalCompute
+    public class AIController : TaskPipelineBase<AIController>, ILocalCompute
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] [Range(0, 6)] private float chaseSpeed = 5;
@@ -24,7 +24,12 @@ namespace RPG.Control
 
         private SMEnemy SMachine;
 
-        protected override void Start()
+        void Awake()
+        {
+            
+        }
+        
+        private void Start()
         {
             base.Start();
             player = GameObject.FindWithTag("Player");

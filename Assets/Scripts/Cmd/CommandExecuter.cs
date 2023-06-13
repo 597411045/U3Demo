@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Cmd;
 using RGP.Cmd;
 using RPG.Cmd;
 using RPG.Control;
@@ -12,49 +13,51 @@ using UnityEngine.SceneManagement;
 
 namespace PRG.Cmd
 {
-    public class CommandExecuter
+    public class CommandExecuter : SingleTon<CommandExecuter>
     {
-        public static CommandExecuter Ins;
-        private Dictionary<string, CMDBase> avaliableCmd;
-        private IEnumerator<KeyValuePair<string, CMDBase>> ienum;
+        private Dictionary<string, ICMDAction> avaliableCmd;
+        private IEnumerator<KeyValuePair<string, ICMDAction>> ienum;
 
         public CommandExecuter()
         {
-            if (Ins == null)
-            {
-                Debug.LogError(this.ToString() + " Construction");
-                Ins = this;
-            }
-            else
-            {
-                Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
-            }
+            // if (Ins == null)
+            // {
+            //     Debug.LogError(this.ToString() + " Construction");
+            //     Ins = this;
+            // }
+            // else
+            // {
+            //     Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
+            // }
 
-            avaliableCmd = new Dictionary<string, CMDBase>();
+            avaliableCmd = new Dictionary<string, ICMDAction>();
 
-            CMDChangeScene cmdChangeScene = new CMDChangeScene();
-            CMDGeneratePrefab cmdGeneratePrefab = new CMDGeneratePrefab();
-            CMDLogin cmdLogin = new CMDLogin();
-            CMDSyncObject cmdSyncObject = new CMDSyncObject();
-            CMDSyncRequest cmdSyncRequest = new CMDSyncRequest();
-            CMDSyncRequestAllow cmdSyncRequestAllow = new CMDSyncRequestAllow();
-            CMDHello cmdHello = new CMDHello();
+            avaliableCmd.Add(typeof(CMDChangeScene).Name, CMDChangeScene.Ins);
+            avaliableCmd.Add(typeof(CMDGeneratePrefab).Name, CMDGeneratePrefab.Ins);
+            avaliableCmd.Add(typeof(CMDLogin).Name, CMDLogin.Ins);
+            avaliableCmd.Add(typeof(CMDSyncObject).Name, CMDSyncObject.Ins);
+            avaliableCmd.Add(typeof(CMDSyncRequest).Name, CMDSyncRequest.Ins);
+            avaliableCmd.Add(typeof(CMDSyncRequestAllow).Name, CMDSyncRequestAllow.Ins);
+            avaliableCmd.Add(typeof(CMDHello).Name, CMDHello.Ins);
+
+            // CMDChangeScene cmdChangeScene = new CMDChangeScene();
+            // CMDGeneratePrefab cmdGeneratePrefab = new CMDGeneratePrefab();
+            // CMDLogin cmdLogin = new CMDLogin();
+            // CMDSyncObject cmdSyncObject = new CMDSyncObject();
+            // CMDSyncRequest cmdSyncRequest = new CMDSyncRequest();
+            // CMDSyncRequestAllow cmdSyncRequestAllow = new CMDSyncRequestAllow();
+            // CMDHello cmdHello = new CMDHello();
 
             ienum = avaliableCmd.GetEnumerator();
-        }
-
-        public void RegisterCmd(string name, CMDBase p)
-        {
-            avaliableCmd.Add(name, p);
         }
 
         public string GetHint(string text)
         {
             foreach (var c in avaliableCmd)
             {
-                if (c.Value.CmdFormat.Contains(text))
+                if (c.Value.FORMAT.Contains(text))
                 {
-                    return c.Value.CmdFormat;
+                    return c.Value.FORMAT;
                 }
             }
 
@@ -65,7 +68,7 @@ namespace PRG.Cmd
         {
             if (ienum.MoveNext())
             {
-                return ienum.Current.Value.CmdFormat;
+                return ienum.Current.Value.FORMAT;
             }
             else
             {

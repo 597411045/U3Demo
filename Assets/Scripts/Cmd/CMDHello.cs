@@ -5,15 +5,12 @@ using RPG.UI;
 
 namespace RPG.Cmd
 {
-    public class CMDHello : CMDBase
+    public class CMDHello : CMDBase<CMDHello>
     {
-        public static CMDHello Ins;
 
         public CMDHello() : base()
         {
-            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
             CmdFormat = $"{this.GetType().Name}|<Hello>";
-            Ins = this;
         }
 
 

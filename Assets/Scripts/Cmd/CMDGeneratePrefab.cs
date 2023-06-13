@@ -7,16 +7,12 @@ using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDGeneratePrefab : CMDBase
+    public class CMDGeneratePrefab : CMDBase<CMDGeneratePrefab>
     {
-        public static CMDGeneratePrefab Ins;
 
         public CMDGeneratePrefab() : base()
         {
-            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
-
             CmdFormat = $"{this.GetType().Name}|<PrefabName><GameObjectName>";
-            Ins = this;
         }
 
         //2.2服务器回复创建玩家

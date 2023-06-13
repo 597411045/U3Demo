@@ -13,7 +13,7 @@ using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
-    public class FighterActionComponent : TaskPipelineBase, IAction, IJsonSaveable, IModifierProvider,ILocalCompute
+    public class FighterActionComponent : TaskPipelineBase<FighterActionComponent>, IAction, IJsonSaveable, IModifierProvider,ILocalCompute
     {
         [SerializeField] private bool isFsmControlled;
 
@@ -182,7 +182,7 @@ namespace RPG.Combat
 
       
         
-        protected override void Start()
+        private void Start()
         {
             if (!isFsmControlled)
             {

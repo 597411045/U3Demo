@@ -7,14 +7,11 @@ using UnityEngine;
 
 namespace RGP.Cmd
 {
-    public class CMDSyncObject : CMDBase
+    public class CMDSyncObject : CMDBase<CMDSyncObject>
     {
-        public static CMDSyncObject Ins;
-
         public CMDSyncObject() : base()
         {
             CmdFormat = $"{this.GetType().Name}|<PTT>";
-            Ins = this;
         }
 
         //3.2客户端发送出同步信息
@@ -31,7 +28,7 @@ namespace RGP.Cmd
         {
             CmdManagement.Ins.LogOnScreen("Recv:" + cmd);
 
-            
+
             string PTT = GetParam(cmd, 0);
             PTTransform ptt = PTTransform.Parser.ParseJson(PTT);
             Vector3 position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
@@ -43,7 +40,6 @@ namespace RGP.Cmd
                     c.SyncObject = ptt;
                 }
             }
-
         }
     }
 }

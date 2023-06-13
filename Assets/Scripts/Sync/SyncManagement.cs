@@ -5,9 +5,14 @@ using UnityEngine;
 
 namespace PRG.Sync
 {
-    public class SyncManagement : TaskPipelineBase, ISendSyncObject, ISyncData, ISyncStats
+    public class SyncManagement : TaskPipelineBase<SyncManagement>, ISendSyncObject, ISyncData, ISyncStats
     {
         private float timer = 0;
+
+        private void Awake()
+        {
+            base.Awake();
+        }
 
         public void SendSyncObject()
         {
@@ -16,12 +21,11 @@ namespace PRG.Sync
                 foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
                     Debug.LogError(c.enabled);
-                    if (c.enabled)
+                    if (c.enabled && c.SIID != "")
                     {
-                        foreach (var d in GetComponents<ISyncObject>())
+                        foreach (var d in c.syncObjects)
                         {
-                            //CMDSyncObject.Ins.Send("ClientMainSocket", d.BuildSyncObject());
-                            Debug.LogError("SendSyncObject");
+                            CMDSyncObject.Ins.Send("ClientMainSocket", d.Value.BuildSyncObject());
                         }
                     }
                 }

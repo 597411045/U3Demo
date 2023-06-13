@@ -7,15 +7,12 @@ using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDLogin : CMDBase
+    public class CMDLogin : CMDBase<CMDLogin>
     {
-        public static CMDLogin Ins;
 
         public CMDLogin() : base()
         {
-            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
             CmdFormat = $"{this.GetType().Name}|<Username><Password>";
-            Ins = this;
         }
 
         //1，客户端率先发起登录信息

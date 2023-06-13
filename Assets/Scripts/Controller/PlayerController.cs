@@ -20,7 +20,7 @@ namespace RPG.Control
     }
 
 
-    public class PlayerController : TaskPipelineBase, ILocalCompute
+    public class PlayerController : TaskPipelineBase<PlayerController>, ILocalCompute
     {
         private GameObject cineMachine;
 

@@ -2,21 +2,21 @@
 
 namespace RPG.Core
 {
-    public class TaskPipelineBase : MonoBehaviour
+    public class TaskPipelineBase<T> : SingleTonWithMono<T> where T : TaskPipelineBase<T>
     {
         private bool IfDestroyed;
 
-        protected virtual void Start()
+        protected void Start()
         {
             Register();
         }
 
-        protected void Register()
+        private void Register()
         {
             TaskPipelineManager.Ins.Register(this);
         }
 
-        protected virtual void OnDestroy()
+        protected void OnDestroy()
         {
             IfDestroyed = true;
         }

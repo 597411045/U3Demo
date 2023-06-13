@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Text;
 using PRG.Cmd;
 using PRG.Network;
@@ -10,11 +8,9 @@ using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class CmdManagement : TaskPipelineBase, ILocalCompute
+    public class CmdManagement : TaskPipelineBase<CmdManagement>, ILocalCompute
     {
-        public static CmdManagement Ins;
-        private CommandExecuter ce;
-
+        //spublic static CmdManagement Ins;
 
         [SerializeField] public GameObject _canvas;
         [SerializeField] public InputField _inputField;
@@ -23,21 +19,20 @@ namespace RPG.UI
 
         private void Awake()
         {
-            if (Ins == null)
-            {
-                Debug.LogError(this.ToString() + " Awake");
-                Ins = this;
-            }
-            else
-            {
-                Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
-                Destroy(this);
-            }
-
-            ce = new CommandExecuter();
+            base.Awake();
+            // if (Ins == null)
+            // {
+            //     Debug.LogError(this.ToString() + " Awake");
+            //     Ins = this;
+            // }
+            // else
+            // {
+            //     Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
+            //     Destroy(this);
+            // }
         }
 
-        protected override void Start()
+        private void Start()
         {
             base.Start();
             _canvas.SetActive(false);

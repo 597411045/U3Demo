@@ -14,7 +14,7 @@ public enum ItemType
 }
 
 
-public class PickUpAble : TaskPipelineBase, IRayCastAble, ILocalCompute
+public class PickUpAble : TaskPipelineBase<PickUpAble>, IRayCastAble, ILocalCompute
 {
     [FormerlySerializedAs("_weapon")] [SerializeField]
     private WeaponConfig weaponConfig = null;
@@ -23,6 +23,10 @@ public class PickUpAble : TaskPipelineBase, IRayCastAble, ILocalCompute
 
     public float timer = 0;
 
+    void Awake()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider collision)
     {

@@ -122,9 +122,9 @@ namespace PRG.Network
     }
 
     //网络方案总入口
-    public class NetworkManagement : TaskPipelineBase, IRecvCmd
+    public class NetworkManagement : TaskPipelineBase<NetworkManagement>, IRecvCmd
     {
-        public static NetworkManagement Ins;
+        //public static NetworkManagement Ins;
         public static bool isServer;
 
         private Queue<SocketInstance> valSocketInstance;
@@ -136,17 +136,17 @@ namespace PRG.Network
         private void Awake()
         {
             #region 单例
-
-            if (Ins == null)
-            {
-                Debug.LogError(this.ToString() + " Awake");
-                Ins = this;
-            }
-            else
-            {
-                Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
-                Destroy(this);
-            }
+            base.Awake();
+            // if (Ins == null)
+            // {
+            //     Debug.LogError(this.ToString() + " Awake");
+            //     Ins = this;
+            // }
+            // else
+            // {
+            //     Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
+            //     Destroy(this);
+            // }
 
             #endregion
 
@@ -190,8 +190,7 @@ namespace PRG.Network
             }
         }
 
-
-        protected override void OnDestroy()
+        private void OnDestroy()
         {
             DestroyAll();
             base.OnDestroy();

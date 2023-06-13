@@ -8,15 +8,12 @@ using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDSyncRequestAllow : CMDBase
+    public class CMDSyncRequestAllow : CMDBase<CMDSyncRequestAllow>
     {
-        public static CMDSyncRequestAllow Ins;
 
         public CMDSyncRequestAllow() : base()
         {
-            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
             CmdFormat = $"{this.GetType().Name}|<GameObjectName>";
-            Ins = this;
         }
 
 

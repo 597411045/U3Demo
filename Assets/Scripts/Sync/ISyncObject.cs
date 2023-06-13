@@ -9,5 +9,7 @@ namespace PRG.Sync
         public void ApplySyncData();
 
         public PTTransform SyncObject { get; set; }
+
+        public void RegisterToSyncComponent();
     }
 }

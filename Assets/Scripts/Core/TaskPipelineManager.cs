@@ -69,9 +69,9 @@ public interface ISendSyncObject : IBaseTask
     void SendSyncObject();
 }
 
-public class TaskPipelineManager : MonoBehaviour
+public class TaskPipelineManager : TaskPipelineBase<TaskPipelineManager>
 {
-    public static TaskPipelineManager Ins;
+    //public static TaskPipelineManager Ins;
 
     //计划阶段：接受指令-执行状态指令-本地模拟-执行同步指令-发送指令
 
@@ -120,16 +120,17 @@ public class TaskPipelineManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Ins == null)
-        {
-            Debug.LogError(this.ToString() + " Awake");
-            Ins = this;
-        }
-        else
-        {
-            Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
-            Destroy(this);
-        }
+        base.Awake();
+        // if (Ins == null)
+        // {
+        //     Debug.LogError(this.ToString() + " Awake");
+        //     Ins = this;
+        // }
+        // else
+        // {
+        //     Debug.LogError("For Now, Only One " + this.ToString() + " Allowed");
+        //     Destroy(this);
+        // }
 
         RecvCmd = new List<IRecvCmd>();
         SyncStats = new List<ISyncStats>();

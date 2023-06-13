@@ -10,7 +10,8 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class NavMoveComponent : TaskPipelineBase, IAction, IJsonSaveable, ILocalCompute, ISyncObject
+    public class NavMoveComponent : TaskPipelineBase<NavMoveComponent>, IAction, IJsonSaveable, ILocalCompute,
+        ISyncObject
     {
         //SyncObject
         private PTTransform ptt;
@@ -156,6 +157,11 @@ namespace RPG.Movement
         {
             get { return ptt; }
             set { ptt = value; }
+        }
+
+        public void RegisterToSyncComponent()
+        {
+            this.GetComponent<SyncObjectComponent>().syncObjects.Add(this.GetType().Name, this);
         }
 
         public string BuildSyncObject()

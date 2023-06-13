@@ -8,15 +8,11 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.Cmd
 {
-    public class CMDChangeScene : CMDBase
+    public class CMDChangeScene : CMDBase<CMDChangeScene>
     {
-        public static CMDChangeScene Ins;
-
         public CMDChangeScene() : base()
         {
-            CommandExecuter.Ins.RegisterCmd(this.GetType().Name, this);
             CmdFormat = $"{this.GetType().Name}|<SceneName>";
-            Ins = this;
         }
 
         //2.1 发送切换场景
