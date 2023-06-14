@@ -11,7 +11,7 @@ namespace RPG.Cmd
     {
         public CMDGeneratePrefab() : base()
         {
-            CmdFormat = $"{this.GetType().Name}|<PrefabName><GameObjectName>";
+            CmdFormat = $"{this.GetType().Name}|<PrefabName><GameObjectName><YouAreOwner>";
         }
 
         //2.2服务器回复创建玩家
@@ -19,7 +19,7 @@ namespace RPG.Cmd
         /// 
         /// </summary>
         /// <param name="fromUid"></param>
-        /// <param name="para">1:PrefabName,2:GameObjectName</param>
+        /// <param name="para">1:PrefabName,2:GameObjectName,3:YouAreOwner</param>
         public override void Send(string fromUid, params string[] paras)
         {
             string cmd = ReplaceParam(paras);
@@ -35,9 +35,15 @@ namespace RPG.Cmd
 
             string PrefabName = GetParam(cmd, 0);
             string GameObjectName = GetParam(cmd, 1);
+            string YouAreOwner = GetParam(cmd, 2);
             //PTTransform ptt = PTTransform.Parser.ParseJson(PTT);
             //Vector3 position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
+            if (YouAreOwner == "TRUE")
+            {            
+                siid = "";
+            }
             SceneEntityManager.GeneratePurePrefab(PrefabName, GameObjectName, Vector3.zero, siid);
+
         }
     }
 }

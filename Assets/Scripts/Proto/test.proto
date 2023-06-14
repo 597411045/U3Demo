@@ -1,5 +1,8 @@
 syntax = "proto3";
 
+package ProtoMsg;
+option cc_generic_services = true;
+
 message PTTransform{
 
   float positionX = 1;
@@ -8,11 +11,30 @@ message PTTransform{
   float angleX = 4;
   float angleY = 5;
   float angleZ = 6;
+
   float Speed = 7;
 
   string gameObjectName = 8;
   string componentName = 9;
+}
 
+message ResultCode{
+  int32 errCode = 1;
+  string errMesg = 2;
+}
+
+message LoginRequest{
+  string username = 1;
+  string password = 2;
+}
+
+message LoginResponse{
+  ResultCode result = 1;
+  bool success = 2;
+}
+
+service LoginRpc{
+  rpc Login(LoginRequest) returns (LoginResponse);
 }
 
 //--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto

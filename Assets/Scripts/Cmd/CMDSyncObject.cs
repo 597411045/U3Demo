@@ -1,7 +1,9 @@
 ﻿using System.Text;
 using PRG.Network;
 using PRG.Sync;
+using ProtoMsg;
 using RPG.Cmd;
+using RPG.Scene;
 using RPG.UI;
 using UnityEngine;
 
@@ -47,6 +49,7 @@ namespace RGP.Cmd
                     c.GetSyncBuffer().Enqueue(json);
                 }
             }
+            
         }
     }
 }

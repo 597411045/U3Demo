@@ -4,6 +4,7 @@ using RGP.Cmd;
 using RPG.Core;
 using RPG.Scene;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PRG.Sync
 {
@@ -11,12 +12,12 @@ namespace PRG.Sync
     {
         private float timer = 0;
 
-        public List<string> clientsSIID;
+        [FormerlySerializedAs("syncSSID")] public List<string> syncSIID;
 
         private void Awake()
         {
             base.Awake();
-            clientsSIID = new List<string>();
+            syncSIID = new List<string>();
         }
 
         public void SendSyncObject()
@@ -25,14 +26,14 @@ namespace PRG.Sync
             {
                 foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
-                    if (c.ControllerSIID == "")
+                    if (c.enabled && c.ControllerSIID == "")
                     {
                         foreach (var d in c.GetComponents<ISyncObject>())
                         {
                             string json = d.BuildSyncObject();
                             if (json != "")
                             {
-                                foreach (var e in clientsSIID)
+                                foreach (var e in syncSIID)
                                 {
                                     CMDSyncObject.Ins.Send(e, c.gameObject.name, json);
                                 }
@@ -41,7 +42,7 @@ namespace PRG.Sync
                     }
                 }
 
-                timer = 0.3f;
+                timer = 1f;
             }
 
             timer -= Time.deltaTime;
@@ -53,7 +54,7 @@ namespace PRG.Sync
             {
                 foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
-                    if (c.ControllerSIID == "")
+                    if (c.ControllerSIID != "")
                     {
                         foreach (var d in c.GetComponents<ISyncObject>())
                         {
@@ -66,6 +67,19 @@ namespace PRG.Sync
 
         public void SyncData()
         {
+            if (timer <= 0)
+            {
+                foreach (var c in FindObjectsOfType<SyncObjectComponent>())
+                {
+                    if (c.ControllerSIID != "")
+                    {
+                        foreach (var d in c.GetComponents<ISyncObject>())
+                        {
+                            d.ApplySyncData();
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace PRG.Network
         {
             this.socketInstance =
                 new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
-                    "ClientMainSocket");
+                    "MainServer");
             IPAddress ip = IPAddress.Parse("127.0.0.1");
             EndPoint ep = new IPEndPoint(ip, port);
 

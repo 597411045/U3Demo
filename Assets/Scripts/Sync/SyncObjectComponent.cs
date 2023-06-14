@@ -8,6 +8,7 @@ namespace PRG.Sync
     public class SyncObjectComponent : MonoBehaviour
     {
         public string ControllerSIID;
+        public string PrefabName;
 
         private void Awake()
         {

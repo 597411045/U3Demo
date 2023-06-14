@@ -41,13 +41,6 @@ namespace RPG.Control
             {
                 cineMachine = GameObject.Find("CM vcam1");
                 cineMachine.GetComponent<CinemachineVirtualCamera>().Follow = this.gameObject.transform;
-                if (!SceneManager.GetActiveScene().name.Contains("Solo"))
-                {
-                    TaskPipelineManager.Ins.Register(() =>
-                    {
-                        CMDSyncRequest.Ins.Send("ClientMainSocket", this.gameObject.name);
-                    });
-                }
             }
         }
 

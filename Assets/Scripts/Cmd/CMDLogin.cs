@@ -31,9 +31,9 @@ namespace RPG.Cmd
 
 
             //获取,验证客户端信息（状态，Transform等）
-            
-            SyncManagement.Ins.clientsSIID.Add(siid);
-            
+
+            SyncManagement.Ins.syncSIID.Add(siid);
+
             //TODO:获取信息
             //服务器本地创建
             string PrefabName = "Player";
@@ -42,7 +42,7 @@ namespace RPG.Cmd
             SceneEntityManager.GeneratePurePrefab("Player", GObjectName, position, siid);
 
             CMDChangeScene.Ins.Send(siid, "Assets/Scenes/Sandbox 1 Client/Sandbox 1 Client.unity");
-            CMDGeneratePrefab.Ins.Send(siid, PrefabName, GObjectName);
+            CMDGeneratePrefab.Ins.Send(siid, PrefabName, GObjectName, "TRUE");
         }
     }
 }

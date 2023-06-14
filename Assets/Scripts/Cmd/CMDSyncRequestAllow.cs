@@ -39,8 +39,6 @@ namespace RPG.Cmd
             GameObject go = GameObject.Find(GameObjectName);
             if (go != null)
             {
-                go.GetComponent<SyncObjectComponent>().isSyncControlled = false;
-                Debug.LogError(" go.GetComponent<SyncObjectComponent>().enabled = true;");
             }
         }
     }

@@ -40,7 +40,7 @@ namespace PRG.Network
 
     public class SocketInstance
     {
-        public static int length = 256;
+        public static int length = 512;
 
         //改用string作为UID，可直接用于Dic
         //public int UID;

@@ -9,9 +9,8 @@ using UnityEngine;
 
 namespace RPG.Cmd
 {
-    public class CMDSyncRequest : CMDBase<CMDSyncRequest>,ICMDAction
+    public class CMDSyncRequest : CMDBase<CMDSyncRequest>, ICMDAction
     {
-
         public CMDSyncRequest() : base()
         {
             CmdFormat = $"{this.GetType().Name}|<GameObjectName>";

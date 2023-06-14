@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using PRG.Network;
 using PRG.Sync;
+using ProtoMsg;
 using RPG.Control;
 using RPG.Core;
 using RPG.Saving;

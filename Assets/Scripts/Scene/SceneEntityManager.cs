@@ -14,8 +14,7 @@ namespace RPG.Scene
     {
         private void Start()
         {
-            GameObject go = GenerateEnemyPrefab();
-            go.GetComponent<SyncObjectComponent>().isSyncControlled = false;
+            GenerateEnemyPrefab();
         }
 
         public static GameObject GenerateEnemyPrefab()
@@ -27,6 +26,8 @@ namespace RPG.Scene
             go.GetComponent<BaseStats>().startingLevel = 2;
             go.GetComponent<BaseStats>().InitBaseStat();
             go.GetComponent<PathPatrolComponent>().pathGroup = GameObject.Find("PatrolPoint");
+            
+            
             return go;
         }
 
