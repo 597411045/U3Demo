@@ -42,7 +42,10 @@ namespace RGP.Cmd
             GameObject go = GameObject.Find(GameObjectName);
             if (go != null)
             {
-                go.GetComponent<SyncObjectComponent>().syncObjects[tmp.ComponentName].GetSyncBuffer().Enqueue(json);
+                foreach (var c in go.GetComponents<ISyncObject>())
+                {
+                    c.GetSyncBuffer().Enqueue(json);
+                }
             }
         }
     }

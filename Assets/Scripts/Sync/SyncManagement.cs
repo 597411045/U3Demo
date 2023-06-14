@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using RGP.Cmd;
 using RPG.Core;
@@ -10,11 +11,12 @@ namespace PRG.Sync
     {
         private float timer = 0;
 
+        public List<string> clientsSIID;
+
         private void Awake()
         {
             base.Awake();
-            GameObject go = SceneEntityManager.GenerateEnemyPrefab();
-            go.GetComponent<SyncObjectComponent>().isSyncControlled = false;
+            clientsSIID = new List<string>();
         }
 
         public void SendSyncObject()
@@ -23,14 +25,17 @@ namespace PRG.Sync
             {
                 foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
-                    if (!c.isSyncControlled && c.SIID != "")
+                    if (c.ControllerSIID == "")
                     {
-                        foreach (var d in c.syncObjects)
+                        foreach (var d in c.GetComponents<ISyncObject>())
                         {
-                            string json = d.Value.BuildSyncObject();
+                            string json = d.BuildSyncObject();
                             if (json != "")
                             {
-                                CMDSyncObject.Ins.Send(c.SIID, c.gameObject.name, json);
+                                foreach (var e in clientsSIID)
+                                {
+                                    CMDSyncObject.Ins.Send(e, c.gameObject.name, json);
+                                }
                             }
                         }
                     }
@@ -48,11 +53,11 @@ namespace PRG.Sync
             {
                 foreach (var c in FindObjectsOfType<SyncObjectComponent>())
                 {
-                    if (c.enabled && c.SIID != "")
+                    if (c.ControllerSIID == "")
                     {
-                        foreach (var d in c.syncObjects)
+                        foreach (var d in c.GetComponents<ISyncObject>())
                         {
-                            d.Value.ApplySyncData();
+                            d.ApplySyncState();
                         }
                     }
                 }
@@ -61,19 +66,6 @@ namespace PRG.Sync
 
         public void SyncData()
         {
-            if (timer <= 0)
-            {
-                foreach (var c in FindObjectsOfType<SyncObjectComponent>())
-                {
-                    if (c.enabled && c.SIID != "")
-                    {
-                        foreach (var d in c.syncObjects)
-                        {
-                            d.Value.ApplySyncData();
-                        }
-                    }
-                }
-            }
         }
     }
 }

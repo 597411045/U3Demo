@@ -13,6 +13,7 @@ namespace PRG.Network
 
         public Dictionary<string, Dictionary<CommunicationChildType, NetTaskInstance>> clientCommunications;
 
+
         public NTICommCenter(string name) : base(name)
         {
             BuildCommunicationNTI();

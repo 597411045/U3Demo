@@ -58,7 +58,7 @@ namespace RPG.Control
         {
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
-            if (this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
+            if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
 
             if (cineMachine != null)
             {

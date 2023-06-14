@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using PRG.Cmd;
 using PRG.Network;
+using PRG.Sync;
 using RPG.Scene;
 using RPG.UI;
 using UnityEngine;
@@ -30,6 +31,9 @@ namespace RPG.Cmd
 
 
             //获取,验证客户端信息（状态，Transform等）
+            
+            SyncManagement.Ins.clientsSIID.Add(siid);
+            
             //TODO:获取信息
             //服务器本地创建
             string PrefabName = "Player";

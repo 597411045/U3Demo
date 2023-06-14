@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace PRG.Sync
 {
     public class SyncObjectComponent : MonoBehaviour
     {
-        public string SIID;
-        public Dictionary<string, ISyncObject> syncObjects;
-        public bool isSyncControlled = true;
+        public string ControllerSIID;
 
         private void Awake()
         {
-            syncObjects = new Dictionary<string, ISyncObject>();
         }
     }
 }

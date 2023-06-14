@@ -32,7 +32,7 @@ namespace RPG.Control
         private void Start()
         {
             base.Start();
-            player = GameObject.FindWithTag("Player");
+            //player = GameObject.FindWithTag("Player");
             targerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
             fac = this.GetComponent<FighterActionComponent>();
@@ -45,7 +45,8 @@ namespace RPG.Control
         public void LocalCompute()
         {
             if (hc.IsDead) return;
-            if (this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
+            if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
+            player = GameObject.FindWithTag("Player");
             SMachine.OnUpdate();
         }
 

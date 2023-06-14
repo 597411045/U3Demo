@@ -12,8 +12,6 @@ namespace PRG.Sync
 
         public PTTransform SyncObject { get; set; }
 
-        public void RegisterToSyncComponent();
-
         public Queue<string> GetSyncBuffer();
     }
 }

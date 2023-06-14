@@ -12,6 +12,11 @@ namespace RPG.Scene
 {
     public class SceneEntityManager : MonoBehaviour
     {
+        private void Start()
+        {
+            GameObject go = GenerateEnemyPrefab();
+            go.GetComponent<SyncObjectComponent>().isSyncControlled = false;
+        }
 
         public static GameObject GenerateEnemyPrefab()
         {
@@ -35,7 +40,7 @@ namespace RPG.Scene
                 go.name = gobjectName;
                 if (siid != "")
                 {
-                    go.GetComponent<SyncObjectComponent>().SIID = siid;
+                    go.GetComponent<SyncObjectComponent>().ControllerSIID = siid;
                 }
             }
             else

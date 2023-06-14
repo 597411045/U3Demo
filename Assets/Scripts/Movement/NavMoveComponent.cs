@@ -27,7 +27,6 @@ namespace RPG.Movement
         private void Start()
         {
             base.Start();
-            RegisterToSyncComponent();
         }
 
         public void LocalCompute()
@@ -64,7 +63,7 @@ namespace RPG.Movement
 
         private void UpdateAnimator()
         {
-            if (!this.GetComponent<SyncObjectComponent>().isSyncControlled)
+            if (this.GetComponent<SyncObjectComponent>().ControllerSIID == "")
             {
                 Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
                 Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
@@ -167,11 +166,6 @@ namespace RPG.Movement
             set { ptt = value; }
         }
 
-        public void RegisterToSyncComponent()
-        {
-            this.GetComponent<SyncObjectComponent>().syncObjects.Add(this.GetType().Name, this);
-        }
-
         public Queue<string> GetSyncBuffer()
         {
             return syncBuffer;
@@ -179,7 +173,7 @@ namespace RPG.Movement
 
         public string BuildSyncObject()
         {
-            if (this.GetComponent<SyncObjectComponent>().isSyncControlled) return "";
+            if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return "";
             ptt.GameObjectName = this.gameObject.name;
             ptt.ComponentName = "NavMoveComponent";
 
@@ -195,8 +189,11 @@ namespace RPG.Movement
 
         public void ApplySyncData()
         {
-            if (!this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
+        }
 
+
+        public void ApplySyncState()
+        {
             if (syncBuffer.Count > 0)
             {
                 ptt = PTTransform.Parser.ParseJson(syncBuffer.Dequeue());
@@ -206,12 +203,6 @@ namespace RPG.Movement
                     new Vector3(ptt.AngleX, ptt.AngleY, ptt.AngleZ);
                 this.GetComponent<Animator>().SetFloat("ForwardSpeed", ptt.Speed);
             }
-        }
-
-
-        public void ApplySyncState()
-        {
-            if (!this.GetComponent<SyncObjectComponent>().isSyncControlled) return;
         }
 
         #endregion
