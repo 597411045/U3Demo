@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b8ae9fe3cd46e491d51755eef8874d, type: 3}
+  m_Name: DialogueSO
+  m_EditorClassIdentifier: 
+  nodeList:
+  - Uid: 2881cf5c-c34b-450b-975a-46d272c5b93d
+    Text: 
+    NodeRect:
+      serializedVersion: 2
+      x: 192
+      y: 229
+      width: 200
+      height: 200
+  - Uid: 9fd11966-8f65-49c1-8f86-48f14cf81a30
+    Text: 1111
+    NodeRect:
+      serializedVersion: 2
+      x: 477
+      y: 33
+      width: 200
+      height: 200
+  - Uid: 3cf3f819-ee2a-4311-a1e7-57f74a640cb2
+    Text: 1111
+    NodeRect:
+      serializedVersion: 2
+      x: 559
+      y: 428
+      width: 200
+      height: 200
+  - Uid: bf045c4b-d2b4-473c-b012-6940646111bf
+    Text: 2222
+    NodeRect:
+      serializedVersion: 2
+      x: 870
+      y: 204
+      width: 200
+      height: 200

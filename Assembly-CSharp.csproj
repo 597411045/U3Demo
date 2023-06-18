@@ -41,87 +41,91 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\FSM\ITransition.cs" />
-     <Compile Include="Assets\Scripts\Proto\RPCImpl.cs" />
-     <Compile Include="Assets\Scripts\Stats\Progression.cs" />
-     <Compile Include="Assets\Scripts\Core\SingleTonWithMono.cs" />
-     <Compile Include="Assets\Scripts\IEnumratorExample.cs" />
-     <Compile Include="Assets\Scripts\Sync\SyncObjectComponent.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CmdManagement.cs" />
-     <Compile Include="Assets\Scripts\ThreadTest.cs" />
-     <Compile Include="Assets\Scripts\Combat\CombatAbleComponent.cs" />
-     <Compile Include="Assets\Scripts\Core\SingleTon.cs" />
-     <Compile Include="Assets\Scripts\Core\IAction.cs" />
-     <Compile Include="Assets\Scripts\Combat\ConsumeConfig.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDChangeScene.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDHello.cs" />
-     <Compile Include="Assets\Scripts\FSM\StateIdle.cs" />
-     <Compile Include="Assets\Scripts\FSM\TransToAttack.cs" />
-     <Compile Include="Assets\Scripts\Stats\StatEnum.cs" />
-     <Compile Include="Assets\Scripts\Stats\BaseStats.cs" />
-     <Compile Include="Assets\Scripts\FSM\CState.cs" />
-     <Compile Include="Assets\Scripts\Combat\WeaponConfig.cs" />
-     <Compile Include="Assets\Scripts\Network\NTIAccept.cs" />
-     <Compile Include="Assets\Scripts\Stats\IModifierProvider.cs" />
-     <Compile Include="Assets\Scripts\Controller\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\UI\UIControl.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CommandExecuter.cs" />
-     <Compile Include="Assets\Scripts\FSM\ISMachine.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDLogin.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDSyncRequest.cs" />
-     <Compile Include="Assets\Scripts\GameStartButton.cs" />
-     <Compile Include="Assets\Scripts\Core\PersistentClassComponent.cs" />
-     <Compile Include="Assets\Scripts\FSM\TransToDead.cs" />
-     <Compile Include="Assets\Scripts\Network\NTIConnect.cs" />
-     <Compile Include="Assets\Scripts\Core\TaskPipelineManager.cs" />
-     <Compile Include="Assets\Scripts\Combat\FighterActionComponent.cs" />
-     <Compile Include="Assets\Scripts\FSM\StateMove.cs" />
-     <Compile Include="Assets\Scripts\Proto\Test.cs" />
-     <Compile Include="Assets\Scripts\Movement\PathPatrolComponent.cs" />
-     <Compile Include="Assets\Scripts\Item\PickUpAble.cs" />
-     <Compile Include="Assets\Scripts\Saving\IJsonSaveable.cs" />
-     <Compile Include="Assets\Scripts\FSM\IState.cs" />
-     <Compile Include="Assets\Scripts\Movement\TerrianComponent.cs" />
-     <Compile Include="Assets\Scripts\Core\CamFollowComponent.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDSyncObject.cs" />
-     <Compile Include="Assets\Scripts\Cinematic\CameraShaderComponent.cs" />
-     <Compile Include="Assets\Scripts\Cmd\ICMDAction.cs" />
-     <Compile Include="Assets\Scripts\FSM\SMEnemy.cs" />
-     <Compile Include="Assets\Scripts\Combat\Projectile.cs" />
-     <Compile Include="Assets\Scripts\Core\Util.cs" />
-     <Compile Include="Assets\Scripts\Core\TaskPipelineBase.cs" />
-     <Compile Include="Assets\Scripts\Saving\JsonStatics.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\ITransition.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\Progression.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\SingleTonWithMono.cs" />
+     <Compile Include="Assets\Scripts\CS\IEnumratorExample.cs" />
+     <Compile Include="Assets\Scripts\CS\Sync\SyncObjectComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CmdManagement.cs" />
+     <Compile Include="Assets\Scripts\CS\ThreadTest.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\CombatAbleComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Proto\RPCImpl.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\SingleTon.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\IAction.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\ConsumeConfig.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDChangeScene.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDHello.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\StateIdle.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\TransToAttack.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\StatEnum.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\BaseStats.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\CState.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\WeaponConfig.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTIAccept.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\IModifierProvider.cs" />
+     <Compile Include="Assets\Scripts\Game\Controller\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Game\UI\UIControl.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CommandExecuter.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\ISMachine.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDLogin.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDSyncRequest.cs" />
+     <Compile Include="Assets\Scripts\Game\GameStartButton.cs" />
+     <Compile Include="Assets\Scripts\Game\Core\PersistentClassComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\TransToDead.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTIConnect.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\TaskPipelineManager.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\FighterActionComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\StateMove.cs" />
+     <Compile Include="Assets\Scripts\CS\Proto\Test.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\PathPatrolComponent.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\PickUpAble.cs" />
+     <Compile Include="Assets\Scripts\CS\Saving\IJsonSaveable.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\IState.cs" />
+     <Compile Include="Assets\Scripts\Game\Dialogue\DialogueNode.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\TerrianComponent.cs" />
+     <Compile Include="Assets\Scripts\Game\Core\CamFollowComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDSyncObject.cs" />
+     <Compile Include="Assets\Scripts\Game\Cinematic\CameraShaderComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\ICMDAction.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\SMEnemy.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\Projectile.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\Util.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\TaskPipelineBase.cs" />
+     <Compile Include="Assets\Scripts\CS\Saving\JsonStatics.cs" />
      <Compile Include="Assets\Asset Packs\GameDev.tv Assets\Scripts\Utils\LazyValue.cs" />
-     <Compile Include="Assets\Scripts\Saving\JsonSaveableEntity.cs" />
-     <Compile Include="Assets\Scripts\Core\ActionSchedulerComponent.cs" />
-     <Compile Include="Assets\Scripts\Network\NTICommCenter.cs" />
-     <Compile Include="Assets\Scripts\Controller\AIController.cs" />
-     <Compile Include="Assets\Scripts\FSM\CTransition.cs" />
-     <Compile Include="Assets\Scripts\FSM\StateAttack.cs" />
-     <Compile Include="Assets\Scripts\Scene\PortalTriggerComponent.cs" />
-     <Compile Include="Assets\Scripts\Cinematic\CMTriggerComponent.cs" />
-     <Compile Include="Assets\Scripts\Combat\WeaponComponent.cs" />
-     <Compile Include="Assets\Scripts\Item\IItemAction.cs" />
-     <Compile Include="Assets\Scripts\FSM\TransToMove.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDSyncRequestAllow.cs" />
-     <Compile Include="Assets\Scripts\FSM\TransToIdle.cs" />
-     <Compile Include="Assets\Scripts\Saving\SavingWrapper.cs" />
-     <Compile Include="Assets\Scripts\Network\NTICommChild.cs" />
-     <Compile Include="Assets\Scripts\FSM\StateDead.cs" />
-     <Compile Include="Assets\Scripts\FSM\CSMachine.cs" />
-     <Compile Include="Assets\Scripts\Movement\NavMoveComponent.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDBase.cs" />
-     <Compile Include="Assets\Scripts\Network\NetworkManagement.cs" />
-     <Compile Include="Assets\Scripts\Core\HealthComponent.cs" />
-     <Compile Include="Assets\Scripts\Sync\ISyncObject.cs" />
-     <Compile Include="Assets\Scripts\Core\IRayCastAble.cs" />
-     <Compile Include="Assets\Scripts\UI\CharacterUIComponent.cs" />
-     <Compile Include="Assets\Scripts\Saving\JsonSavingSystem.cs" />
-     <Compile Include="Assets\Scripts\Cmd\CMDGeneratePrefab.cs" />
-     <Compile Include="Assets\Scripts\Sync\SyncManagement.cs" />
-     <Compile Include="Assets\Scripts\Scene\AutoDestroy.cs" />
-     <Compile Include="Assets\Scripts\Scene\SceneEntityManager.cs" />
-     <Compile Include="Assets\Scripts\Proto\TestGrpc.cs" />
+     <Compile Include="Assets\Scripts\CS\Saving\JsonSaveableEntity.cs" />
+     <Compile Include="Assets\Scripts\Game\Core\ActionSchedulerComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTICommCenter.cs" />
+     <Compile Include="Assets\Scripts\Game\Controller\AIController.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\CTransition.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\StateAttack.cs" />
+     <Compile Include="Assets\Scripts\Game\Scene\PortalTriggerComponent.cs" />
+     <Compile Include="Assets\Scripts\Game\Dialogue\TaskSO.cs" />
+     <Compile Include="Assets\Scripts\Game\Cinematic\CMTriggerComponent.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\WeaponComponent.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\IItemAction.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\TransToMove.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDSyncRequestAllow.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\TransToIdle.cs" />
+     <Compile Include="Assets\Scripts\Game\Dialogue\DialogueSO.cs" />
+     <Compile Include="Assets\Scripts\CS\Proto\TestGrpc.cs" />
+     <Compile Include="Assets\Scripts\CS\Saving\SavingWrapper.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTICommChild.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\StateDead.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\CSMachine.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\NavMoveComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDBase.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NetworkManagement.cs" />
+     <Compile Include="Assets\Scripts\Game\Core\HealthComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Sync\ISyncObject.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\IRayCastAble.cs" />
+     <Compile Include="Assets\Scripts\Game\UI\CharacterUIComponent.cs" />
+     <Compile Include="Assets\Scripts\CS\Saving\JsonSavingSystem.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CMDGeneratePrefab.cs" />
+     <Compile Include="Assets\Scripts\CS\Sync\SyncManagement.cs" />
+     <Compile Include="Assets\Scripts\Game\Scene\AutoDestroy.cs" />
+     <Compile Include="Assets\Scripts\Game\Scene\SceneEntityManager.cs" />
+     <Compile Include="Assets\DialogTest.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets\Scenes\Sandbox 1 Client" />
      <None Include="Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
@@ -129,7 +133,7 @@
      <Folder Include="Assets\Asset Packs\SimpleFX\_Demo" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Shaders" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Rod of Death\Prefab" />
-     <Folder Include="Assets\Scripts\Cmd" />
+     <Folder Include="Assets\Scripts\CS\Cmd" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Sword" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Spear" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs\Vehicles" />
@@ -137,10 +141,11 @@
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs\Environments" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Models" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club\Prefab" />
-     <Folder Include="Assets\Scripts\Cinematic" />
+     <Folder Include="Assets\Scripts\Game\Cinematic" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE\Panoramics" />
-     <Folder Include="Assets\Scripts\Core" />
+     <Folder Include="Assets\Scripts\Game\Core" />
      <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample\UI\Update 1.1" />
+     <Folder Include="Assets\Scripts\Game" />
      <Folder Include="Assets\Game\Characters" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Bow\Prefab" />
      <Folder Include="Assets\Asset Packs\Animations\Unarmed" />
@@ -149,8 +154,9 @@
      <Folder Include="Assets\Asset Packs\Pixel Cursors\Demo" />
      <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample\Coins Pack\Money_Perspective" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow\Materials &amp; Meshes" />
+     <Folder Include="Assets\Game\Dialogue" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs\Buildings" />
-     <Folder Include="Assets\Scripts\Saving" />
+     <Folder Include="Assets\Scripts\CS\Saving" />
      <Folder Include="Assets\Asset Packs\Terrain Textures\Simple Textures" />
      <None Include="Assets\Asset Packs\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\TerrainAssets" />
@@ -188,7 +194,7 @@
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Pitchfork" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures\Old Floor Boards" />
      <Folder Include="Assets\Asset Packs\SimpleFX\Prefabs" />
-     <Folder Include="Assets\Scripts\FSM" />
+     <Folder Include="Assets\Scripts\CS\FSM" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required" />
      <Folder Include="Assets\Asset Packs\SimpleSky\_Textures\Materials" />
      <Folder Include="Assets\Asset Packs\SimpleFX\Models" />
@@ -204,8 +210,10 @@
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures" />
      <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample" />
      <Folder Include="Assets\Scenes\Sandbox 1\Sandbox 1_Profiles" />
+     <Folder Include="Assets\Scripts\CS\Proto" />
      <Folder Include="Assets\Scenes\Sandbox 2" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Props" />
+     <Folder Include="Assets\Scripts\CS" />
      <Folder Include="Assets\Asset Packs" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Sprites\Placeholders" />
      <Folder Include="Assets\Asset Packs\SimpleSky\_Materials" />
@@ -214,20 +222,20 @@
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Models" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE\Panoramics\FS002" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Scripts" />
-     <Folder Include="Assets\Scripts\Stats" />
+     <Folder Include="Assets\Scripts\Game\Stats" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE" />
      <Folder Include="Assets\Game\SceneMetric" />
-     <Folder Include="Assets\Scripts\Movement" />
+     <Folder Include="Assets\Scripts\Game\Movement" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Buildings" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Materials" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\SFX" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Textures" />
-     <Folder Include="Assets\Scripts\UI" />
+     <Folder Include="Assets\Scripts\Game\UI" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Armed" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Models" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Bow" />
-     <Folder Include="Assets\Scripts\Controller" />
+     <Folder Include="Assets\Scripts\Game\Controller" />
      <Folder Include="Assets\Scenes\Sandbox" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Environments" />
      <Folder Include="Assets\Scenes\Sandbox 1" />
@@ -241,7 +249,7 @@
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures\StoneWork" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Demo Scene" />
-     <Folder Include="Assets\Scripts\Item" />
+     <Folder Include="Assets\Scripts\Game\Item" />
      <Folder Include="Assets\Game\Characters\Resources" />
      <Folder Include="Assets\Game\Cinematics" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs" />
@@ -249,7 +257,7 @@
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs\Buildings" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village\Components" />
      <Folder Include="Assets\Asset Packs\Fantasy RPG UI Sample\UI\Parts" />
-     <Folder Include="Assets\Scripts\Scene" />
+     <Folder Include="Assets\Scripts\Game\Scene" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs" />
      <Folder Include="Assets\Scenes\Old_Trrian" />
@@ -268,9 +276,10 @@
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Materials" />
      <Folder Include="Assets\Asset Packs\Standard Assets" />
      <Folder Include="Assets\Asset Packs\Pixel Cursors\Cursors" />
+     <Folder Include="Assets\Scripts\CS\Core" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Materials" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle\Components" />
-     <Folder Include="Assets\Scripts\Network" />
+     <Folder Include="Assets\Scripts\CS\Network" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Club" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club\Materials and Model" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample" />
@@ -282,9 +291,10 @@
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Sprites" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Textures" />
-     <Folder Include="Assets\Scripts\Sync" />
+     <Folder Include="Assets\Scripts\CS\Sync" />
+     <Folder Include="Assets\Scripts\Game\Dialogue" />
      <Folder Include="Assets\Scenes" />
-     <Folder Include="Assets\Scripts\Combat" />
+     <Folder Include="Assets\Scripts\Game\Combat" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle\Components\Materials" />
      <Folder Include="Assets\Game" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Prefabs" />
@@ -530,6 +540,12 @@
      <Reference Include="System.Numerics.Vectors">
      <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Numerics.Vectors.dll</HintPath>
      </Reference>
+     <Reference Include="Grpc.Core.Api">
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Grpc.Core.Api.dll</HintPath>
+     </Reference>
+     <Reference Include="Grpc.Core">
+     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Grpc.Core.dll</HintPath>
+     </Reference>
      <Reference Include="System.Runtime.CompilerServices.Unsafe">
      <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
      </Reference>
@@ -541,12 +557,6 @@
      </Reference>
      <Reference Include="Google.Protobuf">
      <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Google.Protobuf.dll</HintPath>
-     </Reference>
-     <Reference Include="Grpc.Core">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Grpc.Core.dll</HintPath>
-     </Reference>
-     <Reference Include="Grpc.Core.Api">
-     <HintPath>C:\Users\AC\Desktop\U3Demo\Assets\Plugins\Grpc.Core.Api.dll</HintPath>
      </Reference>
      <Reference Include="netstandard">
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\NetStandard\ref\2.0.0\netstandard.dll</HintPath>
