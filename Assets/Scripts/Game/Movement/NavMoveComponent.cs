@@ -17,9 +17,13 @@ namespace RPG.Movement
         //SyncObject
         private PTTransform ptt;
         public Queue<string> syncBuffer;
+        private GameObject cineMachine;
+        private Vector3 movingPredict;
+        private Vector3 desPredict;
 
         private void Awake()
         {
+            cineMachine = GameObject.Find("CM vcam1");
             ptt = new PTTransform();
             nmp = new NavMeshPath();
             syncBuffer = new Queue<string>();
@@ -35,6 +39,74 @@ namespace RPG.Movement
             UpdateAnimator();
         }
 
+        public void ActMoveUpdating()
+        {
+            //WSAD
+            if (Input.GetKey(KeyCode.W))
+            {
+                if (movingPredict.z < 2)
+                    movingPredict.z += 0.5f;
+            }
+            else
+            {
+                if (movingPredict.z > 0)
+                {
+                    movingPredict.z -= 0.5f;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.S))
+            {
+                if (movingPredict.z > -2)
+                    movingPredict.z -= 0.5f;
+            }
+            else
+            {
+                if (movingPredict.z < 0)
+                {
+                    movingPredict.z += 0.5f;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.A))
+            {
+                if (movingPredict.x > -2)
+
+                    movingPredict.x -= 0.5f;
+            }
+            else
+            {
+                if (movingPredict.x < 0)
+                {
+                    movingPredict.x += 0.5f;
+                }
+            }
+
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (movingPredict.x < 2)
+
+                    movingPredict.x += 0.5f;
+            }
+            else
+            {
+                if (movingPredict.x > 0)
+                {
+                    movingPredict.x -= 0.5f;
+                }
+            }
+
+            Vector3 directZ = (this.transform.position - new Vector3(cineMachine.transform.position.x,
+                this.transform.position.y, cineMachine.transform.position.z)).normalized;
+            Quaternion q = Quaternion.LookRotation(directZ, Vector3.up);
+            desPredict = (q * movingPredict) + this.transform.position;
+
+            //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) ||
+            //    Input.GetKey(KeyCode.D))
+            {
+                this.GetComponent<NavMeshAgent>().SetDestination(desPredict);
+            }
+        }
 
         #region 普通函数
 
@@ -207,5 +279,12 @@ namespace RPG.Movement
         }
 
         #endregion
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.DrawSphere(desPredict, 1f);
+            Gizmos.DrawLine(this.transform.position,
+                desPredict);
+        }
     }
 }

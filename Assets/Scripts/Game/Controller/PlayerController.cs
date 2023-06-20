@@ -3,8 +3,11 @@ using Cinemachine;
 using PRG.Network;
 using PRG.Sync;
 using RPG.Cmd;
+using RPG.Combat;
 using RPG.Core;
+using RPG.Movement;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
@@ -24,6 +27,8 @@ namespace RPG.Control
     public class PlayerController : TaskPipelineBase<PlayerController>, ILocalCompute
     {
         private GameObject cineMachine;
+        private Animator animator;
+
 
         [Serializable]
         struct CursorMapping
@@ -40,6 +45,7 @@ namespace RPG.Control
             if (!NetworkManagement.isServer)
             {
                 cineMachine = GameObject.Find("CM vcam1");
+                animator = this.GetComponent<Animator>();
                 cineMachine.GetComponent<CinemachineVirtualCamera>().Follow = this.gameObject.transform;
             }
         }
@@ -53,14 +59,21 @@ namespace RPG.Control
             if (!this.gameObject.activeInHierarchy) return;
             if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
 
+
+            if(animator.is)
+            this.GetComponent<NavMoveComponent>().ActMoveUpdating();
+
+
+            //Camera
             if (cineMachine != null)
             {
-                if (Input.GetMouseButtonDown(1))
+                //右键旋转模式，通过鼠标视口的位置判断，问题：超出视口无效
+                if (false && Input.GetMouseButtonDown(1))
                 {
                     oldMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
                 }
 
-                if (Input.GetMouseButton(1))
+                if (false && Input.GetMouseButton(1))
                 {
                     mouseMoveDelta = (Camera.main.ScreenToViewportPoint(Input.mousePosition) - oldMousePosition);
                     cineMachine.transform.Rotate(Vector3.up, mouseMoveDelta.x * 50, Space.World);
@@ -71,31 +84,57 @@ namespace RPG.Control
 
                     oldMousePosition = Camera.main.ScreenToViewportPoint(Input.mousePosition);
                 }
-            }
 
-
-            if (EventSystem.current.IsPointerOverGameObject())
-            {
-                SetCursor(CursorType.UI);
-                return;
-            }
-
-            RaycastHit[] hit = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
-            for (int i = 0; i < hit.Length; i++)
-            {
-                for (int j = i + 1; j < hit.Length; j++)
+                //全局旋转模式，通过GetAxis
+                if (Mathf.Abs(Input.GetAxis("Mouse X")) >= 0.1f)
                 {
-                    if (hit[i].distance > hit[j].distance)
-                    {
-                        (hit[j], hit[i]) = (hit[i], hit[j]);
-                    }
+                    cineMachine.transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * Time.deltaTime * 10,
+                        Space.World);
                 }
 
-                if (hit[i].transform.GetComponent<IRayCastAble>() != null)
+                if (Mathf.Abs(Input.GetAxis("Mouse Y")) >= 0.1f)
                 {
-                    if (hit[i].transform.GetComponent<IRayCastAble>().HandleRaycaset(this, hit[i]))
+                    cineMachine.transform.Rotate(Vector3.right, -Input.GetAxis("Mouse Y") * Time.deltaTime * 10);
+                    cineMachine.transform.eulerAngles = new Vector3(
+                        Mathf.Clamp(cineMachine.transform.eulerAngles.x, 10, 60), cineMachine.transform.eulerAngles.y,
+                        cineMachine.transform.eulerAngles.z);
+                }
+
+                //锁鼠标
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                this.GetComponent<FighterActionComponent>().ActAttack();
+            }
+
+            //老操作模式，纯鼠标操作，以后可用于纯ui操作界面：
+            if (false)
+            {
+                if (EventSystem.current.IsPointerOverGameObject())
+                {
+                    SetCursor(CursorType.UI);
+                    return;
+                }
+
+                RaycastHit[] hit = Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition));
+                for (int i = 0; i < hit.Length; i++)
+                {
+                    for (int j = i + 1; j < hit.Length; j++)
                     {
-                        return;
+                        if (hit[i].distance > hit[j].distance)
+                        {
+                            (hit[j], hit[i]) = (hit[i], hit[j]);
+                        }
+                    }
+
+                    if (hit[i].transform.GetComponent<IRayCastAble>() != null)
+                    {
+                        if (hit[i].transform.GetComponent<IRayCastAble>().HandleRaycaset(this, hit[i]))
+                        {
+                            return;
+                        }
                     }
                 }
             }
@@ -128,6 +167,7 @@ namespace RPG.Control
         public void SetCursor(CursorType e)
         {
             CursorMapping m = GetCursorMapping(e);
+
             Cursor.SetCursor(m.texture, m.hotspot, CursorMode.Auto);
         }
 

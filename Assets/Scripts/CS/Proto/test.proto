@@ -16,6 +16,7 @@ message PTTransform{
 
   string gameObjectName = 8;
   string componentName = 9;
+  
 }
 
 message ResultCode{

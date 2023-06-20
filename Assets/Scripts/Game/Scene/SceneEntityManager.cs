@@ -14,7 +14,7 @@ namespace RPG.Scene
     {
         private void Start()
         {
-            GenerateEnemyPrefab();
+            //GenerateEnemyPrefab();
         }
 
         public static GameObject GenerateEnemyPrefab()

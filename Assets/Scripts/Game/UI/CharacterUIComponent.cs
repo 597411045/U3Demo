@@ -7,11 +7,17 @@ namespace RPG.UI
     {
         public float timer = 0f;
         public bool persist;
+        public GameObject cineMachine;
+
+        private void Awake()
+        {
+            cineMachine = GameObject.Find("CM vcam1");
+        }
 
         private void LateUpdate()
         {
-            if (Camera.main == null) return;
-            this.transform.forward = Camera.main.transform.forward;
+            if (cineMachine == null) return;
+            this.transform.rotation = cineMachine.transform.rotation;
 
             if (persist) return;
 

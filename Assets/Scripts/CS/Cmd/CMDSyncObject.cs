@@ -49,6 +49,12 @@ namespace RGP.Cmd
                     c.GetSyncBuffer().Enqueue(json);
                 }
             }
+            else
+            {
+                //如果收到同步信息，没有该物体，生成该物体
+                
+            }
+            
             
         }
     }

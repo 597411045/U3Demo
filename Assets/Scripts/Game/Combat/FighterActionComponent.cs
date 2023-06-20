@@ -66,6 +66,16 @@ namespace RPG.Combat
             }
         }
 
+        public void ActAttack()
+        {
+            if (TimeLeftToAttackAction <= 0)
+            {
+                this.GetComponent<Animator>().ResetTrigger("StopAttack");
+                this.GetComponent<Animator>().SetTrigger("IfAttack");
+                TimeLeftToAttackAction = weaponConfig.attackInterval;
+            }
+        }
+
         private bool GetIfInRange()
         {
             return Vector3.Distance(transform.position, target.position) < weaponConfig.weaponRange;

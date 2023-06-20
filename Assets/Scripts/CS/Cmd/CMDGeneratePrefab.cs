@@ -1,6 +1,7 @@
 ﻿using System.Text;
 using PRG.Cmd;
 using PRG.Network;
+using PRG.Sync;
 using RPG.Scene;
 using RPG.UI;
 using UnityEngine;
@@ -39,11 +40,12 @@ namespace RPG.Cmd
             //PTTransform ptt = PTTransform.Parser.ParseJson(PTT);
             //Vector3 position = new Vector3(ptt.PositionX, ptt.PositionY, ptt.PositionZ);
             if (YouAreOwner == "TRUE")
-            {            
+            {
+                SyncManagement.Ins.syncSIID.Add(siid);
                 siid = "";
+                //客户端：仅将服务器作为广播对象
             }
             SceneEntityManager.GeneratePurePrefab(PrefabName, GameObjectName, Vector3.zero, siid);
-
         }
     }
 }

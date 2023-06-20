@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.0078735305, g: 0.029314285, b: 0.15393376, a: 1}
+  m_IndirectSpecularColor: {r: 0.007856586, g: 0.029214475, b: 0.1537363, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19569,6 +19569,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1762891301}
     m_Modifications:
+    - target: {fileID: 1618591385486876687, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1883138393196008226, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -19616,6 +19620,18 @@ PrefabInstance:
     - target: {fileID: 1883138393196008227, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
       propertyPath: m_Name
       value: Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883138393196008232, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883138393196008233, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1883138393196008238, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1245296b8a54df4458085fc551e2c50f, type: 3}
