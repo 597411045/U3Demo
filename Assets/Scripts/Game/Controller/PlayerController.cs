@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using Game.Item;
 using PRG.Network;
 using PRG.Sync;
 using RPG.Cmd;
@@ -23,8 +24,8 @@ namespace RPG.Control
         Deny,
     }
 
-
-    public class PlayerController : TaskPipelineBase<PlayerController>, ILocalCompute
+    
+    public class PlayerController : ControllerBase, ILocalCompute
     {
         private GameObject cineMachine;
         private Animator animator;
@@ -60,7 +61,13 @@ namespace RPG.Control
             if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
 
 
-            if(animator.is)
+            AnimatorClipInfo[] a = animator.GetCurrentAnimatorClipInfo(0);
+            // int b = animator.GetCurrentAnimatorClipInfoCount(0);
+            // AnimatorStateInfo c = animator.GetCurrentAnimatorStateInfo(0);
+            // AnimatorTransitionInfo d = animator.GetAnimatorTransitionInfo(0);
+            // RuntimeAnimatorController e = animator.runtimeAnimatorController;
+            // AnimationClip[] f = e.animationClips;
+
             this.GetComponent<NavMoveComponent>().ActMoveUpdating();
 
 

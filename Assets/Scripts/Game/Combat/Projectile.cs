@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace RPG.Combat
 {
-    public class Projectile : TaskPipelineBase<Projectile>, ILocalCompute
+    public class Projectile : TaskPipelineBaseWithSTMN<Projectile>, ILocalCompute
     {
         [SerializeField] private float speed = 1;
         [SerializeField] public bool isAutoNav;

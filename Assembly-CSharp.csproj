@@ -52,7 +52,6 @@
      <Compile Include="Assets/Scripts/CS/Proto/RPCImpl.cs" />
      <Compile Include="Assets/Scripts/CS/Core/SingleTon.cs" />
      <Compile Include="Assets/Scripts/CS/Core/IAction.cs" />
-     <Compile Include="Assets/Scripts/Game/Combat/ConsumeConfig.cs" />
      <Compile Include="Assets/Scripts/CS/Cmd/CMDChangeScene.cs" />
      <Compile Include="Assets/Scripts/CS/Cmd/CMDHello.cs" />
      <Compile Include="Assets/Scripts/CS/FSM/StateIdle.cs" />
@@ -60,7 +59,7 @@
      <Compile Include="Assets/Scripts/Game/Stats/StatEnum.cs" />
      <Compile Include="Assets/Scripts/Game/Stats/BaseStats.cs" />
      <Compile Include="Assets/Scripts/CS/FSM/CState.cs" />
-     <Compile Include="Assets/Scripts/Game/Combat/WeaponConfig.cs" />
+     <Compile Include="Assets/Scripts/Game/Item/WeaponConfig.cs" />
      <Compile Include="Assets/Scripts/CS/Network/NTIAccept.cs" />
      <Compile Include="Assets/Scripts/Game/Stats/IModifierProvider.cs" />
      <Compile Include="Assets/Scripts/Game/Controller/PlayerController.cs" />
@@ -90,7 +89,8 @@
      <Compile Include="Assets/Scripts/CS/FSM/SMEnemy.cs" />
      <Compile Include="Assets/Scripts/Game/Combat/Projectile.cs" />
      <Compile Include="Assets/Scripts/CS/Core/Util.cs" />
-     <Compile Include="Assets/Scripts/CS/Core/TaskPipelineBase.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\TaskPipelineBase.cs" />
+     <Compile Include="Assets\Scripts\CS\Core\TaskPipelineBaseWithSTMN.cs" />
      <Compile Include="Assets/Scripts/CS/Saving/JsonStatics.cs" />
      <Compile Include="Assets/Asset Packs/GameDev.tv Assets/Scripts/Utils/LazyValue.cs" />
      <Compile Include="Assets/Scripts/CS/Saving/JsonSaveableEntity.cs" />
@@ -103,7 +103,6 @@
      <Compile Include="Assets/Scripts/Game/Dialogue/TaskSO.cs" />
      <Compile Include="Assets/Scripts/Game/Cinematic/CMTriggerComponent.cs" />
      <Compile Include="Assets/Scripts/Game/Combat/WeaponComponent.cs" />
-     <Compile Include="Assets/Scripts/Game/Item/IItemAction.cs" />
      <Compile Include="Assets/Scripts/CS/FSM/TransToMove.cs" />
      <Compile Include="Assets/Scripts/CS/Cmd/CMDSyncRequestAllow.cs" />
      <Compile Include="Assets/Scripts/CS/FSM/TransToIdle.cs" />
@@ -126,6 +125,11 @@
      <Compile Include="Assets/Scripts/Game/Scene/AutoDestroy.cs" />
      <Compile Include="Assets/Scripts/Game/Scene/SceneEntityManager.cs" />
      <Compile Include="Assets/DialogTest.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\Item_HealthPotion.cs" />
+     <Compile Include="Assets\Scripts\Game\Controller\ControllerBase.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\ItemBase_SO.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\Item_SwordWeapon.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\ItemBase_Weapon.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scenes/Sandbox 1 Client" />
      <None Include="Assets/Asset Packs/Synty - Polygon Student Sample/README - Usage Rights for these assets.txt" />
@@ -235,7 +239,6 @@
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Synty Asset Packs - Commercial licence required" />
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Synty Asset Packs - Commercial licence required/PolygonVikings/Models" />
      <Folder Include="Assets/Asset Packs/Animations by Explosive/2Hand-Bow" />
-     <Folder Include="Assets/Scripts/Game/Controller" />
      <Folder Include="Assets/Scenes/Sandbox" />
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Synty Asset Packs - Commercial licence required/PolygonAdventure/Prefabs/Environments" />
      <Folder Include="Assets/Scenes/Sandbox 1" />
@@ -249,7 +252,6 @@
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Environments - Misc other assets/Textures/StoneWork" />
      <Folder Include="Assets/Asset Packs/Standard Assets/Environment/Water" />
      <Folder Include="Assets/Asset Packs/Synty - Polygon Student Sample/Demo Scene" />
-     <Folder Include="Assets/Scripts/Game/Item" />
      <Folder Include="Assets/Game/Characters/Resources" />
      <Folder Include="Assets/Game/Cinematics" />
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Synty Asset Packs - Commercial licence required/PolygonKnights/Prefabs" />
@@ -276,7 +278,6 @@
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Environments - Misc other assets/Materials" />
      <Folder Include="Assets/Asset Packs/Standard Assets" />
      <Folder Include="Assets/Asset Packs/Pixel Cursors/Cursors" />
-     <Folder Include="Assets/Scripts/CS/Core" />
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Synty Asset Packs - Commercial licence required/PolygonKnights/Materials" />
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Environments - Misc other assets/Castle/Components" />
      <Folder Include="Assets/Scripts/CS/Network" />

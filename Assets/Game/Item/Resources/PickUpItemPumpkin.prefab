@@ -136,8 +136,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2f2ff540329e5c4884709b3cd69392e, type: 3}
+--- !u!1 &2920981312403177866 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6799249898322980240, guid: e2f2ff540329e5c4884709b3cd69392e, type: 3}
+  m_PrefabInstance: {fileID: 8562082610124057626}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5710114854134880396 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4173930796636861590, guid: e2f2ff540329e5c4884709b3cd69392e, type: 3}
   m_PrefabInstance: {fileID: 8562082610124057626}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6416141758617605075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2920981312403177866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1213721e4f9249998bcee1243288fc22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uuid: 
+  ItemPrefab: {fileID: 0}
+  potionConfig: {fileID: 11400000, guid: 1defe0c45da604f8d8b74cb2c1513afa, type: 2}

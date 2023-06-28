@@ -118,7 +118,7 @@ namespace PRG.Network
     }
 
     //网络方案总入口
-    public class NetworkManagement : TaskPipelineBase<NetworkManagement>, IRecvCmd
+    public class NetworkManagement : TaskPipelineBaseWithSTMN<NetworkManagement>, IRecvCmd
     {
         //public static NetworkManagement Ins;
         public static bool isServer;

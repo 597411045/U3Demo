@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Game.Item;
 using PRG.Sync;
 using RPG.Combat;
 using RPG.Movement;
@@ -22,7 +23,6 @@ namespace RPG.Scene
             GameObject go = Instantiate(Resources.Load<GameObject>("Enemy"));
             go.transform.position = new Vector3(27.79f, 1.6f, 6.26f);
             go.transform.eulerAngles = new Vector3(0, -257.29f, 0);
-            go.GetComponent<FighterActionComponent>().EquipItem(Resources.Load<WeaponConfig>("SwordWeapon"));
             go.GetComponent<BaseStats>().startingLevel = 2;
             go.GetComponent<BaseStats>().InitBaseStat();
             go.GetComponent<PathPatrolComponent>().pathGroup = GameObject.Find("PatrolPoint");

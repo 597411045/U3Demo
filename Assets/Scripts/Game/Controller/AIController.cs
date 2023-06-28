@@ -11,7 +11,7 @@ using UnityEngine.AI;
 
 namespace RPG.Control
 {
-    public class AIController : TaskPipelineBase<AIController>, ILocalCompute
+    public class AIController : ControllerBase, ILocalCompute
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] [Range(0, 6)] private float chaseSpeed = 5;
@@ -22,6 +22,7 @@ namespace RPG.Control
         private float suspicionTimeAfterPatrol = 2;
         private HealthComponent hc;
         private FighterActionComponent fac;
+
 
         private SMEnemy SMachine;
 
@@ -72,7 +73,7 @@ namespace RPG.Control
         private bool IfOutAttackRange()
         {
             if (player == null) return false;
-            if (Vector3.Distance(this.transform.position, player.transform.position) > fac.weaponConfig.weaponRange ||
+            if (Vector3.Distance(this.transform.position, player.transform.position) > CurrentWeapon.weaponRange ||
                 player.GetComponent<HealthComponent>().IsDead)
             {
                 this.GetComponent<Animator>().SetTrigger("StopAttack");
@@ -95,12 +96,12 @@ namespace RPG.Control
         private bool IfInAttackRange()
         {
             if (player == null) return false;
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= fac.weaponConfig.weaponRange &&
+            if (Vector3.Distance(this.transform.position, player.transform.position) <= CurrentWeapon.weaponRange &&
                 player.GetComponent<HealthComponent>().IsDead == false)
             {
                 this.GetComponent<NavMeshAgent>().enabled = false;
                 SMachine.attackTarget = player.transform;
-                fac.target = player.transform;
+                fac.target = player;
                 return true;
             }
             else
@@ -140,7 +141,7 @@ namespace RPG.Control
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                fac.TimeLeftToAttackAction = fac.weaponConfig.attackInterval;
+                fac.TimeLeftToAttackAction = CurrentWeapon.attackInterval;
             }
         }
 

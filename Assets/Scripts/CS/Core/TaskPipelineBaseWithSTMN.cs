@@ -2,7 +2,7 @@
 
 namespace RPG.Core
 {
-    public class TaskPipelineBase : MonoBehaviour
+    public class TaskPipelineBaseWithSTMN<T> : SingleTonWithMono<T> where T : TaskPipelineBaseWithSTMN<T>
     {
         private bool IfDestroyed;
 

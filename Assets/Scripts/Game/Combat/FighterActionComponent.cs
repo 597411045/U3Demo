@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Game.Item;
 using Newtonsoft.Json.Linq;
+using RPG.Control;
 using RPG.Core;
 using RPG.Movement;
 using RPG.Saving;
@@ -13,23 +15,18 @@ using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
-    public class FighterActionComponent : TaskPipelineBase<FighterActionComponent>, IAction, IJsonSaveable, IModifierProvider,ILocalCompute
+    public class FighterActionComponent : TaskPipelineBase, IAction, IJsonSaveable,
+        IModifierProvider, ILocalCompute
     {
         [SerializeField] private bool isFsmControlled;
 
-        [SerializeField] private Transform handTransform;
-
-        [FormerlySerializedAs("_weapon")] [SerializeField]
-        public WeaponConfig weaponConfig;
-
-        [SerializeField] public Transform weaponTR;
-
-        public Transform target;
+        public GameObject target;
         public float TimeLeftToAttackAction = 0f;
+        private ControllerBase controller;
 
         private void Awake()
         {
-            weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
+            controller = this.GetComponent<ControllerBase>();
         }
 
         private void OnLocalCompute()
@@ -45,7 +42,7 @@ namespace RPG.Combat
 
             if (!GetIfInRange())
             {
-                this.GetComponent<NavMoveComponent>().MoveToPosition(target.position);
+                this.GetComponent<NavMoveComponent>().MoveToPosition(target.transform.position);
             }
             else
             {
@@ -62,7 +59,7 @@ namespace RPG.Combat
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                TimeLeftToAttackAction = weaponConfig.attackInterval;
+                TimeLeftToAttackAction = controller.CurrentWeapon.attackInterval;
             }
         }
 
@@ -72,13 +69,14 @@ namespace RPG.Combat
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                TimeLeftToAttackAction = weaponConfig.attackInterval;
+                TimeLeftToAttackAction = controller.CurrentWeapon.attackInterval;
             }
         }
 
         private bool GetIfInRange()
         {
-            return Vector3.Distance(transform.position, target.position) < weaponConfig.weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) <
+                   controller.CurrentWeapon.weaponRange;
         }
 
         public bool TryMakeTargetBeAttackTarget(CombatAbleComponent cac, float speed = 0)
@@ -97,7 +95,7 @@ namespace RPG.Combat
             }
 
             this.GetComponent<ActionSchedulerComponent>().StartAction(this);
-            target = cac.transform;
+            target = cac.transform.gameObject;
             return true;
         }
 
@@ -109,28 +107,30 @@ namespace RPG.Combat
 
         private void Hit()
         {
+            Debug.Log(123);
+
             if (target == null) return;
             target.GetComponent<HealthComponent>()
                 .TakeDamage(this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage),
                     this.gameObject);
-            if (weaponConfig.hitAudio != null)
+            if (controller.CurrentWeapon.hitAudio != null)
             {
-                weaponTR.GetComponent<AudioSource>().clip = weaponConfig.hitAudio;
-                weaponTR.GetComponent<AudioSource>().Play();
+                controller.CurrentWeapon.go.GetComponent<AudioSource>().clip = controller.CurrentWeapon.hitAudio;
+                controller.CurrentWeapon.go.GetComponent<AudioSource>().Play();
             }
         }
 
         private void Shoot()
         {
             if (target == null) return;
-            GameObject go = Instantiate(weaponConfig.projectilePrefab);
+            GameObject go = Instantiate(controller.CurrentWeapon.projectilePrefab);
             go.GetComponent<Projectile>().atk =
                 this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage);
             //go.GetComponent<Projectile>().isAutoNav = true;
             go.GetComponent<Projectile>().Target = target.gameObject;
             go.GetComponent<Projectile>().launcher = this.gameObject;
 
-            go.transform.position = weaponTR.position;
+            go.transform.position = controller.CurrentWeapon.go.transform.position;
             go.transform.position += (target.transform.position - this.transform.position).normalized * 0.5f;
 
             go.GetComponent<Projectile>().direction =
@@ -138,17 +138,15 @@ namespace RPG.Combat
         }
 
 
-        public void EquipItem(WeaponConfig weaponConfig)
-        {
-            this.weaponConfig.Drop(weaponTR);
-            this.weaponConfig = weaponConfig;
-            this.weaponConfig.Spawn(this.transform, this.GetComponent<Animator>(), out weaponTR);
-        }
+        // public void EquipItem(WeaponConfig weaponConfig)
+        // {
+        //     
+        // }
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(this.transform.position, weaponConfig.weaponRange);
+            Gizmos.DrawWireSphere(this.transform.position, controller.CurrentWeapon.weaponRange);
         }
 
         public JToken CaptureAsJTokenInInterface()
@@ -157,7 +155,7 @@ namespace RPG.Combat
 
             JObject state = new JObject();
             IDictionary<string, JToken> stateDict = state;
-            stateDict["weaponPrefabName"] = weaponConfig.prefabName;
+            stateDict["weaponPrefabName"] = controller.CurrentWeapon.PrefabInScene.name.ToString();
             return state;
         }
 
@@ -168,7 +166,7 @@ namespace RPG.Combat
             JObject s = state.ToObject<JObject>();
             IDictionary<string, JToken> stateDict = s;
             string str = stateDict["weaponPrefabName"].ToObject<string>();
-            EquipItem(Resources.Load<WeaponConfig>(str));
+            controller.EquipItem(Resources.Load<ItemBase_Weapon>(str));
         }
 
         public float GetTargetHP()
@@ -181,7 +179,7 @@ namespace RPG.Combat
         {
             if (e == ProgressionEnum.Damage)
             {
-                yield return weaponConfig.weaponDamage;
+                yield return controller.CurrentWeapon.weaponDamage;
             }
         }
 
@@ -190,8 +188,7 @@ namespace RPG.Combat
             yield return 1f;
         }
 
-      
-        
+
         private void Start()
         {
             if (!isFsmControlled)
@@ -199,7 +196,7 @@ namespace RPG.Combat
                 base.Start();
             }
         }
-      
+
         void ILocalCompute.LocalCompute()
         {
             OnLocalCompute();

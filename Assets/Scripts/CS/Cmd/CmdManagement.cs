@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class CmdManagement : TaskPipelineBase<CmdManagement>, ILocalCompute
+    public class CmdManagement : TaskPipelineBaseWithSTMN<CmdManagement>, ILocalCompute
     {
         //spublic static CmdManagement Ins;
 

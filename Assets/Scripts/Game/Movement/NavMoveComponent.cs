@@ -11,7 +11,7 @@ using UnityEngine.AI;
 
 namespace RPG.Movement
 {
-    public class NavMoveComponent : TaskPipelineBase<NavMoveComponent>, IAction, IJsonSaveable, ILocalCompute,
+    public class NavMoveComponent : TaskPipelineBaseWithSTMN<NavMoveComponent>, IAction, IJsonSaveable, ILocalCompute,
         ISyncObject
     {
         //SyncObject

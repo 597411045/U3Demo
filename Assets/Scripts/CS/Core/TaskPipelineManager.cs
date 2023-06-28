@@ -69,7 +69,7 @@ public interface ISendSyncObject : IBaseTask
     void SendSyncObject();
 }
 
-public class TaskPipelineManager : TaskPipelineBase<TaskPipelineManager>
+public class TaskPipelineManager : TaskPipelineBaseWithSTMN<TaskPipelineManager>
 {
     //public static TaskPipelineManager Ins;
 

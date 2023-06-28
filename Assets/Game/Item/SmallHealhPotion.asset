@@ -10,7 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 156ae11d25aa4e23965bb1a9478a07e8, type: 3}
-  m_Name: Pumpkin
+  m_Name: SmallHealhPotion
   m_EditorClassIdentifier: 
-  ConsumePrefab: {fileID: 199514, guid: 626f1b816ba1ee64a9f7cea6ceb529cd, type: 3}
-  consumeValue: 20
+  prefab: {fileID: 0}
+  value: 10
+  durtion: 0

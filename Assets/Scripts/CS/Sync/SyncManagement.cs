@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 namespace PRG.Sync
 {
-    public class SyncManagement : TaskPipelineBase<SyncManagement>, ISendSyncObject, ISyncData, ISyncStats
+    public class SyncManagement : TaskPipelineBaseWithSTMN<SyncManagement>, ISendSyncObject, ISyncData, ISyncStats
     {
         private float timer = 0;
 

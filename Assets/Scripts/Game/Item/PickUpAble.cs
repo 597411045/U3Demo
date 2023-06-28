@@ -7,58 +7,51 @@ using RPG.Core;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public enum ItemType
+namespace Game.Item
 {
-    Weapon,
-    Consume
-}
-
-
-public class PickUpAble : TaskPipelineBase<PickUpAble>, IRayCastAble, ILocalCompute
-{
-    [FormerlySerializedAs("_weapon")] [SerializeField]
-    private WeaponConfig weaponConfig = null;
-
-    [SerializeField] private ConsumeConfig consumeConfig;
-
-    public float timer = 0;
-
-    void Awake()
+    public enum ItemType
     {
-        
+        Weapon,
+        Consume
     }
 
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (timer >= 0) return;
-        if (collision.gameObject.tag.Equals("Player") || collision.gameObject.name.Contains("Enemy"))
-        {
-            weaponConfig?.DoAction(collision.gameObject);
-            consumeConfig?.DoAction(collision.gameObject);
-            Destroy(this.gameObject);
-        }
-    }
 
-    public bool HandleRaycaset(PlayerController p, RaycastHit h)
+    public class PickUpAble : TaskPipelineBaseWithSTMN<PickUpAble>, IRayCastAble
     {
-        p.SetCursor(CursorType.PickUp);
-        if (Input.GetMouseButtonDown(0))
-        {
-            weaponConfig?.DoAction(p.gameObject);
-            consumeConfig?.DoAction(p.gameObject);
+        public float timer = 0;
+        [FormerlySerializedAs("item")] public ItemBase_SO itemBase;
 
-            Destroy(this.gameObject);
+        //触发器拾取模式
+        private void OnTriggerEnter(Collider collision)
+        {
+            if (timer >= 0) return;
+            if (collision.gameObject.tag.Equals("Player"))
+            {
+                itemBase.OnPickup(collision.gameObject);
+                //拾取后删除物体拾取预制体
+                Destroy(this.gameObject);
+            }
         }
 
-        return true;
-    }
-
-    public void LocalCompute()
-    {
-        if (timer >= 0)
+        //鼠标点击拾取模式
+        public bool HandleRaycaset(PlayerController p, RaycastHit h)
         {
-            timer -= Time.deltaTime;
+            p.SetCursor(CursorType.PickUp);
+            if (Input.GetMouseButtonDown(0))
+            {
+                Destroy(this.gameObject);
+            }
+
+            return true;
+        }
+
+        //拾取预制体生成2秒后才能拾取
+        public void Update()
+        {
+            if (timer >= 0)
+            {
+                timer -= Time.deltaTime;
+            }
         }
     }
-
 }

@@ -13,7 +13,7 @@ namespace RPG.Combat
         public bool HandleRaycaset(PlayerController p, RaycastHit h)
         {
             if (Vector3.Distance(h.point, p.transform.position) >
-                p.GetComponent<FighterActionComponent>().weaponConfig.weaponRange)
+                p.GetComponent<ControllerBase>().CurrentWeapon.weaponRange)
             {
                 p.SetCursor(CursorType.Deny);
                 return false;

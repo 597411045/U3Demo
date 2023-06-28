@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class UIControl : TaskPipelineBase<UIControl>, ILocalCompute
+    public class UIControl : TaskPipelineBaseWithSTMN<UIControl>, ILocalCompute
     {
         [SerializeField] Text textHP;
         [SerializeField] GameObject user;
