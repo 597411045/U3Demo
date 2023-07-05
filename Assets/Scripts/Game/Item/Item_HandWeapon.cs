@@ -4,19 +4,20 @@ using UnityEngine;
 
 namespace Game.Item
 {
-    [CreateAssetMenu(fileName = "SwordWeapon", menuName = "Item/Make New SwordWeapon")]
-    public class Item_SwordWeapon : ItemBase_Weapon
+    [CreateAssetMenu(fileName = "Weapon", menuName = "Item/Make New HandWeapon")]
+    public class Item_HandWeapon : ItemBase_Weapon
     {
         public override void OnPickup(GameObject picker)
         {
             picker.GetComponent<ControllerBase>().StoreItemInBag(this);
-            Debug.Log("Item_SwordWeapon OnPickup");
+            Debug.Log("Item_HandWeapon OnPickUp");
         }
 
         public override void OnUse(GameObject owner)
         {
             owner.GetComponent<ControllerBase>().EquipItem(this);
-            Debug.Log("Item_SwordWeapon OnUse");
+            Debug.Log("Item_HandWeapon OnUse");
+
         }
 
         public override void WeaponAttackAction()
@@ -26,8 +27,8 @@ namespace Game.Item
                 go.GetComponent<AudioSource>().clip = hitAudio;
                 go.GetComponent<AudioSource>().Play();
             }
+            Debug.Log("Item_HandWeapon WeaponAttackAction");
 
-            Debug.Log("Item_SwordWeapon WeaponAttackAction");
         }
     }
 }

@@ -43,6 +43,8 @@ namespace RPG.Control
 
         private void Awake()
         {
+            base.Awake();
+            
             if (!NetworkManagement.isServer)
             {
                 cineMachine = GameObject.Find("CM vcam1");
@@ -56,6 +58,8 @@ namespace RPG.Control
 
         public void OnLocalCompute()
         {
+            base.LocalCompute();
+            
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
             if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
@@ -113,7 +117,7 @@ namespace RPG.Control
 
             if (Input.GetMouseButton(0))
             {
-                this.GetComponent<FighterActionComponent>().ActAttack();
+                Attack();
             }
 
             //老操作模式，纯鼠标操作，以后可用于纯ui操作界面：

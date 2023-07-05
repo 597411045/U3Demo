@@ -14,6 +14,6 @@ namespace Game.Item
         [SerializeField] public AudioClip hitAudio;
         [SerializeField] public AudioClip launchAudio;
 
-        public abstract void Attack();
+        public abstract void WeaponAttackAction();
     }
 }

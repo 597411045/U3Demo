@@ -28,6 +28,7 @@ namespace RPG.Control
 
         void Awake()
         {
+            base.Awake();
         }
 
         private void Start()

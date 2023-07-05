@@ -8,14 +8,16 @@ using UnityEngine.Serialization;
 namespace RPG.Control
 {
     //综合的实体行为
-    public class ControllerBase : TaskPipelineBase
+    public class ControllerBase : TaskPipelineBase, ILocalCompute
     {
         public List<ItemBase_SO> Bag;
         public ItemBase_Weapon CurrentWeapon;
+        public float AttactTimer;
 
-        private void Awake()
+        protected void Awake()
         {
             Bag = new List<ItemBase_SO>();
+            AttactTimer = 0;
 
             if (CurrentWeapon != null)
             {
@@ -49,7 +51,7 @@ namespace RPG.Control
             GameObject go = Instantiate(item.PrefabInScene);
             go.GetComponent<PickUpAble>().timer = 2;
             go.transform.position = this.transform.position + this.transform.forward;
-            go.GetComponent<Rigidbody>().AddForce(new Vector3(0, 2, 0), ForceMode.Impulse);
+            go.GetComponent<Rigidbody>().AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
             item.go = go;
         }
 
@@ -75,7 +77,9 @@ namespace RPG.Control
             Util.FindAlongChild(this.transform, item.SlotTransformName, out slotTransform, true);
             for (int i = 0; i < slotTransform.childCount; i++)
             {
-                if (slotTransform.GetChild(i).name.Contains("Weapon"))
+                Transform childTransform = slotTransform.GetChild(i);
+                string childTransformName = childTransform.gameObject.name;
+                if (childTransformName.Contains("Slot"))
                 {
                     Destroy(slotTransform.GetChild(i).gameObject);
                     break;
@@ -107,11 +111,20 @@ namespace RPG.Control
             // }
 
             GenerateItemPrefabInTransform(weapon);
+            CurrentWeapon = weapon;
         }
 
 
         public void StoreItemInBag(ItemBase_SO item)
         {
+            //临时，丢弃现有武器，装备新武器
+            DropItem(CurrentWeapon);
+            Debug.Log("drop item");
+            EquipItem((ItemBase_Weapon)item);
+            Debug.Log("equip item");
+
+
+            return;
             if (Bag.Exists((_itemInBag) => { return _itemInBag == item ? true : false; })) return;
 
             //背包中添加索引
@@ -122,6 +135,32 @@ namespace RPG.Control
         public void RecoverHealth(float value)
         {
             throw new NotImplementedException();
+        }
+
+        public void Attack()
+        {
+            if (AttactTimer <= 0)
+            {
+                this.GetComponent<Animator>().ResetTrigger("StopAttack");
+                this.GetComponent<Animator>().SetTrigger("IfAttack");
+                AttactTimer = CurrentWeapon.attackInterval;
+                CurrentWeapon.WeaponAttackAction();
+            }
+
+
+            // if (target == null) return;
+            // target.GetComponent<HealthComponent>()
+            //     .TakeDamage(this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage),
+            //         this.gameObject);
+        }
+
+        public void LocalCompute()
+        {
+            if (AttactTimer >= 0)
+            {
+                AttactTimer -= Time.deltaTime;
+                Debug.Log("Attack cooling");
+            }
         }
     }
 }

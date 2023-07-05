@@ -65,12 +65,7 @@ namespace RPG.Combat
 
         public void ActAttack()
         {
-            if (TimeLeftToAttackAction <= 0)
-            {
-                this.GetComponent<Animator>().ResetTrigger("StopAttack");
-                this.GetComponent<Animator>().SetTrigger("IfAttack");
-                TimeLeftToAttackAction = controller.CurrentWeapon.attackInterval;
-            }
+           
         }
 
         private bool GetIfInRange()
@@ -107,17 +102,7 @@ namespace RPG.Combat
 
         private void Hit()
         {
-            Debug.Log(123);
-
-            if (target == null) return;
-            target.GetComponent<HealthComponent>()
-                .TakeDamage(this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage),
-                    this.gameObject);
-            if (controller.CurrentWeapon.hitAudio != null)
-            {
-                controller.CurrentWeapon.go.GetComponent<AudioSource>().clip = controller.CurrentWeapon.hitAudio;
-                controller.CurrentWeapon.go.GetComponent<AudioSource>().Play();
-            }
+            
         }
 
         private void Shoot()
@@ -145,6 +130,8 @@ namespace RPG.Combat
 
         private void OnDrawGizmos()
         {
+            if (controller == null) return;
+            if (controller.CurrentWeapon == null) return;
             Gizmos.color = Color.yellow;
             Gizmos.DrawWireSphere(this.transform.position, controller.CurrentWeapon.weaponRange);
         }

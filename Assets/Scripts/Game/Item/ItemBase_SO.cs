@@ -24,14 +24,9 @@ namespace Game.Item
         public abstract void OnPickup(GameObject picker);
         public abstract void OnUse(GameObject picker);
 
-        public static bool operator ==(ItemBase_SO one, ItemBase_SO two)
+        public  bool Equal(ItemBase_SO another)
         {
-            return one.uuid == two.uuid ? true : false;
-        }
-
-        public static bool operator !=(ItemBase_SO one, ItemBase_SO two)
-        {
-            return one.uuid != two.uuid ? true : false;
+            return this.uuid == another.uuid ? true : false;
         }
     }
 }
