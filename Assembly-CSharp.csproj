@@ -131,6 +131,7 @@
      <Compile Include="Assets/Scripts/Game/Scene/AutoDestroy.cs" />
      <Compile Include="Assets/Scripts/Game/Scene/SceneEntityManager.cs" />
      <Compile Include="Assets/DialogTest.cs" />
+     <Compile Include="Assets/Shader/NewShadetTest.cs" />
      <Folder Include="Assets" />
      <Folder Include="Assets/Scenes/Sandbox 1 Client" />
      <None Include="Assets/Asset Packs/Synty - Polygon Student Sample/README - Usage Rights for these assets.txt" />
@@ -204,6 +205,7 @@
      <Folder Include="Assets/Asset Packs/SimpleSky/_Textures/Materials" />
      <Folder Include="Assets/Asset Packs/SimpleFX/Models" />
      <Folder Include="Assets/Asset Packs/Not For Student Use - licence required/Environments - Misc other assets" />
+     <None Include="Assets/Shader/NewUnlitShader 1.shader" />
      <Folder Include="Assets/Game/Item/Resources" />
      <None Include="Assets/Shader/NewUnlitShader.shader" />
      <Folder Include="Assets/Asset Packs/Terrain Textures" />
