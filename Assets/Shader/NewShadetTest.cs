@@ -17,16 +17,16 @@ public class NewShadetTest : MonoBehaviour
         shad = mat.shader;
     }
 
-#if UNITY_EDITOR
     private void Update()
     {
         totalTime += Time.deltaTime;
         if (mat != null)
         {
             mat.SetFloat("_DeltaTime", totalTime);
+            mat.SetVector("_CamPosition", Camera.main.transform.position);
         }
     }
-#endif
+
     private void OnRenderImage(RenderTexture src, RenderTexture dest)
     {
     }
