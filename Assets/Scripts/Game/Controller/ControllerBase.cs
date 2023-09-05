@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 namespace RPG.Control
 {
     //综合的实体行为
-    public class ControllerBase : TaskPipelineBase, ILocalCompute
+    public class ControllerBase :MonoBehaviour
     {
         public List<ItemBase_SO> Bag;
         public ItemBase_Weapon CurrentWeapon;

@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using Google.Protobuf.WellKnownTypes;
 using Newtonsoft.Json.Linq;
 using RPG.Core;
-using RPG.Saving;
 using RPG.UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace RPG.Stats
 {
-    public class BaseStats : MonoBehaviour, IJsonSaveable, IModifierProvider
+    public class BaseStats : MonoBehaviour, IModifierProvider
     {
         [Range(1, 99)] [SerializeField] public int startingLevel = 1;
 

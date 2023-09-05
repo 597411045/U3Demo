@@ -6,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using RPG.Control;
 using RPG.Core;
 using RPG.Movement;
-using RPG.Saving;
 using RPG.Stats;
 using UnityEngine;
 using UnityEngine.AI;
@@ -15,8 +14,7 @@ using UnityEngine.Serialization;
 
 namespace RPG.Combat
 {
-    public class FighterActionComponent : TaskPipelineBase, IAction, IJsonSaveable,
-        IModifierProvider, ILocalCompute
+    public class FighterActionComponent : MonoBehaviour
     {
         [SerializeField] private bool isFsmControlled;
 
@@ -89,7 +87,7 @@ namespace RPG.Combat
                 this.GetComponent<NavMeshAgent>().speed = speed;
             }
 
-            this.GetComponent<ActionSchedulerComponent>().StartAction(this);
+            //this.GetComponent<ActionSchedulerComponent>().StartAction(this);
             target = cac.transform.gameObject;
             return true;
         }
@@ -173,20 +171,6 @@ namespace RPG.Combat
         public IEnumerable<float> GetPercentageModifier(ProgressionEnum b)
         {
             yield return 1f;
-        }
-
-
-        private void Start()
-        {
-            if (!isFsmControlled)
-            {
-                base.Start();
-            }
-        }
-
-        void ILocalCompute.LocalCompute()
-        {
-            OnLocalCompute();
         }
     }
 }

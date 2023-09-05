@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using PRG.Network;
-using RPG.Saving;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -14,7 +12,7 @@ public class GameStartButton : MonoBehaviour
     {
         if (this.gameObject.name == "StartGame")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkManagement>().StartAsClient);
+            //this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkManagement>().StartAsClient);
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
                 this.GetComponent<Button>().interactable = false;
@@ -51,7 +49,7 @@ public class GameStartButton : MonoBehaviour
 
         if (this.gameObject.name == "StartAsServer")
         {
-            this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkManagement>().StartAsServer);
+            //this.GetComponent<Button>().onClick.AddListener(GameObject.FindObjectOfType<NetworkManagement>().StartAsServer);
             this.GetComponent<Button>().onClick.AddListener(() =>
             {
                 this.GetComponent<Button>().interactable = false;

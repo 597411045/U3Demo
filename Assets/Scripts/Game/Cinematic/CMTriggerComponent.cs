@@ -32,13 +32,13 @@ namespace Cinematic
 
         private void DisablePlayerControl(PlayableDirector p)
         {
-            player.GetComponent<ActionSchedulerComponent>().CancelCurrentAction();
-            player.GetComponent<PlayerController>().enabled = false;
+            //player.GetComponent<ActionSchedulerComponent>().CancelCurrentAction();
+            //player.GetComponent<PlayerController>().enabled = false;
         }
 
         private void EnablePlayerControl(PlayableDirector p)
         {
-            player.GetComponent<PlayerController>().enabled = true;
+            //player.GetComponent<PlayerController>().enabled = true;
         }
     }
 }

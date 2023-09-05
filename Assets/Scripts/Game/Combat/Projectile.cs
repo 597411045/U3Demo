@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 namespace RPG.Combat
 {
-    public class Projectile : TaskPipelineBaseWithSTMN<Projectile>, ILocalCompute
+    public class Projectile : MonoBehaviour
     {
         [SerializeField] private float speed = 1;
         [SerializeField] public bool isAutoNav;
@@ -86,9 +86,6 @@ namespace RPG.Combat
             speed = 0;
         }
 
-        void ILocalCompute.LocalCompute()
-        {
-            OnLocalCompute();
-        }
+        
     }
 }

@@ -1,9 +1,6 @@
 using System;
 using Cinemachine;
 using Game.Item;
-using PRG.Network;
-using PRG.Sync;
-using RPG.Cmd;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -25,7 +22,7 @@ namespace RPG.Control
     }
 
     
-    public class PlayerController : ControllerBase, ILocalCompute
+    public class PlayerController : ControllerBase
     {
         private GameObject cineMachine;
         private Animator animator;
@@ -45,12 +42,12 @@ namespace RPG.Control
         {
             base.Awake();
             
-            if (!NetworkManagement.isServer)
-            {
-                cineMachine = GameObject.Find("CM vcam1");
-                animator = this.GetComponent<Animator>();
-                cineMachine.GetComponent<CinemachineVirtualCamera>().Follow = this.gameObject.transform;
-            }
+            // if (!NetworkManagement.isServer)
+            // {
+            //     cineMachine = GameObject.Find("CM vcam1");
+            //     animator = this.GetComponent<Animator>();
+            //     cineMachine.GetComponent<CinemachineVirtualCamera>().Follow = this.gameObject.transform;
+            // }
         }
 
         private Vector3 oldMousePosition;
@@ -62,7 +59,7 @@ namespace RPG.Control
             
             if (this.enabled == false) return;
             if (!this.gameObject.activeInHierarchy) return;
-            if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
+           // if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
 
 
             AnimatorClipInfo[] a = animator.GetCurrentAnimatorClipInfo(0);

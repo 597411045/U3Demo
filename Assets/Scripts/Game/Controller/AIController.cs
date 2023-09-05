@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using FSM;
-using PRG.Sync;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Movement;
@@ -11,7 +10,7 @@ using UnityEngine.AI;
 
 namespace RPG.Control
 {
-    public class AIController : ControllerBase, ILocalCompute
+    public class AIController : ControllerBase
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] [Range(0, 6)] private float chaseSpeed = 5;
@@ -33,7 +32,7 @@ namespace RPG.Control
 
         private void Start()
         {
-            base.Start();
+            //base.Start();
             //player = GameObject.FindWithTag("Player");
             targerPosition = Vector3.zero;
             hc = this.GetComponent<HealthComponent>();
@@ -47,7 +46,7 @@ namespace RPG.Control
         public void LocalCompute()
         {
             if (hc.IsDead) return;
-            if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
+            //if (this.GetComponent<SyncObjectComponent>().ControllerSIID != "") return;
             player = GameObject.FindWithTag("Player");
             SMachine.OnUpdate();
         }

@@ -16,7 +16,7 @@ namespace Game.Item
     }
 
 
-    public class PickUpAble : TaskPipelineBase, IRayCastAble
+    public class PickUpAble : MonoBehaviour, IRayCastAble
     {
         public float timer = 0;
         [FormerlySerializedAs("item")] public ItemBase_SO itemBase;

@@ -1,6 +1,5 @@
 ﻿using System;
 using Google.Protobuf.WellKnownTypes;
-using PRG.Network;
 using RPG.Combat;
 using RPG.Core;
 using RPG.Stats;
@@ -9,7 +8,7 @@ using UnityEngine.UI;
 
 namespace RPG.UI
 {
-    public class UIControl : TaskPipelineBaseWithSTMN<UIControl>, ILocalCompute
+    public class UIControl : MonoBehaviour
     {
         [SerializeField] Text textHP;
         [SerializeField] GameObject user;
@@ -24,7 +23,7 @@ namespace RPG.UI
 
         private void Awake()
         {
-            if (NetworkManagement.isServer) return;
+            //if (NetworkManagement.isServer) return;
 
             textHP = GameObject.Find("HP_Text").GetComponent<Text>();
             targetHP = GameObject.Find("TargetHP_Text").GetComponent<Text>();
@@ -43,7 +42,7 @@ namespace RPG.UI
 
         public void LocalCompute()
         {
-            if (NetworkManagement.isServer) return;
+            //if (NetworkManagement.isServer) return;
 
             if (user == null) return;
             targetHP.text =

@@ -1,52 +1,45 @@
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using RPG.Cmd;
-using UnityEngine;
+using CS.Log;
 
-namespace PRG.Network
+namespace CS.Network
 {
-    public class NTIAccept : NetTaskInstance
+    public class NTIAccept : NetThreadInstance
     {
-        public static int InstanceCount = 0;
+        string strIp;
+        int intPort;
 
-
-        public NTIAccept(string name) : base(name)
+        public NTIAccept(string _ip, int _port)
         {
-            BuildAcceptNTI(7000);
-            InstanceCount++;
+            LogManagement.Log("NTIAccept Init");
+            strIp = _ip;
+            intPort = _port;
+            BuildAcceptNTI();
         }
 
-        public void BuildAcceptNTI(int port)
+        public void BuildAcceptNTI()
         {
-            this.socketInstance =
-                new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
-                    "ServerMainSocket");
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            EndPoint ep = new IPEndPoint(ip, port);
-            this.socketInstance.socket.Bind(ep);
-            this.socketInstance.socket.Listen(5);
-            Debug.LogError("Listen Ready");
-            this.name = "AcceptNTI";
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ip = IPAddress.Parse(strIp);
+            EndPoint ep = new IPEndPoint(ip, intPort);
+            socket.Bind(ep);
+            socket.Listen(5);
 
-            this.threadInstance = new ThreadInstance(new Thread(() =>
+            thread = new Thread(() =>
             {
-                Debug.LogError("BuildAcceptNTI Start");
                 while (true)
                 {
                     this.manualResetEvent.WaitOne();
-                    Socket tmpS = this.socketInstance.socket.Accept();
-                    Debug.LogError("A New Client In");
-                    //取消Valid，无需传输到临时Socket列表，直接转入Val列表
-                    //NetworkCenter.tmpSocketInstance.Enqueue(new SocketInstance(tmp));
-                    SocketInstance tmpSI = new SocketInstance(tmpS, System.Guid.NewGuid().ToString());
-                    CMDHello.Ins.Send(tmpSI, "Hello Client");
-                    NetworkManagement.Ins.EnqueueSI(tmpSI);
+                    Socket tmpS = socket.Accept();
+                    NetworkManagement.SingleTon.AddClient(tmpS, "UnknownClient");
+                    manualResetEvent.Reset();
                 }
-            }), "BuildAcceptNTI");
-            StartTask();
-            NetworkManagement.Ins.AddNTI(NTI_type.Accept, this);
+            });
+            thread.IsBackground = true;
+            thread.Start();
         }
     }
 }

@@ -63,15 +63,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="NetCore\Cmd\Cmd_TransformSync.cs" />
-    <Compile Include="NetCore\Cmd\Cmd_BroadCast.cs" />
-    <Compile Include="NetCore\Cmd\Cmd_WhoAreYou.cs" />
-    <Compile Include="NetCore\Cmd\CmdClasses.cs" />
-    <Compile Include="NetCore\Network\NetworkClasses.cs" />
-    <Compile Include="NetCore\Network\NTIAccept.cs" />
-    <Compile Include="NetCore\Network\NTICommSend.cs" />
-    <Compile Include="NetCore\Network\NTICommRecv.cs" />
-    <Compile Include="NetCore\Network\NTIConnect.cs" />
+    <Compile Include="..\..\Assets\Scripts\CS\Cmd\CmdManagement.cs">
+      <Link>NetCore\Cmd\CmdManagement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_Base.cs">
+      <Link>NetCore\Cmd\Cmd_Base.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_BroadCast.cs">
+      <Link>NetCore\Cmd\Cmd_BroadCast.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_TransformSync.cs">
+      <Link>NetCore\Cmd\Cmd_TransformSync.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_WhoAreYou.cs">
+      <Link>NetCore\Cmd\Cmd_WhoAreYou.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Log\LogManagement.cs">
+      <Link>NetCore\Log\LogManagement.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NetworkClasses.cs">
+      <Link>NetCore\Network\NetworkClasses.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NTIAccept.cs">
+      <Link>NetCore\Network\NTIAccept.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NTICommRecv.cs">
+      <Link>NetCore\Network\NTICommRecv.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NTICommSend.cs">
+      <Link>NetCore\Network\NTICommSend.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NTIConnect.cs">
+      <Link>NetCore\Network\NTIConnect.cs</Link>
+    </Compile>
     <Compile Include="NetCore\Proto\Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,6 +106,12 @@
     <None Include="NetCore\Proto\test.proto" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\Assets\Scripts\CS\Cmd\Cmd_Base.cs.meta">
+      <Link>NetCore\Cmd\Cmd_Base.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Log\LogManagement.cs.meta">
+      <Link>NetCore\Log\LogManagement.cs.meta</Link>
+    </Content>
     <Content Include="NetCore\Proto\protoc.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

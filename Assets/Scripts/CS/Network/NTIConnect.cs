@@ -3,53 +3,60 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using RPG.Cmd;
-using UnityEngine;
+using CS.Log;
 
-namespace PRG.Network
+namespace CS.Network
 {
-    public class NTIConnect : NetTaskInstance
+    public class NTIConnect : NetThreadInstance
     {
-        public static int InstanceCount = 0;
 
-        public NTIConnect(string name) : base(name)
+        string strIp;
+        int intPort;
+        public NTIConnect(string _ip, int _port)
         {
-            BuildConnectNTI(7000);
-            InstanceCount++;
+            LogManagement.Log("NTIConnect Init");
+            strIp = _ip;
+            intPort = _port;
+            BuildConnectNTI();
         }
 
-        public void BuildConnectNTI(int port)
+        public void BuildConnectNTI()
         {
-            this.socketInstance =
-                new SocketInstance(new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp),
-                    "MainServer");
-            IPAddress ip = IPAddress.Parse("127.0.0.1");
-            EndPoint ep = new IPEndPoint(ip, port);
-
-            this.threadInstance = new ThreadInstance(new Thread(() =>
+            if (thread != null)
             {
-                Debug.LogError("BuildConnectNTI Start");
-                try
-                {
-                    this.socketInstance.socket.Connect(ep);
-                    Debug.LogError("Connected");
-                    NetworkManagement.Ins.EnqueueSI(socketInstance);
+                thread.Abort();
+            }
 
-                    CMDHello.Ins.Send(this.socketInstance, "Hello Server");
-
-                    this.socketInstance = null;
-                }
-                catch (Exception e)
+            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ip = IPAddress.Parse(strIp);
+            EndPoint ep = new IPEndPoint(ip, intPort);
+            thread = new Thread(() =>
+            {
+                while (true)
                 {
-                    Debug.LogError("CATCHED:" + e);
+                    manualResetEvent.WaitOne();
+                    try
+                    {
+                        socket.Connect(ep);
+                    }
+                    catch (SocketException e)
+                    {
+                        LogManagement.Log(e.Message);
+                        manualResetEvent.Reset();
+                        continue;
+                    }catch(InvalidOperationException e)
+                    {
+                        LogManagement.Log(e.Message);
+                        socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                        manualResetEvent.Reset();
+                        continue;
+                    }
+                    NetworkManagement.SingleTon.AddClient(socket, "UnknownServer");
+                    manualResetEvent.Reset();
                 }
-                finally
-                {
-                    isFinished = true;
-                }
-            }), "BuildConnectNTI");
-            StartTask();
-            NetworkManagement.Ins.AddNTI(NTI_type.Connect, this);
+            });
+            thread.IsBackground = true;
+            thread.Start();
         }
     }
 }
