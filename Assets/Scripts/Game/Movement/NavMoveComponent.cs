@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using RPG.Control;
@@ -10,28 +11,26 @@ namespace RPG.Movement
     public class NavMoveComponent : MonoBehaviour
     {
         //SyncObject
-        public Queue<string> syncBuffer;
         private GameObject cineMachine;
         private Vector3 movingPredict;
         private Vector3 desPredict;
+        NavMeshHit nmh;
+        NavMeshPath nmp;
+        private float SumPathLength;
 
         private void Awake()
         {
-            cineMachine = GameObject.Find("CM vcam1");
+            cineMachine = GameObject.Find("CM FreeLook1");
             nmp = new NavMeshPath();
-            syncBuffer = new Queue<string>();
         }
 
-        private void Start()
-        {
-        }
-
-        public void LocalCompute()
+        public void Update()
         {
             UpdateAnimator();
+            UpdateMove();
         }
 
-        public void ActMoveUpdating()
+        public void UpdateMove()
         {
             //WSAD
             if (Input.GetKey(KeyCode.W))
@@ -93,98 +92,38 @@ namespace RPG.Movement
             Quaternion q = Quaternion.LookRotation(directZ, Vector3.up);
             desPredict = (q * movingPredict) + this.transform.position;
 
-            //if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) ||
-            //    Input.GetKey(KeyCode.D))
-            {
-                this.GetComponent<NavMeshAgent>().SetDestination(desPredict);
-            }
-        }
-
-        #region 普通函数
-
-        public void StartMoveToPosition(Vector3 destination, float speed = 0)
-        {
-            if (speed != 0)
-            {
-                this.GetComponent<NavMeshAgent>().speed = speed;
-            }
-
-            MoveToPosition(destination);
-        }
-
-        public void MoveToPosition(Vector3 destination)
-        {
-            if (!this.GetComponent<NavMeshAgent>().enabled) return;
-            this.GetComponent<NavMeshAgent>().destination = destination;
-            this.GetComponent<NavMeshAgent>().isStopped = false;
-        }
-
-        public void Cancel()
-        {
-            if (this.GetComponent<NavMeshAgent>().enabled)
-                this.GetComponent<NavMeshAgent>().isStopped = true;
-        }
-
-        private void UpdateAnimator()
-        {
-            // if (this.GetComponent<SyncObjectComponent>().ControllerSIID == "")
-            // {
-            //     Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
-            //     Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
-            //     this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
-            //     ptt.Speed = localVelocity.z;
-            // }
-        }
-
-        #endregion
-
-
-        #region 射线系统
-
-        NavMeshHit nmh;
-        NavMeshPath nmp;
-        private float SumPathLength;
-
-        public bool IfMoveable(PlayerController p, RaycastHit h, out Vector3 des)
-        {
-            des = Vector3.zero;
-            if (!NavMesh.SamplePosition(h.point, out nmh, 1, NavMesh.AllAreas))
-            {
-                p.SetCursor(CursorType.Deny);
-                return false;
-            }
-
-            if (NavMesh.CalculatePath(p.transform.position, h.point, NavMesh.AllAreas, nmp) == false
-                || nmp.status != NavMeshPathStatus.PathComplete)
-            {
-                p.SetCursor(CursorType.Deny);
-                return false;
-            }
+            if (!NavMesh.SamplePosition(desPredict, out nmh, 1, NavMesh.AllAreas)) return;
+            if (NavMesh.CalculatePath(this.transform.position, desPredict, NavMesh.AllAreas, nmp) == false
+                || nmp.status != NavMeshPathStatus.PathComplete) return;
 
             SumPathLength = 0;
+
+            if (nmp.corners.Length > 2) return;
 
             for (int i = 0; i < nmp.corners.Length - 1; i++)
             {
                 SumPathLength += (nmp.corners[i] - nmp.corners[i + 1]).sqrMagnitude;
             }
 
-            if (SumPathLength > 50)
-            {
-                p.SetCursor(CursorType.Deny);
-                return false;
-            }
+            if (SumPathLength > 50) return;
 
-            des = nmh.position;
-            return true;
+            desPredict = nmh.position;
+
+
+            this.GetComponent<NavMeshAgent>().SetDestination(desPredict);
         }
 
-        #endregion
 
-        
-
-        private void OnDrawGizmos()
+        private void UpdateAnimator()
         {
-            Gizmos.DrawSphere(desPredict, 1f);
+            Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
+            Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
+            this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+        }
+
+        public void OnDrawGizmos()
+        {
+            Gizmos.DrawSphere(desPredict, 0.5f);
             Gizmos.DrawLine(this.transform.position,
                 desPredict);
         }

@@ -11,12 +11,12 @@ namespace Game.Item
 
         public override void OnPickup(GameObject picker)
         {
-            picker.GetComponent<ControllerBase>().StoreItemInBag(this);
+            //picker.GetComponent<ControllerBase>().StoreItemInBag(this);
         }
 
         public override void OnUse(GameObject owner)
         {
-            owner.GetComponent<ControllerBase>().RecoverHealth(value);
+           // owner.GetComponent<ControllerBase>().RecoverHealth(value);
         }
 
         

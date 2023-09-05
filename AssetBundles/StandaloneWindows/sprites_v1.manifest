@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+CRC: 49520397
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 17f1c4facae4b41a1cd178a7ec03467f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c90fc19e2679e5295d10bd00f33cb4c3
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Resources/Sprites/Player.png
+- Assets/Resources/Sprites/Boss.png
+- Assets/Resources/Sprites/Lives.png
+- Assets/Resources/Sprites/win phase.png
+- Assets/Resources/Sprites/Bullet.png
+- Assets/Resources/Sprites/Target.png
+- Assets/Resources/Sprites/lose phase.png
+Dependencies: []

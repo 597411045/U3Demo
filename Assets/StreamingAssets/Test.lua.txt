@@ -1,0 +1,41 @@
+p = 3.14;
+function Test()
+    local p = 5.55;
+    print(p);
+end
+Test();
+print(p);
+
+math.randomseed(tostring(os.time()):reverse():sub(1, 7));
+a = math.random();
+if (a > 10 or a < 0) then
+    print('illegal');
+elseif (a > 5 and a < 11) then
+    print('big');
+else
+    print('small');
+end
+print(a);
+print(type(a));
+
+function f(x)
+    return x * 2
+end
+
+for i = 1, f(5), 2 do
+    print(i)
+end
+
+t = {1, 2, 3, 4, 5};
+for i, v in ipairs(t) do
+    print(i, v);
+end
+
+t1 = {
+    name = "abc",
+    age = 20,
+    scroe = 80
+};
+for i, v in pairs(t1) do
+    print(i, v);
+end

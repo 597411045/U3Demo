@@ -100,7 +100,7 @@ namespace CS.Network
         public List<Client> ClientList;
         public Queue<Client> ClientBuffer;
         public Queue<CmdBase> CmdBuffer;
-        private List<Action> customActions;
+        public List<Action> customActions;
 
         public void AddClient(Socket s, string name)
         {
@@ -117,7 +117,7 @@ namespace CS.Network
         {
             SingleTon = this;
             type = _type;
-            
+
             customActions = new List<Action>();
 
             if (type == NTI_type.Server)
@@ -129,7 +129,6 @@ namespace CS.Network
             if (type == NTI_type.Client)
             {
                 nTIConnect = new NTIConnect(ip, port);
-                customActions.Add(ClientAction);
             }
 
             ClientList = new List<Client>();
@@ -150,7 +149,7 @@ namespace CS.Network
             }
         }
 
-        private void CheckInvalidClients()
+        public void CheckInvalidClients()
         {
             for (int i = ClientList.Count - 1; i >= 0; i--)
             {
@@ -169,7 +168,9 @@ namespace CS.Network
             FlushClients();
             CheckInvalidClients();
             TryReceiveExceptPD();
-            TryExecute();
+            TryExecuteRecv();
+            DoCustomActions();
+            TryExecuteSend();
             TrySendExceptPD();
         }
 
@@ -183,11 +184,13 @@ namespace CS.Network
                 FlushClients();
                 CheckInvalidClients();
                 TryReceiveExceptPD();
-                TryExecute();
+                TryExecuteRecv();
+                DoCustomActions();
+                TryExecuteSend();
                 TrySendExceptPD();
             }
         }
-        
+
         public bool TryConnect()
         {
             if (nTIConnect.socket != null && !nTIConnect.socket.Connected)
@@ -220,7 +223,7 @@ namespace CS.Network
             }
         }
 
-        public void TryExecute()
+        public void TryExecuteRecv()
         {
             //对接收对cmd做处理
             foreach (var i in ClientList)
@@ -237,9 +240,10 @@ namespace CS.Network
 
             //Cmd综合处理
             CmdManagement.SingleTon.Process();
+        }
 
-            DoCustomActions();
-
+        public void TryExecuteSend()
+        {
             //对预备发送的cmd做处理
             int c2 = CmdBuffer.Count;
             for (int i = c2; i > 0; i--)
@@ -283,7 +287,7 @@ namespace CS.Network
             }
         }
 
-        private void ClientAction()
+        public void ClientAction()
         {
             foreach (var i in ClientList)
             {
@@ -304,6 +308,17 @@ namespace CS.Network
                     AddCmd(cmd);
                 }
             }
+        }
+
+        public void CloseAll()
+        {
+            LogManagement.Log("NetworkManager.CloseAll");
+            foreach (var i in ClientList)
+            {
+                i.state = ClientState.PendingDestroy;
+            }
+
+            CheckInvalidClients();
         }
     }
 }

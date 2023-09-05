@@ -12,14 +12,12 @@ namespace RPG.Combat
 
         public bool HandleRaycaset(PlayerController p, RaycastHit h)
         {
-            if (Vector3.Distance(h.point, p.transform.position) >
-                p.GetComponent<ControllerBase>().CurrentWeapon.weaponRange)
-            {
-                p.SetCursor(CursorType.Deny);
-                return false;
-            }
+            // if (Vector3.Distance(h.point, p.transform.position) >
+            //     p.GetComponent<ControllerBase>().CurrentWeapon.weaponRange)
+            // {
+            //     return false;
+            // }
 
-            p.SetCursor(CursorType.Combat);
             if (Input.GetMouseButtonDown(0))
             {
                 CombatAbleComponent cac = this.transform.GetComponent<CombatAbleComponent>();

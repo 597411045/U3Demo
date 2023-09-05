@@ -20,11 +20,11 @@ namespace RPG.Combat
 
         public GameObject target;
         public float TimeLeftToAttackAction = 0f;
-        private ControllerBase controller;
+        //private ControllerBase controller;
 
         private void Awake()
         {
-            controller = this.GetComponent<ControllerBase>();
+           //controller = this.GetComponent<ControllerBase>();
         }
 
         private void OnLocalCompute()
@@ -40,11 +40,11 @@ namespace RPG.Combat
 
             if (!GetIfInRange())
             {
-                this.GetComponent<NavMoveComponent>().MoveToPosition(target.transform.position);
+                //this.GetComponent<NavMoveComponent>().MoveToPosition(target.transform.position);
             }
             else
             {
-                this.GetComponent<NavMoveComponent>().Cancel();
+                //this.GetComponent<NavMoveComponent>().Cancel();
                 AttackAction();
             }
         }
@@ -57,7 +57,7 @@ namespace RPG.Combat
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                TimeLeftToAttackAction = controller.CurrentWeapon.attackInterval;
+                //TimeLeftToAttackAction = controller.CurrentWeapon.attackInterval;
             }
         }
 
@@ -68,8 +68,10 @@ namespace RPG.Combat
 
         private bool GetIfInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) <
-                   controller.CurrentWeapon.weaponRange;
+            // return Vector3.Distance(transform.position, target.transform.position) <
+            //        controller.CurrentWeapon.weaponRange;
+
+            return false;
         }
 
         public bool TryMakeTargetBeAttackTarget(CombatAbleComponent cac, float speed = 0)
@@ -105,19 +107,19 @@ namespace RPG.Combat
 
         private void Shoot()
         {
-            if (target == null) return;
-            GameObject go = Instantiate(controller.CurrentWeapon.projectilePrefab);
-            go.GetComponent<Projectile>().atk =
-                this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage);
-            //go.GetComponent<Projectile>().isAutoNav = true;
-            go.GetComponent<Projectile>().Target = target.gameObject;
-            go.GetComponent<Projectile>().launcher = this.gameObject;
-
-            go.transform.position = controller.CurrentWeapon.go.transform.position;
-            go.transform.position += (target.transform.position - this.transform.position).normalized * 0.5f;
-
-            go.GetComponent<Projectile>().direction =
-                (target.transform.position + new Vector3(0, 1, 0) - go.transform.position).normalized;
+            // if (target == null) return;
+            // GameObject go = Instantiate(controller.CurrentWeapon.projectilePrefab);
+            // go.GetComponent<Projectile>().atk =
+            //     this.GetComponent<BaseStats>().GetAllAdditiveModifier(ProgressionEnum.Damage);
+            // //go.GetComponent<Projectile>().isAutoNav = true;
+            // go.GetComponent<Projectile>().Target = target.gameObject;
+            // go.GetComponent<Projectile>().launcher = this.gameObject;
+            //
+            // go.transform.position = controller.CurrentWeapon.go.transform.position;
+            // go.transform.position += (target.transform.position - this.transform.position).normalized * 0.5f;
+            //
+            // go.GetComponent<Projectile>().direction =
+            //     (target.transform.position + new Vector3(0, 1, 0) - go.transform.position).normalized;
         }
 
 
@@ -128,30 +130,10 @@ namespace RPG.Combat
 
         private void OnDrawGizmos()
         {
-            if (controller == null) return;
-            if (controller.CurrentWeapon == null) return;
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(this.transform.position, controller.CurrentWeapon.weaponRange);
-        }
-
-        public JToken CaptureAsJTokenInInterface()
-        {
-            if (gameObject.tag != "Player") return null;
-
-            JObject state = new JObject();
-            IDictionary<string, JToken> stateDict = state;
-            stateDict["weaponPrefabName"] = controller.CurrentWeapon.PrefabInScene.name.ToString();
-            return state;
-        }
-
-        public void RestoreFormJToken(JToken state)
-        {
-            if (gameObject.tag != "Player") return;
-
-            JObject s = state.ToObject<JObject>();
-            IDictionary<string, JToken> stateDict = s;
-            string str = stateDict["weaponPrefabName"].ToObject<string>();
-            controller.EquipItem(Resources.Load<ItemBase_Weapon>(str));
+            // if (controller == null) return;
+            // if (controller.CurrentWeapon == null) return;
+            // Gizmos.color = Color.yellow;
+            // Gizmos.DrawWireSphere(this.transform.position, controller.CurrentWeapon.weaponRange);
         }
 
         public float GetTargetHP()
@@ -160,13 +142,7 @@ namespace RPG.Combat
             return target.GetComponent<BaseStats>().HP;
         }
 
-        public IEnumerable<float> GetAdditiveModifier(ProgressionEnum e)
-        {
-            if (e == ProgressionEnum.Damage)
-            {
-                yield return controller.CurrentWeapon.weaponDamage;
-            }
-        }
+        
 
         public IEnumerable<float> GetPercentageModifier(ProgressionEnum b)
         {

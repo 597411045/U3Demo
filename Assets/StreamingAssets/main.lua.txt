@@ -1,0 +1,55 @@
+-- Base = require 'Test3'
+-- tree = Base:new();
+-- account:withdraw(10);
+-- print(a)
+-----------------------------------------------------
+--package.cpath = package.cpath .. ';C:/Users/Administrator/AppData/Roaming/JetBrains/Rider2022.3/plugins/EmmyLua/debugger/emmy/windows/x64/?.dll'
+--local dbg = require('emmy_core')
+--dbg.tcpConnect('localhost', 9966)
+
+--require('ChildChild')
+
+--aaa = 4;
+
+function awake(obj)
+    print(obj.hp)
+end
+
+
+
+function Lua_OnDamage(obj)
+    obj.hp = obj.hp - 1;
+    obj.obj[obj.hp]:SetActive(false);
+
+    obj.hp = obj.hp - 1;
+
+    if (obj.hp > 0) then
+        obj.obj[obj.hp]:SetActive(false);
+    end
+
+    if (obj.hp <= 0) then
+
+        CS.FacadeGame.GetInstance(null):SendNotification(CS.GameConst.MSG_GAME_LOSE);
+    end
+end
+
+Enemy = {
+
+
+}
+
+function Enemy.Lua_Enemy_Update(obj)
+
+    if obj.state == CS.eState.Move then
+        obj.transform:Translate(CS.UnityEngine.Vector3.right * obj.speed * CS.UnityEngine.Time.deltaTime);
+        if obj.transform.position.x >= CS.UnityEngine.Camera.main.orthographicSize * CS.GameConst.Screen_Ratio then
+            obj.transform.position = CS.UnityEngine.Vector3(-CS.UnityEngine.Camera.main.orthographicSize * CS.GameConst.Screen_Ratio, obj.transform.position.y);
+        end
+    end
+
+end
+
+function start()
+    print('start')
+end
+

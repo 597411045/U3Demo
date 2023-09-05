@@ -50,7 +50,7 @@ namespace RPG.Movement
 
             if (Vector3.Distance(this.transform.position, GetPoint()) > 1)
             {
-                this.GetComponent<NavMoveComponent>().StartMoveToPosition(pathPoints[currPoint], 3);
+               // this.GetComponent<NavMoveComponent>().StartMoveToPosition(pathPoints[currPoint], 3);
                 return true;
             }
 

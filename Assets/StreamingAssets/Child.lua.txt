@@ -1,0 +1,20 @@
+local Base = require('Base')
+
+child = Base:new()
+
+child.childVale = 3
+
+function child:fun()
+
+    print(self.childVale)
+end
+
+function child:new()
+    local obj = {}
+    setmetatable(obj, {
+        __index = self
+    })
+    return obj
+end
+
+return child

@@ -1,0 +1,52 @@
+ManifestFileVersion: 0
+CRC: 1702647184
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c80ef837526b34774b343aad18c2ad65
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 676a13f78e6abe421dbd3159bd1a04eb
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 102
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: bc2949b92572d964281bb52e9a5bdf02, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 22ae153acb624770a4bae9d628629744, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/OutRes/Prefabs/Bullet.prefab
+- Assets/OutRes/Prefabs/Enemy.prefab
+- Assets/OutRes/Prefabs/ScreenWin.prefab
+- Assets/OutRes/Prefabs/Player.prefab
+- Assets/OutRes/Prefabs/ScreenLose.prefab
+- Assets/OutRes/Prefabs/Boss.prefab
+- Assets/OutRes/Prefabs/GameController.prefab
+Dependencies:
+- D:/CQC/Test/AssetBundles/StandaloneWindows/sprites_v1

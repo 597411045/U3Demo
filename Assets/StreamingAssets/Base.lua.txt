@@ -1,0 +1,25 @@
+local Base = {}
+
+Base.baseValue1 = 1;
+Base.baseValue2 = 2;
+
+function Base:new()
+
+    local obj = {}
+
+    setmetatable(obj, {
+        __index = self
+    })
+
+    return obj
+
+end
+
+function Base:fun()
+
+    print(self.baseValue1)
+    print(self.baseValue2)
+
+end
+
+return Base

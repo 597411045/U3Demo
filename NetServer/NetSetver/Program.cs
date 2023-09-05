@@ -30,15 +30,23 @@ namespace CS
                 nm = new NetworkManagement(NTI_type.Server);
             }
 
+            if (int.Parse(input) == 2)
+            {
+                lm = new LogManagement("Server");
+                nm = new NetworkManagement(NTI_type.Server, "10.0.4.13");
+            }
+
             if (int.Parse(input) == 1)
             {
                 lm = new LogManagement("Client");
                 nm = new NetworkManagement(NTI_type.Client);
+                nm.customActions.Add(nm.ClientAction);
             }
 
             cm = new CmdManagement();
 
             LogManagement.Log("Program Start");
+
 
             while (true)
             {

@@ -131,7 +131,7 @@ namespace CS.Cmd
                     i.Value.other.state = ClientState.PendingDestroy;
                 }
 
-                if (DateTime.Now.Subtract(i.Value.timer).Seconds > 10)
+                if (DateTime.Now.Subtract(i.Value.timer).Seconds > 5)
                 {
                     i.Value.state = CmdState.PendingDestroy;
                 }

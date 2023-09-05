@@ -9,13 +9,13 @@ namespace Game.Item
     {
         public override void OnPickup(GameObject picker)
         {
-            picker.GetComponent<ControllerBase>().StoreItemInBag(this);
+            //picker.GetComponent<ControllerBase>().StoreItemInBag(this);
             Debug.Log("Item_HandWeapon OnPickUp");
         }
 
         public override void OnUse(GameObject owner)
         {
-            owner.GetComponent<ControllerBase>().EquipItem(this);
+            //owner.GetComponent<ControllerBase>().EquipItem(this);
             Debug.Log("Item_HandWeapon OnUse");
 
         }

@@ -12,12 +12,9 @@ namespace RPG.Movement
 
         public bool HandleRaycaset(PlayerController p, RaycastHit h)
         {
-            if (!p.GetComponent<NavMoveComponent>().IfMoveable(p, h, out des)) return false;
-
-            p.SetCursor(CursorType.Movement);
             if (Input.GetMouseButtonDown(0))
             {
-                p.GetComponent<NavMoveComponent>().StartMoveToPosition(des);
+                //p.GetComponent<NavMoveComponent>().StartMoveToPosition(des);
                 return true;
             }
 

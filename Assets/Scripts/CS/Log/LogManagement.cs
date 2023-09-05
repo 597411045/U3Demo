@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 
 #if UNITY_EDITOR||UNITY_STANDALONE
-    using UnityEngine;
+using UnityEngine;
 #endif
 
 namespace CS.Log
@@ -12,7 +12,7 @@ namespace CS.Log
     {
         private static LogManagement SingleTon;
         private string path = Directory.GetCurrentDirectory();
-        private static StreamWriter sw;
+        private StreamWriter sw;
 
         public LogManagement(string fileName)
         {
@@ -28,8 +28,8 @@ namespace CS.Log
 
         public static void Log(string str)
         {
-            sw.WriteLine(str);
-            sw.Flush();
+            SingleTon.sw.WriteLine($"{DateTime.Now.ToString("u")}:" + str);
+            SingleTon.sw.Flush();
 
 #if UNITY_EDITOR||UNITY_STANDALONE
             Debug.Log(str);

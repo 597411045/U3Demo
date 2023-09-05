@@ -1,0 +1,42 @@
+-- local Account = {
+--     balance = 100,
+--     f = function(self, b)
+--         print(self.balance)
+--         print(b)
+--     end
+-- }
+-- function Account:new(o)
+--     t = o or {}
+--     setmetatable(t, {
+--         __index = Account
+--     })
+--     return t
+-- end
+-- function Account:withdraw(v)
+--     self.balance = self.balance - v
+-- end
+-- function Account:show()
+--     print(self.balance)
+-- end
+-- return Account
+--------------------------------------------------------------------
+local Tree = {}
+local a = 10;
+Tree.Color = "Red";
+Tree.Height = 10;
+
+function Tree:new(color, h)
+    local obj = {}
+    obj.Color = color or Tree.Color;
+    obj.Height = h or Tree.Height;
+    setmetatable(obj, {
+        __index = Tree
+    })
+    return obj;
+end
+
+function Tree:grow(int)
+    self.Height = self.Height + int + a;
+end
+
+return Tree;

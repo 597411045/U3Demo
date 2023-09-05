@@ -10,7 +10,7 @@ using UnityEngine.AI;
 
 namespace RPG.Control
 {
-    public class AIController : ControllerBase
+    public class AIController : MonoBehaviour
     {
         [SerializeField] private float chaseDistance = 5f;
         [SerializeField] [Range(0, 6)] private float chaseSpeed = 5;
@@ -27,7 +27,6 @@ namespace RPG.Control
 
         void Awake()
         {
-            base.Awake();
         }
 
         private void Start()
@@ -72,39 +71,39 @@ namespace RPG.Control
 
         private bool IfOutAttackRange()
         {
-            if (player == null) return false;
-            if (Vector3.Distance(this.transform.position, player.transform.position) > CurrentWeapon.weaponRange ||
-                player.GetComponent<HealthComponent>().IsDead)
-            {
-                this.GetComponent<Animator>().SetTrigger("StopAttack");
-                this.GetComponent<NavMeshAgent>().enabled = true;
-                fac.target = null;
-
-                if (player.GetComponent<HealthComponent>().IsDead)
-                {
-                    SMachine.waitTimer = 5;
-                }
-
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            // if (player == null) return false;
+            // if (Vector3.Distance(this.transform.position, player.transform.position) > CurrentWeapon.weaponRange ||
+            //     player.GetComponent<HealthComponent>().IsDead)
+            // {
+            //     this.GetComponent<Animator>().SetTrigger("StopAttack");
+            //     this.GetComponent<NavMeshAgent>().enabled = true;
+            //     fac.target = null;
+            //
+            //     if (player.GetComponent<HealthComponent>().IsDead)
+            //     {
+            //         SMachine.waitTimer = 5;
+            //     }
+            //
+            //     return true;
+            // }
+            // else
+            // {
+                 return false;
+            // }
         }
 
         private bool IfInAttackRange()
         {
             if (player == null) return false;
-            if (Vector3.Distance(this.transform.position, player.transform.position) <= CurrentWeapon.weaponRange &&
-                player.GetComponent<HealthComponent>().IsDead == false)
-            {
-                this.GetComponent<NavMeshAgent>().enabled = false;
-                SMachine.attackTarget = player.transform;
-                fac.target = player;
-                return true;
-            }
-            else
+            // if (Vector3.Distance(this.transform.position, player.transform.position) <= CurrentWeapon.weaponRange &&
+            //     player.GetComponent<HealthComponent>().IsDead == false)
+            // {
+            //     this.GetComponent<NavMeshAgent>().enabled = false;
+            //     SMachine.attackTarget = player.transform;
+            //     fac.target = player;
+            //     return true;
+            // }
+            // else
             {
                 return false;
             }
@@ -120,7 +119,7 @@ namespace RPG.Control
 
         private void State_Move()
         {
-            this.GetComponent<NavMoveComponent>().StartMoveToPosition(SMachine.moveDestination);
+            //this.GetComponent<NavMoveComponent>().StartMoveToPosition(SMachine.moveDestination);
 
             if (fac.TimeLeftToAttackAction >= 0)
             {
@@ -141,7 +140,7 @@ namespace RPG.Control
             {
                 this.GetComponent<Animator>().ResetTrigger("StopAttack");
                 this.GetComponent<Animator>().SetTrigger("IfAttack");
-                fac.TimeLeftToAttackAction = CurrentWeapon.attackInterval;
+                //fac.TimeLeftToAttackAction = CurrentWeapon.attackInterval;
             }
         }
 
@@ -300,7 +299,7 @@ namespace RPG.Control
             if (targerPosition != Vector3.zero &&
                 Vector3.Distance(this.transform.position, targerPosition) > 0.5f)
             {
-                this.GetComponent<NavMoveComponent>().StartMoveToPosition(targerPosition, chaseSpeed);
+                //this.GetComponent<NavMoveComponent>().StartMoveToPosition(targerPosition, chaseSpeed);
                 return true;
             }
 

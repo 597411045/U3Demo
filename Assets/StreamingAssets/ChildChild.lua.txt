@@ -1,0 +1,5 @@
+local ChildBase = require('Child')
+
+cc = ChildBase:new()
+
+cc:fun();

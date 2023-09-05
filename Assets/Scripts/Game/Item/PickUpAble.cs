@@ -36,7 +36,6 @@ namespace Game.Item
         //鼠标点击拾取模式
         public bool HandleRaycaset(PlayerController p, RaycastHit h)
         {
-            p.SetCursor(CursorType.PickUp);
             if (Input.GetMouseButtonDown(0))
             {
                 Destroy(this.gameObject);
