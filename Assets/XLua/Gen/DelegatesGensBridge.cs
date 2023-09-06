@@ -722,11 +722,6 @@ namespace XLua
 			    return new System.Func<double, double, double>(__Gen_Delegate_Imp1);
 			}
 		
-		    if (type == typeof(LuaManager.LuaMax))
-			{
-			    return new LuaManager.LuaMax(__Gen_Delegate_Imp1);
-			}
-		
 		    if (type == typeof(System.Action<string>))
 			{
 			    return new System.Action<string>(__Gen_Delegate_Imp2);

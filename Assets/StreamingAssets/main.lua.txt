@@ -3,7 +3,7 @@
 -- account:withdraw(10);
 -- print(a)
 -----------------------------------------------------
---package.cpath = package.cpath .. ';C:/Users/Administrator/AppData/Roaming/JetBrains/Rider2022.3/plugins/EmmyLua/debugger/emmy/windows/x64/?.dll'
+--package.cpath = package.cpath .. ';/Users/ac/Library/Application Support/JetBrains/Rider2022.3/plugins/EmmyLua/debugger/emmy/mac/x64/?.dylib'
 --local dbg = require('emmy_core')
 --dbg.tcpConnect('localhost', 9966)
 
@@ -49,7 +49,22 @@ function Enemy.Lua_Enemy_Update(obj)
 
 end
 
-function start()
-    print('start')
+function Log(str)
+    CS.UnityEngine.Debug.Log(str)
 end
+
+local GameObject=CS.UnityEngine.GameObject
+local Resources=CS.UnityEngine.Resources
+local Vector3=CS.UnityEngine.Vector3
+
+function start()
+    local canvasGo = GameObject.Find("Canvas");
+    Log(canvasGo.name)
+    local loginPanel = GameObject.Instantiate(Resources.Load("LoginPanel"));
+    loginPanel.transform:SetParent(canvasGo.transform);
+    loginPanel.transform.localScale = Vector3.one;
+    loginPanel.transform.localPosition = Vector3.zero;
+    
+end
+
 

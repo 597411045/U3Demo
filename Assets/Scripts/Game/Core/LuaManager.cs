@@ -3,25 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UIElements;
 using XLua;
 
-
-
-
-[CSharpCallLua]
-[LuaCallCSharp]
-
-public class CSObject
-{
-    public int hp;
-    public int p2;
-}
-
-
-
-
-[CSharpCallLua]
-[LuaCallCSharp]
 public class LuaManager : MonoBehaviour
 {
     public static LuaEnv luaenv = null;
@@ -34,32 +18,17 @@ public class LuaManager : MonoBehaviour
     private void Awake()
     {
         luaenv = new LuaEnv();
-        
+
         luaenv.AddLoader(CustomLoader);
         luaenv.DoString("require 'main'");
-        
-
-        luaenv.Global.Set("CSHARP", this);
-        luaenv.Global.Set("TestValue",1234);
-        
-
-        ;
-        //luaenv.DoString(File.ReadAllText(Application.streamingAssetsPath + "/" + "main" + ".lua.txt")
-
-        //LuaFunction luaAwake = luaenv.Global.Get<LuaFunction>("awake");
-        //Action<Player> luaAwake2 = luaenv.Global.Get<Action<Player>>("awake");
-        //luaenv.Global.Set<string,List<Enemy>>("Enemys",GameController.enemys);
         luaenv.Global.Get("start", out luaStart);
-
     }
 
 
     void Start()
     {
         luaStart();
-        
-        var max = luaenv.Global.GetInPath<LuaMax>("math.max");
-        Debug.Log("max:" + max(32, 12));
+        //Test();
     }
 
     void Update()
@@ -70,17 +39,13 @@ public class LuaManager : MonoBehaviour
         }
     }
 
-    [XLua.CSharpCallLua]
-    public delegate double LuaMax(double a, double b);
-
-    //public void LuaEnv.AddLoader(CustomLoader loader)
     public byte[] CustomLoader(ref string filepath)
     {
-
         if (filepath == "emmy_core")
         {
             return null;
         }
+
         string path = Application.streamingAssetsPath + "/" + filepath + ".lua.txt";
         return System.Text.Encoding.UTF8.GetBytes(File.ReadAllText(path));
     }
@@ -88,5 +53,16 @@ public class LuaManager : MonoBehaviour
     private void OnDestroy()
     {
         //luaenv.Dispose();
+    }
+
+    private void Test()
+    {
+        GameObject canvasGo = GameObject.Find("Canvas");
+        GameObject buttonGO = Instantiate(Resources.Load<GameObject>("Button"));
+        buttonGO.transform.SetParent(canvasGo.transform);
+        buttonGO.transform.localScale = Vector3.one;
+        buttonGO.transform.localPosition = Vector3.zero;
+
+        Transform[] trs = canvasGo.GetComponentsInChildren<Transform>();
     }
 }
