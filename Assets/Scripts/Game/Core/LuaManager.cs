@@ -5,38 +5,39 @@ using System.IO;
 using UnityEngine;
 using UnityEngine.UIElements;
 using XLua;
+using UnityEngine.UI;
 
 public class LuaManager : MonoBehaviour
 {
-    public static LuaEnv luaenv = null;
-
-    private Action luaStart;
-    private Action luaUpdate;
-    private Action luaOnDestroy;
+    // public static LuaEnv luaenv = null;
+    //
+    // private Action luaStart;
+    // private Action luaUpdate;
+    // private Action luaOnDestroy;
 
 
     private void Awake()
     {
-        luaenv = new LuaEnv();
-
-        luaenv.AddLoader(CustomLoader);
-        luaenv.DoString("require 'main'");
-        luaenv.Global.Get("start", out luaStart);
+        // luaenv = new LuaEnv();
+        //
+        // luaenv.AddLoader(CustomLoader);
+        // luaenv.DoString("require 'main'");
+        // luaenv.Global.Get("start", out luaStart);
     }
 
 
     void Start()
     {
-        luaStart();
-        //Test();
+        //luaStart();
+        Test();
     }
 
     void Update()
     {
-        if (luaenv != null)
-        {
-            luaenv.Tick();
-        }
+        // if (luaenv != null)
+        // {
+        //     luaenv.Tick();
+        // }
     }
 
     public byte[] CustomLoader(ref string filepath)
@@ -58,11 +59,9 @@ public class LuaManager : MonoBehaviour
     private void Test()
     {
         GameObject canvasGo = GameObject.Find("Canvas");
-        GameObject buttonGO = Instantiate(Resources.Load<GameObject>("Button"));
+        GameObject buttonGO = Instantiate(Resources.Load<GameObject>("LoginPanel"));
         buttonGO.transform.SetParent(canvasGo.transform);
         buttonGO.transform.localScale = Vector3.one;
         buttonGO.transform.localPosition = Vector3.zero;
-
-        Transform[] trs = canvasGo.GetComponentsInChildren<Transform>();
     }
 }

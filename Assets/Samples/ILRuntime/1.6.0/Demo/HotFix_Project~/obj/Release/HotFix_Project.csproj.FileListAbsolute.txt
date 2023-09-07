@@ -1,0 +1,7 @@
+E:\Desktop\U3Demo\Assets\StreamingAssets\HotFix_Project.dll
+E:\Desktop\U3Demo\Assets\StreamingAssets\HotFix_Project.pdb
+E:\Desktop\U3Demo\Assets\Samples\ILRuntime\1.6.0\Demo\HotFix_Project~\obj\Release\HotFix_Project.csproj.AssemblyReference.cache
+E:\Desktop\U3Demo\Assets\Samples\ILRuntime\1.6.0\Demo\HotFix_Project~\obj\Release\HotFix_Project.csproj.CoreCompileInputs.cache
+E:\Desktop\U3Demo\Assets\Samples\ILRuntime\1.6.0\Demo\HotFix_Project~\obj\Release\HotFix_Project.csproj.CopyComplete
+E:\Desktop\U3Demo\Assets\Samples\ILRuntime\1.6.0\Demo\HotFix_Project~\obj\Release\HotFix_Project.dll
+E:\Desktop\U3Demo\Assets\Samples\ILRuntime\1.6.0\Demo\HotFix_Project~\obj\Release\HotFix_Project.pdb
