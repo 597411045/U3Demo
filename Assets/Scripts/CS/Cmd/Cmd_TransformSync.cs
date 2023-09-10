@@ -8,34 +8,41 @@ using CS.Log;
 
 namespace CS.Cmd
 {
-    public class Cmd_TransformSync : CmdBase
+    public class Cmd_TransformSync : CmdBase2<TransformSyncRequest, TransformSyncResponse>
     {
-        TransformSyncRequest request;
-        TransformSyncResponse response;
-
         //仅用作发送
-        public Cmd_TransformSync(Client _Other, TransformSyncRequest _request) : base(_Other)
+        public Cmd_TransformSync(User _user, TransformSyncRequest _request) : base(_user, _request)
         {
-            request = _request;
-            request.Token = token;
+            request.Token = Token;
         }
 
-        public Cmd_TransformSync():base()
+        public Cmd_TransformSync() : base()
         {
         }
-        
-        public override void RecvRequest(string proto)
+
+        public override void ExecRequest(string proto)
         {
-            //收到了Request
+            //
             request = TransformSyncRequest.Parser.ParseJson(proto);
+            if (Token != request.Token)
+            {
+                CmdBase CmdAgent = CmdManagement.SingleTon.GetCmdByToken(request.Token);
+                if (CmdAgent != null)
+                {
+                    CmdAgent.ExecResponse(proto);
+                    return;
+                }
+                else
+                {
+                    Token = request.Token;
+                    CmdManagement.SingleTon.AddRequestedCmdInCookedDic(this);
+                }
+            }
 
-            //此业务无需Response
-            state = CmdState.ResponseDone;
-            UpdateTime();
-
-            //业务处理
-            LogManagement.Log("Get Sync:"+request.ToString());
+            //
+            LogManagement.SingleTon.Log("", "", $"!!!GET ASYNC{request.GameObjectName}");
+            //
+            base.ExecRequest(proto);
         }
     }
-
 }

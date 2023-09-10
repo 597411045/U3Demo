@@ -1,18 +1,14 @@
-using System;
-using CS.Cmd;
+﻿using System;
 using CS.Log;
-using CS.Network;
 using UnityEngine;
 
 namespace RPG.Core
 {
-    public class LogManager : MonoBehaviour
+    public class LogManager:MonoBehaviour
     {
-        private LogManagement lm;
-     
         private void Awake()
         {
-            lm = new LogManagement("UnityClient");
+            LogManagement.SingleTon.Initial("UnityClient");
         }
     }
 }

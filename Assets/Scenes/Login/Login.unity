@@ -123,6 +123,23 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &3611837 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1043497214114284336, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
+  m_PrefabInstance: {fileID: 1217718572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3611838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3611837}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f872f2ce234c27a35b4015a77d6071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &418300611
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +357,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1043497214114284336, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1043497214694705625, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
       propertyPath: m_Enabled
@@ -348,7 +365,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1043497214694705627, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1043497214838463456, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
       propertyPath: m_RootOrder
@@ -400,13 +417,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1043497215022275992, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1043497215942286299, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1043497214114284334, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a0c521f916d70654bb1a0ceeda60fcd6, type: 3}
 --- !u!4 &1217718573 stripped
 Transform:

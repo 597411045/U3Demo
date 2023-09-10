@@ -107,11 +107,11 @@ public class CLRBindingDemo : MonoBehaviour
             
             //由于CLR重定向只能重定向一次，并且CLR绑定就是利用的CLR重定向，所以请在初始化最后阶段再执行下面的代码，以保证CLR重定向生效
             //请在生成了绑定代码后注释下面这行
-            throw new System.Exception("请在生成了绑定代码后再运行这个示例");//
+            //throw new System.Exception("请在生成了绑定代码后再运行这个示例");//
             //请在生成了绑定代码后解除下面这行的注释
             //请在生成了绑定代码后解除下面这行的注释
             //请在生成了绑定代码后解除下面这行的注释
-            //ILRuntime.Runtime.Generated.CLRBindings.Initialize(appdomain);
+            ILRuntime.Runtime.Generated.CLRBindings.Initialize(appdomain);
             //这个只是为了演示加的，平时不需要这么用，直接在InitializeILRuntime方法里面写CLR绑定注册就行了
             
             var type = appdomain.LoadedTypes["HotFix_Project.TestCLRBinding"];

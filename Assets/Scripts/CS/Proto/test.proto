@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package ProtoMsg;
+
+message WhoAreYouRequest{
+  string ServerName = 1;
+  string Token = 2;
+}
+
+message WhoAreYouResponse{
+  string ClientName = 1;
+  string Token = 2;
+}
+
+message BroadCastRequest{
+  string msg = 1;
+  string Token = 2;
+}
+
+message BroadCastResponse{
+  string msg = 1;
+  string Token = 2;
+}
+
+message LoginRequest{
+  string username = 1;
+  string password = 2;
+  string Token = 3;
+}
+
+message LoginResponse{
+  string result = 1;
+  string Token = 2;
+}
+
+message TransformSyncRequest{
+  float PositionX = 1;
+  float PositionY = 2;
+  float PositionZ = 3;
+  float RotationX = 4;
+  float RotationY = 5;
+  float RotationZ = 6;
+  string Token = 7;
+  string GameObjectName = 8;
+}
+
+message TransformSyncResponse{
+  string msg = 1;
+  string Token = 2;
+}
+
+//--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto
+//    /Users/ac/Desktop/U3Demo/Packages/Google.Protobuf.Tools.3.23.2/tools/macosx_x64/protoc 

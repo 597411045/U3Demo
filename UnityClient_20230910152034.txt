@@ -1,0 +1,3 @@
+﻿StartLog
+2023-09-10 15:20:34Z:NTIConnect Init
+2023-09-10 15:20:37Z:NetworkManager.CloseAll

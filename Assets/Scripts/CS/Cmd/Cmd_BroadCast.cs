@@ -8,78 +8,68 @@ using CS.Log;
 
 namespace CS.Cmd
 {
-    public class Cmd_BroadCast : CmdBase
+    public class Cmd_BroadCast : CmdBase2<BroadCastRequest, BroadCastResponse>
     {
-        BroadCastRequest request;
-        BroadCastResponse response;
-
-        //仅用作发送
-        public Cmd_BroadCast(Client _Other, BroadCastRequest _request) : base(_Other)
+        public Cmd_BroadCast(User _user, BroadCastRequest _request) : base(_user, _request)
         {
-            request = _request;
-            request.Token = token;
+            request.Token = Token;
         }
 
         public Cmd_BroadCast() : base()
         {
         }
 
-        public override void SendRequest()
+
+        public override void PassResponseToSendBuffer()
         {
-            //发送
-            if (request == null) return;
-            other.send.sendList.Enqueue(Encoding.ASCII.GetBytes(request.GetType().Name + "|" + request.ToString()));
-            //发送完成
-            state = CmdState.ResponseDone;
-            UpdateTime();
+            //
+            response = new BroadCastResponse() { Msg = "Broad OK", Token = Token };
+            //
+            base.PassResponseToSendBuffer();
         }
 
-        public override void SendResponse()
+        public override void ExecRequest(string proto)
         {
-            //构建response
-            response = new BroadCastResponse() { Msg = "Broad OK", Token = token };
-            //加入Client发送队列
-            other.send.sendList.Enqueue(Encoding.ASCII.GetBytes(response.GetType().Name + "|" + response.ToString()));
-            //回复完成
-            state = CmdState.ResponseDone;
-            UpdateTime();
-        }
-
-        public override void RecvRequest(string proto)
-        {
-            //收到了Request
+            //
             request = BroadCastRequest.Parser.ParseJson(proto);
-            token = request.Token;
-            //Cmd留存
-            JoinCmdExecDic();
-            //准备发送response
-            state = CmdState.UnprocessResponse;
-            UpdateTime();
-            
-            //业务处理
-            foreach (var i in NetworkManagement.SingleTon.ClientList)
+            if (Token != request.Token)
             {
-                //直接将要广播的消息加入各自Client发送队列
-                i.send.sendList.Enqueue(Encoding.ASCII.GetBytes(request.Msg));
+                CmdBase CmdAgent = CmdManagement.SingleTon.GetCmdByToken(request.Token);
+                if (CmdAgent != null)
+                {
+                    CmdAgent.ExecResponse(proto);
+                    return;
+                }
+                else
+                {
+                    Token = request.Token;
+                    CmdManagement.SingleTon.AddRequestedCmdInCookedDic(this);
+                }
             }
+
+            //
+            foreach (var i in NetworkManagement.SingleTon.GetValidClients(UserType.Client))
+            {
+                i.Send.AddMsg(Encoding.ASCII.GetBytes(request.Msg));
+            }
+
+            //
+            base.ExecRequest(proto);
         }
 
-        public override void RecvResponse(string proto)
+        public override void ExecResponse(string proto)
         {
-            //收到了response
+            //
             response = BroadCastResponse.Parser.ParseJson(proto);
-            if (token != response.Token)
+            if (Token != response.Token)
             {
-                CmdManagement.SingleTon.GetCmd(response.Token)?.RecvResponse(proto);
+                CmdManagement.SingleTon.GetCmdByToken(response.Token)?.ExecResponse(proto);
                 return;
             }
+            //
 
-            ;
-            //业务处理
-            LogManagement.Log(response.Msg);
-            //Cmd完成
-            state = CmdState.RequestReplied;
-            UpdateTime();
+            //
+            base.ExecResponse(proto);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using RPG.Core;
+using UnityEngine;
 using UnityEngine.UI;
 
 
@@ -17,12 +18,7 @@ namespace HotFix_Project
 
             GameObject Button_GuestLogin = GameObject.Find("Button_GuestLogin");
             Button button = Button_GuestLogin.GetComponent<Button>();
-            button.onClick.AddListener(OnClick_Button_GuestLogin);
-        }
-
-        public static void OnClick_Button_GuestLogin()
-        {
-            Debug.Log("OnClick_Button_GuestLogin");
+            button.onClick.AddListener(CmdManager.SendGuestCmdLogin);
         }
     }
 }

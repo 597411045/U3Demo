@@ -7,26 +7,22 @@ using CS.Log;
 
 namespace CS.Network
 {
-    public class NTIConnect : NetThreadInstance
+    public class NTIConnect : NetThreadBase
     {
-
         string strIp;
         int intPort;
+
         public NTIConnect(string _ip, int _port)
         {
-            LogManagement.Log("NTIConnect Init");
+            LogManagement.SingleTon.Log(this.GetType().Name, "NTIConnect");
             strIp = _ip;
             intPort = _port;
             BuildConnectNTI();
         }
 
+
         public void BuildConnectNTI()
         {
-            if (thread != null)
-            {
-                thread.Abort();
-            }
-
             socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPAddress ip = IPAddress.Parse(strIp);
             EndPoint ep = new IPEndPoint(ip, intPort);
@@ -41,17 +37,21 @@ namespace CS.Network
                     }
                     catch (SocketException e)
                     {
-                        LogManagement.Log(e.Message);
+                        LogManagement.SingleTon.LogNetContent(this.GetType().Name, "Thread",
+                            ep.ToString(), "BuiltIn", e.Message);
                         manualResetEvent.Reset();
                         continue;
-                    }catch(InvalidOperationException e)
+                    }
+                    catch (InvalidOperationException e)
                     {
-                        LogManagement.Log(e.Message);
+                        LogManagement.SingleTon.LogNetContent(this.GetType().Name, "Thread",
+                            ep.ToString(), "BuiltIn", e.Message);
                         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                         manualResetEvent.Reset();
                         continue;
                     }
-                    NetworkManagement.SingleTon.AddClient(socket, "UnknownServer");
+
+                    NetworkManagement.SingleTon.AddClientInBuffer(socket, "UnknownServer");
                     manualResetEvent.Reset();
                 }
             });

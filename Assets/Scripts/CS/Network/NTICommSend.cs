@@ -7,17 +7,32 @@ using CS.Log;
 
 namespace CS.Network
 {
-    public class NTICommSend : NetThreadInstance
+    public class NTICommSend : NetThreadBase
     {
-        Client client;
+        User _user;
 
-        public NTICommSend(Socket s, Client _client)
+        public NTICommSend(Socket s, User user)
         {
             socket = s;
-            client = _client;
-            sendList = new Queue<byte[]>();
+            _user = user;
+            CookedSendBuffer = new Queue<byte[]>();
 
             BuildNTICommSend();
+        }
+
+        public int GetCount()
+        {
+            return CookedSendBuffer.Count;
+        }
+
+        public byte[] GetMsg()
+        {
+            return CookedSendBuffer.Dequeue();
+        }
+
+        public void AddMsg(byte[] msg)
+        {
+            CookedSendBuffer.Enqueue(msg);
         }
 
         public void BuildNTICommSend()
@@ -28,10 +43,10 @@ namespace CS.Network
                 {
                     this.manualResetEvent.WaitOne();
 
-                    int count = sendList.Count;
+                    int count = CookedSendBuffer.Count;
                     for (int i = count; i > 0; i--)
                     {
-                        byte[] tmp2 = sendList.Dequeue();
+                        byte[] tmp2 = CookedSendBuffer.Dequeue();
                         byte[] tmp = new byte[tmp2.Length + 2];
                         tmp[0] = 2;
                         tmp[tmp.Length - 1] = 3;
@@ -39,13 +54,16 @@ namespace CS.Network
                         try
                         {
                             socket.Send(tmp, 0, tmp.Length, SocketFlags.None);
-                            LogManagement.Log("Send to " + client.name + ":" + Encoding.ASCII.GetString(tmp));
+                            string str = Encoding.ASCII.GetString(tmp);
+                            LogManagement.SingleTon.LogNetContentOnlyInFile(this.GetType().Name, "Thread",
+                                _user.Send.GetRemoteEndPoint(), _user.Name, Encoding.ASCII.GetString(tmp));
                         }
                         catch (Exception e)
                         {
-                            LogManagement.Log(e.Message);
+                            LogManagement.SingleTon.LogNetContent(this.GetType().Name, "Thread",
+                                _user.Send.GetRemoteEndPoint(), _user.Name, e.Message);
                             manualResetEvent.Reset();
-                            client.state = ClientState.PendingDestroy;
+                            _user.DoDestroy();
                             return;
                         }
                     }

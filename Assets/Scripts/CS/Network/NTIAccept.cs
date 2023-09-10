@@ -7,14 +7,14 @@ using CS.Log;
 
 namespace CS.Network
 {
-    public class NTIAccept : NetThreadInstance
+    public class NTIAccept : NetThreadBase
     {
         string strIp;
         int intPort;
 
         public NTIAccept(string _ip, int _port)
         {
-            LogManagement.Log("NTIAccept Init");
+            LogManagement.SingleTon.Log(this.GetType().Name,"NTIAccept");
             strIp = _ip;
             intPort = _port;
             BuildAcceptNTI();
@@ -34,7 +34,7 @@ namespace CS.Network
                 {
                     this.manualResetEvent.WaitOne();
                     Socket tmpS = socket.Accept();
-                    NetworkManagement.SingleTon.AddClient(tmpS, "UnknownClient");
+                    NetworkManagement.SingleTon.AddClientInBuffer(tmpS, "UnknownClient");
                     manualResetEvent.Reset();
                 }
             });

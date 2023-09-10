@@ -7,21 +7,37 @@ using CS.Log;
 
 namespace CS.Network
 {
-    public class NTICommRecv : NetThreadInstance
+    public class NTICommRecv : NetThreadBase
     {
-        Client client;
+        User _user;
         bool StartValidContent = false;
         StringBuilder sb;
 
-        public NTICommRecv(Socket s, Client _client)
+        public NTICommRecv(Socket s, User user)
         {
             socket = s;
-            client = _client;
-            recvBuf = new Queue<byte>();
-            recvList = new Queue<byte[]>();
+            _user = user;
+            TrueRecvBuffer = new Queue<byte>();
+            CookedRecvBuffer = new Queue<byte[]>();
             sb = new StringBuilder();
             BuildNTICommRecv();
         }
+
+        public int GetCount()
+        {
+            return CookedRecvBuffer.Count;
+        }
+
+        public byte[] GetMsg()
+        {
+            return CookedRecvBuffer.Dequeue();
+        }
+
+        public void AddMsg(byte[] msg)
+        {
+            CookedRecvBuffer.Enqueue(msg);
+        }
+
 
         public void BuildNTICommRecv()
         {
@@ -36,13 +52,15 @@ namespace CS.Network
                     try
                     {
                         length = socket.Receive(b, 0, b.Length, SocketFlags.None);
-                        LogManagement.Log("length:" + length);
                     }
                     catch (Exception e)
                     {
-                        LogManagement.Log(e.Message);
+                        //销毁流程-Client-触发
+
+                        LogManagement.SingleTon.LogNetContent(this.GetType().Name, "Thread",
+                            _user.Send.GetRemoteEndPoint(), _user.Name, e.Message);
                         manualResetEvent.Reset();
-                        client.state = ClientState.PendingDestroy;
+                        _user.DoDestroy();
                         return;
                     }
 
@@ -57,15 +75,15 @@ namespace CS.Network
                             }
                             else
                             {
-                                recvBuf.Enqueue(b[i]);
+                                TrueRecvBuffer.Enqueue(b[i]);
                             }
                         }
 
                         //开始分析头尾
-                        int count = recvBuf.Count;
+                        int count = TrueRecvBuffer.Count;
                         for (int j = count; j > 0; j--)
                         {
-                            byte oneByte = recvBuf.Dequeue();
+                            byte oneByte = TrueRecvBuffer.Dequeue();
                             if (oneByte == 2)
                             {
                                 sb.Clear();
@@ -74,8 +92,10 @@ namespace CS.Network
                             else if (oneByte == 3)
                             {
                                 StartValidContent = false;
-                                LogManagement.Log("Receive from " + client.name + ":" + sb.ToString());
-                                recvList.Enqueue(Encoding.ASCII.GetBytes(sb.ToString()));
+                                string str = sb.ToString();
+                                LogManagement.SingleTon.LogNetContentOnlyInFile(this.GetType().Name, "Thread",
+                                    _user.Send.GetRemoteEndPoint(), _user.Name, sb.ToString());
+                                CookedRecvBuffer.Enqueue(Encoding.ASCII.GetBytes(sb.ToString()));
                             }
                             else
                             {
@@ -89,10 +109,10 @@ namespace CS.Network
                         //断截的msg存回queue
                         if (sb.Length > 0)
                         {
-                            recvBuf.Enqueue(2);
+                            TrueRecvBuffer.Enqueue(2);
                             for (int i = 0; i < sb.Length; i++)
                             {
-                                recvBuf.Enqueue((Byte)sb[i]);
+                                TrueRecvBuffer.Enqueue((Byte)sb[i]);
                             }
                         }
                     }

@@ -15,49 +15,55 @@ namespace CS
         static int count = 0;
         static DateTime curr;
         static DateTime lastFrame;
-        static NetworkManagement nm;
-        static CmdManagement cm;
-        static LogManagement lm;
 
         static void Main(string[] args)
         {
-            curr = DateTime.Now;
-            lastFrame = DateTime.Now;
-            string input = Console.ReadLine();
-            if (int.Parse(input) == 0)
+            try
             {
-                lm = new LogManagement("Server");
-                nm = new NetworkManagement(NTI_type.Server);
-            }
-
-            if (int.Parse(input) == 2)
-            {
-                lm = new LogManagement("Server");
-                nm = new NetworkManagement(NTI_type.Server, "10.0.4.13");
-            }
-
-            if (int.Parse(input) == 1)
-            {
-                lm = new LogManagement("Client");
-                nm = new NetworkManagement(NTI_type.Client);
-                nm.customActions.Add(nm.ClientAction);
-            }
-
-            cm = new CmdManagement();
-
-            LogManagement.Log("Program Start");
-
-
-            while (true)
-            {
-                if (curr.Subtract(lastFrame).Seconds > 2)
+                curr = DateTime.Now;
+                lastFrame = DateTime.Now;
+                string input = Console.ReadLine();
+                if (int.Parse(input) == 0)
                 {
-                    lastFrame = curr;
-                    nm.AutoProcess();
+                    LogManagement.SingleTon.Initial("Server");
+                    NetworkManagement.SingleTon.Initial(NTI_type.Server);
                 }
 
-                curr = DateTime.Now;
-                Thread.Sleep(1);
+                if (int.Parse(input) == 2)
+                {
+                    LogManagement.SingleTon.Initial("Server");
+                    NetworkManagement.SingleTon.Initial(NTI_type.Server, "10.0.4.13");
+                }
+
+                if (int.Parse(input) == 1)
+                {
+                    LogManagement.SingleTon.Initial("Client");
+                    NetworkManagement.SingleTon.Initial(NTI_type.Client);
+                }
+
+
+                LogManagement.SingleTon.Log("Program", "Main");
+
+
+                while (true)
+                {
+                    if (curr.Subtract(lastFrame).Seconds > 1)
+                    {
+                        lastFrame = curr;
+                        NetworkManagement.SingleTon.AutoProcess();
+                    }
+
+                    curr = DateTime.Now;
+                    Thread.Sleep(1);
+                }
+            }
+            catch (Exception e)
+            {
+                LogManagement.SingleTon.Log("Program", "Main", "\n" + e.StackTrace);
+            }
+            finally
+            {
+                Console.ReadLine();
             }
         }
     }

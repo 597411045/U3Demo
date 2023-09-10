@@ -72,6 +72,9 @@
     <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_BroadCast.cs">
       <Link>NetCore\Cmd\Cmd_BroadCast.cs</Link>
     </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_Login.cs">
+      <Link>NetCore\Cmd\Cmd_Login.cs</Link>
+    </Compile>
     <Compile Include="..\..\Assets\Scripts\CS\Cmd\Cmd_TransformSync.cs">
       <Link>NetCore\Cmd\Cmd_TransformSync.cs</Link>
     </Compile>
@@ -81,8 +84,11 @@
     <Compile Include="..\..\Assets\Scripts\CS\Log\LogManagement.cs">
       <Link>NetCore\Log\LogManagement.cs</Link>
     </Compile>
-    <Compile Include="..\..\Assets\Scripts\CS\Network\NetworkClasses.cs">
-      <Link>NetCore\Network\NetworkClasses.cs</Link>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NetThreadBase.cs">
+      <Link>NetCore\Network\NetThreadBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\NetworkManagement.cs">
+      <Link>NetCore\Network\NetworkManagement.cs</Link>
     </Compile>
     <Compile Include="..\..\Assets\Scripts\CS\Network\NTIAccept.cs">
       <Link>NetCore\Network\NTIAccept.cs</Link>
@@ -96,14 +102,20 @@
     <Compile Include="..\..\Assets\Scripts\CS\Network\NTIConnect.cs">
       <Link>NetCore\Network\NTIConnect.cs</Link>
     </Compile>
-    <Compile Include="NetCore\Proto\Test.cs" />
+    <Compile Include="..\..\Assets\Scripts\CS\Network\SingleTonBase.cs">
+      <Link>NetCore\Network\SingleTonBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Network\User.cs">
+      <Link>NetCore\Network\User.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Assets\Scripts\CS\Proto\Test.cs">
+      <Link>NetCore\Proto\Test.cs</Link>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="NetCore\Proto\protoc" />
-    <None Include="NetCore\Proto\test.proto" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\Assets\Scripts\CS\Cmd\Cmd_Base.cs.meta">
@@ -112,7 +124,57 @@
     <Content Include="..\..\Assets\Scripts\CS\Log\LogManagement.cs.meta">
       <Link>NetCore\Log\LogManagement.cs.meta</Link>
     </Content>
-    <Content Include="NetCore\Proto\protoc.exe" />
+    <Content Include="..\..\Assets\Scripts\CS\Network\NetThreadBase.cs.meta">
+      <Link>NetCore\Network\NetThreadBase.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\NetworkManagement.cs.meta">
+      <Link>NetCore\Network\NetworkManagement.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\NTIAccept.cs.meta">
+      <Link>NetCore\Network\NTIAccept.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\NTICommRecv.cs.meta">
+      <Link>NetCore\Network\NTICommRecv.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\NTICommSend.cs.meta">
+      <Link>NetCore\Network\NTICommSend.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\NTIConnect.cs.meta">
+      <Link>NetCore\Network\NTIConnect.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\SingleTonBase.cs.meta">
+      <Link>NetCore\Network\SingleTonBase.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Network\User.cs.meta">
+      <Link>NetCore\Network\User.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\bat.bat">
+      <Link>NetCore\Proto\bat.bat</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\bat.bat.meta">
+      <Link>NetCore\Proto\bat.bat.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\protoc">
+      <Link>NetCore\Proto\protoc</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\protoc.exe">
+      <Link>NetCore\Proto\protoc.exe</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\protoc.exe.meta">
+      <Link>NetCore\Proto\protoc.exe.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\protoc.meta">
+      <Link>NetCore\Proto\protoc.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\Test.cs.meta">
+      <Link>NetCore\Proto\Test.cs.meta</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\test.proto">
+      <Link>NetCore\Proto\test.proto</Link>
+    </Content>
+    <Content Include="..\..\Assets\Scripts\CS\Proto\test.proto.meta">
+      <Link>NetCore\Proto\test.proto.meta</Link>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
