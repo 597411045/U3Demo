@@ -19,6 +19,7 @@ namespace RPG.Movement
         NavMeshPath nmp;
         private NavMeshAgent nma;
         private float SumPathLength;
+        public GameObject SecondViewPoint;
 
         private void Awake()
         {
@@ -36,7 +37,7 @@ namespace RPG.Movement
 
         public void UpdateMove()
         {
-            //WSAD
+            //构建预行为方向
             if (Input.GetKey(KeyCode.W))
             {
                 if (movingPredict.z < 2)
@@ -91,14 +92,32 @@ namespace RPG.Movement
                 }
             }
 
+            //预方向和摄像机关联
+
             Vector3 directZ = (this.transform.position - new Vector3(camera.transform.position.x,
                 this.transform.position.y, camera.transform.position.z)).normalized;
-            desPredict = (movingPredict) + this.transform.position;
 
+            Quaternion q = Quaternion.FromToRotation(Vector3.forward, directZ);
+            desPredict = (q * movingPredict) + this.transform.position;
+
+
+            //不同的模式
+            if (Input.GetMouseButton(1))
+            {
+                nma.updateRotation = false;
+                transform.rotation = Quaternion.Lerp(transform.rotation, q, 0.9f);
+            }
+            else
+            {
+                nma.updateRotation = true;
+            }
+
+            //寻路可否到达手动检测
 
             if (!NavMesh.SamplePosition(desPredict, out nmh, 1, NavMesh.AllAreas)) return;
             if (NavMesh.CalculatePath(this.transform.position, desPredict, NavMesh.AllAreas, nmp) == false
                 || nmp.status != NavMeshPathStatus.PathComplete) return;
+
 
             SumPathLength = 0;
 

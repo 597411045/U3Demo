@@ -41,33 +41,33 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Folder Include="Assets/Plugins/Android" />
-     <Folder Include="Assets/Plugins/arm64" />
-     <Folder Include="Assets/Plugins" />
-     <Folder Include="Assets/Plugins/xlua.bundle" />
-     <Folder Include="Assets/Plugins/WSA/ARM" />
-     <Folder Include="Assets/Plugins/Android/libs/x86" />
-     <Folder Include="Assets/Plugins/WebGL" />
-     <Folder Include="Assets/Plugins/Android/libs/arm64-v8a" />
-     <Folder Include="Assets/Plugins/Android/libs/armeabi-v7a" />
-     <Folder Include="Assets/Plugins/WSA" />
-     <Folder Include="Assets/Plugins/xlua.bundle/Contents/MacOS" />
-     <Folder Include="Assets/Plugins/iOS" />
-     <Folder Include="Assets/Plugins/x86" />
-     <Folder Include="Assets/Plugins/Android/libs" />
-     <Folder Include="Assets/Plugins/WSA/x64" />
-     <Folder Include="Assets/Plugins/x86_64" />
-     <Folder Include="Assets/Plugins/WSA/x86" />
-     <Folder Include="Assets/Plugins/xlua.bundle/Contents" />
-     <Folder Include="Assets/Plugins/WSA/ARM64" />
+     <Folder Include="Assets\Plugins\Android" />
+     <Folder Include="Assets\Plugins\arm64" />
+     <Folder Include="Assets\Plugins" />
+     <Folder Include="Assets\Plugins\xlua.bundle" />
+     <Folder Include="Assets\Plugins\WSA\ARM" />
+     <Folder Include="Assets\Plugins\Android\libs\x86" />
+     <Folder Include="Assets\Plugins\WebGL" />
+     <Folder Include="Assets\Plugins\Android\libs\arm64-v8a" />
+     <Folder Include="Assets\Plugins\Android\libs\armeabi-v7a" />
+     <Folder Include="Assets\Plugins\WSA" />
+     <Folder Include="Assets\Plugins\xlua.bundle\Contents\MacOS" />
+     <Folder Include="Assets\Plugins\iOS" />
+     <Folder Include="Assets\Plugins\x86" />
+     <Folder Include="Assets\Plugins\Android\libs" />
+     <Folder Include="Assets\Plugins\WSA\x64" />
+     <Folder Include="Assets\Plugins\x86_64" />
+     <Folder Include="Assets\Plugins\WSA\x86" />
+     <Folder Include="Assets\Plugins\xlua.bundle\Contents" />
+     <Folder Include="Assets\Plugins\WSA\ARM64" />
      <Reference Include="UnityEngine">
-     <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
+     <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>
      <Reference Include="UnityEngine.CoreModule">
-     <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.CoreModule.dll</HintPath>
+     <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll</HintPath>
      </Reference>
      <Reference Include="UnityEditor">
-     <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEditor.dll</HintPath>
+     <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\Managed\UnityEngine\UnityEditor.dll</HintPath>
      </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

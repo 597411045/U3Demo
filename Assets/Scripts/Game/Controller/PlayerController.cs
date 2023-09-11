@@ -21,6 +21,7 @@ namespace RPG.Control
     {
         private GameObject camera;
         private Animator animator;
+        public GameObject LeftHandGrip;
 
 
         private void Awake()
@@ -31,6 +32,11 @@ namespace RPG.Control
         private Ray GerRayFromCursor()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
+        }
+
+        private void OnAnimatorIK(int layerIndex)
+        {
+          
         }
     }
 }
