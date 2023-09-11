@@ -11,17 +11,21 @@ namespace RPG.Movement
     public class NavMoveComponent : MonoBehaviour
     {
         //SyncObject
-        private GameObject cineMachine;
+        public GameObject camera;
         private Vector3 movingPredict;
         private Vector3 desPredict;
+        public CameraMode cameraMode;
         NavMeshHit nmh;
         NavMeshPath nmp;
+        private NavMeshAgent nma;
         private float SumPathLength;
 
         private void Awake()
         {
-            cineMachine = GameObject.Find("CM FreeLook1");
+            cameraMode = CameraMode.First;
+
             nmp = new NavMeshPath();
+            nma = this.GetComponent<NavMeshAgent>();
         }
 
         public void Update()
@@ -87,10 +91,10 @@ namespace RPG.Movement
                 }
             }
 
-            Vector3 directZ = (this.transform.position - new Vector3(cineMachine.transform.position.x,
-                this.transform.position.y, cineMachine.transform.position.z)).normalized;
-            Quaternion q = Quaternion.LookRotation(directZ, Vector3.up);
-            desPredict = (q * movingPredict) + this.transform.position;
+            Vector3 directZ = (this.transform.position - new Vector3(camera.transform.position.x,
+                this.transform.position.y, camera.transform.position.z)).normalized;
+            desPredict = (movingPredict) + this.transform.position;
+
 
             if (!NavMesh.SamplePosition(desPredict, out nmh, 1, NavMesh.AllAreas)) return;
             if (NavMesh.CalculatePath(this.transform.position, desPredict, NavMesh.AllAreas, nmp) == false
@@ -110,7 +114,7 @@ namespace RPG.Movement
             desPredict = nmh.position;
 
 
-            this.GetComponent<NavMeshAgent>().SetDestination(desPredict);
+            nma.SetDestination(desPredict);
         }
 
 
@@ -118,7 +122,8 @@ namespace RPG.Movement
         {
             Vector3 velocity = this.GetComponent<NavMeshAgent>().velocity;
             Vector3 localVelocity = this.transform.InverseTransformDirection(velocity);
-            this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+            //this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.z);
+            this.GetComponent<Animator>().SetFloat("ForwardSpeed", localVelocity.sqrMagnitude);
         }
 
         public void OnDrawGizmos()

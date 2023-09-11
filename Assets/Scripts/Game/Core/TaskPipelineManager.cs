@@ -16,7 +16,7 @@ public class TaskPipelineManager : MonoBehaviour
 
     public Dictionary<string, Action> EndActions;
 
-    public TaskPipelineManager()
+    public void Awake()
     {
         if (SingleTon == null)
         {
@@ -44,9 +44,5 @@ public class TaskPipelineManager : MonoBehaviour
             i.Value.Invoke();
         }
     }
-
-
-    private void Awake()
-    {
-    }
+   
 }

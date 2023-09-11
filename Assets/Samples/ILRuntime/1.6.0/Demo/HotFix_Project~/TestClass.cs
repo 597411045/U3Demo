@@ -9,7 +9,7 @@ namespace HotFix_Project
     {
         public static void StaticFunTest()
         {
-            Debug.Log("TestClass");
+            //Debug.Log("TestClass");
             GameObject Canvas = GameObject.Find("Canvas");
             GameObject LoginPanel = GameObject.Instantiate(Resources.Load<GameObject>("LoginPanel"));
             LoginPanel.transform.SetParent(Canvas.transform);

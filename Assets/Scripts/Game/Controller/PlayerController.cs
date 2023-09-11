@@ -11,22 +11,26 @@ using UnityEngine.SceneManagement;
 
 namespace RPG.Control
 {
+    public enum CameraMode
+    {
+        Third,
+        First
+    }
+
     public class PlayerController : MonoBehaviour
     {
-        private GameObject cineMachine;
+        private GameObject camera;
         private Animator animator;
 
 
         private void Awake()
         {
             animator = this.GetComponent<Animator>();
-            cineMachine = GameObject.Find("CM FreeLook1");
         }
 
         private Ray GerRayFromCursor()
         {
             return Camera.main.ScreenPointToRay(Input.mousePosition);
         }
-
     }
 }
