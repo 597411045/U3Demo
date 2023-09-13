@@ -25,6 +25,8 @@ public class TaskPipelineManager : MonoBehaviour
             LocalActions = new Dictionary<string, Action>();
             EndActions = new Dictionary<string, Action>();
         }
+        
+        DontDestroyOnLoad(this.gameObject);
     }
 
     private void Update()

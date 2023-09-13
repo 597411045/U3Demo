@@ -8,6 +8,11 @@ namespace RPG.Core
 {
     public class NetworkManager : MonoBehaviour
     {
+        private void Awake()
+        {
+            DontDestroyOnLoad(this.gameObject);
+        }
+
         public void StageRecv()
         {
             if (NetworkManagement.SingleTon.TryConnect()) return;

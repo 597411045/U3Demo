@@ -43,6 +43,8 @@ namespace CS.Cmd
             RecognizedCmd.Add(typeof(TransformSyncResponse).Name, typeof(Cmd_TransformSync));
             RecognizedCmd.Add(typeof(LoginRequest).Name, typeof(Cmd_Login));
             RecognizedCmd.Add(typeof(LoginResponse).Name, typeof(Cmd_Login));
+            RecognizedCmd.Add(typeof(ChangeSceneResponse).Name, typeof(Cmd_ChangeScene));
+            RecognizedCmd.Add(typeof(ChangeSceneRequest).Name, typeof(Cmd_ChangeScene));
         }
 
         public void PassRecvMsgToCmdAndExec(string msg, User c)

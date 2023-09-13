@@ -9,6 +9,7 @@ namespace RPG.Core
         private void Awake()
         {
             LogManagement.SingleTon.Initial("UnityClient");
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 }

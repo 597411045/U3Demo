@@ -56,7 +56,7 @@ public class CameraScript : MonoBehaviour
         }
         else
         {
-            transform.position = Player.transform.position - transform.forward * 5;
+            transform.position = Player.transform.position + Vector3.up * 1 - transform.forward * 5;
         }
     }
 

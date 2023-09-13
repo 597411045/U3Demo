@@ -59,7 +59,7 @@ namespace CS.Cmd
             }
 
             //
-            SceneManager.LoadSceneAsync("Scenes/Play/Play");
+            SceneManager.LoadSceneAsync(request.SceneName);
             //
             base.ExecRequest(proto);
         }
@@ -77,8 +77,8 @@ namespace CS.Cmd
                     return;
                 }
             }
-
             //
+            
             //
             base.ExecResponse(proto);
         }

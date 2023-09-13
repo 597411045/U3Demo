@@ -11,6 +11,7 @@ namespace RPG.Core
     {
         private void Awake()
         {
+            DontDestroyOnLoad(this.gameObject);
         }
 
         public static void SendGuestCmdLogin()

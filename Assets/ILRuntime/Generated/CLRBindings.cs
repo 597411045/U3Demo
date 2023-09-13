@@ -14,7 +14,6 @@ namespace ILRuntime.Runtime.Generated
         /// </summary>
         public static void Initialize(ILRuntime.Runtime.Enviorment.AppDomain app)
         {
-            UnityEngine_Debug_Binding.Register(app);
             UnityEngine_GameObject_Binding.Register(app);
             UnityEngine_Resources_Binding.Register(app);
             UnityEngine_Object_Binding.Register(app);
@@ -26,6 +25,7 @@ namespace ILRuntime.Runtime.Generated
             System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding.Register(app);
             System_Collections_Generic_Dictionary_2_String_Int32_Binding.Register(app);
             LitJson_JsonMapper_Binding.Register(app);
+            UnityEngine_Debug_Binding.Register(app);
             System_Diagnostics_Stopwatch_Binding.Register(app);
             System_Object_Binding.Register(app);
             System_String_Binding.Register(app);

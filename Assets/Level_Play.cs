@@ -68,7 +68,7 @@ public class Level_Play : MonoBehaviour
     public void DisAbleComponent(GameObject player)
     {
         player.GetComponent<NavMoveComponent>().enabled = false;
-        camera.GetComponent<CameraScript>().enabled = false;
+        //camera.GetComponent<CameraScript>().enabled = false;
         player.GetComponent<PlayerController>().enabled = false;
     }
 }
