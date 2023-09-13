@@ -49,5 +49,15 @@ message TransformSyncResponse{
   string Token = 2;
 }
 
+message ChangeSceneRequest{
+  string SceneName = 1;
+  string Token = 2;
+}
+
+message ChangeSceneResponse{
+  string CurrentScene = 1;
+  string Token = 2;
+}
+
 //--proto_path=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto/ --csharp_out=/Users/ac/Desktop/U3Demo/Assets/Scripts/Proto text.proto
 //    /Users/ac/Desktop/U3Demo/Packages/Google.Protobuf.Tools.3.23.2/tools/macosx_x64/protoc 

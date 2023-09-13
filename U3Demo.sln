@@ -1,15 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{9995ae61-d13f-d586-2666-a874fd425c68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{9995AE61-D13F-D586-2666-A874FD425C68}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xlua.Core", "Xlua.Core.csproj", "{5d4df9e6-6404-bb75-edff-38776d3f6c4f}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xlua.Core", "Xlua.Core.csproj", "{5D4DF9E6-6404-BB75-EDFF-38776D3F6C4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{ceda9bc5-5a9a-b8a0-8956-a161899ba958}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{CEDA9BC5-5A9A-B8A0-8956-A161899BA958}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xlua.Core.Editor", "Xlua.Core.Editor.csproj", "{d6128cdc-83f0-d61b-86d7-267474ff4b74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xlua.Core.Editor", "Xlua.Core.Editor.csproj", "{D6128CDC-83F0-D61B-86D7-267474FF4B74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{6dcd710a-00a8-c600-a9e5-c49645db48d6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{6DCD710A-00A8-C600-A9E5-C49645DB48D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetSetver", "NetServer\NetSetver\NetSetver.csproj", "{2D3030FB-CF35-40A2-B5F2-E06EFA07A694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotFix_Project", "Assets\Samples\ILRuntime\1.6.0\Demo\HotFix_Project~\HotFix_Project.csproj", "{F6F32EB1-2463-48D6-AFA6-BBDB9AB4B75A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,6 +30,10 @@ Global
 		{d6128cdc-83f0-d61b-86d7-267474ff4b74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6dcd710a-00a8-c600-a9e5-c49645db48d6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6dcd710a-00a8-c600-a9e5-c49645db48d6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D3030FB-CF35-40A2-B5F2-E06EFA07A694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D3030FB-CF35-40A2-B5F2-E06EFA07A694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6F32EB1-2463-48D6-AFA6-BBDB9AB4B75A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6F32EB1-2463-48D6-AFA6-BBDB9AB4B75A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,7 +5,13 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Sandbox Level1/Sandbox SoloClient.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Login/Login.unity
+    guid: afa742fdb16f3be4faeb82c06fe1006b
+  - enabled: 1
+    path: Assets/Scenes/Play/Play.unity
+    guid: 107dfd1d39d124ad3b0c422fc60ef101
   m_configObjects: {}

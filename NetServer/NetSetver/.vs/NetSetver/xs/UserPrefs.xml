@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{2D3030FB-CF35-40A2-B5F2-E06EFA07A694}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.NetSetver PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Assets/Scripts/CS/Cmd/Cmd_ChangeScene.cs">
+    <Files>
+      <File FileName="../../Assets/Scripts/CS/Cmd/Cmd_Login.cs" Line="1" Column="1" />
+      <File FileName="../../Assets/Scripts/CS/Cmd/Cmd_ChangeScene.cs" Line="7" Column="12" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="NetSetver">
+            <Node name="NetSetver" expanded="True">
+              <Node name="References" expanded="True" selected="True" />
+              <Node name="NetCore" expanded="True">
+                <Node name="Cmd" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

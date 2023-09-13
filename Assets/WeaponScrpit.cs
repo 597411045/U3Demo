@@ -19,12 +19,10 @@ public class WeaponScrpit : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Fire();
-        }
-
-      
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Fire();
+        // }
     }
 
     public void Fire()
@@ -32,6 +30,6 @@ public class WeaponScrpit : MonoBehaviour
         GameObject go = Instantiate(Resources.Load<GameObject>("Bullet"), ArrowEnd.transform.position,
             Quaternion.identity);
         go.transform.forward = (ArrowEnd.transform.position - ArrowStart.transform.position).normalized;
-        go.GetComponent<Rigidbody>().AddForce(go.transform.forward * 100, ForceMode.Impulse);
+        go.GetComponent<Rigidbody>().AddForce(go.transform.forward * 10, ForceMode.Impulse);
     }
 }

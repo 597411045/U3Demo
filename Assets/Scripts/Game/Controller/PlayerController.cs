@@ -23,10 +23,31 @@ namespace RPG.Control
         private Animator animator;
         public GameObject LeftHandGrip;
 
+        public GameObject weapon;
 
         private void Awake()
         {
             animator = this.GetComponent<Animator>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                animator.SetTrigger("IfAttack");
+                weapon.GetComponent<WeaponScrpit>().Fire();
+
+                AnimatorClipInfo[] a = animator.GetCurrentAnimatorClipInfo(0);
+                Debug.Log(a[0].clip.name);
+
+                if (a[0].clip.name.Contains("Firing"))
+                {
+                    animator.Play("Firing", 0, 0);
+                    ;
+                }
+
+                animator.GetCurrentAnimatorStateInfo(0);
+            }
         }
 
         private Ray GerRayFromCursor()
@@ -36,7 +57,15 @@ namespace RPG.Control
 
         private void OnAnimatorIK(int layerIndex)
         {
-          
+            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
+            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1);
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1);
+        }
+
+        public void FiringEnd()
+        {
+            animator.SetBool("IfAttack", false);
         }
     }
 }

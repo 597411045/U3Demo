@@ -19,7 +19,6 @@ public class CameraScript : MonoBehaviour
     {
         float axisX = Input.GetAxis("Horizontal");
         axisX = Mathf.Clamp(axisX, -1f, 1f);
-        Debug.Log(axisX);
         if (axisX != 0)
         {
             transform.Rotate(Vector3.up, axisX, Space.World);

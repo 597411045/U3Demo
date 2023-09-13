@@ -137,8 +137,11 @@ namespace CS.Cmd
             }
 
             PendingDeleteCmdKey.Clear();
-            LogManagement.SingleTon.LogOnlyInFile(this.GetType().Name, "FlushCmdBufferAndCleanDestroyed",
-                $"Current Cmd Count:{CookedCmdDic.Count}");
+            if (CookedCmdDic.Count != 0)
+            {
+                LogManagement.SingleTon.LogOnlyInFile(this.GetType().Name, "FlushCmdBufferAndCleanDestroyed",
+                    $"Current Cmd Count:{CookedCmdDic.Count}");
+            }
         }
     }
 }

@@ -46,8 +46,11 @@ namespace CS.Cmd
                     CmdManagement.SingleTon.AddRequestedCmdInCookedDic(this);
                 }
             }
+
             //
-           
+            ChangeSceneRequest newRequest = new ChangeSceneRequest() { SceneName = "Scenes/Play/Play" };
+            Cmd_ChangeScene cmd = new Cmd_ChangeScene(UserRef, newRequest);
+            CmdManagement.SingleTon.AddNewRequestCmdInCookedDicAndSend(cmd);
             //
             base.ExecRequest(proto);
         }
@@ -62,7 +65,7 @@ namespace CS.Cmd
                 return;
             }
             //
-            
+
             //
             base.ExecResponse(proto);
         }
