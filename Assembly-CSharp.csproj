@@ -43,101 +43,52 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\CS\FSM\ITransition.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\09_Reflection\ReflectionDemo.cs" />
-     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_ChangeScene.cs" />
-     <Compile Include="Assets\XLua\Examples\01_Helloworld\Helloworld.cs" />
      <Compile Include="Assets\ILRuntime\Generated\System_Diagnostics_Stopwatch_Binding.cs" />
      <Compile Include="Assets\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_Int32_Binding.cs" />
-     <Compile Include="Assets\Scripts\Game\Stats\Progression.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\DelegateDemo_Binding.cs" />
      <Compile Include="Assets\XLua\Examples\08_Hotfix\HotfixTest.cs" />
      <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Vector3_Binding.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\TestDelegateMethod_Binding.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\04_Inheritance\InheritanceAdapter.cs" />
-     <Compile Include="Assets\XLua\Tutorial\LoadLuaScript\ByFile\ByFile.cs" />
-     <Compile Include="Assets\Scripts\Game\Core\LuaManager.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\System_Action_1_String_Binding.cs" />
      <Compile Include="Assets\Scripts\Game\Item\Item_HandWeapon.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Events_UnityEvent_Binding.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\08_MonoBehaviour\MonoBehaviourAdapter.cs" />
      <Compile Include="Assets\XLua\Tutorial\LoadLuaScript\Loader\CustomLoader.cs" />
      <Compile Include="Assets\ILRuntime\Generated\System_Object_Binding.cs" />
-     <Compile Include="Assets\Scripts\CS\Cmd\CmdManagement.cs" />
      <Compile Include="Assets\Scripts\Game\Combat\CombatAbleComponent.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonMapper.cs" />
      <Compile Include="Assets\Scripts\CS\Log\LogManagement.cs" />
-     <Compile Include="Assets\XLua\Examples\09_GenericMethod\Foo.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\01_HelloWorld\HelloWorld.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\11_ValueTypeBinding\QuaternionBinder.cs" />
      <Compile Include="Assets\XLua\Examples\11_RawObject\RawObjectTest.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding.cs" />
      <Compile Include="Assets\XLua\Examples\06_Coroutine\CoroutineTest.cs" />
-     <Compile Include="Assets\XLua\Examples\12_ReImplementInLua\ReImplementInLua.cs" />
-     <Compile Include="Assets\XLua\Examples\06_Coroutine\Coroutine_Runner.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\08_MonoBehaviour\MonoBehaviourDemo.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\StateIdle.cs" />
-     <Compile Include="Assets\XLua\Examples\08_Hotfix\StatefullTest.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\TransToAttack.cs" />
-     <Compile Include="Assets\WeaponScrpit.cs" />
-     <Compile Include="Assets\Scripts\Game\Stats\StatEnum.cs" />
-     <Compile Include="Assets\Scripts\Game\Stats\BaseStats.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\CState.cs" />
      <Compile Include="Assets\ILRuntime\Generated\TestClassBase_Binding.cs" />
-     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_WhoAreYou.cs" />
-     <Compile Include="Assets\Scripts\Game\Item\Item_HealthPotion.cs" />
-     <Compile Include="Assets\XLua\Examples\08_Hotfix\HotfixTest2.cs" />
      <Compile Include="Assets\Scripts\Game\Item\WeaponConfig.cs" />
-     <Compile Include="Assets\Scripts\CS\Network\NTIAccept.cs" />
      <Compile Include="Assets\ILRuntime\Generated\System_Int32_Binding.cs" />
      <Compile Include="Assets\Scripts\Game\Stats\IModifierProvider.cs" />
-     <Compile Include="Assets\Scripts\Game\Controller\PlayerController.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\07_Coroutine\CoroutineAdapter.cs" />
      <Compile Include="Assets\Scripts\CS\Network\SingleTonBase.cs" />
-     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_TransformSync.cs" />
-     <Compile Include="Assets\Scripts\CS\Network\NetworkManagement.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\03_Delegate\DelegateDemo.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_GameObject_Binding.cs" />
      <Compile Include="Assets\ILRuntime\Generated\UnityEngine_WaitForSeconds_Binding.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\02_Invocation\Invocation.cs" />
      <Compile Include="Assets\Scripts\Game\UI\UIControl.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\ISMachine.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\CLRBindingTestClass_Binding.cs" />
      <Compile Include="Assets\XLua\Examples\02_U3DScripting\LuaBehaviour.cs" />
      <Compile Include="Assets\Scripts\Game\GameStartButton.cs" />
      <Compile Include="Assets\XLua\Examples\10_SignatureLoader\SignatureLoaderTest.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\TransToDead.cs" />
-     <Compile Include="Assets\Scripts\CS\Network\NTIConnect.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonException.cs" />
      <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Vector2_Binding.cs" />
      <Compile Include="Assets\Scripts\Game\Core\TaskPipelineManager.cs" />
      <Compile Include="Assets\Scripts\Game\Combat\FighterActionComponent.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\05_CLRRedirection\CLRRedirectionDemo.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\04_Inheritance\Inheritance.cs" />
      <Compile Include="Assets\XLua\Tutorial\LuaCallCSharp\LuaCallCs.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\StateMove.cs" />
      <Compile Include="Assets\Scripts\CS\Proto\Test.cs" />
      <Compile Include="Assets\Scripts\Game\Movement\PathPatrolComponent.cs" />
-     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_Base.cs" />
      <Compile Include="Assets\Scripts\Game\Item\PickUpAble.cs" />
      <Compile Include="Assets\ILRuntime\Generated\CoroutineDemo_Binding.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\System_Boolean_Binding.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\CLRBindings.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\IState.cs" />
      <Compile Include="Assets\Scripts\Game\Dialogue\DialogueNode.cs" />
      <Compile Include="Assets\XLua\Examples\04_LuaObjectOrented\InvokeLua.cs" />
-     <Compile Include="Assets\Scripts\Game\Movement\TerrianComponent.cs" />
      <Compile Include="Assets\Scripts\Game\Core\CamFollowComponent.cs" />
-     <Compile Include="Assets\Scripts\ABSystem.cs" />
-     <Compile Include="Assets\XLua\Examples\07_AsyncTest\MessageBox.cs" />
-     <Compile Include="Assets\Scripts\Game\Item\ItemBase_SO.cs" />
-     <Compile Include="Assets\Scripts\Game\Cinematic\CameraShaderComponent.cs" />
      <Compile Include="Assets\ILRuntime\Generated\LitJson_JsonMapper_Binding.cs" />
+     <Compile Include="Assets\Scripts\Game\Cinematic\CameraShaderComponent.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonData.cs" />
-     <Compile Include="Assets\XLua\Tutorial\LoadLuaScript\ByString\ByString.cs" />
      <Compile Include="Assets\ILRuntime\Generated\TestDelegateFunction_Binding.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\SMEnemy.cs" />
-     <Compile Include="Assets\Scripts\Game\Combat\Projectile.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\07_Coroutine\CoroutineDemo.cs" />
-     <Compile Include="Assets\XLua\Examples\05_NoGc\NoGc.cs" />
      <Compile Include="Assets\Scripts\CS\Cmd\Cmd_Login.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\Lexer.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\11_ValueTypeBinding\Vector2Binder.cs" />
@@ -148,57 +99,106 @@
      <Compile Include="Assets\Scripts\Game\Core\NetworkManager.cs" />
      <Compile Include="Assets\BulletScript.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\06_CLRBinding\CLRBindingDemo.cs" />
-     <Compile Include="Assets\Scripts\CS\Network\NTICommSend.cs" />
      <Compile Include="Assets\Scripts\CS\Network\User.cs" />
      <Compile Include="Assets\Scripts\Game\Controller\AIController.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\CTransition.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\11_ValueTypeBinding\Vector3Binder.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonMockWrapper.cs" />
-     <Compile Include="Assets\Level_Play.cs" />
      <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Quaternion_Binding.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\StateAttack.cs" />
      <Compile Include="Assets\Scripts\Game\Item\Item_SwordWeapon.cs" />
      <Compile Include="Assets\Scripts\Game\Dialogue\TaskSO.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\System_Collections_Generic_List_1_Int32_Binding.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\TransToMove.cs" />
+     <Compile Include="Assets\Shader\NewShadetTest.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\ParserToken.cs" />
+     <Compile Include="Assets\XLua\Examples\07_AsyncTest\AsyncTest.cs" />
+     <Compile Include="Assets\Scripts\Game\Dialogue\DialogueSO.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Object_Binding.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Transform_Binding.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\System_NotSupportedException_Binding.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\CSMachine.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\NavMoveComponent.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Resources_Binding.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTICommRecv.cs" />
+     <Compile Include="Assets\Scripts\Game\Core\HealthComponent.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Debug_Binding.cs" />
+     <Compile Include="Assets\Scripts\Game\UI\CharacterUIComponent.cs" />
+     <Compile Include="Assets\Scripts\Game\Scene\AutoDestroy.cs" />
+     <Compile Include="Assets\DialogTest.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_ChangeScene.cs" />
+     <Compile Include="Assets\XLua\Examples\01_Helloworld\Helloworld.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\Progression.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\DelegateDemo_Binding.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\TestDelegateMethod_Binding.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\04_Inheritance\InheritanceAdapter.cs" />
+     <Compile Include="Assets\XLua\Tutorial\LoadLuaScript\ByFile\ByFile.cs" />
+     <Compile Include="Assets\Scripts\Game\Core\LuaManager.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\System_Action_1_String_Binding.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Events_UnityEvent_Binding.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\08_MonoBehaviour\MonoBehaviourAdapter.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\CmdManagement.cs" />
+     <Compile Include="Assets\XLua\Examples\09_GenericMethod\Foo.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\01_HelloWorld\HelloWorld.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\System_Collections_Generic_Dictionary_2_String_ILTypeInstance_Binding.cs" />
+     <Compile Include="Assets\XLua\Examples\12_ReImplementInLua\ReImplementInLua.cs" />
+     <Compile Include="Assets\XLua\Examples\06_Coroutine\Coroutine_Runner.cs" />
+     <Compile Include="Assets\XLua\Examples\08_Hotfix\StatefullTest.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\TransToAttack.cs" />
+     <Compile Include="Assets\WeaponScrpit.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\StatEnum.cs" />
+     <Compile Include="Assets\Scripts\Game\Stats\BaseStats.cs" />
+     <Compile Include="Assets\XLua\Examples\08_Hotfix\HotfixTest2.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_WhoAreYou.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\Item_HealthPotion.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTIAccept.cs" />
+     <Compile Include="Assets\Scripts\Game\Controller\PlayerController.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\07_Coroutine\CoroutineAdapter.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_TransformSync.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NetworkManagement.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\03_Delegate\DelegateDemo.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_GameObject_Binding.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\CLRBindingTestClass_Binding.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTIConnect.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonException.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\05_CLRRedirection\CLRRedirectionDemo.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\StateMove.cs" />
+     <Compile Include="Assets\Scripts\CS\Cmd\Cmd_Base.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\System_Boolean_Binding.cs" />
+     <Compile Include="Assets\ILRuntime\Generated\CLRBindings.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\IState.cs" />
+     <Compile Include="Assets\Scripts\Game\Movement\TerrianComponent.cs" />
+     <Compile Include="Assets\Scripts\ABSystem.cs" />
+     <Compile Include="Assets\XLua\Examples\07_AsyncTest\MessageBox.cs" />
+     <Compile Include="Assets\Scripts\Game\Item\ItemBase_SO.cs" />
+     <Compile Include="Assets\XLua\Tutorial\LoadLuaScript\ByString\ByString.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\SMEnemy.cs" />
+     <Compile Include="Assets\Scripts\Game\Combat\Projectile.cs" />
+     <Compile Include="Assets\XLua\Examples\05_NoGc\NoGc.cs" />
+     <Compile Include="Assets\Scripts\CS\Network\NTICommSend.cs" />
+     <Compile Include="Assets\Scripts\CS\FSM\CTransition.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\11_ValueTypeBinding\Vector3Binder.cs" />
+     <Compile Include="Assets\Level_Play.cs" />
      <Compile Include="Assets\Scripts\Game\Core\CmdManager.cs" />
      <Compile Include="Assets\Scripts\Game\Cinematic\CMTriggerComponent.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\System_Collections_Generic_List_1_Int32_Binding.cs" />
      <Compile Include="Assets\Scripts\Game\Combat\WeaponComponent.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\10_LitJson\LitJsonDemo.cs" />
      <Compile Include="Assets\Scripts\CS\Network\NetThreadBase.cs" />
      <Compile Include="Assets\XLua\Tutorial\CSharpCallLua\CSCallLua.cs" />
      <Compile Include="Assets\XLua\Examples\ExampleGenConfig.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\TransToMove.cs" />
-     <Compile Include="Assets\Shader\NewShadetTest.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\ParserToken.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\TransToIdle.cs" />
-     <Compile Include="Assets\XLua\Examples\07_AsyncTest\AsyncTest.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonWriter.cs" />
-     <Compile Include="Assets\Scripts\Game\Dialogue\DialogueSO.cs" />
      <Compile Include="Assets\CameraScript.cs" />
      <Compile Include="Assets\ILRuntime\Generated\System_Collections_Generic_List_1_ILTypeInstance_Binding.cs" />
      <Compile Include="Assets\XLua\Examples\09_GenericMethod\GenericMethodExample.cs" />
      <Compile Include="Assets\Scripts\Game\Core\LogManager.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Object_Binding.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Transform_Binding.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\11_ValueTypeBinding\ValueTypeBindingDemo.cs" />
      <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Time_Binding.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\System_NotSupportedException_Binding.cs" />
      <Compile Include="Assets\Scripts\Game\Item\ItemBase_Weapon.cs" />
      <Compile Include="Assets\Scripts\CS\FSM\StateDead.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\IJsonWrapper.cs" />
-     <Compile Include="Assets\Scripts\Game\Movement\NavMoveComponent.cs" />
-     <Compile Include="Assets\Scripts\CS\FSM\CSMachine.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Resources_Binding.cs" />
      <Compile Include="Assets\ILRuntime\Generated\UnityEngine_UI_Button_Binding.cs" />
-     <Compile Include="Assets\Scripts\CS\Network\NTICommRecv.cs" />
-     <Compile Include="Assets\Scripts\Game\Core\HealthComponent.cs" />
-     <Compile Include="Assets\ILRuntime\Generated\UnityEngine_Debug_Binding.cs" />
      <Compile Include="Assets\Scripts\CS\Core\IRayCastAble.cs" />
-     <Compile Include="Assets\Scripts\Game\UI\CharacterUIComponent.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\LitJson\JsonReader.cs" />
      <Compile Include="Assets\ILRuntime\Generated\System_Single_Binding.cs" />
-     <Compile Include="Assets\Scripts\Game\Scene\AutoDestroy.cs" />
-     <Compile Include="Assets\DialogTest.cs" />
      <Folder Include="Assets" />
      <None Include="Assets\Asset Packs\Synty - Polygon Student Sample\README - Usage Rights for these assets.txt" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Hoe" />
@@ -211,6 +211,7 @@
      <None Include="Assets\StreamingAssets\Test3.lua.txt" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Sword" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Spear" />
+     <Folder Include="Assets\AnimeSuburbCity\Settings" />
      <Folder Include="Assets\XLua\Tutorial\LoadLuaScript\ByFile\Resources" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\07_Coroutine" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Prefabs\Vehicles" />
@@ -220,6 +221,7 @@
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Models" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club\Prefab" />
      <Folder Include="Assets\Scripts\Game\Cinematic" />
+     <Folder Include="Assets\AnimeSuburbCity\Scenes" />
      <Folder Include="Assets\XLua\Resources\xlua" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE\Panoramics" />
      <Folder Include="Assets\Scripts\Game\Core" />
@@ -236,14 +238,20 @@
      <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample\Coins Pack\Money_Perspective" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow\Materials &amp; Meshes" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs\Buildings" />
+     <Folder Include="Assets\AnimeSuburbCity\Textures\Vehicles" />
      <Folder Include="Assets\Asset Packs\Terrain Textures\Simple Textures" />
      <None Include="Assets\Asset Packs\SimpleFX\Materials\UnlitVertexColour_Alpha.shader" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\TerrainAssets" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\09_Reflection" />
+     <Folder Include="Assets\AnimeSuburbCity\Models" />
      <Folder Include="Assets\Asset Packs\SimpleFX\Materials" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Decals" />
      <Folder Include="Assets\Asset Packs\SimpleFX" />
+     <Folder Include="Assets\AnimeSuburbCity" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Rod of Death" />
      <Folder Include="Assets\Game\Effects" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Vehicles" />
+     <Folder Include="Assets\AnimeSuburbCity\AdditionalPieces" />
      <None Include="Assets\XLua\Examples\06_Coroutine\Resources\coruntine_test.lua.txt" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water" />
@@ -256,6 +264,7 @@
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Bow" />
      <Folder Include="Assets\Game\UI" />
      <Folder Include="Assets\Scripts\CS\Log" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Props" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village\Components\Materials" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\02_Invocation" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Models\ImportedModels" />
@@ -267,8 +276,10 @@
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets" />
      <Folder Include="Assets\Game\Core" />
      <None Include="Assets\Asset Packs\Animations by Explosive\README - Usage Rights for these assets 1.txt" />
+     <Folder Include="Assets\AnimeSuburbCity\Scenes\Demo" />
      <Folder Include="Assets\XLua\Tutorial\LoadLuaScript" />
      <None Include="Assets\StreamingAssets\Test.lua.txt" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\RepairShop" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Item" />
      <Folder Include="Assets\XLua\Examples\03_UIEvent" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\01_HelloWorld" />
@@ -276,10 +287,12 @@
      <Folder Include="Assets\XLua\Tutorial\LuaCallCSharp" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Models" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Prefabs" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\BGBuildings" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Farm\Components\Materials" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Materials" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment" />
      <Folder Include="Assets\XLua\Tutorial\CSharpCallLua" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Shop" />
      <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample\Coins Pack" />
      <None Include="Assets\StreamingAssets\Test2.lua.txt" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\_Scenes" />
@@ -300,6 +313,8 @@
      <None Include="Assets\Shader\NewUnlitShader.shader" />
      <Folder Include="Assets\Asset Packs\Terrain Textures" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\TerrainAssets\BillboardTextures" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\RoadProps" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Fence" />
      <Folder Include="Assets\StreamingAssets" />
      <Folder Include="Assets\Scenes\Play\Play" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonPirates\Prefabs\Props" />
@@ -332,6 +347,7 @@
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Farm" />
      <Folder Include="Assets\Asset Packs\Universal Gold Icons Sample" />
      <Folder Include="Assets\Asset Packs\Synty - Polygon Student Sample\Models" />
+     <Folder Include="Assets\AnimeSuburbCity\Textures\Posters" />
      <Folder Include="Assets\Asset Packs\Fantasy Skybox FREE\Panoramics\FS002" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Scripts" />
      <Folder Include="Assets\XLua\Examples\01_Helloworld" />
@@ -347,19 +363,24 @@
      <None Include="Assets\StreamingAssets\main.lua.txt" />
      <Folder Include="Assets\Scripts\Game\UI" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\Armed" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Lanterns" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings\Models" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive\2Hand-Bow" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Vegetation" />
      <Folder Include="Assets\Scripts\Game\Controller" />
      <Folder Include="Assets\XLua\Examples\10_SignatureLoader" />
      <Folder Include="Assets\Scenes\Sandbox OriEnv" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs\Environments" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\ElectronicProps" />
      <Folder Include="Assets\Scenes\Sandbox Level1" />
      <Folder Include="Assets\Game\Core\Resources" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow" />
      <Folder Include="Assets\Asset Packs\SimpleSky" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\VendingMachines" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Textures\Tiling Textures" />
      <Folder Include="Assets\Scenes\Sandbox Level2\Sandbox 2" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\05_CLRRedirection" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts" />
@@ -386,6 +407,7 @@
      <Folder Include="Assets\Samples\ILRuntime" />
      <Folder Include="Assets\XLua\Tutorial\LoadLuaScript\ByString" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Pitchfork\Materials and Model" />
+     <Folder Include="Assets\AnimeSuburbCity\Textures" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonVikings" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Scripts\Utils" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Hoe\Materials and Model" />
@@ -395,6 +417,7 @@
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\04_Inheritance" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Hoe\Prefab" />
      <Folder Include="Assets\Game\Item" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\BuildingPieces" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Textures" />
      <Folder Include="Assets\XLua\Examples\09_GenericMethod" />
      <None Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Shaders\FXWaterPro.shader" />
@@ -405,6 +428,7 @@
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\SFX\Death" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Materials" />
      <Folder Include="Assets\Asset Packs\Standard Assets" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Tram" />
      <Folder Include="Assets\Asset Packs\Pixel Cursors\Cursors" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo" />
      <Folder Include="Assets\Scripts\CS\Core" />
@@ -422,7 +446,9 @@
      <None Include="Assets\StreamingAssets\Base.lua.txt" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Village" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonAdventure\Prefabs" />
+     <Folder Include="Assets\AnimeSuburbCity\Animations" />
      <Folder Include="Assets\Asset Packs\SimpleSky\_Textures" />
+     <Folder Include="Assets\AnimeSuburbCity\Shaders" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Synty Asset Packs - Commercial licence required\PolygonKnights\Prefabs\Environments" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Club" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Sprites" />
@@ -433,6 +459,8 @@
      <Folder Include="Assets\Scenes" />
      <Folder Include="Assets\Scripts\Game\Combat" />
      <Folder Include="Assets\XLua\Examples\13_BuildFromCLI" />
+     <Folder Include="Assets\AnimeSuburbCity\Materials" />
+     <None Include="Assets\AnimeSuburbCity\BUILT_IN_HOW_TO.txt" />
      <Folder Include="Assets\XLua\Examples\11_RawObject" />
      <None Include="Assets\XLua\Resources\tdr\tdr.lua.txt" />
      <Folder Include="Assets\Asset Packs\Not For Student Use - licence required\Environments - Misc other assets\Castle\Components\Materials" />
@@ -450,6 +478,7 @@
      <Folder Include="Assets\Shader" />
      <Folder Include="Assets\Asset Packs\GameDev.tv Assets\Simple Arrow\Prefab" />
      <Folder Include="Assets\Asset Packs\Standard Assets\Environment\Water\Water\Materials" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Road" />
      <Folder Include="Assets\Scenes\Particle Materials" />
      <None Include="Assets\XLua\Examples\06_Coroutine\Resources\cs_coroutine.lua.txt" />
      <Folder Include="Assets\Asset Packs\Animations by Explosive" />
@@ -460,6 +489,7 @@
      <Folder Include="Assets\XLua\Examples\07_AsyncTest\Resources" />
      <Folder Include="Assets\Samples\ILRuntime\1.6.0\Demo\_Scenes\Examples" />
      <Folder Include="Assets\Scenes\Sandbox Level1\Sandbox 1" />
+     <Folder Include="Assets\AnimeSuburbCity\Prefabs\Park" />
      <Reference Include="UnityEngine">
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
      </Reference>
@@ -1066,11 +1096,68 @@
      <Reference Include="System.Xml.Serialization">
      <HintPath>E:\Unity\Editor\2020.3.47f1\Editor\Data\NetStandard\compat\2.0.0\shims\netfx\System.Xml.Serialization.dll</HintPath>
      </Reference>
-     <Reference Include="Cinemachine">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualStudio.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Timeline">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Searcher.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="ILRuntime">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\ILRuntime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.Runtime">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Postprocessing.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Animation.Rigging">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ShaderGraph.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Cinemachine">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
@@ -1081,53 +1168,26 @@
      <Reference Include="Unity.Postprocessing.Runtime">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.TextMeshPro.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.Universal.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Timeline">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.TextMeshPro">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Mathematics.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Burst.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="ILRuntime">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\ILRuntime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Postprocessing.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.UI">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Animation.Rigging.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Animation.Rigging">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.Core.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>

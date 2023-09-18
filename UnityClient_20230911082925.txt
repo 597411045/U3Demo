@@ -1,3 +1,0 @@
-﻿2023-09-11 08:29:25Z:StartLog
-2023-09-11 08:29:25Z:<Class>NTIConnect</Class><FunctionName>NTIConnect</FunctionName><Content></Content>
-2023-09-11 08:29:32Z:<Class>NetworkManagement</Class><FunctionName>CloseAllUser</FunctionName><Content></Content>

@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviour
     void LateUpdate()
     {
         float axisX = Input.GetAxis("Horizontal");
-        axisX = Mathf.Clamp(axisX, -1f, 1f);
+        axisX = Mathf.Clamp(axisX, -2f, 2f);
         if (axisX != 0)
         {
             transform.Rotate(Vector3.up, axisX, Space.World);

@@ -30,6 +30,6 @@ public class WeaponScrpit : MonoBehaviour
         GameObject go = Instantiate(Resources.Load<GameObject>("Bullet"), ArrowEnd.transform.position,
             Quaternion.identity);
         go.transform.forward = (ArrowEnd.transform.position - ArrowStart.transform.position).normalized;
-        go.GetComponent<Rigidbody>().AddForce(go.transform.forward * 10, ForceMode.Impulse);
+        go.GetComponent<Rigidbody>().AddForce(go.transform.forward * 50, ForceMode.Impulse);
     }
 }

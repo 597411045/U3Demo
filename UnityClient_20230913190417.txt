@@ -1,8 +1,0 @@
-﻿2023-09-13 19:04:17Z:StartLog
-2023-09-13 19:04:17Z:<Class>NTIConnect</Class><FunctionName>NTIConnect</FunctionName><Content></Content>
-2023-09-13 19:04:17Z:<Class>User</Class><FunctionName>User</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content>A New User In</Content>
-2023-09-13 19:04:18Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content>WhoAreYouRequest|{ "ServerName": "MainServer", "Token": "cbe1adc5-74fb-43f3-88b0-9469ba98095f" }</Content>
-2023-09-13 19:04:20Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content>WhoAreYouRequest|{ "ServerName": "MainServer", "Token": "cbe1adc5-74fb-43f3-88b0-9469ba98095f" }</Content>
-2023-09-13 19:04:21Z:<Class>NetworkManagement</Class><FunctionName>CloseAllUser</FunctionName><Content></Content>
-2023-09-13 19:04:21Z:<Class>User</Class><FunctionName>DoDestroy</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content></Content>
-2023-09-13 19:04:21Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content></Content>

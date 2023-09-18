@@ -42,11 +42,11 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\XLua\Examples\08_Hotfix\Editor\HotfixTestCfg.cs" />
-     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Editor\ILRuntimeCrossBinding.cs" />
-     <Compile Include="Assets\XLua\Editor\ExampleConfig.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Scripts\Examples\08_MonoBehaviour\Editor\MonoBehaviourAdapterEditor.cs" />
      <Compile Include="Assets\Scripts\Game\Dialogue\Editor\DialogueEditor.cs" />
      <Compile Include="Assets\XLua\Examples\13_BuildFromCLI\Editor\BuildFromCLI.cs" />
+     <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Editor\ILRuntimeCrossBinding.cs" />
+     <Compile Include="Assets\XLua\Editor\ExampleConfig.cs" />
      <Compile Include="Assets\Samples\ILRuntime\1.6.0\Demo\Editor\ILRuntimeCLRBinding.cs" />
      <Folder Include="Assets\XLua\Examples\13_BuildFromCLI\Editor" />
      <Folder Include="Assets\XLua\Editor" />
@@ -327,6 +327,9 @@
      </Reference>
      <Reference Include="System.Runtime.CompilerServices.Unsafe">
      <HintPath>E:\Desktop\U3Demo\Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+     </Reference>
+     <Reference Include="ICSharpCode.NRefactory">
+     <HintPath>E:\Desktop\U3Demo\Library\PackageCache\com.unity.render-pipelines.core@10.10.1\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
      </Reference>
      <Reference Include="System.Memory">
      <HintPath>E:\Desktop\U3Demo\Assets\Plugins\System.Memory.dll</HintPath>
@@ -694,11 +697,68 @@
      <Reference Include="UnityEditor.TestRunner">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEditor.TestRunner.dll</HintPath>
      </Reference>
-     <Reference Include="Cinemachine">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.VSCode.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.VisualStudio.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Timeline">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.TextMeshPro">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Burst.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Searcher.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="ILRuntime">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\ILRuntime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.Runtime">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Postprocessing.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEditor.UI">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.PlasticSCM.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Rider.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+     </Reference>
+     <Reference Include="UnityEngine.UI">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Animation.Rigging">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.Mathematics">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+     </Reference>
+     <Reference Include="Unity.ShaderGraph.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
+     </Reference>
+     <Reference Include="Cinemachine">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Cinemachine.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Burst">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
@@ -709,53 +769,26 @@
      <Reference Include="Unity.Postprocessing.Runtime">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Postprocessing.Runtime.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.TextMeshPro.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.Universal.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Universal.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.VisualStudio.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Timeline.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Timeline">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.TextMeshPro">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
      </Reference>
      <Reference Include="Unity.Mathematics.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="Unity.Burst.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="ILRuntime">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\ILRuntime.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Postprocessing.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Postprocessing.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="UnityEditor.UI">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Rider.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-     </Reference>
      <Reference Include="Unity.Animation.Rigging.Editor">
      <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
      </Reference>
-     <Reference Include="UnityEngine.UI">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.PlasticSCM.Editor">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Animation.Rigging">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
-     </Reference>
-     <Reference Include="Unity.Mathematics">
-     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
+     <Reference Include="Unity.RenderPipelines.Core.Editor">
+     <HintPath>E:\Desktop\U3Demo\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
      </Reference>
   </ItemGroup>
   <ItemGroup>

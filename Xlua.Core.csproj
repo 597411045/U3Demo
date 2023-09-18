@@ -41,29 +41,29 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\XLua\Src\ObjectTranslatorPool.cs" />
-     <Compile Include="Assets\XLua\Src\LuaTable.cs" />
      <Compile Include="Assets\XLua\Src\LuaDLL.cs" />
-     <Compile Include="Assets\XLua\Src\Utils.cs" />
-     <Compile Include="Assets\XLua\Src\RawObject.cs" />
-     <Compile Include="Assets\XLua\Src\TemplateEngine\TemplateEngine.cs" />
      <Compile Include="Assets\XLua\Src\MethodWarpsCache.cs" />
-     <Compile Include="Assets\XLua\Src\ObjectPool.cs" />
-     <Compile Include="Assets\XLua\Src\LuaBase.cs" />
-     <Compile Include="Assets\XLua\Src\GenAttributes.cs" />
      <Compile Include="Assets\XLua\Src\LuaFunction.cs" />
      <Compile Include="Assets\XLua\Src\ObjectCasters.cs" />
      <Compile Include="Assets\XLua\Src\SignatureLoader.cs" />
      <Compile Include="Assets\XLua\Src\TypeExtensions.cs" />
-     <Compile Include="Assets\XLua\Src\ObjectTranslator.cs" />
-     <Compile Include="Assets\XLua\Src\LuaEnv.cs" />
      <Compile Include="Assets\XLua\Src\CodeEmit.cs" />
      <Compile Include="Assets\XLua\Src\LuaException.cs" />
+     <Compile Include="Assets\XLua\Src\InternalGlobals.cs" />
+     <Compile Include="Assets\XLua\Src\ObjectTranslatorPool.cs" />
+     <Compile Include="Assets\XLua\Src\LuaTable.cs" />
+     <Compile Include="Assets\XLua\Src\Utils.cs" />
+     <Compile Include="Assets\XLua\Src\RawObject.cs" />
+     <Compile Include="Assets\XLua\Src\TemplateEngine\TemplateEngine.cs" />
+     <Compile Include="Assets\XLua\Src\ObjectPool.cs" />
+     <Compile Include="Assets\XLua\Src\LuaBase.cs" />
+     <Compile Include="Assets\XLua\Src\GenAttributes.cs" />
+     <Compile Include="Assets\XLua\Src\ObjectTranslator.cs" />
+     <Compile Include="Assets\XLua\Src\LuaEnv.cs" />
      <Compile Include="Assets\XLua\Src\DelegateBridge.cs" />
      <Compile Include="Assets\XLua\Src\GenericDelegateBridge.cs" />
      <Compile Include="Assets\XLua\Src\CopyByValue.cs" />
      <Compile Include="Assets\XLua\Src\StaticLuaCallbacks.cs" />
-     <Compile Include="Assets\XLua\Src\InternalGlobals.cs" />
      <None Include="Assets\XLua\Src\Xlua.Core.asmdef" />
      <Folder Include="Assets\XLua\Src" />
      <Folder Include="Assets\XLua\Src\TemplateEngine" />
@@ -339,6 +339,9 @@
      </Reference>
      <Reference Include="System.Runtime.CompilerServices.Unsafe">
      <HintPath>E:\Desktop\U3Demo\Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+     </Reference>
+     <Reference Include="ICSharpCode.NRefactory">
+     <HintPath>E:\Desktop\U3Demo\Library\PackageCache\com.unity.render-pipelines.core@10.10.1\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
      </Reference>
      <Reference Include="System.Memory">
      <HintPath>E:\Desktop\U3Demo\Assets\Plugins\System.Memory.dll</HintPath>

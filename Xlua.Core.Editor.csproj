@@ -41,9 +41,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\XLua\Src\Editor\Hotfix.cs" />
      <Compile Include="Assets\XLua\Src\Editor\LinkXmlGen\LinkXmlGen.cs" />
      <Compile Include="Assets\XLua\Src\Editor\TemplateRef.cs" />
-     <Compile Include="Assets\XLua\Src\Editor\Hotfix.cs" />
      <Compile Include="Assets\XLua\Src\Editor\Generator.cs" />
      <None Include="Assets\XLua\Src\Editor\Template\LuaInterfaceBridge.tpl.txt" />
      <None Include="Assets\XLua\Src\Editor\Template\LuaWrapPusher.tpl.txt" />
@@ -334,6 +334,9 @@
      </Reference>
      <Reference Include="System.Runtime.CompilerServices.Unsafe">
      <HintPath>E:\Desktop\U3Demo\Assets\Plugins\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+     </Reference>
+     <Reference Include="ICSharpCode.NRefactory">
+     <HintPath>E:\Desktop\U3Demo\Library\PackageCache\com.unity.render-pipelines.core@10.10.1\Editor\ShaderGenerator\ICSharpCode.NRefactory.dll</HintPath>
      </Reference>
      <Reference Include="System.Memory">
      <HintPath>E:\Desktop\U3Demo\Assets\Plugins\System.Memory.dll</HintPath>
