@@ -1,0 +1,109 @@
+﻿2023-09-15 09:33:45Z:StartLog
+2023-09-15 09:33:45Z:<Class>NTIConnect</Class><FunctionName>NTIConnect</FunctionName><Content></Content>
+2023-09-15 09:33:45Z:<Class>User</Class><FunctionName>User</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content>A New User In</Content>
+2023-09-15 09:33:46Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>UnknownServer</UserName><Content>WhoAreYouRequest|{ "ServerName": "MainServer", "Token": "6105ac1a-4cfb-4680-b6f4-5ade36e531a5" }</Content>
+2023-09-15 09:33:47Z:<Class>Cmd_WhoAreYou</Class><FunctionName>ExecRequest</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "ServerName": "MainServer", "Token": "6105ac1a-4cfb-4680-b6f4-5ade36e531a5" }</Content>
+2023-09-15 09:33:47Z:<Class>Cmd_WhoAreYou</Class><FunctionName>PassResponseToSendBuffer</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "ClientName": "ACs-MacBook-Pro.mshome.net", "Token": "6105ac1a-4cfb-4680-b6f4-5ade36e531a5" }</Content>
+2023-09-15 09:33:47Z:<Class>NTICommSend</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>WhoAreYouResponse|{ "ClientName": "ACs-MacBook-Pro.mshome.net", "Token": "6105ac1a-4cfb-4680-b6f4-5ade36e531a5" }</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_Login</Class><FunctionName>PassRequestToSendBuffer</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "username": "Guest", "password": "Guest", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>NTICommSend</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>LoginRequest|{ "username": "Guest", "password": "Guest", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_Login</Class><FunctionName>CheckState</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>Retry Count:RetryCount2</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_Login</Class><FunctionName>PassRequestToSendBuffer</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "username": "Guest", "password": "Guest", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>NTICommSend</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>LoginRequest|{ "username": "Guest", "password": "Guest", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_Login</Class><FunctionName>CheckState</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>Retry Count:RetryCount3</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_Login</Class><FunctionName>PassRequestToSendBuffer</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "username": "Guest", "password": "Guest", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>NTICommSend</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>LoginRequest|{ "username": "Guest", "password": "Guest", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>ChangeSceneRequest|{ "SceneName": "Scenes/Play/Play", "Token": "f6844804-ba13-4c70-91b7-0d7c69000431" }</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_ChangeScene</Class><FunctionName>ExecRequest</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "SceneName": "Scenes/Play/Play", "Token": "f6844804-ba13-4c70-91b7-0d7c69000431" }</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_ChangeScene</Class><FunctionName>PassResponseToSendBuffer</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "CurrentScene": "Login", "Token": "f6844804-ba13-4c70-91b7-0d7c69000431" }</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>NTICommSend</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>ChangeSceneResponse|{ "CurrentScene": "Login", "Token": "f6844804-ba13-4c70-91b7-0d7c69000431" }</Content>
+2023-09-15 09:34:08Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>LoginResponse|{ "result": "OK", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>Cmd_Login</Class><FunctionName>ExecResponse</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content>{ "result": "OK", "Token": "8cefd076-6474-4aec-a1bb-9711a6c04ccf" }</Content>
+2023-09-15 09:34:08Z:<Class>CmdManagement</Class><FunctionName>FlushCmdBufferAndCleanDestroyed</FunctionName><Content>Current Cmd Count:1</Content>
+2023-09-15 09:34:08Z:<Class>NetworkManagement</Class><FunctionName>CloseAllUser</FunctionName><Content></Content>
+2023-09-15 09:34:08Z:<Class>User</Class><FunctionName>DoDestroy</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content></Content>
+2023-09-15 09:34:08Z:<Class>NTICommRecv</Class><FunctionName>Thread</FunctionName><UserEP>81.68.87.60:7000</UserEP><UserName>MainServer</UserName><Content></Content>

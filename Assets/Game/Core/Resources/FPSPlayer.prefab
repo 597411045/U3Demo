@@ -2400,7 +2400,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 96
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8135624544963663320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,6 +2434,7 @@ GameObject:
   - component: {fileID: 4504320763501162992}
   - component: {fileID: 3272513191827323521}
   - component: {fileID: 7448785265703950207}
+  - component: {fileID: -8427561370547223108}
   m_Layer: 0
   m_Name: FPSPlayer
   m_TagString: Player
@@ -2601,6 +2602,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LeftHandGrip: {fileID: 5331670094279485932}
   weapon: {fileID: 7221613381323002917}
+--- !u!114 &-8427561370547223108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7455332553218571824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8d852e64924b5fbc317127d66f00c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7802367389745591225
 GameObject:
   m_ObjectHideFlags: 0

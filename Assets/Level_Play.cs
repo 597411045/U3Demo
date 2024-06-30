@@ -22,23 +22,24 @@ public class Level_Play : MonoBehaviour
         camera = Camera.main;
         flag1 = true;
         flag2 = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnGUI()
     {
-        if (flag1 && Input.GetKeyDown(KeyCode.Alpha1))
+        if (GUILayout.Button("Initial a Button"))
         {
+            if (!flag1) return;
             GameObject go = GeneratePlayerAt(SpawnPoint[Random.Range(0, SpawnPoint.Length)].transform.position);
             InitialPlayerComponent(go);
-
             flag1 = false;
         }
 
-        if (flag2 && Input.GetKeyDown(KeyCode.Alpha2))
+        if (GUILayout.Button("Initial a AI"))
         {
+            if (!flag2) return;
             GameObject ai = GeneratePlayerAt(SpawnPoint[Random.Range(0, SpawnPoint.Length)].transform.position);
             DisAbleComponent(ai);
 
@@ -62,6 +63,12 @@ public class Level_Play : MonoBehaviour
 
         player.GetComponent<PlayerController>().enabled = true;
         camera.GetComponent<CameraScript>().enabled = true;
+        Transform tmpT;
+        if (player.transform.FindAlongChild("ArrowEnd", out tmpT))
+        {
+            camera.GetComponent<CameraScript>().WeaponFirePoint = tmpT.gameObject;
+        }
+
         player.GetComponent<NavMoveComponent>().enabled = true;
     }
 

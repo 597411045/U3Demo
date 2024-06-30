@@ -1,5 +1,6 @@
 using System;
 using Cinemachine;
+using DefaultNamespace;
 using Game.Item;
 using RPG.Combat;
 using RPG.Core;
