@@ -84,7 +84,7 @@ namespace FairyGUI
 
         List<Renderer> _renders;
 
-        void OnEnable()
+        public void CP1_OnEnable(AssetBundle bundle1,AssetBundle bundle2)
         {
             if (Application.isPlaying)
             {
@@ -93,7 +93,7 @@ namespace FairyGUI
                     CreateContainer();
 
                     if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
-                        UIPackage.AddPackage(packagePath);
+                        UIPackage.AddPackage(bundle1,bundle2);
                 }
             }
             else
@@ -118,13 +118,13 @@ namespace FairyGUI
                 EMRenderSupport.Remove(this);
         }
 
-        void Start()
+        void CP3_Start()
         {
             if (!_created && Application.isPlaying)
                 CreateUI_PlayMode();
         }
 
-        void Update()
+        void CP4_Update()
         {
             if (screenSizeVer != StageCamera.screenSizeVer)
                 HandleScreenSizeChanged();
