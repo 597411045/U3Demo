@@ -11,10 +11,8 @@ public class GameModeScript : MonoBehaviour
     public long RenderFrame;
     public long PhysicsFrame;
 
-    public UIPanel UIPanel;
-    
-    private UIManagement _uiManagement;
-    private ResourceManagement _resourceManagement;
+    public UIManagement _uiManagement;
+    public ResourceManagement _resourceManagement;
 
     private void Awake()
     {
@@ -23,12 +21,7 @@ public class GameModeScript : MonoBehaviour
 
     void Start()
     {
-        _resourceManagement = new ResourceManagement();
-        
-        _uiManagement = new UIManagement();
-        _uiManagement.UIPanel = UIPanel;
         _uiManagement.CusAwake();
-        
     }
 
     // Update is called once per frame

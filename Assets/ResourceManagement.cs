@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using FairyGUI;
 using UnityEngine;
 
-public class ResourceManagement
+public class ResourceManagement : MonoBehaviour
 {
     public static ResourceManagement instance;
 

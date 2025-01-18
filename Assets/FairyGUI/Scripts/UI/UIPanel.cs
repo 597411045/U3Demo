@@ -56,12 +56,9 @@ namespace FairyGUI
         RenderMode renderMode = RenderMode.ScreenSpaceOverlay;
         [SerializeField]
         Camera renderCamera = null;
-        [SerializeField]
-        Vector3 position;
-        [SerializeField]
-        Vector3 scale = new Vector3(1, 1, 1);
-        [SerializeField]
-        Vector3 rotation = new Vector3(0, 0, 0);
+        [SerializeField] public Vector3 position;
+        [SerializeField] public Vector3 scale = new Vector3(1, 1, 1);
+        [SerializeField] public Vector3 rotation = new Vector3(0, 0, 0);
         [SerializeField]
         bool fairyBatching = false;
         [SerializeField]
@@ -78,13 +75,12 @@ namespace FairyGUI
         [System.NonSerialized]
         Rect uiBounds; //Track bounds even when UI is not created, edit mode
 
-        GComponent _ui;
-        [NonSerialized]
-        bool _created;
+        public GComponent _ui;
+        [NonSerialized] public bool _created;
 
         List<Renderer> _renders;
 
-        public void CP1_OnEnable(AssetBundle bundle1,AssetBundle bundle2)
+        public void CP1_OnEnable()
         {
             if (Application.isPlaying)
             {
@@ -92,8 +88,8 @@ namespace FairyGUI
                 {
                     CreateContainer();
 
-                    if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
-                        UIPackage.AddPackage(bundle1,bundle2);
+                    // if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
+                    //     UIPackage.AddPackage(bundle1,bundle2);
                 }
             }
             else
@@ -118,7 +114,7 @@ namespace FairyGUI
                 EMRenderSupport.Remove(this);
         }
 
-        void CP3_Start()
+        public void CP3_Start()
         {
             if (!_created && Application.isPlaying)
                 CreateUI_PlayMode();
@@ -344,7 +340,7 @@ namespace FairyGUI
                 Debug.LogError("Create " + packageName + "/" + componentName + " failed!");
         }
 
-        void UpdateHitArea()
+        public void UpdateHitArea()
         {
             ColliderHitTest hitArea = this.container.hitArea as ColliderHitTest;
             if (hitArea != null)
@@ -389,7 +385,7 @@ namespace FairyGUI
             }
         }
 
-        void HandleScreenSizeChanged()
+        public void HandleScreenSizeChanged()
         {
             if (!Application.isPlaying)
                 DisplayObject.hideFlags = HideFlags.DontSaveInEditor;
