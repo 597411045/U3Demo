@@ -6,7 +6,6 @@ using UnityEngine.Splines;
 
 public partial class AIController : MonoBehaviour
 {
-    [NonSerialized] public List<AIController> targets = new List<AIController>();
     public Rigidbody rigidbody;
     public SplineAnimate splineAnimate;
     public CharacterData characterData;
@@ -36,7 +35,7 @@ public partial class AIController : MonoBehaviour
         {
             rigidbody.isKinematic = true;
         }
-        
+
         //如果死亡动画, return
         if (stateData.IfAnimDie())
         {
@@ -56,23 +55,13 @@ public partial class AIController : MonoBehaviour
             stateData.SetAnimRun(false);
         }
 
-        
 
         //如果目标列表有对象
         Vector3 direction = Vector3.zero;
         Vector3 directionNormal = Vector3.zero;
-        AIController target = null;
-        if (targets.Count > 0)
+        AIController target = GameMode.Instance.entityManager.GetCallerNearestEnemy(this);
+        if (target != null)
         {
-            //如果目标是死亡的，则这帧不做事情
-            if (targets[0].stateData.IfAnimDie() || targets[0].gameObject.activeSelf == false)
-            {
-                targets.RemoveAt(0);
-                return;
-            }
-
-            //拿取第一个目标
-            target = targets[0];
             //和目标的原始方向
             direction = (target.gameObject.transform.position - this.gameObject.transform.position);
             //个目标的单位方向
@@ -120,21 +109,4 @@ public partial class AIController : MonoBehaviour
 
         CheckSatus();
     }
-
-
-    // private void OnCollisionStay(Collision other)
-    // {
-    //     if (other.gameObject.tag == "Player")
-    //     {
-    //         this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-    //     }
-    // }
-    //
-    // private void OnCollisionExit(Collision other)
-    // {
-    //     if (other.gameObject.tag == "Player")
-    //     {
-    //         this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
-    //     }
-    // }
 }

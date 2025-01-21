@@ -49,10 +49,9 @@ public class 跳跃攻击 : BaseSkill
         {
             owner.splineAnimate.Completed += EventAction;
 
-            Vector3 directionNormal = Vector3.zero;
-            var target = owner.targets[0];
+            var target = GameMode.Instance.entityManager.GetCallerNearestEnemy(owner);
             var direction = (target.gameObject.transform.position - owner.gameObject.transform.position);
-            directionNormal = direction.normalized;
+            var directionNormal = direction.normalized;
 
             owner.splineAnimate.Container = GameMode.Instance.entityManager.SpawnSpline();
             var sp = owner.splineAnimate.Container;

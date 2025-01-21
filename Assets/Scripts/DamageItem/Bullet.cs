@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,6 +17,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody rigidBody;
 
     public AIController caster;
+    [NonSerialized] public List<AIController> ignoreList = new List<AIController>();
 
     private void Start()
     {
@@ -67,7 +69,7 @@ public class Bullet : MonoBehaviour
             }
 
             var otherAic = other.gameObject.GetComponent<AIController>();
-            if (otherAic != null && caster.tag != otherAic.tag)
+            if (otherAic != null && caster.tag != otherAic.tag && ignoreList.Contains(otherAic) == false)
             {
                 if (otherAic.AIInjured(caster) && DrainBloodAble)
                 {
@@ -76,6 +78,7 @@ public class Bullet : MonoBehaviour
 
                 if (ReflectOnEnemyAble)
                 {
+                    ignoreList.Add(otherAic);
                     SetDirToNearestTarget(otherAic);
                     ReflectOnEnemyAimit--;
                     if (ReflectOnEnemyAimit <= 0)
@@ -94,25 +97,10 @@ public class Bullet : MonoBehaviour
 
     public void SetDirToNearestTarget(AIController lastTarget)
     {
-        var list = GameMode.Instance.entityManager.aiList;
-        float minDistance = 9999;
-        Vector3 dir = this.transform.forward;
-        foreach (var iter in list)
+        var target = GameMode.Instance.entityManager.GetCallerNearestAlly(lastTarget);
+        if (target != null)
         {
-            if (iter == lastTarget || iter == caster || iter.characterData.currentHealth <= 0)
-            {
-            }
-            else
-            {
-                var distance = Vector3.Distance(this.transform.position, iter.transform.position);
-                if (distance < minDistance)
-                {
-                    minDistance = distance;
-                    dir = iter.transform.position - this.transform.position;
-                }
-            }
+            this.transform.forward = target.transform.position - this.transform.position;
         }
-
-        this.transform.forward = dir;
     }
 }

@@ -6,8 +6,9 @@ using UnityEngine.Splines;
 
 public class EntityManager : MonoBehaviour
 {
-    [NonSerialized] public List<AIController> aiList = new List<AIController>();
-    [NonSerialized] public List<AIController> enemyList = new List<AIController>();
+    [NonSerialized] private List<AIController> aiList = new List<AIController>();
+    [NonSerialized] public List<AIController> aliveEnemyList = new List<AIController>();
+    [NonSerialized] public List<AIController> deadEnemyList = new List<AIController>();
     [NonSerialized] public List<AIController> playerList = new List<AIController>();
 
     public GameObject BulletPrefab;
@@ -25,6 +26,11 @@ public class EntityManager : MonoBehaviour
     {
         GameMode.Instance.AddActionToAwakeOrderDic(0, M_Awake);
         GameMode.Instance.AddActionToUpdateOrderDic(999, M_Update);
+    }
+
+    public List<AIController> GetAiList()
+    {
+        return aiList;
     }
 
     private void M_Awake()
@@ -58,7 +64,7 @@ public class EntityManager : MonoBehaviour
 
             if (iter.gameObject.tag == "Enemy")
             {
-                enemyList.Add(iter);
+                aliveEnemyList.Add(iter);
                 aiList.Add(iter);
             }
         }
@@ -81,18 +87,22 @@ public class EntityManager : MonoBehaviour
 
     private void M_Update()
     {
-        if (DoOnce && enemyList.Count != 0)
+        if (aliveEnemyList.Count > 0)
         {
-            foreach (var iter in enemyList)
+            for (int i = aliveEnemyList.Count - 1; i >= 0; i--)
             {
-                if (iter.characterData.currentHealth > 0)
+                if (aliveEnemyList[i].characterData.currentHealth <= 0)
                 {
-                    return;
+                    deadEnemyList.Add(aliveEnemyList[i]);
+                    aliveEnemyList.RemoveAt(i);
                 }
             }
+        }
 
+
+        if (DoOnce && aliveEnemyList.Count == 0 && deadEnemyList.Count != 0)
+        {
             GameMode.Instance.OnEnemyClear();
-
             DoOnce = false;
         }
     }
@@ -128,6 +138,49 @@ public class EntityManager : MonoBehaviour
 
     public AIController SpawnMeleeEnemy(Vector3 pos, Quaternion qua)
     {
-        return Instantiate(近战敌人Prefab, pos, qua).GetComponent<AIController>();
+        var result = Instantiate(近战敌人Prefab, pos, qua).GetComponent<AIController>();
+        aiList.Add(result);
+        aliveEnemyList.Add(result);
+        return result;
+    }
+
+    public AIController GetCallerNearestEnemy(AIController caller)
+    {
+        float minDistance = float.MaxValue;
+        AIController result = null;
+        foreach (var iter in aiList)
+        {
+            if (iter != caller && iter.characterData.currentHealth > 0 && iter.gameObject.tag != caller.gameObject.tag)
+            {
+                var tmp = Vector3.Distance(caller.gameObject.transform.position, iter.gameObject.transform.position);
+                if (tmp < minDistance)
+                {
+                    minDistance = tmp;
+                    result = iter;
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public AIController GetCallerNearestAlly(AIController caller)
+    {
+        float minDistance = float.MaxValue;
+        AIController result = null;
+        foreach (var iter in aiList)
+        {
+            if (iter != caller && iter.characterData.currentHealth > 0 && iter.gameObject.tag == caller.gameObject.tag)
+            {
+                var tmp = Vector3.Distance(caller.gameObject.transform.position, iter.gameObject.transform.position);
+                if (tmp < minDistance)
+                {
+                    minDistance = tmp;
+                    result = iter;
+                }
+            }
+        }
+
+        return result;
     }
 }
