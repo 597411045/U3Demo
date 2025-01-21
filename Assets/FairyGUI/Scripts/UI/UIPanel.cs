@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using FairyGUI.Utils;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
@@ -50,37 +52,27 @@ namespace FairyGUI
         /// </summary>
         public int sortingOrder;
 
-        [SerializeField]
-        string packagePath;
-        [SerializeField]
-        RenderMode renderMode = RenderMode.ScreenSpaceOverlay;
-        [SerializeField]
-        Camera renderCamera = null;
-        [SerializeField] public Vector3 position;
-        [SerializeField] public Vector3 scale = new Vector3(1, 1, 1);
-        [SerializeField] public Vector3 rotation = new Vector3(0, 0, 0);
-        [SerializeField]
-        bool fairyBatching = false;
-        [SerializeField]
-        bool touchDisabled = false;
-        [SerializeField]
-        Vector2 cachedUISize;
-        [SerializeField]
-        HitTestMode hitTestMode = HitTestMode.Default;
-        [SerializeField]
-        bool setNativeChildrenOrder = false;
+        [SerializeField] string packagePath;
+        [SerializeField] RenderMode renderMode = RenderMode.ScreenSpaceOverlay;
+        [SerializeField] Camera renderCamera = null;
+        [SerializeField] Vector3 position;
+        [SerializeField] Vector3 scale = new Vector3(1, 1, 1);
+        [SerializeField] Vector3 rotation = new Vector3(0, 0, 0);
+        [SerializeField] bool fairyBatching = false;
+        [SerializeField] bool touchDisabled = false;
+        [SerializeField] Vector2 cachedUISize;
+        [SerializeField] HitTestMode hitTestMode = HitTestMode.Default;
+        [SerializeField] bool setNativeChildrenOrder = false;
 
-        [System.NonSerialized]
-        int screenSizeVer;
-        [System.NonSerialized]
-        Rect uiBounds; //Track bounds even when UI is not created, edit mode
+        [System.NonSerialized] int screenSizeVer;
+        [System.NonSerialized] Rect uiBounds; //Track bounds even when UI is not created, edit mode
 
-        public GComponent _ui;
-        [NonSerialized] public bool _created;
+        GComponent _ui;
+        [NonSerialized] bool _created;
 
         List<Renderer> _renders;
 
-        public void CP1_OnEnable()
+        void OnEnable()
         {
             if (Application.isPlaying)
             {
@@ -88,15 +80,36 @@ namespace FairyGUI
                 {
                     CreateContainer();
 
-                    // if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
-                    //     UIPackage.AddPackage(bundle1,bundle2);
+                    if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
+                    {
+                        var desc = ResourceManager.instance.GetBundle("uiresource\\desc_bundle");
+                        var res = ResourceManager.instance.GetBundle("uiresource\\res_bundle");
+                        List<byte[]> source = new List<byte[]>();
+                        List<string> mainAssetName = new List<string>();
+                        string[] names = desc.GetAllAssetNames();
+                        string searchPattern = "_fui";
+                        foreach (string n in names)
+                        {
+                            if (n.IndexOf(searchPattern) != -1)
+                            {
+                                TextAsset ta = desc.LoadAsset<TextAsset>(n);
+                                if (ta != null)
+                                {
+                                    source.Add(ta.bytes);
+                                    mainAssetName.Add(Path.GetFileNameWithoutExtension(n));
+                                    UIPackage.AddPackage(desc, res, Path.GetFileNameWithoutExtension(n));
+                                }
+                            }
+                        }
+                    }
+                    //UIPackage.AddPackage(packagePath);
                 }
             }
             else
             {
                 //不在播放状态时我们不在OnEnable创建，因为Prefab也会调用OnEnable，延迟到Update里创建（Prefab不调用Update)
                 //每次播放前都会disable/enable一次。。。
-                if (container != null)//如果不为null，可能是因为Prefab revert， 而不是因为Assembly reload，
+                if (container != null) //如果不为null，可能是因为Prefab revert， 而不是因为Assembly reload，
                     OnDestroy();
 
                 EMRenderSupport.Add(this);
@@ -114,13 +127,13 @@ namespace FairyGUI
                 EMRenderSupport.Remove(this);
         }
 
-        public void CP3_Start()
+        void Start()
         {
             if (!_created && Application.isPlaying)
                 CreateUI_PlayMode();
         }
 
-        void CP4_Update()
+        void Update()
         {
             if (screenSizeVer != StageCamera.screenSizeVer)
                 HandleScreenSizeChanged();
@@ -159,10 +172,12 @@ namespace FairyGUI
                     {
 #if (UNITY_2018_3_OR_NEWER && UNITY_EDITOR)
                         if (PrefabUtility.IsPartOfPrefabInstance(go))
-                            PrefabUtility.UnpackPrefabInstance(PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject), PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
+                            PrefabUtility.UnpackPrefabInstance(PrefabUtility.GetOutermostPrefabInstanceRoot(gameObject),
+                                PrefabUnpackMode.Completely, InteractionMode.AutomatedAction);
 #endif
                         UnityEngine.Object.DestroyImmediate(go);
                     }
+
                     cnt--;
                 }
             }
@@ -332,6 +347,7 @@ namespace FairyGUI
                     _ui.onSizeChanged.Add(UpdateHitArea);
                     _ui.onPositionChanged.Add(UpdateHitArea);
                 }
+
                 this.container.AddChildAt(_ui.displayObject, 0);
 
                 HandleScreenSizeChanged();
@@ -340,12 +356,13 @@ namespace FairyGUI
                 Debug.LogError("Create " + packageName + "/" + componentName + " failed!");
         }
 
-        public void UpdateHitArea()
+        void UpdateHitArea()
         {
             ColliderHitTest hitArea = this.container.hitArea as ColliderHitTest;
             if (hitArea != null)
             {
-                ((BoxCollider)hitArea.collider).center = new Vector3(_ui.xMin + _ui.width / 2, -_ui.yMin - _ui.height / 2);
+                ((BoxCollider)hitArea.collider).center =
+                    new Vector3(_ui.xMin + _ui.width / 2, -_ui.yMin - _ui.height / 2);
                 ((BoxCollider)hitArea.collider).size = _ui.size;
             }
         }
@@ -364,6 +381,7 @@ namespace FairyGUI
                 Debug.LogWarning("Not a GComponnet: " + packageName + "/" + componentName);
                 return;
             }
+
             _ui = (GComponent)obj;
 
             if (_ui != null)
@@ -385,7 +403,7 @@ namespace FairyGUI
             }
         }
 
-        public void HandleScreenSizeChanged()
+        void HandleScreenSizeChanged()
         {
             if (!Application.isPlaying)
                 DisplayObject.hideFlags = HideFlags.DontSaveInEditor;
@@ -408,7 +426,8 @@ namespace FairyGUI
                     StageCamera sc = cam.GetComponent<StageCamera>();
                     if (sc == null)
                         sc = StageCamera.main.GetComponent<StageCamera>();
-                    this.container.scale = new Vector2(sc.unitsPerPixel * UIContentScaler.scaleFactor, sc.unitsPerPixel * UIContentScaler.scaleFactor);
+                    this.container.scale = new Vector2(sc.unitsPerPixel * UIContentScaler.scaleFactor,
+                        sc.unitsPerPixel * UIContentScaler.scaleFactor);
                 }
             }
 
@@ -496,6 +515,7 @@ namespace FairyGUI
                     else
                         EMRenderSupport.orderChanged = true;
                 }
+
                 container.fairyBatching = fairyBatching;
             }
 
@@ -509,9 +529,10 @@ namespace FairyGUI
                 _ui.rotationY = rotation.y;
                 _ui.rotation = rotation.z;
             }
+
             if (fitScreen == FitScreen.None)
                 uiBounds.position = position;
-            screenSizeVer = 0;//force HandleScreenSizeChanged be called
+            screenSizeVer = 0; //force HandleScreenSizeChanged be called
 
             if (fitScreenChanged && this.fitScreen == FitScreen.None)
             {

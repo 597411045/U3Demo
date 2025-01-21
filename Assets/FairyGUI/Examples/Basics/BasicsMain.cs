@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using FairyGUI;
 
-public class BasicsMain
+public class BasicsMain : MonoBehaviour
 {
-    public GComponent _mainView;
-    public GObject _backBtn;
-    public GComponent _demoContainer;
-    public Controller _viewController;
-    public Dictionary<string, GComponent> _demoObjects;
+    private GComponent _mainView;
+    private GObject _backBtn;
+    private GComponent _demoContainer;
+    private Controller _viewController;
+    private Dictionary<string, GComponent> _demoObjects;
 
     public Gradient lineGradient;
 
-    void CP2_Awake()
+    void Awake()
     {
 #if (UNITY_5 || UNITY_5_3_OR_NEWER)
         //Use the font names directly
@@ -29,12 +29,12 @@ public class BasicsMain
         UIConfig.buttonSound = (NAudioClip)UIPackage.GetItemAsset("Basics", "click");
     }
 
-    void CP3_Start()
+    void Start()
     {
         Application.targetFrameRate = 60;
         Stage.inst.onKeyDown.Add(OnKeyDown);
 
-        //_mainView = this.GetComponent<UIPanel>().ui;
+        _mainView = this.GetComponent<UIPanel>().ui;
 
         _backBtn = _mainView.GetChild("btn_Back");
         _backBtn.visible = false;
@@ -54,7 +54,7 @@ public class BasicsMain
         }
     }
 
-    public void runDemo(EventContext context)
+    private void runDemo(EventContext context)
     {
         string type = ((GObject)(context.sender)).name.Substring(4);
         GComponent obj;
@@ -113,13 +113,13 @@ public class BasicsMain
         }
     }
 
-    public void onClickBack()
+    private void onClickBack()
     {
         _viewController.selectedIndex = 0;
         _backBtn.visible = false;
     }
 
-    public void OnKeyDown(EventContext context)
+    void OnKeyDown(EventContext context)
     {
         if (context.inputEvent.keyCode == KeyCode.Escape)
         {

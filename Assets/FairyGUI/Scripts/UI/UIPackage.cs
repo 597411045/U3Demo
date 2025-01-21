@@ -69,9 +69,9 @@ namespace FairyGUI
         string _assetPath;
         string[] _branches;
         internal int _branchIndex;
-        public AssetBundle _resBundle;
+        AssetBundle _resBundle;
         string _customId;
-        public bool _fromBundle;
+        bool _fromBundle;
         LoadResource _loadFunc;
         LoadResourceAsync _loadAsyncFunc;
 
@@ -85,9 +85,9 @@ namespace FairyGUI
         }
         Dictionary<string, AtlasSprite> _sprites;
 
-        public static Dictionary<string, UIPackage> _packageInstById = new Dictionary<string, UIPackage>();
-        public static Dictionary<string, UIPackage> _packageInstByName = new Dictionary<string, UIPackage>();
-        public static List<UIPackage> _packageList = new List<UIPackage>();
+        static Dictionary<string, UIPackage> _packageInstById = new Dictionary<string, UIPackage>();
+        static Dictionary<string, UIPackage> _packageInstByName = new Dictionary<string, UIPackage>();
+        static List<UIPackage> _packageList = new List<UIPackage>();
         static string _branch;
         static Dictionary<string, string> _vars = new Dictionary<string, string>();
 
@@ -664,7 +664,7 @@ namespace FairyGUI
             get { return _dependencies; }
         }
 
-        public bool LoadPackage(ByteBuffer buffer, string assetNamePrefix)
+        bool LoadPackage(ByteBuffer buffer, string assetNamePrefix)
         {
             if (buffer.ReadUint() != 0x46475549)
             {
@@ -784,7 +784,7 @@ namespace FairyGUI
                 pi.width = buffer.ReadInt();
                 pi.height = buffer.ReadInt();
 
-                switch (pi.type) 
+                switch (pi.type)
                 {
                     case PackageItemType.Image:
                         {
