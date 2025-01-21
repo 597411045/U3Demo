@@ -1,0 +1,47 @@
+ManifestFileVersion: 0
+CRC: 865026120
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b135c3636f3f6a075c1ed8795e2ca4e8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: b135c3636f3f6a075c1ed8795e2ca4e8
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/fgui/des/ScrollPane_fui.bytes
+- Assets/fgui/des/Curve_fui.bytes
+- Assets/fgui/des/TypingEffect_fui.bytes
+- Assets/fgui/des/Model_fui.bytes
+- Assets/fgui/des/EmitNumbers_fui.bytes
+- Assets/fgui/des/TurnCard_fui.bytes
+- Assets/fgui/des/LoopList_fui.bytes
+- Assets/fgui/des/Transition_fui.bytes
+- Assets/fgui/des/RenderTexture_fui.bytes
+- Assets/fgui/des/Emoji_fui.bytes
+- Assets/fgui/des/VirtualList_fui.bytes
+- Assets/fgui/des/PullToRefresh_fui.bytes
+- Assets/fgui/des/Joystick_fui.bytes
+- Assets/fgui/des/Particles_fui.bytes
+- Assets/fgui/des/Extension_fui.bytes
+- Assets/fgui/des/HeadBar_fui.bytes
+- Assets/fgui/des/ModalWaiting_fui.bytes
+- Assets/fgui/des/Guide_fui.bytes
+- Assets/fgui/des/TreeView_fui.bytes
+- Assets/fgui/des/Basics_fui.bytes
+- Assets/fgui/des/TextMeshPro_fui.bytes
+- Assets/fgui/des/Perspective_fui.bytes
+- Assets/fgui/des/Filter_fui.bytes
+- Assets/fgui/des/HitTest_fui.bytes
+- Assets/fgui/des/Gesture_fui.bytes
+- Assets/fgui/des/BundleUsage_fui.bytes
+- Assets/fgui/des/TurnPage_fui.bytes
+- Assets/fgui/des/CutScene_fui.bytes
+Dependencies: []

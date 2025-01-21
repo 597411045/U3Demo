@@ -12,13 +12,13 @@ public class 两侧箭1 : BaseEffect
         AIController goAic = go.GetComponent<AIController>();
         if (goAic != null)
         {
-            Bullet bulletIns1 = GameMode.Instance.entityManager.SpawnBullet(
+            Bullet bulletIns1 = EntityManager.Instance.SpawnBullet(
                 goAic.transform.position + goAic.transform.right / 2 + Vector3.up,
                 goAic.gameObject.transform.rotation);
             bulletIns1.transform.forward = bulletIns1.transform.right;
             bulletIns1.caster = goAic;
 
-            Bullet bulletIns2 = GameMode.Instance.entityManager.SpawnBullet(
+            Bullet bulletIns2 = EntityManager.Instance.SpawnBullet(
                 goAic.transform.position - goAic.transform.right / 2 + Vector3.up,
                 goAic.gameObject.transform.rotation);
             bulletIns2.transform.forward = -bulletIns2.transform.right;

@@ -6,9 +6,21 @@ using UnityEngine;
 
 public class ResourceManager : MonoBehaviour
 {
-    public static ResourceManager instance;
+    private static ResourceManager instance;
 
-    public ResourceManager()
+    public static ResourceManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new ResourceManager();
+            }
+
+            return instance;
+        }
+    }
+    public void Awake()
     {
         instance = this;
     }

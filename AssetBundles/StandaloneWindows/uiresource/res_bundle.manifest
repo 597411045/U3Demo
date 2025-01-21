@@ -1,15 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3645911141
+CRC: 2425447699
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b4500b1392093439d1bba3d78ec428fd
+    Hash: 345cca1ffec0da723a75f46f76616fef
   TypeTreeHash:
     serializedVersion: 2
     Hash: ce3b6d18a872ca8039cd5eb3c4fb7ef5
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: b4500b1392093439d1bba3d78ec428fd
+    Hash: 345cca1ffec0da723a75f46f76616fef
 HashAppended: 0
 ClassTypes:
 - Class: 28
@@ -18,36 +18,34 @@ ClassTypes:
   Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/UIResources/FUI/TurnPage_atlas0.png
-- Assets/UIResources/FUI/Model_atlas0.png
-- Assets/UIResources/FUI/TreeView_atlas0.png
-- Assets/UIResources/FUI/Cooldown_atlas0.png
-- Assets/UIResources/FUI/Basics_gojg7u.wav
-- Assets/UIResources/FUI/Curve_atlas0.png
-- Assets/UIResources/FUI/Basics_o4lt7w.wav
-- Assets/UIResources/FUI/HitTest_atlas0.png
-- Assets/UIResources/FUI/CutScene_atlas0.png
-- Assets/UIResources/FUI/TypingEffect_atlas0.png
-- Assets/UIResources/FUI/RenderTexture_atlas0.png
-- Assets/UIResources/FUI/Emoji_atlas0.png
-- Assets/UIResources/FUI/Bag_atlas0.png
-- Assets/UIResources/FUI/Extension_atlas0.png
-- Assets/UIResources/FUI/BundleUsage_atlas0.png
-- Assets/UIResources/FUI/PullToRefresh_atlas0.png
-- Assets/UIResources/FUI/HeadBar_atlas0.png
-- Assets/UIResources/FUI/Particles_atlas0.png
-- Assets/UIResources/FUI/LoopList_atlas0.png
-- Assets/UIResources/FUI/Transition_atlas0.png
-- Assets/UIResources/FUI/Basics_atlas0.png
-- Assets/UIResources/FUI/EmitNumbers_atlas0.png
-- Assets/UIResources/FUI/ModalWaiting_atlas0.png
-- Assets/UIResources/FUI/Guide_atlas0.png
-- Assets/UIResources/FUI/VirtualList_atlas0.png
-- Assets/UIResources/FUI/TextMeshPro_atlas0.png
-- Assets/UIResources/FUI/Filter_atlas0.png
-- Assets/UIResources/FUI/Perspective_atlas0.png
-- Assets/UIResources/FUI/Joystick_atlas0.png
-- Assets/UIResources/FUI/Transition_gkq03.wav
-- Assets/UIResources/FUI/ScrollPane_atlas0.png
-- Assets/UIResources/FUI/TurnCard_atlas0.png
+- Assets/fgui/RenderTexture_atlas0.png
+- Assets/fgui/PullToRefresh_atlas0.png
+- Assets/fgui/Curve_atlas0.png
+- Assets/fgui/EmitNumbers_atlas0.png
+- Assets/fgui/Joystick_atlas0.png
+- Assets/fgui/TurnPage_atlas0.png
+- Assets/fgui/ScrollPane_atlas0.png
+- Assets/fgui/Basics_atlas0.png
+- Assets/fgui/TypingEffect_atlas0.png
+- Assets/fgui/Particles_atlas0.png
+- Assets/fgui/TreeView_atlas0.png
+- Assets/fgui/VirtualList_atlas0.png
+- Assets/fgui/Perspective_atlas0.png
+- Assets/fgui/Extension_atlas0.png
+- Assets/fgui/BundleUsage_atlas0.png
+- Assets/fgui/CutScene_atlas0.png
+- Assets/fgui/Model_atlas0.png
+- Assets/fgui/Emoji_atlas0.png
+- Assets/fgui/Transition_gkq03.wav
+- Assets/fgui/Basics_o4lt7w.wav
+- Assets/fgui/HeadBar_atlas0.png
+- Assets/fgui/Filter_atlas0.png
+- Assets/fgui/Guide_atlas0.png
+- Assets/fgui/TurnCard_atlas0.png
+- Assets/fgui/ModalWaiting_atlas0.png
+- Assets/fgui/LoopList_atlas0.png
+- Assets/fgui/HitTest_atlas0.png
+- Assets/fgui/Basics_gojg7u.wav
+- Assets/fgui/Transition_atlas0.png
+- Assets/fgui/TextMeshPro_atlas0.png
 Dependencies: []

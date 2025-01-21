@@ -8,18 +8,57 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
-    public UIPanel UIPanel;
+    public static UIManager Instance;
+    private AssetBundle des = null;
+    private AssetBundle res = null;
 
-    public UIManager()
+    void OnDestroy()
     {
-        instance = this;
+        if (des != null)
+        {
+            des.Unload(true);
+        }
+
+        if (res != null)
+        {
+            res.Unload(true);
+        }
+    }
+
+    public UIPackage LoadUIResourceByBundle(string assetName)
+    {
+        if (des == null)
+        {
+            des = ResourceManager.Instance.GetBundle("uiresource\\des_bundle");
+        }
+
+        if (res == null)
+        {
+            res = ResourceManager.Instance.GetBundle("uiresource\\res_bundle");
+        }
+
+        // List<byte[]> source = new List<byte[]>();
+        // List<string> mainAssetName = new List<string>();
+        // string[] names = des.GetAllAssetNames();
+        // string searchPattern = "_fui";
+        // foreach (string n in names)
+        // {
+        //     if (n.IndexOf(searchPattern) != -1)
+        //     {
+        //         TextAsset ta = des.LoadAsset<TextAsset>(n);
+        //         if (ta != null)
+        //         {
+        //             source.Add(ta.bytes);
+        //             mainAssetName.Add(Path.GetFileNameWithoutExtension(n));
+        //         }
+        //     }
+        // }
+        return UIPackage.AddPackage(des, res, assetName + "_fui");
     }
 
     public void Awake()
     {
-        var desc = ResourceManager.instance.GetBundle("uiresource\\desc_bundle");
-        var res = ResourceManager.instance.GetBundle("uiresource\\res_bundle");
+        Instance = this;
 
 //         UIPanel.CP1_OnEnable();
 //

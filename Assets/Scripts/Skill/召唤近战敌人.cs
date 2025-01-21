@@ -33,7 +33,7 @@ public class 召唤近战敌人 : BaseSkill
         AIController goAic = go.GetComponent<AIController>();
         if (goAic != null)
         {
-            GameMode.Instance.entityManager.SpawnMeleeEnemy(
+            EntityManager.Instance.SpawnMeleeEnemy(
                 goAic.transform.position + goAic.transform.forward,
                 goAic.gameObject.transform.rotation);
 

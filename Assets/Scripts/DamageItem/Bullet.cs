@@ -97,7 +97,7 @@ public class Bullet : MonoBehaviour
 
     public void SetDirToNearestTarget(AIController lastTarget)
     {
-        var target = GameMode.Instance.entityManager.GetCallerNearestAlly(lastTarget);
+        var target = EntityManager.Instance.GetCallerNearestAlly(lastTarget);
         if (target != null)
         {
             this.transform.forward = target.transform.position - this.transform.position;

@@ -59,7 +59,7 @@ public partial class AIController : MonoBehaviour
         //如果目标列表有对象
         Vector3 direction = Vector3.zero;
         Vector3 directionNormal = Vector3.zero;
-        AIController target = GameMode.Instance.entityManager.GetCallerNearestEnemy(this);
+        AIController target = EntityManager.Instance.GetCallerNearestEnemy(this);
         if (target != null)
         {
             //和目标的原始方向

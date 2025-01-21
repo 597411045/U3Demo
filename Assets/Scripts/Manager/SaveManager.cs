@@ -1,15 +1,23 @@
+using System;
 using System.Text;
 using UnityEngine;
 
 public class SaveManager : MonoBehaviour
 {
+    public static SaveManager Instance;
+
     private static string saveSkillData = "";
     private static string savePropertyData = "";
     private static string saveplayerData = "";
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public void SaveData()
     {
-        var list = GameMode.Instance.entityManager.playerList;
+        var list = EntityManager.Instance.playerList;
 
         StringBuilder skillData = new StringBuilder();
         foreach (var iter in list)
@@ -36,7 +44,7 @@ public class SaveManager : MonoBehaviour
 
     public void ImportData()
     {
-        var list = GameMode.Instance.entityManager.playerList;
+        var list = EntityManager.Instance.playerList;
 
         string data = saveSkillData;
         if (data != "")

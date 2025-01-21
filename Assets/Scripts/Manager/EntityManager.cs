@@ -16,7 +16,7 @@ public class EntityManager : MonoBehaviour
     public GameObject CylinderDamagePrefab;
     public GameObject BoxDamagePrefab;
     public GameObject 近战敌人Prefab;
-
+    public static EntityManager Instance;
 
     public GameObject BulletGroup;
 
@@ -24,6 +24,7 @@ public class EntityManager : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
         GameMode.Instance.AddActionToAwakeOrderDic(0, M_Awake);
         GameMode.Instance.AddActionToUpdateOrderDic(999, M_Update);
     }
@@ -121,7 +122,7 @@ public class EntityManager : MonoBehaviour
     {
         GameObject splineInstance = Instantiate(SplinePrefab,
             Vector3.zero,
-            quaternion.identity);
+            Quaternion.identity);
         var result = splineInstance.GetComponent<SplineContainer>();
         return result;
     }

@@ -38,7 +38,7 @@ public class 跳跃攻击 : BaseSkill
 
     private void EventAction()
     {
-        var tmp = GameMode.Instance.entityManager.SpawnCylinderDamage(owner.transform.position);
+        var tmp = EntityManager.Instance.SpawnCylinderDamage(owner.transform.position);
         tmp.selfAic = owner;
         owner.splineAnimate.Completed -= EventAction;
     }
@@ -49,11 +49,11 @@ public class 跳跃攻击 : BaseSkill
         {
             owner.splineAnimate.Completed += EventAction;
 
-            var target = GameMode.Instance.entityManager.GetCallerNearestEnemy(owner);
+            var target = EntityManager.Instance.GetCallerNearestEnemy(owner);
             var direction = (target.gameObject.transform.position - owner.gameObject.transform.position);
             var directionNormal = direction.normalized;
 
-            owner.splineAnimate.Container = GameMode.Instance.entityManager.SpawnSpline();
+            owner.splineAnimate.Container = EntityManager.Instance.SpawnSpline();
             var sp = owner.splineAnimate.Container;
             int i = 0;
             sp.Spline.Knots = new List<BezierKnot>()

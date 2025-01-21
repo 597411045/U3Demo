@@ -36,7 +36,7 @@ public class C1被动 : BaseEffect
 
             if (Interval <= 0)
             {
-                Bullet bullet = GameMode.Instance.entityManager.SpawnBullet(
+                Bullet bullet = EntityManager.Instance.SpawnBullet(
                     owner.transform.position +
                     owner.transform.forward / 2 + Vector3.up,
                     owner.gameObject.transform.rotation);

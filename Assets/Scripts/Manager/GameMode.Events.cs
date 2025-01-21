@@ -17,7 +17,7 @@ public partial class GameMode : MonoBehaviour
         {
         }
 
-        saveManager.ImportData();
+        SaveManager.Instance.ImportData();
     }
 
     public void OnEnemyClear()
@@ -31,7 +31,7 @@ public partial class GameMode : MonoBehaviour
 
     public void ChangeScene(string sceneName)
     {
-        saveManager.SaveData();
+        SaveManager.Instance.SaveData();
         SceneManager.LoadScene(sceneName);
     }
 }

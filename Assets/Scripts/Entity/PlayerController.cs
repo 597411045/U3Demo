@@ -39,9 +39,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void M_Start()
     {
-        if (GameMode.Instance.entityManager.playerList.Count > 0)
+        if (EntityManager.Instance.playerList.Count > 0)
         {
-            SetModel(GameMode.Instance.entityManager.playerList[0]);
+            SetModel(EntityManager.Instance.playerList[0]);
         }
 
         if (JoyStickCenter != null)
@@ -73,13 +73,13 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeCha()
     {
-        for (int i = 0; i < GameMode.Instance.entityManager.playerList.Count; i++)
+        for (int i = 0; i < EntityManager.Instance.playerList.Count; i++)
         {
-            chaIndex = (++chaIndex) % GameMode.Instance.entityManager.playerList.Count;
-            if (GameMode.Instance.entityManager.playerList[chaIndex].characterData.currentHealth > 0 &&
-                GameMode.Instance.entityManager.playerList[chaIndex] != currentChaAic)
+            chaIndex = (++chaIndex) % EntityManager.Instance.playerList.Count;
+            if (EntityManager.Instance.playerList[chaIndex].characterData.currentHealth > 0 &&
+                EntityManager.Instance.playerList[chaIndex] != currentChaAic)
             {
-                SetModel(GameMode.Instance.entityManager.playerList[chaIndex]);
+                SetModel(EntityManager.Instance.playerList[chaIndex]);
                 Flag = true;
                 return;
             }
@@ -156,7 +156,7 @@ public class PlayerController : MonoBehaviour
             if (iter != "")
             {
                 chaIndex = -1;
-                foreach (var iter2 in GameMode.Instance.entityManager.playerList)
+                foreach (var iter2 in EntityManager.Instance.playerList)
                 {
                     if (iter2.gameObject.name == iter)
                     {

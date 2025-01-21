@@ -21,7 +21,7 @@ public class BasicsMain : MonoBehaviour
         //Need to put a ttf file into Resources folder. Here is the file name of the ttf file.
         UIConfig.defaultFont = "afont";
 #endif
-        UIPackage.AddPackage("UI/Basics");
+        //UIPackage.AddPackage("UI/Basics");
 
         UIConfig.verticalScrollBar = "ui://Basics/ScrollBar_VT";
         UIConfig.horizontalScrollBar = "ui://Basics/ScrollBar_HZ";

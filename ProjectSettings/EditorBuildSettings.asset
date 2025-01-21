@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FairyGUI/Examples/Scenes/scene1.unity
+    guid: 6940e9cae0b012148b4848f1c72c314a
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 09505fb251ae431478b1f686a6012918, type: 2}

@@ -1,10 +1,10 @@
 ManifestFileVersion: 0
-CRC: 3336939516
+CRC: 2624022159
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: uiresource/res_bundle
+      Name: uiresource/des_bundle
       Dependencies: {}
     Info_1:
-      Name: uiresource/desc_bundle
+      Name: uiresource/res_bundle
       Dependencies: {}

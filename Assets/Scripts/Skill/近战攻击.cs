@@ -33,7 +33,7 @@ public class 近战攻击 : BaseSkill
         AIController goAic = go.GetComponent<AIController>();
         if (goAic != null)
         {
-            FunctionItem item = GameMode.Instance.entityManager.SpawnBoxDamage(
+            FunctionItem item = EntityManager.Instance.SpawnBoxDamage(
                 goAic.transform.position + goAic.transform.forward + Vector3.up,
                 goAic.gameObject.transform.rotation);
             item.selfAic = goAic;

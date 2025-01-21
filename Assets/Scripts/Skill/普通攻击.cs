@@ -37,13 +37,13 @@ public class 普通攻击 : BaseSkill
             Bullet bulletIns1;
             if (dict.ContainsKey(SkillType.正向箭1))
             {
-                bulletIns1 = GameMode.Instance.entityManager.SpawnBullet(
+                bulletIns1 = EntityManager.Instance.SpawnBullet(
                     goAic.transform.position + goAic.transform.forward / 2 + Vector3.up - goAic.transform.right / 2,
                     goAic.gameObject.transform.rotation);
             }
             else
             {
-                bulletIns1 = GameMode.Instance.entityManager.SpawnBullet(
+                bulletIns1 = EntityManager.Instance.SpawnBullet(
                     goAic.transform.position + goAic.transform.forward / 2 + Vector3.up,
                     goAic.gameObject.transform.rotation);
             }

@@ -82,25 +82,8 @@ namespace FairyGUI
 
                     if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
                     {
-                        var desc = ResourceManager.instance.GetBundle("uiresource\\desc_bundle");
-                        var res = ResourceManager.instance.GetBundle("uiresource\\res_bundle");
-                        List<byte[]> source = new List<byte[]>();
-                        List<string> mainAssetName = new List<string>();
-                        string[] names = desc.GetAllAssetNames();
-                        string searchPattern = "_fui";
-                        foreach (string n in names)
-                        {
-                            if (n.IndexOf(searchPattern) != -1)
-                            {
-                                TextAsset ta = desc.LoadAsset<TextAsset>(n);
-                                if (ta != null)
-                                {
-                                    source.Add(ta.bytes);
-                                    mainAssetName.Add(Path.GetFileNameWithoutExtension(n));
-                                    UIPackage.AddPackage(desc, res, Path.GetFileNameWithoutExtension(n));
-                                }
-                            }
-                        }
+                        UIManager.Instance.LoadUIResourceByBundle("basics");
+
                     }
                     //UIPackage.AddPackage(packagePath);
                 }

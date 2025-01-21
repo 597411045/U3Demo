@@ -9,11 +9,6 @@ public partial class GameMode : MonoBehaviour
     public int RenderFrame;
     public int FixedFrame;
 
-    public EntityManager entityManager;
-    public SaveManager saveManager;
-    public ConfigManager configManager;
-    public UIManager uIManager;
-
     private List<Action> AwakeNoOrderList = new List<Action>();
     private List<Action> StartNoOrderList = new List<Action>();
     private List<Action<float>> UpdateNoOrderList = new List<Action<float>>();
@@ -86,7 +81,7 @@ public partial class GameMode : MonoBehaviour
         FixedUpdateNoOrderListRemoveBuffer.Add(action);
     }
 
-    public GameMode()
+    void Awake()
     {
         Instance = this;
     }
