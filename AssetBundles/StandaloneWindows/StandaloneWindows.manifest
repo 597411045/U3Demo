@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 3336939516
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: uiresource/res_bundle
+      Dependencies: {}
+    Info_1:
+      Name: uiresource/desc_bundle
+      Dependencies: {}

@@ -1,0 +1,49 @@
+ManifestFileVersion: 0
+CRC: 1179375612
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: c1b95d6e937ffcf490000147218eae5f
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5ad585dd02dfb5016c0dad519eab8f49
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: c1b95d6e937ffcf490000147218eae5f
+HashAppended: 0
+ClassTypes:
+- Class: 49
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UIResources/FUI/Curve_fui.bytes
+- Assets/UIResources/FUI/Emoji_fui.bytes
+- Assets/UIResources/FUI/Cooldown_fui.bytes
+- Assets/UIResources/FUI/TurnCard_fui.bytes
+- Assets/UIResources/FUI/HeadBar_fui.bytes
+- Assets/UIResources/FUI/Bag_fui.bytes
+- Assets/UIResources/FUI/Particles_fui.bytes
+- Assets/UIResources/FUI/Basics_fui.bytes
+- Assets/UIResources/FUI/Filter_fui.bytes
+- Assets/UIResources/FUI/CutScene_fui.bytes
+- Assets/UIResources/FUI/Joystick_fui.bytes
+- Assets/UIResources/FUI/LoopList_fui.bytes
+- Assets/UIResources/FUI/Perspective_fui.bytes
+- Assets/UIResources/FUI/BundleUsage_fui.bytes
+- Assets/UIResources/FUI/VirtualList_fui.bytes
+- Assets/UIResources/FUI/TurnPage_fui.bytes
+- Assets/UIResources/FUI/Extension_fui.bytes
+- Assets/UIResources/FUI/Transition_fui.bytes
+- Assets/UIResources/FUI/Model_fui.bytes
+- Assets/UIResources/FUI/ModalWaiting_fui.bytes
+- Assets/UIResources/FUI/RenderTexture_fui.bytes
+- Assets/UIResources/FUI/TextMeshPro_fui.bytes
+- Assets/UIResources/FUI/TypingEffect_fui.bytes
+- Assets/UIResources/FUI/HitTest_fui.bytes
+- Assets/UIResources/FUI/EmitNumbers_fui.bytes
+- Assets/UIResources/FUI/Guide_fui.bytes
+- Assets/UIResources/FUI/PullToRefresh_fui.bytes
+- Assets/UIResources/FUI/Gesture_fui.bytes
+- Assets/UIResources/FUI/ScrollPane_fui.bytes
+- Assets/UIResources/FUI/TreeView_fui.bytes
+Dependencies: []
