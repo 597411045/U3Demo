@@ -5,7 +5,6 @@ using UnityEngine.Splines;
 
 public class 跳跃攻击 : BaseSkill
 {
-    private float CoolDownTimer;
     private AIController owner;
 
     public 跳跃攻击()
@@ -21,19 +20,6 @@ public class 跳跃攻击 : BaseSkill
         {
             GameMode.Instance.AddActionToUpdateNoOrderListBuffer(CoolDown);
         }
-    }
-
-    public void CoolDown(float deltaTime)
-    {
-        if (CoolDownTimer > 0)
-        {
-            CoolDownTimer -= deltaTime;
-        }
-    }
-
-    public override bool IsReady()
-    {
-        return CoolDownTimer <= 0;
     }
 
     private void EventAction()
@@ -85,7 +71,6 @@ public class 跳跃攻击 : BaseSkill
 
             owner.splineAnimate.NormalizedTime = 0;
             owner.splineAnimate.Play();
-            CoolDownTimer = Config_EffectCoolDown;
         }
     }
 }

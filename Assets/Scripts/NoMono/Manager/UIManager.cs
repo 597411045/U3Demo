@@ -6,9 +6,8 @@ using FairyGUI;
 using FairyGUI.Utils;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : SingleTon<UIManager>
 {
-    public static UIManager Instance;
     private AssetBundle des = null;
     private AssetBundle res = null;
 
@@ -58,8 +57,6 @@ public class UIManager : MonoBehaviour
 
     public void Awake()
     {
-        Instance = this;
-
 //         UIPanel.CP1_OnEnable();
 //
 //         List<byte[]> source = new List<byte[]>();

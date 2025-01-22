@@ -8,7 +8,6 @@ public partial class GameMode : MonoBehaviour
     public static GameMode Instance;
     public int RenderFrame;
     public int FixedFrame;
-
     private List<Action> AwakeNoOrderList = new List<Action>();
     private List<Action> StartNoOrderList = new List<Action>();
     private List<Action<float>> UpdateNoOrderList = new List<Action<float>>();
@@ -84,6 +83,7 @@ public partial class GameMode : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        entityManager.Awake();
     }
 
     // Start is called before the first frame update

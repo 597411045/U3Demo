@@ -301,9 +301,24 @@ public class BaseEffect
 
 public class BaseSkill : BaseEffect
 {
+    protected float CoolDownTimer;
+
     public virtual bool IsReady()
     {
-        return false;
+        return CoolDownTimer <= 0;
+    }
+
+    public void BeginCoolDown()
+    {
+        CoolDownTimer = Config_EffectCoolDown;
+    }
+    
+    protected void CoolDown(float deltaTime)
+    {
+        if (CoolDownTimer > 0)
+        {
+            CoolDownTimer -= deltaTime;
+        }
     }
 }
 

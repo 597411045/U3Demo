@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class 普通攻击 : BaseSkill
 {
-    private float CoolDownTimer;
-
     public 普通攻击()
     {
         name = "普通攻击";
@@ -13,19 +11,6 @@ public class 普通攻击 : BaseSkill
     public override void ActionCallByInitial(GameObject go)
     {
         GameMode.Instance.AddActionToUpdateNoOrderListBuffer(CoolDown);
-    }
-
-    public void CoolDown(float deltaTime)
-    {
-        if (CoolDownTimer > 0)
-        {
-            CoolDownTimer -= deltaTime;
-        }
-    }
-
-    public override bool IsReady()
-    {
-        return CoolDownTimer <= 0;
     }
 
     public override void ActionCallByReleaseSkill(GameObject go)
@@ -54,7 +39,6 @@ public class 普通攻击 : BaseSkill
                 iter.Value.ActionCallByReleaseSkill(bulletIns1.gameObject);
             }
 
-            CoolDownTimer = Config_EffectCoolDown;
         }
     }
 }

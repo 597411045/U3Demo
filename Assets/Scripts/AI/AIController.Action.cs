@@ -77,11 +77,15 @@ public partial class AIController : MonoBehaviour
         var dict = skillData.Get主动技能Dict();
         foreach (var iter in dict)
         {
-            if (((BaseSkill)iter.Value).IsReady())
+            if (iter.Value is BaseSkill skill)
             {
-                stateData.SetAnimAttack(iter.Key);
-                skillData.curSkill = iter.Value;
-                return;
+                if (skill.IsReady())
+                {
+                    skillData.curSkill = skill;
+                    skill.BeginCoolDown();
+                    stateData.SetAnimAttack(skill.refType);
+                    return;
+                }
             }
         }
     }

@@ -4,27 +4,19 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Splines;
 
-public class EntityManager : MonoBehaviour
+public class EntityManager : SingleTon<EntityManager>
 {
     [NonSerialized] private List<AIController> aiList = new List<AIController>();
     [NonSerialized] public List<AIController> aliveEnemyList = new List<AIController>();
     [NonSerialized] public List<AIController> deadEnemyList = new List<AIController>();
     [NonSerialized] public List<AIController> playerList = new List<AIController>();
-
-    public GameObject BulletPrefab;
-    public GameObject SplinePrefab;
-    public GameObject CylinderDamagePrefab;
-    public GameObject BoxDamagePrefab;
-    public GameObject 近战敌人Prefab;
-    public static EntityManager Instance;
-
-    public GameObject BulletGroup;
+    private GameObject BulletGroup;
 
     private bool DoOnce = true;
 
-    private void Awake()
+
+    public void Awake()
     {
-        Instance = this;
         GameMode.Instance.AddActionToAwakeOrderDic(0, M_Awake);
         GameMode.Instance.AddActionToUpdateOrderDic(999, M_Update);
     }
@@ -111,16 +103,16 @@ public class EntityManager : MonoBehaviour
     public Bullet SpawnBullet(Vector3 pos, Quaternion qua)
     {
         //GameObject bullet = Resources.Load("Prefab/Bullet") as GameObject;
-        GameObject bulletInstance = Instantiate(BulletPrefab,
+        GameObject bulletInstance = GameObject.Instantiate(GameMode.Instance.BulletPrefab,
             pos,
             qua);
         bulletInstance.transform.parent = BulletGroup.transform;
         return bulletInstance.GetComponent<Bullet>();
     }
-
+ 
     public SplineContainer SpawnSpline()
     {
-        GameObject splineInstance = Instantiate(SplinePrefab,
+        GameObject splineInstance = GameObject.Instantiate(GameMode.Instance.SplinePrefab,
             Vector3.zero,
             Quaternion.identity);
         var result = splineInstance.GetComponent<SplineContainer>();
@@ -129,17 +121,17 @@ public class EntityManager : MonoBehaviour
 
     public FunctionItem SpawnCylinderDamage(Vector3 pos)
     {
-        return Instantiate(CylinderDamagePrefab, pos, Quaternion.identity).GetComponent<FunctionItem>();
+        return GameObject.Instantiate(GameMode.Instance.CylinderDamagePrefab, pos, Quaternion.identity).GetComponent<FunctionItem>();
     }
 
     public FunctionItem SpawnBoxDamage(Vector3 pos, Quaternion qua)
     {
-        return Instantiate(BoxDamagePrefab, pos, qua).GetComponent<FunctionItem>();
+        return GameObject.Instantiate(GameMode.Instance.BoxDamagePrefab, pos, qua).GetComponent<FunctionItem>();
     }
 
     public AIController SpawnMeleeEnemy(Vector3 pos, Quaternion qua)
     {
-        var result = Instantiate(近战敌人Prefab, pos, qua).GetComponent<AIController>();
+        var result = GameObject.Instantiate(GameMode.Instance.近战敌人Prefab, pos, qua).GetComponent<AIController>();
         aiList.Add(result);
         aliveEnemyList.Add(result);
         return result;

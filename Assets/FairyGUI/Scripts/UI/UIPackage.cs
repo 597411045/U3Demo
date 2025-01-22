@@ -285,7 +285,7 @@ namespace FairyGUI
         /// <returns>UIPackage</returns>
         public static UIPackage AddPackage(string descFilePath)
         {
-            return UIManager.Instance.LoadUIResourceByBundle(descFilePath.Split("/")[1]);
+            return GameMode.uIManager.LoadUIResourceByBundle(descFilePath.Split("/")[1]);
 
             if (descFilePath.StartsWith("Assets/"))
             {

@@ -12,7 +12,7 @@ public class CutSceneMain : MonoBehaviour
         Application.targetFrameRate = 60;
         Stage.inst.onKeyDown.Add(OnKeyDown);
 
-        UIManager.Instance.LoadUIResourceByBundle("cutscene");
+        GameMode.uIManager.LoadUIResourceByBundle("cutscene");
 
         LevelManager.inst.Init();
         LevelManager.inst.LoadLevel("scene1");

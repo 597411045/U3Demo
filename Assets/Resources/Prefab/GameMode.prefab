@@ -10,10 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1083449102026831351}
   - component: {fileID: -377559996132688488}
-  - component: {fileID: 7578585183687123227}
   - component: {fileID: -731414307902382977}
   - component: {fileID: 3683739697275543516}
-  - component: {fileID: 8436894997952503779}
   m_Layer: 0
   m_Name: GameMode
   m_TagString: Untagged
@@ -50,28 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RenderFrame: 0
   FixedFrame: 0
-  entityManager: {fileID: 7578585183687123227}
-  saveManager: {fileID: -731414307902382977}
-  configManager: {fileID: 3683739697275543516}
-  uIManager: {fileID: 8436894997952503779}
---- !u!114 &7578585183687123227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560511296426645120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e8a687f04294c03a69e220afbc40049, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BulletPrefab: {fileID: 3640071834979198491, guid: 9534cbe6762ecd644aed3af5730eed31, type: 3}
-  SplinePrefab: {fileID: 6559190815877544294, guid: bc7995a69828572409aa8514c46ea201, type: 3}
-  CylinderDamagePrefab: {fileID: 1190476090656565320, guid: 39bfefcdc44562b4db92c855cf19c9b9, type: 3}
-  BoxDamagePrefab: {fileID: 1190476090656565320, guid: e32eb26a69151b24488adeb2b2d52d0d, type: 3}
-  "\u8FD1\u6218\u654C\u4EBAPrefab": {fileID: 2027255837340685120, guid: 3497a1db538732547ab41299a8d65a93, type: 3}
-  BulletGroup: {fileID: 0}
 --- !u!114 &-731414307902382977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,16 +74,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u53EF\u91CD\u590D\u5C5E\u6027\u5956\u52B1": 010000000200000003000000040000000500000006000000070000000800000009000000
   "\u4E0D\u53EF\u91CD\u590D\u7684\u62DB\u5F0F\u5956\u52B1": 0a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000
---- !u!114 &8436894997952503779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560511296426645120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fff3ffad5bc543d48f384ac7f5a9edb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UIPanel: {fileID: 0}
