@@ -22,7 +22,8 @@ public partial class AIController : MonoBehaviour
         {
             direction = direction.normalized;
             direction *= characterData.移动速度speed;
-            rigidbody.velocity = direction;
+            SetVelocity(direction);
+
             if (direction != Vector3.zero)
             {
                 transform.forward = direction;
@@ -34,7 +35,7 @@ public partial class AIController : MonoBehaviour
     public void StopMove()
     {
         stateData.SetAnimRun(false);
-        rigidbody.velocity = new Vector3(0, ((Component)this).GetComponent<Rigidbody>().velocity.y, 0);
+        SetVelocity(new Vector3(0, rigidbody.velocity.y, 0));
     }
 
     public bool AIInjured(AIController caster)
@@ -60,8 +61,8 @@ public partial class AIController : MonoBehaviour
     {
         stateData.SetAnimDie();
         var cc = this.GetComponent<CapsuleCollider>();
-        cc.excludeLayers = LayerMask.GetMask("Bullet", "Entity", "Sense");
-        ((Component)this).GetComponent<Rigidbody>().drag = 100;
+        rigidbody.drag = 100;
+        rigidbody.excludeLayers = LayerMask.GetMask("Default");
     }
 
     public void CheckSatus()
@@ -87,6 +88,14 @@ public partial class AIController : MonoBehaviour
                     return;
                 }
             }
+        }
+    }
+
+    public void SetVelocity(Vector3 v3)
+    {
+        if (rigidbody.isKinematic == false)
+        {
+            rigidbody.velocity = v3;
         }
     }
 }

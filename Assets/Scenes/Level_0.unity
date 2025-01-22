@@ -867,6 +867,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 541619788662392719, guid: 19c0e05c1c6afcd4997fc5b46fa8cc03, type: 3}
+      propertyPath: "\u653B\u51FB\u529Battack"
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7272681050017021675, guid: 19c0e05c1c6afcd4997fc5b46fa8cc03, type: 3}
       propertyPath: m_Name
       value: C1
@@ -1226,6 +1230,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -377559996132688488, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
+      propertyPath: BulletGroup
+      value: 
+      objectReference: {fileID: 743301672}
+    - target: {fileID: -377559996132688488, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
+      propertyPath: BulletPrefab
+      value: 
+      objectReference: {fileID: 3640071834979198491, guid: 9534cbe6762ecd644aed3af5730eed31, type: 3}
+    - target: {fileID: -377559996132688488, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
+      propertyPath: SplinePrefab
+      value: 
+      objectReference: {fileID: 6559190815877544294, guid: bc7995a69828572409aa8514c46ea201, type: 3}
+    - target: {fileID: -377559996132688488, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
+      propertyPath: BoxDamagePrefab
+      value: 
+      objectReference: {fileID: 1190476090656565320, guid: e32eb26a69151b24488adeb2b2d52d0d, type: 3}
+    - target: {fileID: -377559996132688488, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
+      propertyPath: "\u8FD1\u6218\u654C\u4EBAPrefab"
+      value: 
+      objectReference: {fileID: 2027255837340685120, guid: 3497a1db538732547ab41299a8d65a93, type: 3}
+    - target: {fileID: -377559996132688488, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
+      propertyPath: CylinderDamagePrefab
+      value: 
+      objectReference: {fileID: 1190476090656565320, guid: 33c5b49fc2c3e0f44aac546f7d0c7e9c, type: 3}
     - target: {fileID: 560511296426645120, guid: db04e83be1ee0934881ff38acf082d8c, type: 3}
       propertyPath: m_Name
       value: GameMode

@@ -2,18 +2,13 @@ using System;
 using System.Text;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : SingleTon<SaveManager>
 {
-    public static SaveManager Instance;
 
     private static string saveSkillData = "";
     private static string savePropertyData = "";
     private static string saveplayerData = "";
 
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public void SaveData()
     {

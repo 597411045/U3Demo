@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1083449102026831351}
   - component: {fileID: -377559996132688488}
-  - component: {fileID: -731414307902382977}
   - component: {fileID: 3683739697275543516}
   m_Layer: 0
   m_Name: GameMode
@@ -46,20 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7da2faa0831fdcd468df912e7496a459, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletPrefab: {fileID: 3640071834979198491, guid: 9534cbe6762ecd644aed3af5730eed31, type: 3}
+  SplinePrefab: {fileID: 6559190815877544294, guid: bc7995a69828572409aa8514c46ea201, type: 3}
+  CylinderDamagePrefab: {fileID: 1190476090656565320, guid: 33c5b49fc2c3e0f44aac546f7d0c7e9c, type: 3}
+  BoxDamagePrefab: {fileID: 1190476090656565320, guid: e32eb26a69151b24488adeb2b2d52d0d, type: 3}
+  "\u8FD1\u6218\u654C\u4EBAPrefab": {fileID: 2027255837340685120, guid: 3497a1db538732547ab41299a8d65a93, type: 3}
+  BulletGroup: {fileID: 0}
   RenderFrame: 0
   FixedFrame: 0
---- !u!114 &-731414307902382977
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 560511296426645120}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf17edb3025f48d29c75887f0813c258, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3683739697275543516
 MonoBehaviour:
   m_ObjectHideFlags: 0

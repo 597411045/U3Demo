@@ -51,7 +51,7 @@ public partial class AIController : MonoBehaviour
         //如果受伤动画，停止移动，停止跑步
         if (stateData.IfAnimInjured())
         {
-            rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
+            SetVelocity(new Vector3(0, rigidbody.velocity.y, 0));
             stateData.SetAnimRun(false);
         }
 
@@ -81,14 +81,14 @@ public partial class AIController : MonoBehaviour
                     direction.magnitude > stateData.AttackRange)
                 {
                     directionNormal *= characterData.移动速度speed;
-                    rigidbody.velocity = new Vector3(directionNormal.x, rigidbody.velocity.y, directionNormal.z);
+                    SetVelocity(new Vector3(directionNormal.x, rigidbody.velocity.y, directionNormal.z));
                     this.gameObject.transform.forward = directionNormal;
                     stateData.SetAnimRun(true);
                 }
                 else
                 {
                     stateData.SetAnimRun(false);
-                    rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
+                    SetVelocity(new Vector3(0, rigidbody.velocity.y, 0));
                 }
             }
 

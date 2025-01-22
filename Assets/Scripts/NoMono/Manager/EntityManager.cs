@@ -10,10 +10,8 @@ public class EntityManager : SingleTon<EntityManager>
     [NonSerialized] public List<AIController> aliveEnemyList = new List<AIController>();
     [NonSerialized] public List<AIController> deadEnemyList = new List<AIController>();
     [NonSerialized] public List<AIController> playerList = new List<AIController>();
-    private GameObject BulletGroup;
 
     private bool DoOnce = true;
-
 
     public void Awake()
     {
@@ -106,10 +104,14 @@ public class EntityManager : SingleTon<EntityManager>
         GameObject bulletInstance = GameObject.Instantiate(GameMode.Instance.BulletPrefab,
             pos,
             qua);
-        bulletInstance.transform.parent = BulletGroup.transform;
+        if (GameMode.Instance.BulletGroup != null)
+        {
+            bulletInstance.transform.parent = GameMode.Instance.BulletGroup.transform;
+        }
+
         return bulletInstance.GetComponent<Bullet>();
     }
- 
+
     public SplineContainer SpawnSpline()
     {
         GameObject splineInstance = GameObject.Instantiate(GameMode.Instance.SplinePrefab,
@@ -121,7 +123,8 @@ public class EntityManager : SingleTon<EntityManager>
 
     public FunctionItem SpawnCylinderDamage(Vector3 pos)
     {
-        return GameObject.Instantiate(GameMode.Instance.CylinderDamagePrefab, pos, Quaternion.identity).GetComponent<FunctionItem>();
+        return GameObject.Instantiate(GameMode.Instance.CylinderDamagePrefab, pos, Quaternion.identity)
+            .GetComponent<FunctionItem>();
     }
 
     public FunctionItem SpawnBoxDamage(Vector3 pos, Quaternion qua)

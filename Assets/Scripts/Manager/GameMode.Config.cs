@@ -7,4 +7,5 @@ public partial class GameMode
     public GameObject CylinderDamagePrefab;
     public GameObject BoxDamagePrefab;
     public GameObject 近战敌人Prefab;
+    public GameObject BulletGroup;
 }

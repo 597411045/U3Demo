@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using FairyGUI;
 using UnityEngine;
 
-public class ResourceManager : MonoBehaviour
+public class ResourceManager : SingleTon<ResourceManager>
 {
     private static ResourceManager instance;
 
