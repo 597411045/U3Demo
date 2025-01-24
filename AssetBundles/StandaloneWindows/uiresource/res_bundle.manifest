@@ -1,51 +1,20 @@
 ManifestFileVersion: 0
-CRC: 2425447699
+CRC: 2618504758
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 345cca1ffec0da723a75f46f76616fef
+    Hash: 681ecfbc852983095305d4721fda683c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ce3b6d18a872ca8039cd5eb3c4fb7ef5
+    Hash: 2612ac43db082a73502ee80f2eceb73f
   IncrementalBuildHash:
     serializedVersion: 2
-    Hash: 345cca1ffec0da723a75f46f76616fef
+    Hash: 681ecfbc852983095305d4721fda683c
 HashAppended: 0
 ClassTypes:
 - Class: 28
   Script: {instanceID: 0}
-- Class: 83
-  Script: {instanceID: 0}
 SerializeReferenceClassIdentifiers: []
 Assets:
-- Assets/fgui/RenderTexture_atlas0.png
-- Assets/fgui/PullToRefresh_atlas0.png
-- Assets/fgui/Curve_atlas0.png
-- Assets/fgui/EmitNumbers_atlas0.png
-- Assets/fgui/Joystick_atlas0.png
-- Assets/fgui/TurnPage_atlas0.png
-- Assets/fgui/ScrollPane_atlas0.png
-- Assets/fgui/Basics_atlas0.png
-- Assets/fgui/TypingEffect_atlas0.png
-- Assets/fgui/Particles_atlas0.png
-- Assets/fgui/TreeView_atlas0.png
-- Assets/fgui/VirtualList_atlas0.png
-- Assets/fgui/Perspective_atlas0.png
-- Assets/fgui/Extension_atlas0.png
-- Assets/fgui/BundleUsage_atlas0.png
-- Assets/fgui/CutScene_atlas0.png
-- Assets/fgui/Model_atlas0.png
 - Assets/fgui/Emoji_atlas0.png
-- Assets/fgui/Transition_gkq03.wav
-- Assets/fgui/Basics_o4lt7w.wav
-- Assets/fgui/HeadBar_atlas0.png
-- Assets/fgui/Filter_atlas0.png
-- Assets/fgui/Guide_atlas0.png
-- Assets/fgui/TurnCard_atlas0.png
-- Assets/fgui/ModalWaiting_atlas0.png
-- Assets/fgui/LoopList_atlas0.png
-- Assets/fgui/HitTest_atlas0.png
-- Assets/fgui/Basics_gojg7u.wav
-- Assets/fgui/Transition_atlas0.png
-- Assets/fgui/TextMeshPro_atlas0.png
 Dependencies: []

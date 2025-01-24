@@ -82,7 +82,7 @@ namespace FairyGUI
 
                     if (!string.IsNullOrEmpty(packagePath) && UIPackage.GetByName(packageName) == null)
                     {
-                        GameMode.uIManager.LoadUIResourceByBundle("basics");
+                        GameMode.uIManager.LoadUIResourceByBundle(packageName);
 
                     }
                     //UIPackage.AddPackage(packagePath);
