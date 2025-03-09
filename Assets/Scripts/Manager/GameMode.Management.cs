@@ -16,4 +16,9 @@ public partial class GameMode : MonoBehaviour
     {
         get { return EntityManager.Instance; }
     }
+    
+    public static LuaManager luaManager
+    {
+        get { return LuaManager.Instance; }
+    }
 }

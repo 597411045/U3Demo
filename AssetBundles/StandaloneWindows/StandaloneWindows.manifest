@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 1801560122
+CRC: 1325692197
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -7,4 +7,7 @@ AssetBundleManifest:
       Dependencies: {}
     Info_1:
       Name: uiresource/res_bundle
+      Dependencies: {}
+    Info_2:
+      Name: uiresource/lua
       Dependencies: {}

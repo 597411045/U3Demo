@@ -84,6 +84,7 @@ public partial class GameMode : MonoBehaviour
     {
         Instance = this;
         entityManager.Awake();
+        luaManager.Awake();
     }
 
     // Start is called before the first frame update

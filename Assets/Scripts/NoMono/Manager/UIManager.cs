@@ -11,19 +11,6 @@ public class UIManager : SingleTon<UIManager>
     private AssetBundle des = null;
     private AssetBundle res = null;
 
-    void OnDestroy()
-    {
-        if (des != null)
-        {
-            des.Unload(true);
-        }
-
-        if (res != null)
-        {
-            res.Unload(true);
-        }
-    }
-
     public UIPackage LoadUIResourceByBundle(string assetName)
     {
         if (des == null)
